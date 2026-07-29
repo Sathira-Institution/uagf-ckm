@@ -1,63 +1,476 @@
-# UAGF v2.0 — Canonical Knowledge Model
+# Universal AI Governance Framework (UAGF)
 
-**Universal AI Governance Knowledge Infrastructure**
+> **A Canonical Knowledge Infrastructure for Interoperable AI Governance**
 
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 [![Status: Alpha](https://img.shields.io/badge/Status-Alpha-orange)](https://github.com/Sathira-Institution/uagf-ckm)
-[![Build Status](https://github.com/Sathira-Institution/uagf-ckm/actions/workflows/ci.yml/badge.svg)](https://github.com/Sathira-Institution/uagf-ckm/actions)
+[![Public Good](https://img.shields.io/badge/Public-Good-green)](#public-benefit)
+[![Machine Readable](https://img.shields.io/badge/Machine-Readable-blue)](#canonical-knowledge-model)
 
 ---
 
-## 🌍 What is UAGF?
+## Why UAGF Exists
 
-UAGF (Universal AI Governance Framework) is a **Canonical Knowledge Infrastructure** for AI governance that enables interoperability across international standards, national regulations, and organizational policies through a common governance language.
+Modern AI governance is increasingly fragmented.
 
-> **UAGF does not replace standards. It connects them.**  
-> **UAGF does not replace regulations. It translates them.**  
+Organizations today must navigate multiple standards, regulations, and internal governance frameworks, each using different terminology, structures, and assumptions.
+
+Examples include:
+
+- ISO/IEC 42001
+- EU AI Act
+- NIST AI RMF
+- OECD AI Principles
+- Thailand PDPA
+- Organizational AI Policies
+
+Although these documents often pursue similar governance goals, they are not directly interoperable.
+
+**UAGF provides a canonical knowledge layer that allows these governance systems to work together without replacing them.**
+
+---
+
+## What is UAGF?
+
+The **Universal AI Governance Framework (UAGF)** is an open, machine-readable knowledge infrastructure for AI governance.
+
+Rather than creating another governance framework, UAGF provides a **Canonical Knowledge Model (CKM)** that enables existing governance knowledge to be represented in a common language.
+
+> **UAGF does not replace standards. It connects them.**
+>
+> **UAGF does not replace regulations. It translates them.**
+>
 > **UAGF does not replace governance frameworks. It enables them to interoperate.**
 
-### Core Principles
+---
 
-- **Open by Design** — Public benefit, CC BY 4.0 licensed
-- **Evidence over Assumption** — Reality First approach
-- **Vendor & Origin Neutral** — No preference for any technology or region
-- **AI-Native** — Machine-readable by design (JSON-LD, RDF, YAML)
-- **Interoperable** — Connects ISO, NIST, EU AI Act, PDPA, and more
+# Core Philosophy
+
+Truth lives in the **Canonical Knowledge Model**.
+
+Everything else is a render.
+
+Documents are disposable.
+
+Knowledge is permanent.
 
 ---
 
-##  What's in This Repository?
+# Design Principles
 
-This repository contains the **CKM 2.0.0-Alpha** release:
+UAGF follows several fundamental principles.
 
-- **`ckm/`** — Canonical Knowledge Model (source of truth)
-  - `requirements/` — UGR (Unified Governance Requirements) in YAML
-  - `domains/` — Governance Domains (11 total)
-  - `references/` — External References (EU AI Act, ISO 42001, etc.)
-  - `cv/` — Controlled Vocabularies (enums as first-class objects)
-  
-- **`ckm-staging/`** — Migration staging area (pre-ratification)
-- **`generated/`** — Rendered artifacts (Markdown, JSON, JSON-LD)
-- **`tests/`** — Automated test suite (E2E regression tests)
-- **`reports/`** — Validation and migration reports
+### 🌍 Open by Design
 
-### Key Tools
+Developed as a public-good initiative and released under CC BY 4.0.
 
-- `migrate_ckm.py` — Migration runner (legacy → CKM)
-- `validate_ckm.py` — Schema validator (K-1 to K-8 invariants)
-- `render_ckm.py` — Multi-format renderer (doc/json/jsonld/ai-context)
-- `manifest.yaml` — Migration configuration (WP-005)
+### 🔍 Evidence over Assumption
+
+Every governance statement should be traceable to verifiable sources.
+
+### ⚖ Vendor & Origin Neutral
+
+No preference for vendors, countries, technologies, or governance traditions.
+
+### 🤖 AI-Native
+
+Machine-readable by design using structured knowledge representations.
+
+### 🔄 Interoperable
+
+Connects governance knowledge across standards, regulations, and organizational policies.
+
+### 📖 Reality First
+
+Documentation is generated from the knowledge model—not maintained independently.
 
 ---
 
-## 🚀 Quick Start
+# Architecture
 
-### Prerequisites
+```
+                   External Sources
 
-- Python 3.8+
-- PyYAML (`pip install pyyaml`)
+      ISO 42001
+      EU AI Act
+      NIST AI RMF
+      OECD AI Principles
+      PDPA
+      Organizational Policies
 
-### 1. Validate the CKM
+                │
+                ▼
+
+     Canonical Knowledge Model (CKM)
+
+                │
+        ┌───────┼────────┐
+        ▼       ▼        ▼
+
+    Markdown  JSON-LD   RDF
+
+        ▼       ▼        ▼
+
+ Documentation  APIs   AI Context
+```
+
+The CKM is the single source of truth.
+
+Every artifact—including documents, APIs, JSON-LD, RDF, AI context, and web interfaces—is generated from the same canonical model.
+
+---
+
+# Repository Structure
+
+```
+.
+├── ckm/
+│   ├── requirements/
+│   ├── domains/
+│   ├── references/
+│   └── cv/
+│
+├── ckm-staging/
+│
+├── generated/
+│
+├── reports/
+│
+├── tests/
+│
+├── migrate_ckm.py
+├── validate_ckm.py
+├── render_ckm.py
+├── manifest.yaml
+│
+└── README.md
+```
+
+---
+
+# Repository Contents
+
+## Canonical Knowledge Model
+
+```
+ckm/
+```
+
+The canonical source of truth.
+
+Contains:
+
+- Unified Governance Requirements (UGRs)
+- Governance Domains
+- External References
+- Controlled Vocabularies
+
+---
+
+## CKM Staging
+
+```
+ckm-staging/
+```
+
+Migration workspace before ratification.
+
+---
+
+## Generated Artifacts
+
+```
+generated/
+```
+
+Automatically rendered outputs including:
+
+- Markdown
+- JSON
+- JSON-LD
+- RDF
+- AI Context
+
+These artifacts are disposable.
+
+The CKM remains the only source of truth.
+
+---
+
+## Tests
+
+```
+tests/
+```
+
+Automated validation including:
+
+- Kernel validation
+- Migration validation
+- Render regression
+- End-to-End regression tests
+
+---
+
+## Reports
+
+```
+reports/
+```
+
+Generated reports such as:
+
+- Validation reports
+- Migration reports
+- Regression reports
+
+---
+
+# Tooling
+
+## validate_ckm.py
+
+Validates the Canonical Knowledge Model.
+
+Checks:
+
+- Kernel invariants
+- Schema integrity
+- Controlled vocabularies
+- Relationship consistency
+- Namespace rules
+
+---
+
+## migrate_ckm.py
+
+Migrates legacy documents into the CKM.
+
+Features:
+
+- Provenance tracking
+- Deterministic migration
+- No silent correction
+- Machine-verifiable validation
+
+---
+
+## render_ckm.py
+
+Renders CKM into multiple output formats.
+
+Supported profiles include:
+
+- registry-doc
+- registry-json
+- registry-jsonld
+- registry-rdf
+- registry-ai-context
+
+---
+
+## manifest.yaml
+
+Migration configuration and mapping specification.
+
+---
+
+# Quick Start
+
+## Requirements
+
+- Python 3.10+
+- PyYAML
+
+Install dependencies
+
+```bash
+pip install pyyaml
+```
+
+---
+
+## Validate the CKM
 
 ```bash
 python validate_ckm.py --ckm-dir ckm
+```
+
+---
+
+## Render Documentation
+
+```bash
+python render_ckm.py \
+  --profile registry-doc \
+  --release 2.0.0
+```
+
+---
+
+## Generate JSON-LD
+
+```bash
+python render_ckm.py \
+  --profile registry-jsonld \
+  --release 2.0.0
+```
+
+---
+
+## Run End-to-End Tests
+
+```bash
+python tests/run_e2e.py
+```
+
+---
+
+# Example Workflow
+
+```
+Legacy Documents
+
+        │
+
+        ▼
+
+Migration Runner
+
+        │
+
+        ▼
+
+Canonical Knowledge Model
+
+        │
+
+        ▼
+
+Validator
+
+        │
+
+        ▼
+
+Renderer
+
+        │
+
+        ▼
+
+Markdown
+JSON
+JSON-LD
+RDF
+AI Context
+```
+
+---
+
+# Current Project Status
+
+| Component | Status |
+|------------|--------|
+| Canonical Knowledge Model | ✅ Alpha |
+| Kernel Validator | ✅ Implemented |
+| Migration Pipeline | ✅ Prototype |
+| Rendering Engine | ✅ Prototype |
+| JSON-LD | ✅ Supported |
+| RDF | 🚧 In Progress |
+| Reference Verification | 🚧 In Progress |
+| Stable Release | 🚧 Planned |
+
+---
+
+# Governance
+
+Architecture evolution is documented through Working Papers (WP).
+
+Major architectural changes require formal review before becoming part of the Canonical Knowledge Model.
+
+The CKM remains the single authoritative source of governance knowledge.
+
+---
+
+# Public Benefit
+
+UAGF is developed and maintained by **Sathira Institution** as an open public-good initiative.
+
+The project aims to improve AI governance interoperability by providing openly available, machine-readable governance knowledge that can be used by:
+
+- Governments
+- Standards organizations
+- Researchers
+- Industry
+- Educational institutions
+- Civil society
+
+UAGF is intended to complement—not replace—existing governance standards, regulations, and organizational frameworks.
+
+---
+
+# License
+
+This project is released under the **Creative Commons Attribution 4.0 International (CC BY 4.0)** License.
+
+You are free to:
+
+- Share
+- Adapt
+- Build upon
+
+provided appropriate attribution is given.
+
+---
+
+# Citation
+
+If you use UAGF in research, academic publications, or derived work, please cite:
+
+```bibtex
+@misc{uagf2026,
+  title={Universal AI Governance Framework},
+  author={Sathira Institution},
+  year={2026},
+  url={https://github.com/Sathira-Institution/uagf-ckm},
+  note={Canonical Knowledge Infrastructure for Interoperable AI Governance}
+}
+```
+
+---
+
+# Roadmap
+
+## Alpha
+
+- ✅ Canonical Knowledge Model
+- ✅ Kernel Validation
+- ✅ Migration Pipeline
+- ✅ Rendering Engine
+- ✅ JSON-LD
+
+## Beta
+
+- ⬜ Reference Verification
+- ⬜ RDF Export
+- ⬜ REST API
+- ⬜ Public Registry
+- ⬜ Governance Profiles
+
+## Stable
+
+- ⬜ CKM 2.0
+- ⬜ Long-Term Governance
+- ⬜ Community Contributions
+- ⬜ International Crosswalk Library
+
+---
+
+# Acknowledgements
+
+UAGF is developed as an open public-good initiative by **Sathira Institution**.
+
+Our goal is to make trustworthy AI governance knowledge openly available, interoperable, and machine-readable for the benefit of the global community.
+
+
