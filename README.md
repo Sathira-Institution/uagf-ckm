@@ -43,7 +43,20 @@ Rather than creating another governance framework, UAGF provides a **Canonical K
 > **UAGF does not replace governance frameworks. It enables them to interoperate.**
 
 ---
+---
 
+### 💡 The Core Differentiator: One Model, Many Views
+
+> **UAGF maintains a single Canonical Knowledge Model (CKM) as the absolute source of truth.**
+> 
+> Every document, dataset, API response, JSON-LD graph, AI context, and user interface is **rendered** from that model. 
+> 
+> **Documentation is a generated artifact — not the authoritative source.**
+
+This "Model-First" architecture ensures:
+- **Zero Drift:** The human-readable document and the machine-readable JSON-LD are always 100% synchronized.
+- **Single Source of Truth:** Updates are made to the CKM (YAML), and all views are automatically regenerated.
+- **Future-Proof:** New output formats (e.g., new API endpoints, new UI dashboards) can be added without rewriting any governance content.
 # Core Philosophy
 
 Truth lives in the **Canonical Knowledge Model**.
