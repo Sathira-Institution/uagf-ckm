@@ -1,0 +1,35 @@
+id: CV-RiskCat
+type: ControlledVocabulary
+tier: 1
+version: '0.1'
+status: published
+label: Risk Category
+owner_module: M-CORE
+created: '2026-07-28'
+modified: '2026-07-28'
+note: Bold-legalized legacy terms per OD-K2 recommendation (pending ratification)
+terms:
+- token: human-rights
+  label_en: Human Rights
+- token: safety
+  label_en: Safety
+- token: privacy
+  label_en: Privacy
+- token: security
+  label_en: Security
+- token: fairness
+  label_en: Fairness
+- token: transparency
+  label_en: Transparency
+- token: governance
+  label_en: Governance
+- token: accountability
+  label_en: Accountability
+- token: auditability
+  label_en: Auditability
+- token: compliance
+  label_en: Compliance
+- token: disinformation
+  label_en: Disinformation
+ratified_by: UFD-007
+ckm_release: 2.0.0-alpha

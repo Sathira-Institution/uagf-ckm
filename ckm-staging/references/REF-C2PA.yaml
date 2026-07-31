@@ -1,0 +1,17 @@
+id: REF-C2PA
+type: ExternalReference
+tier: 1
+version: '0.1'
+status: proposed
+label: C2PA Standard
+owner_module: M-CORE
+created: '2026-07-28'
+modified: '2026-07-28'
+instrument_name: Coalition for Content Provenance and Authenticity Standard
+instrument_version: unversioned
+jurisdiction: International
+verification: pending
+provenance:
+  batch: D
+  minted_by: Migration S4
+  note: Identification only; D-06 verification (S5) pending.

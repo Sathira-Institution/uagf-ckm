@@ -1,0 +1,65 @@
+id: UGR-25
+type: Requirement
+tier: 1
+version: '1.0'
+status: published
+label: AI System Disclosure
+owner_module: M-CORE
+created: '2026-06-28'
+modified: '2026-07-28'
+statement: Users must be informed when they are interacting with an AI system, including the nature and purpose of the system, in a clear and understandable manner.
+intent: Ensure users are aware they are interacting with AI and can make informed decisions about their engagement.
+applicability: All organizations with user-facing AI systems
+expected_evidence: Disclosure mechanism implementation records, user awareness verification, disclosure policy documents
+related_controls: Transparency Control, User Notification, Consent Management
+requirement_type:
+- legal
+- principle
+lifecycle_stages:
+- operation
+priority: high
+risk_categories:
+- transparency
+- human-rights
+automation_potential: medium
+implementation_guidance:
+- Identify all user-facing AI systems
+- Design disclosure mechanisms
+- Implement disclosures
+- Verify user awareness
+- Monitor compliance
+edges:
+  belongs_to:
+    primary: DOM-TRANSPARENCY
+  derives_from:
+  - ref: REF-EUAIA
+    version: '2024'
+    verification: pending
+    locator: Article 50
+  - ref: REF-OECD-AIP
+    version: '2019'
+    verification: pending
+  - ref: REF-UNESCO-RECOMMENDATION-ON
+    version: unversioned
+    verification: pending
+  references:
+  - UGR-26
+  - UGR-27
+provenance:
+  source_document: UAGF-002 v1.0 PUBLIC RELEASE
+  source_location: Section 5 record UGR-025
+  batch: A
+  extraction_timestamp: '2026-07-28'
+  legacy_status: Active
+  legacy_revision_history: v1.0 (2026-06-28, UAGF WG, Initial creation)
+  transform_log:
+  - trim
+  - split-declared-delims
+  - parse_int_id
+  - casefold_token
+  - parse_numbered_list
+  - parse_sources
+  dispositions:
+  - '[TO_VERIFY] sources=UNESCO Recommendation on the Ethics of AI'
+ratified_by: UFD-007
+ckm_release: 2.0.0-alpha

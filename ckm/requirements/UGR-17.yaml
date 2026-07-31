@@ -1,0 +1,35 @@
+id: UGR-17
+type: Requirement
+tier: 1
+version: "1.0"
+status: proposed
+label: "Human Intervention Mechanism"
+owner_module: M-CORE
+created: "2026-06-28"
+modified: "2026-07-28"
+statement: "The organization must implement mechanisms that allow authorized human operators to intervene, override, or halt AI system actions in real time when necessary to prevent harm or correct erroneous behavior."
+intent: "Ensure humans can stop or correct AI actions when necessary."
+requirement_type: [legal, standard]
+applicability: "Organizations deploying high-risk AI systems"
+lifecycle_stages: [design, development, operation]
+priority: critical
+risk_categories: [human-rights, safety, accountability]
+automation_potential: medium
+implementation_guidance:
+  - "Design intervention mechanisms"
+  - "Document intervention procedures"
+  - "Train operators"
+expected_evidence: "Intervention mechanism design documentation, intervention procedure documents, training completion records, intervention logs"
+related_controls: "Human Oversight Control, Emergency Stop, Rollback Procedure"
+edges:
+  belongs_to:
+    primary: DOM-HUMAN
+  derives_from:
+    - {ref: REF-EUAIA, version: "2024", locator: "Article 14", verification: pending}
+    - {ref: REF-ISO42001, version: "2023", locator: "Clause 8", verification: pending}
+  references: [UGR-15]
+provenance:
+  seed_note: "Verbatim from UAGF-002 v1.0 Section 5; guidance steps 4-5 truncated in extraction snapshot — marked TO VERIFY for Migration re-extraction; references scoped to seed set (full set: UGR-015, UGR-045)."
+  legacy_status: "Active"
+  legacy_revision_history: "v1.0 (2026-06-28, UAGF WG, Initial creation)"
+  dispositions: ["TO VERIFY: implementation_guidance completeness vs source file"]

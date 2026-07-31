@@ -1,0 +1,17 @@
+id: REF-TH-PDPA
+type: ExternalReference
+tier: 1
+version: '0.1'
+status: proposed
+label: PDPA Thailand
+owner_module: M-CORE
+created: '2026-07-28'
+modified: '2026-07-28'
+instrument_name: Thailand Personal Data Protection Act
+instrument_version: '2019'
+jurisdiction: TH
+verification: pending
+provenance:
+  batch: D
+  minted_by: Migration S4
+  note: Identification only; D-06 verification (S5) pending.

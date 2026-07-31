@@ -1,0 +1,65 @@
+id: UGR-6
+type: Requirement
+tier: 1
+version: '1.0'
+status: proposed
+label: AI Risk Classification
+owner_module: M-CORE
+created: '2026-06-28'
+modified: '2026-07-28'
+statement: The organization must classify each AI system according to its risk level, considering the potential impact on health, safety, fundamental rights, and organizational objectives.
+intent: Enable proportionate governance by matching controls to risk level.
+applicability: All organizations that deploy AI systems
+expected_evidence: Risk classification criteria document, classification records per AI system, classification review records
+related_controls: Risk Assessment, Proportional Controls, Risk-based Approval
+requirement_type:
+- legal
+- standard
+lifecycle_stages:
+- design
+- development
+- deployment
+priority: high
+risk_categories:
+- safety
+- human-rights
+- governance
+automation_potential: high
+implementation_guidance:
+- Define risk classification criteria
+- Assess each AI system against criteria
+- Assign risk tier (e.g., Low/Medium/High/Critical)
+- Document classification decisions
+- Review classifications periodically
+edges:
+  belongs_to:
+    primary: DOM-RISK
+  derives_from:
+  - ref: REF-EUAIA
+    version: '2024'
+    verification: pending
+    locator: Article 6
+  - ref: REF-ISO42001
+    version: '2023'
+    verification: pending
+    locator: Clause 6.1
+  - ref: REF-NIST-AIRMF
+    version: '1.0'
+    verification: pending
+  references:
+  - UGR-5
+  - UGR-15
+provenance:
+  source_document: UAGF-002 v1.0 PUBLIC RELEASE
+  source_location: Section 5 record UGR-006
+  batch: A
+  extraction_timestamp: '2026-07-28'
+  legacy_status: Active
+  legacy_revision_history: v1.0 (2026-06-28, UAGF WG, Initial creation)
+  transform_log:
+  - trim
+  - split-declared-delims
+  - parse_int_id
+  - casefold_token
+  - parse_numbered_list
+  - parse_sources

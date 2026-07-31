@@ -1,0 +1,52 @@
+id: UGR-52
+type: Requirement
+tier: 1
+version: '1.0'
+status: published
+label: Adversarial Robustness and AI Security Testing
+owner_module: M-CORE
+created: '2026-07-28'
+modified: '2026-07-28'
+ratified_by: UFD-007
+statement: The organization SHALL test AI systems against AI-specific attacks (e.g., data poisoning, adversarial inputs, model extraction) proportionate to risk, and remediate findings.
+intent: Ensure AI systems withstand AI-specific attack classes and that discovered weaknesses are remediated.
+requirement_type:
+- legal
+- standard
+applicability: Organizations developing or operating AI systems exposed to adversarial risk
+lifecycle_stages:
+- development
+- operation
+priority: high
+risk_categories:
+- security
+conformance_level: recommended
+automation_potential: high
+implementation_guidance:
+- Identify applicable AI-specific attack classes
+- Test proportionate to system risk
+- Record findings and remediation
+- Re-test after remediation
+expected_evidence: AI security test plans, test results, remediation records
+related_controls: Adversarial Testing, Security Remediation Tracking
+edges:
+  belongs_to:
+    primary: DOM-SECURITY
+  derives_from:
+  - ref: REF-EUAIA
+    version: '2024'
+    locator: Article 15
+    verification: pending
+  - ref: REF-NIST-AIRMF
+    version: '1.0'
+    verification: pending
+  references:
+  - UGR-50
+  - UGR-51
+provenance:
+  batch: B
+  source_document: UAGF-WP-002 s4 (GAP-13), statement as ratified by Founder decision D-02; activation ordered by FD 2026-07-28 to heal EF-2 dangling references
+  dispositions:
+  - '[TO VERIFY] non-statement fields drafted at Batch B activation; subject to Founder review'
+  - '[PENDING RULING] mandatory-for-high-risk escalation (WP-002 flag)'
+ckm_release: 2.0.0-alpha

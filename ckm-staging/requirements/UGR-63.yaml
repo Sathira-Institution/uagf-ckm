@@ -1,0 +1,62 @@
+id: UGR-63
+type: Requirement
+tier: 1
+version: '1.0'
+status: proposed
+label: Sensitive Data Protection
+owner_module: M-CORE
+created: '2026-06-28'
+modified: '2026-07-28'
+statement: The organization must apply enhanced protections for sensitive personal data (e.g., health data, biometric data, racial or ethnic origin, political opinions, religious beliefs) processed by AI systems, including explicit consent where required.
+intent: Ensure enhanced protection for sensitive data that carries higher privacy risk.
+applicability: Organizations processing sensitive personal data through AI systems
+expected_evidence: Sensitive data identification records, enhanced control implementation, consent records, monitoring logs
+related_controls: Data Classification, Enhanced Data Protection, Consent Management
+requirement_type:
+- legal
+lifecycle_stages:
+- all-stages
+priority: high
+risk_categories:
+- privacy
+- human-rights
+automation_potential: high
+implementation_guidance:
+- Identify sensitive data
+- Apply enhanced controls
+- Obtain explicit consent where required
+- Document processing
+- Monitor compliance
+edges:
+  belongs_to:
+    primary: DOM-PRIVACY
+  derives_from:
+  - ref: REF-TH-PDPA
+    version: '2019'
+    verification: pending
+    locator: Section 26
+  - ref: REF-EUAIA
+    version: '2024'
+    verification: pending
+    locator: Article 10
+  - ref: REF-ISO42001
+    version: '2023'
+    verification: pending
+    locator: Annex A (Privacy)
+  references:
+  - UGR-60
+  - UGR-61
+provenance:
+  source_document: UAGF-002 v1.0 PUBLIC RELEASE
+  source_location: Section 5 record UGR-063
+  batch: A
+  extraction_timestamp: '2026-07-28'
+  legacy_status: Active
+  legacy_revision_history: v1.0 (2026-06-28, UAGF WG, Initial creation)
+  transform_log:
+  - trim
+  - split-declared-delims
+  - parse_int_id
+  - casefold_token
+  - parse_numbered_list
+  - parse_sources

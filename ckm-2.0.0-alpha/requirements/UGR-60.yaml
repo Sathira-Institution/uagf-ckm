@@ -1,0 +1,65 @@
+id: UGR-60
+type: Requirement
+tier: 1
+version: '1.0'
+status: published
+label: Lawful Basis for Personal Data Processing
+owner_module: M-CORE
+created: '2026-06-28'
+modified: '2026-07-28'
+statement: The organization must establish and document a lawful basis for all processing of personal data by AI systems, including consent, contract, legal obligation, vital interest, public task, or legitimate interest.
+intent: Ensure all personal data processing by AI systems has a valid legal foundation.
+applicability: Organizations processing personal data through AI systems
+expected_evidence: Lawful basis documentation, privacy notices, consent records (if applicable), processing activity records
+related_controls: Data Protection Impact Assessment, Privacy Notice, Consent Management
+requirement_type:
+- legal
+lifecycle_stages:
+- all-stages
+priority: critical
+risk_categories:
+- privacy
+- human-rights
+automation_potential: medium
+implementation_guidance:
+- Map AI data processing to lawful bases
+- Document lawful bases
+- Review periodically
+- Include in privacy notices
+- Maintain records
+edges:
+  belongs_to:
+    primary: DOM-PRIVACY
+  derives_from:
+  - ref: REF-TH-PDPA
+    version: '2019'
+    verification: pending
+    locator: Section 24
+  - ref: REF-EUAIA
+    version: '2024'
+    verification: pending
+    locator: Article 10
+  - ref: REF-ISO42001
+    version: '2023'
+    verification: pending
+    locator: Annex A (Privacy)
+  references:
+  - UGR-61
+  - UGR-62
+  - UGR-64
+provenance:
+  source_document: UAGF-002 v1.0 PUBLIC RELEASE
+  source_location: Section 5 record UGR-060
+  batch: A
+  extraction_timestamp: '2026-07-28'
+  legacy_status: Active
+  legacy_revision_history: v1.0 (2026-06-28, UAGF WG, Initial creation)
+  transform_log:
+  - trim
+  - split-declared-delims
+  - parse_int_id
+  - casefold_token
+  - parse_numbered_list
+  - parse_sources
+ratified_by: UFD-007
+ckm_release: 2.0.0-alpha

@@ -1,0 +1,19 @@
+id: REF-EUAIA
+type: ExternalReference
+tier: 1
+version: '0.1'
+status: published
+label: EU AI Act
+owner_module: M-CORE
+created: '2026-07-28'
+modified: '2026-07-28'
+instrument_name: EU Artificial Intelligence Act
+instrument_version: '2024'
+jurisdiction: EU
+verification: pending
+provenance:
+  batch: D
+  minted_by: Migration S4
+  note: Identification only; D-06 verification (S5) pending.
+ratified_by: UFD-007
+ckm_release: 2.0.0-alpha

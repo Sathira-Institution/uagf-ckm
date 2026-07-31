@@ -1,0 +1,66 @@
+id: UGR-64
+type: Requirement
+tier: 1
+version: '1.0'
+status: published
+label: Privacy Impact Assessment
+owner_module: M-CORE
+created: '2026-06-28'
+modified: '2026-07-28'
+statement: The organization must conduct privacy impact assessments for AI systems that process personal data, evaluating privacy risks and implementing appropriate mitigations before deployment.
+intent: Systematically identify and address privacy risks in AI systems.
+applicability: Organizations processing personal data through AI systems
+expected_evidence: PIA documentation, mitigation records, approval records, review records
+related_controls: Data Protection Impact Assessment, Risk Assessment, Data Protection
+requirement_type:
+- legal
+- standard
+lifecycle_stages:
+- design
+- development
+- deployment
+priority: high
+risk_categories:
+- privacy
+automation_potential: medium
+implementation_guidance:
+- Define PIA methodology
+- Conduct PIAs for AI systems
+- Document findings
+- Implement mitigations
+- Review periodically
+edges:
+  belongs_to:
+    primary: DOM-PRIVACY
+  derives_from:
+  - ref: REF-TH-PDPA
+    version: '2019'
+    verification: pending
+    locator: Section 23
+  - ref: REF-ISO42001
+    version: '2023'
+    verification: pending
+    locator: Clause 6
+  - ref: REF-NIST-AIRMF
+    version: '1.0'
+    verification: pending
+  references:
+  - UGR-60
+  - UGR-61
+  - UGR-62
+provenance:
+  source_document: UAGF-002 v1.0 PUBLIC RELEASE
+  source_location: Section 5 record UGR-064
+  batch: A
+  extraction_timestamp: '2026-07-28'
+  legacy_status: Active
+  legacy_revision_history: v1.0 (2026-06-28, UAGF WG, Initial creation)
+  transform_log:
+  - trim
+  - split-declared-delims
+  - parse_int_id
+  - casefold_token
+  - parse_numbered_list
+  - parse_sources
+ratified_by: UFD-007
+ckm_release: 2.0.0-alpha

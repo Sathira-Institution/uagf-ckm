@@ -1,0 +1,62 @@
+id: UGR-71
+type: Requirement
+tier: 1
+version: '1.0'
+status: published
+label: Safety Thresholds and Monitoring
+owner_module: M-CORE
+created: '2026-06-28'
+modified: '2026-07-28'
+statement: The organization must define safety thresholds for AI system behavior and continuously monitor system performance against these thresholds during operation.
+intent: Detect and respond to unsafe AI system behavior during operation.
+applicability: Organizations deploying AI systems
+expected_evidence: Safety threshold documentation, monitoring records, alert records, incident records
+related_controls: Safety Monitoring, Alerting, Incident Response
+requirement_type:
+- standard
+lifecycle_stages:
+- operation
+priority: high
+risk_categories:
+- safety
+automation_potential: high
+implementation_guidance:
+- Define safety thresholds
+- Implement monitoring
+- Configure alerts
+- Document incidents
+- Review thresholds periodically
+edges:
+  belongs_to:
+    primary: DOM-SAFETY
+  derives_from:
+  - ref: REF-EUAIA
+    version: '2024'
+    verification: pending
+    locator: Article 15
+  - ref: REF-ISO42001
+    version: '2023'
+    verification: pending
+    locator: Clause 8
+  - ref: REF-NIST-AIRMF
+    version: '1.0'
+    verification: pending
+  references:
+  - UGR-70
+  - UGR-72
+provenance:
+  source_document: UAGF-002 v1.0 PUBLIC RELEASE
+  source_location: Section 5 record UGR-071
+  batch: A
+  extraction_timestamp: '2026-07-28'
+  legacy_status: Active
+  legacy_revision_history: v1.0 (2026-06-28, UAGF WG, Initial creation)
+  transform_log:
+  - trim
+  - split-declared-delims
+  - parse_int_id
+  - casefold_token
+  - parse_numbered_list
+  - parse_sources
+ratified_by: UFD-007
+ckm_release: 2.0.0-alpha

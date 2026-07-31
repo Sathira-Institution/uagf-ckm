@@ -1,0 +1,65 @@
+id: UGR-45
+type: Requirement
+tier: 1
+version: '1.0'
+status: proposed
+label: Human Accountability for AI Outcomes
+owner_module: M-CORE
+created: '2026-06-28'
+modified: '2026-07-28'
+statement: The organization must ensure that every consequential AI decision has a clearly identified human accountable for the outcome, with documented responsibility and authority.
+intent: Maintain human responsibility for AI outcomes, preventing accountability gaps.
+applicability: All organizations with AI systems that make consequential decisions
+expected_evidence: Accountability assignment records, accountability documentation, training records, incident review records
+related_controls: Human Oversight Control, Accountability Chain, Incident Management
+requirement_type:
+- legal
+- standard
+- principle
+lifecycle_stages:
+- all-stages
+priority: critical
+risk_categories:
+- accountability
+- human-rights
+automation_potential: medium
+implementation_guidance:
+- Map AI decisions to accountable humans
+- Document accountability assignments
+- Include in approval workflows
+- Log accountability records
+- Review assignments regularly
+edges:
+  belongs_to:
+    primary: DOM-ACCOUNTABILITY
+  derives_from:
+  - ref: REF-EUAIA
+    version: '2024'
+    verification: pending
+    locator: Article 14
+  - ref: REF-ISO42001
+    version: '2023'
+    verification: pending
+    locator: Clause 5.3
+  - ref: REF-OECD-AIP
+    version: '2019'
+    verification: pending
+  references:
+  - UGR-1
+  - UGR-4
+  - UGR-15
+  - UGR-16
+provenance:
+  source_document: UAGF-002 v1.0 PUBLIC RELEASE
+  source_location: Section 5 record UGR-045
+  batch: A
+  extraction_timestamp: '2026-07-28'
+  legacy_status: Active
+  legacy_revision_history: v1.0 (2026-06-28, UAGF WG, Initial creation)
+  transform_log:
+  - trim
+  - split-declared-delims
+  - parse_int_id
+  - casefold_token
+  - parse_numbered_list
+  - parse_sources

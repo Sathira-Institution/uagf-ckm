@@ -1,0 +1,17 @@
+id: DOM-DATA
+type: Domain
+tier: 1
+version: '1.0'
+status: published
+label: Data Governance
+owner_module: M-CORE
+created: '2026-06-28'
+modified: '2026-07-28'
+concern_statement: 'Governance domain: Data Governance.'
+provenance:
+  batch: C-interim
+  source_document: UAGF-002 v1.0 category heading
+  dispositions:
+  - '[TO VERIFY] canonical concern_statement to be sourced from UAGF-001 v1.0 Section 8 at Batch C'
+ratified_by: UFD-007
+ckm_release: 2.0.0-alpha

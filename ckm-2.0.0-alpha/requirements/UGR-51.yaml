@@ -1,0 +1,64 @@
+id: UGR-51
+type: Requirement
+tier: 1
+version: '1.0'
+status: published
+label: AI System Security Testing
+owner_module: M-CORE
+created: '2026-06-28'
+modified: '2026-07-28'
+statement: AI systems must be tested for security vulnerabilities before deployment and periodically during operation, with findings documented and remediated.
+intent: Identify and remediate security vulnerabilities before they can be exploited.
+applicability: All organizations with AI systems
+expected_evidence: Security testing reports, vulnerability remediation records, testing schedule, penetration test results
+related_controls: Vulnerability Management, Security Testing, Penetration Testing
+requirement_type:
+- standard
+lifecycle_stages:
+- development
+- deployment
+- operation
+priority: medium
+risk_categories:
+- security
+automation_potential: medium
+implementation_guidance:
+- Define security testing requirements
+- Conduct pre-deployment testing
+- Schedule periodic testing
+- Document findings
+- Remediate vulnerabilities
+edges:
+  belongs_to:
+    primary: DOM-SECURITY
+  derives_from:
+  - ref: REF-EUAIA
+    version: '2024'
+    verification: pending
+    locator: Article 15
+  - ref: REF-ISO42001
+    version: '2023'
+    verification: pending
+    locator: Annex A (Security)
+  - ref: REF-NIST-AIRMF
+    version: '1.0'
+    verification: pending
+  references:
+  - UGR-50
+  - UGR-52
+provenance:
+  source_document: UAGF-002 v1.0 PUBLIC RELEASE
+  source_location: Section 5 record UGR-051
+  batch: A
+  extraction_timestamp: '2026-07-28'
+  legacy_status: Active
+  legacy_revision_history: v1.0 (2026-06-28, UAGF WG, Initial creation)
+  transform_log:
+  - trim
+  - split-declared-delims
+  - parse_int_id
+  - casefold_token
+  - parse_numbered_list
+  - parse_sources
+ratified_by: UFD-007
+ckm_release: 2.0.0-alpha

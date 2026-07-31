@@ -1,0 +1,14 @@
+id: DOM-FAIRNESS
+type: Domain
+tier: 1
+version: "1.0"
+status: proposed
+label: "Fairness & Non-Discrimination"
+owner_module: M-CORE
+created: "2026-07-28"
+modified: "2026-07-28"
+ratified_by: "UFD-001"
+concern_statement: "Governance of bias, fairness, and non-discrimination in AI systems: examination and mitigation of biases, fairness monitoring in operation, and prevention of unlawful discriminatory outcomes in consequential decisions."
+provenance:
+  batch: "B"
+  source_document: "UAGF-WP-002 s3 Option A, ratified by Founder decision D-01 (11th domain)"

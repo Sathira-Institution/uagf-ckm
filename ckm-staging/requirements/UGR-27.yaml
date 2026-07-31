@@ -1,0 +1,59 @@
+id: UGR-27
+type: Requirement
+tier: 1
+version: '1.0'
+status: proposed
+label: Deepfake Disclosure
+owner_module: M-CORE
+created: '2026-06-28'
+modified: '2026-07-28'
+statement: Deepfake content (AI-generated or manipulated image, audio, or video that resembles real persons or events) must be clearly disclosed as artificially generated or manipulated.
+intent: Prevent misinformation and deception through realistic synthetic media.
+applicability: Organizations that generate or distribute deepfake content
+expected_evidence: Deepfake detection records, disclosure labels, disclosure event logs, compliance monitoring records
+related_controls: Content Labeling, Deepfake Detection, Disclosure Management
+requirement_type:
+- legal
+lifecycle_stages:
+- operation
+priority: high
+risk_categories:
+- transparency
+- disinformation
+- human-rights
+automation_potential: high
+implementation_guidance:
+- Detect deepfake content
+- Apply disclosure labels
+- Ensure labels are visible and understandable
+- Log disclosure events
+- Monitor for compliance
+edges:
+  belongs_to:
+    primary: DOM-TRANSPARENCY
+  derives_from:
+  - ref: REF-EUAIA
+    version: '2024'
+    verification: pending
+    locator: Article 50(4)
+  - ref: REF-EUAIA
+    version: '2024'
+    verification: pending
+    locator: Article 3(66)
+  references:
+  - UGR-25
+  - UGR-26
+provenance:
+  source_document: UAGF-002 v1.0 PUBLIC RELEASE
+  source_location: Section 5 record UGR-027
+  batch: A
+  extraction_timestamp: '2026-07-28'
+  legacy_status: Active
+  legacy_revision_history: v1.0 (2026-06-28, UAGF WG, Initial creation)
+  transform_log:
+  - trim
+  - split-declared-delims
+  - parse_int_id
+  - casefold_token
+  - parse_numbered_list
+  - parse_sources

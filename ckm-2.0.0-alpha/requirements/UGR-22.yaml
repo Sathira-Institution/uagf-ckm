@@ -1,0 +1,65 @@
+id: UGR-22
+type: Requirement
+tier: 1
+version: '1.0'
+status: published
+label: Data Classification for AI Systems
+owner_module: M-CORE
+created: '2026-06-28'
+modified: '2026-07-28'
+statement: The organization must classify data used in AI systems according to sensitivity, regulatory requirements, and risk, and apply appropriate controls based on classification.
+intent: Ensure appropriate protection for data based on sensitivity and regulatory requirements.
+applicability: All organizations that process data through AI systems
+expected_evidence: Data classification schema, classification assignments, control implementation records, classification review records
+related_controls: Data Protection, Access Control, Data Handling Procedures
+requirement_type:
+- legal
+- standard
+lifecycle_stages:
+- all-stages
+priority: high
+risk_categories:
+- privacy
+- security
+automation_potential: high
+implementation_guidance:
+- Define data classification schema
+- Classify data used in AI systems
+- Apply controls based on classification
+- Document classification decisions
+- Review classifications periodically
+edges:
+  belongs_to:
+    primary: DOM-DATA
+  derives_from:
+  - ref: REF-TH-PDPA
+    version: '2019'
+    verification: pending
+    locator: Section 23
+  - ref: REF-ISO42001
+    version: '2023'
+    verification: pending
+    locator: Annex A (Privacy)
+  - ref: REF-NIST-AIRMF
+    version: '1.0'
+    verification: pending
+  references:
+  - UGR-20
+  - UGR-30
+  - UGR-31
+provenance:
+  source_document: UAGF-002 v1.0 PUBLIC RELEASE
+  source_location: Section 5 record UGR-022
+  batch: A
+  extraction_timestamp: '2026-07-28'
+  legacy_status: Active
+  legacy_revision_history: v1.0 (2026-06-28, UAGF WG, Initial creation)
+  transform_log:
+  - trim
+  - split-declared-delims
+  - parse_int_id
+  - casefold_token
+  - parse_numbered_list
+  - parse_sources
+ratified_by: UFD-007
+ckm_release: 2.0.0-alpha

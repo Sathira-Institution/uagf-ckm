@@ -1,0 +1,17 @@
+id: REF-UNESCO-RECOMMENDATION-ON
+type: ExternalReference
+tier: 1
+version: '0.1'
+status: proposed
+label: UNESCO Recommendation on the Ethics of AI
+owner_module: M-CORE
+created: '2026-07-28'
+modified: '2026-07-28'
+instrument_name: UNESCO Recommendation on the Ethics of AI
+instrument_version: unversioned
+jurisdiction: unknown
+verification: pending
+provenance:
+  batch: D
+  minted_by: Migration S4
+  note: Identification only; D-06 verification (S5) pending.

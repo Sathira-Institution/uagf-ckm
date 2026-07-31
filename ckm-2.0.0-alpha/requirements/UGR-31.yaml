@@ -1,0 +1,49 @@
+id: UGR-31
+type: Requirement
+tier: 1
+version: '1.0'
+status: published
+label: Fairness Monitoring in Operation
+owner_module: M-CORE
+created: '2026-07-28'
+modified: '2026-07-28'
+ratified_by: UFD-001
+statement: The organization SHOULD define fairness metrics appropriate to the use case and monitor deployed AI systems against them, with review triggers on degradation.
+intent: Detect fairness degradation of deployed AI systems early enough to act.
+requirement_type:
+- standard
+- principle
+applicability: Organizations operating AI systems whose outputs may affect persons
+lifecycle_stages:
+- operation
+priority: high
+risk_categories:
+- fairness
+conformance_level: recommended
+automation_potential: high
+implementation_guidance:
+- Select fairness metrics appropriate to the use case
+- Monitor deployed systems against the metrics
+- Define degradation review triggers
+- Record monitoring outcomes and actions
+expected_evidence: Fairness metric definitions, monitoring records, trigger review records
+related_controls: Fairness Monitoring, Model Performance Review
+edges:
+  belongs_to:
+    primary: DOM-FAIRNESS
+  derives_from:
+  - ref: REF-NIST-AIRMF
+    version: '1.0'
+    verification: pending
+  - ref: REF-OECD-AIP
+    version: '2019'
+    verification: pending
+  references:
+  - UGR-30
+  - UGR-22
+provenance:
+  batch: B
+  source_document: UAGF-WP-002 s4, statement as ratified by Founder decision D-02
+  dispositions:
+  - '[TO VERIFY] non-statement fields drafted at Batch B activation (FD 2026-07-28); subject to Founder review'
+ckm_release: 2.0.0-alpha

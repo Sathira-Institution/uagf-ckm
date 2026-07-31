@@ -1,0 +1,69 @@
+id: UGR-5
+type: Requirement
+tier: 1
+version: '1.0'
+status: published
+label: AI Risk Management System
+owner_module: M-CORE
+created: '2026-06-28'
+modified: '2026-07-28'
+statement: The organization must establish, implement, and maintain a risk management system for AI systems that identifies, analyzes, evaluates, treats, and monitors AI-related risks throughout the AI system lifecycle.
+intent: Ensure systematic identification and management of AI risks from design through deployment and operation.
+applicability: Organizations deploying high-risk AI systems; all organizations with AI systems
+expected_evidence: Risk assessment methodology document, completed risk assessments, risk treatment plans, risk monitoring records, risk review meeting minutes
+related_controls: Risk Assessment, Risk Treatment, Risk Monitoring, Risk Review
+requirement_type:
+- legal
+- standard
+lifecycle_stages:
+- design
+- development
+- deployment
+- operation
+priority: critical
+risk_categories:
+- safety
+- human-rights
+- governance
+automation_potential: medium
+implementation_guidance:
+- Define AI risk assessment methodology
+- Conduct risk assessments for all AI systems
+- Document risk treatment plans
+- Monitor risks continuously
+- Review and update assessments regularly
+edges:
+  belongs_to:
+    primary: DOM-RISK
+  derives_from:
+  - ref: REF-EUAIA
+    version: '2024'
+    verification: pending
+    locator: Article 9
+  - ref: REF-ISO42001
+    version: '2023'
+    verification: pending
+    locator: Clause 6.1
+  - ref: REF-NIST-AIRMF
+    version: '1.0'
+    verification: pending
+    locator: Govern Function
+  references:
+  - UGR-6
+  - UGR-7
+provenance:
+  source_document: UAGF-002 v1.0 PUBLIC RELEASE
+  source_location: Section 5 record UGR-005
+  batch: A
+  extraction_timestamp: '2026-07-28'
+  legacy_status: Active
+  legacy_revision_history: v1.0 (2026-06-28, UAGF WG, Initial creation)
+  transform_log:
+  - trim
+  - split-declared-delims
+  - parse_int_id
+  - casefold_token
+  - parse_numbered_list
+  - parse_sources
+ratified_by: UFD-007
+ckm_release: 2.0.0-alpha

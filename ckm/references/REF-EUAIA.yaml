@@ -1,0 +1,15 @@
+id: REF-EUAIA
+type: ExternalReference
+tier: 1
+version: "0.1"
+status: proposed
+label: "EU AI Act"
+owner_module: M-CORE
+created: "2026-07-28"
+modified: "2026-07-28"
+instrument_name: "EU Artificial Intelligence Act"
+instrument_version: "2024"
+jurisdiction: "EU"
+verification: pending
+provenance:
+  seed_note: "Seed fixture. Instance is minted formally in Migration S4; locator verification occurs only via D-06 (S5)."

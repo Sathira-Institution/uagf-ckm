@@ -1,0 +1,57 @@
+id: UGR-3
+type: Requirement
+tier: 1
+version: '1.0'
+status: proposed
+label: Top Management Commitment
+owner_module: M-CORE
+created: '2026-06-28'
+modified: '2026-07-28'
+statement: Top management must demonstrate commitment to AI governance by approving the AI policy, allocating resources, and regularly reviewing AI governance performance.
+intent: Ensure AI governance has executive-level support and resources to be effective.
+applicability: All organizations that develop, deploy, or operate AI systems
+expected_evidence: Executive meeting minutes, approved resource allocation documents, governance review reports, signed policy approval
+related_controls: AI Governance Ownership, AI Policy Framework, Governance Review Cadence
+requirement_type:
+- standard
+lifecycle_stages:
+- all-stages
+priority: high
+risk_categories:
+- governance
+automation_potential: low
+implementation_guidance:
+- Schedule regular AI governance reviews at executive level
+- Include AI governance in board or management reporting
+- Document resource allocation decisions
+- Maintain meeting minutes
+- Track governance KPIs
+edges:
+  belongs_to:
+    primary: DOM-GOV
+  derives_from:
+  - ref: REF-ISO42001
+    version: '2023'
+    verification: pending
+    locator: Clause 5.1
+  - ref: REF-EUAIA
+    version: '2024'
+    verification: pending
+    locator: Article 26
+  references:
+  - UGR-1
+  - UGR-2
+provenance:
+  source_document: UAGF-002 v1.0 PUBLIC RELEASE
+  source_location: Section 5 record UGR-003
+  batch: A
+  extraction_timestamp: '2026-07-28'
+  legacy_status: Active
+  legacy_revision_history: v1.0 (2026-06-28, UAGF WG, Initial creation)
+  transform_log:
+  - trim
+  - split-declared-delims
+  - parse_int_id
+  - casefold_token
+  - parse_numbered_list
+  - parse_sources

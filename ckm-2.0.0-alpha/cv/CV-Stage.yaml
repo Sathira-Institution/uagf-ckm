@@ -1,0 +1,24 @@
+id: CV-Stage
+type: ControlledVocabulary
+tier: 1
+version: '0.1'
+status: published
+label: Lifecycle Stage
+owner_module: M-CORE
+created: '2026-07-28'
+modified: '2026-07-28'
+terms:
+- token: design
+  label_en: Design
+- token: development
+  label_en: Development
+- token: deployment
+  label_en: Deployment
+- token: operation
+  label_en: Operation
+- token: decommission
+  label_en: Decommission
+- token: all-stages
+  label_en: All Stages
+ratified_by: UFD-007
+ckm_release: 2.0.0-alpha

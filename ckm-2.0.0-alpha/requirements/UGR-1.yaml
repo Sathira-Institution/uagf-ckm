@@ -1,0 +1,65 @@
+id: UGR-1
+type: Requirement
+tier: 1
+version: '1.0'
+status: published
+label: AI Governance Ownership
+owner_module: M-CORE
+created: '2026-06-28'
+modified: '2026-07-28'
+statement: The organization must designate a person or function with overall accountability for AI governance, including policy development, risk oversight, and compliance monitoring.
+intent: Ensure clear ownership and accountability for AI governance across the organization.
+applicability: All organizations that develop, deploy, or operate AI systems
+expected_evidence: AI governance role description, assignment documentation, org chart showing AI governance structure, meeting minutes of governance reviews
+related_controls: AI Policy Framework, Top Management Commitment, Governance Roles and Responsibilities
+requirement_type:
+- standard
+- legal
+lifecycle_stages:
+- all-stages
+priority: high
+risk_categories:
+- governance
+automation_potential: medium
+implementation_guidance:
+- Define AI governance role with documented responsibilities
+- Assign to an accountable individual or committee
+- Include in job descriptions and performance objectives
+- Document the assignment
+- Review annually
+edges:
+  belongs_to:
+    primary: DOM-GOV
+  derives_from:
+  - ref: REF-ISO42001
+    version: '2023'
+    verification: pending
+    locator: Clause 5.3
+  - ref: REF-EUAIA
+    version: '2024'
+    verification: pending
+    locator: Article 26
+  - ref: REF-TH-PDPA
+    version: '2019'
+    verification: pending
+    locator: Section 41
+  references:
+  - UGR-2
+  - UGR-3
+  - UGR-15
+provenance:
+  source_document: UAGF-002 v1.0 PUBLIC RELEASE
+  source_location: Section 5 record UGR-001
+  batch: A
+  extraction_timestamp: '2026-07-28'
+  legacy_status: Active
+  legacy_revision_history: v1.0 (2026-06-28, UAGF WG, Initial creation)
+  transform_log:
+  - trim
+  - split-declared-delims
+  - parse_int_id
+  - casefold_token
+  - parse_numbered_list
+  - parse_sources
+ratified_by: UFD-007
+ckm_release: 2.0.0-alpha

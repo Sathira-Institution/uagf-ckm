@@ -1,0 +1,67 @@
+id: UGR-21
+type: Requirement
+tier: 1
+version: '1.0'
+status: published
+label: Data Lineage and Provenance
+owner_module: M-CORE
+created: '2026-06-28'
+modified: '2026-07-28'
+statement: The organization must maintain data lineage records that track the origin, transformation, and flow of data used in AI systems from source to consumption, enabling traceability and auditability.
+intent: Enable traceability of data used in AI systems for audit, compliance, and error investigation.
+applicability: All organizations that develop or operate AI systems
+expected_evidence: Data lineage records, data flow diagrams, transformation logs, lineage verification records
+related_controls: Data Tracking, Data Provenance, Audit Logging
+requirement_type:
+- legal
+- standard
+lifecycle_stages:
+- development
+- operation
+priority: high
+risk_categories:
+- privacy
+- fairness
+- auditability
+automation_potential: high
+implementation_guidance:
+- Document data sources
+- Track data transformations
+- Maintain lineage records
+- Include lineage in audit trails
+- Verify lineage accuracy
+edges:
+  belongs_to:
+    primary: DOM-DATA
+  derives_from:
+  - ref: REF-EUAIA
+    version: '2024'
+    verification: pending
+    locator: Article 10
+  - ref: REF-ISO42001
+    version: '2023'
+    verification: pending
+    locator: Annex A (Data Integrity)
+  - ref: REF-NIST-AIRMF
+    version: '1.0'
+    verification: pending
+  references:
+  - UGR-20
+  - UGR-35
+  - UGR-36
+provenance:
+  source_document: UAGF-002 v1.0 PUBLIC RELEASE
+  source_location: Section 5 record UGR-021
+  batch: A
+  extraction_timestamp: '2026-07-28'
+  legacy_status: Active
+  legacy_revision_history: v1.0 (2026-06-28, UAGF WG, Initial creation)
+  transform_log:
+  - trim
+  - split-declared-delims
+  - parse_int_id
+  - casefold_token
+  - parse_numbered_list
+  - parse_sources
+ratified_by: UFD-007
+ckm_release: 2.0.0-alpha

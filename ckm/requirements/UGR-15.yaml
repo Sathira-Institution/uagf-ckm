@@ -1,0 +1,37 @@
+id: UGR-15
+type: Requirement
+tier: 1
+version: "1.0"
+status: proposed
+label: "Human Oversight for High-Risk AI"
+owner_module: M-CORE
+created: "2026-06-28"
+modified: "2026-07-28"
+statement: "High-risk AI systems must be designed and operated in a way that enables effective human oversight, including the ability for humans to intervene, override, or stop the system when necessary."
+intent: "Ensure human judgment remains the final authority for consequential AI decisions, preventing full automation of decisions with significant impact."
+requirement_type: [legal, standard]
+applicability: "Organizations deploying high-risk AI systems"
+lifecycle_stages: [design, development, operation]
+priority: critical
+risk_categories: [human-rights, safety, accountability]
+automation_potential: high
+implementation_guidance:
+  - "Identify decision points requiring human review"
+  - "Define approval workflows"
+  - "Assign responsible human authorities"
+  - "Log all review decisions"
+  - "Maintain audit trail"
+expected_evidence: "Human oversight design documentation, approval workflow definitions, human review logs, override records"
+related_controls: "Human Oversight Control, Approval Workflow, Human Intervention Mechanism"
+edges:
+  belongs_to:
+    primary: DOM-HUMAN
+  derives_from:
+    - {ref: REF-EUAIA, version: "2024", locator: "Article 14", verification: pending}
+    - {ref: REF-ISO42001, version: "2023", locator: "Clause 8", verification: pending}
+    - {ref: REF-OECD-AIP, version: "2019", verification: pending}
+  references: [UGR-16, UGR-17]
+provenance:
+  seed_note: "Hand-written fixture; all content verbatim from UAGF-002 v1.0 Section 5, EXCEPT references scoped to the seed set (full published set is UGR-004, UGR-016, UGR-017, UGR-045 — restored at Migration Batch A). Declared, not silent."
+  legacy_status: "Active"
+  legacy_revision_history: "v1.0 (2026-06-28, UAGF WG, Initial creation)"

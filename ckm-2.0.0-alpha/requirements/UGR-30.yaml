@@ -1,0 +1,54 @@
+id: UGR-30
+type: Requirement
+tier: 1
+version: '1.0'
+status: published
+label: Bias Assessment and Mitigation
+owner_module: M-CORE
+created: '2026-07-28'
+modified: '2026-07-28'
+ratified_by: UFD-001
+statement: The organization SHALL examine data and models for possible biases likely to affect health, safety, or fundamental rights, and SHALL apply documented mitigation measures.
+intent: Ensure biases that could harm people are systematically identified and mitigated before and during use of AI systems.
+requirement_type:
+- legal
+- standard
+applicability: Organizations developing or deploying AI systems whose outputs may affect persons
+lifecycle_stages:
+- design
+- development
+- operation
+priority: critical
+risk_categories:
+- fairness
+- human-rights
+conformance_level: mandatory
+automation_potential: medium
+implementation_guidance:
+- Define bias examination scope for data and models
+- Run bias assessments at defined lifecycle points
+- Document identified biases and mitigation measures
+- Verify mitigation effectiveness
+expected_evidence: Bias assessment reports, mitigation records, effectiveness verification records
+related_controls: Bias Assessment Procedure, Mitigation Tracking
+edges:
+  belongs_to:
+    primary: DOM-FAIRNESS
+  derives_from:
+  - ref: REF-EUAIA
+    version: '2024'
+    locator: Article 10(2)
+    verification: pending
+  - ref: REF-NIST-AIRMF
+    version: '1.0'
+    verification: pending
+  references:
+  - UGR-22
+  - UGR-31
+provenance:
+  batch: B
+  source_document: UAGF-WP-002 s4, statement as ratified by Founder decision D-02
+  dispositions:
+  - '[TO VERIFY] non-statement fields drafted at Batch B activation (FD 2026-07-28); subject to Founder review'
+  - '[TO VERIFY] derives_from locators pending D-06'
+ckm_release: 2.0.0-alpha
