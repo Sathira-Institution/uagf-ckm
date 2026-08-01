@@ -1,0 +1,16 @@
+# Machine-readable register of institutional decisions (audit recommendation)
+resolved:
+  - {id: OD-K1, ruling: UFD-007, outcome: "Kernel WP-004 v0.2 ratified"}
+  - {id: OD-K2, ruling: UFD-007, outcome: "CV terms: legalize live values"}
+  - {id: OD-K3, ruling: UFD-007, outcome: "legacy stage mapping ratified"}
+  - {id: OD-13, ruling: UFD-007, outcome: "UFD- prefix + Decisions Ledger established"}
+  - {id: OD-06, ruling: UFD-007, outcome: "canonical name: Universal AI Governance Knowledge Infrastructure"}
+  - {id: D-01,  ruling: UFD-001, outcome: "DOM-FAIRNESS as 11th domain"}
+  - {id: D-02,  ruling: UFD-001, outcome: "15 new UGRs approved (3 activated: UGR-030/031/052)"}
+  - {id: D-03,  ruling: UFD-001, outcome: "UGR-030/031 heal dangling refs"}
+pending:
+  - {id: D-06-PASS, blocks: "clearing pending-verification on all derives_from locators", owner: Engineer, needs: "Founder scheduling"}
+  - {id: BATCH-B-12, blocks: "activation of remaining 12 approved UGRs", owner: Founder}
+  - {id: SEC-CONTACT, blocks: "SECURITY.md disclosure channel", owner: Founder}
+  - {id: COC-RATIFY, blocks: "full Code of Conduct", owner: Founder}
+  - {id: LEDGER-SIGN, blocks: "Founder counter-signature of UFD ledger in public repo", owner: Founder}

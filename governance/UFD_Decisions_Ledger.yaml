@@ -1,0 +1,28 @@
+# UAGF Founder Decisions Ledger — established per ratified OD-13
+# Prefix: UFD- (UAGF Founder Decision). Entries are append-only.
+ledger:
+  - id: UFD-001
+    date: "2026-07-28"
+    title: "WP-001/WP-002 approvals"
+    decisions: "Sole Ownership Model; D-01 DOM-FAIRNESS as 11th domain (Option A); D-02 fifteen new UGRs approved; D-03 UGR-030/031 allocation heals dangling refs; D-04 domain placements deferred pending source verification; D-05 GPAI deferred to GenAI Extension; D-06 source-verification pass mandatory."
+  - id: UFD-002
+    date: "2026-07-28"
+    title: "Architecture Reset"
+    decisions: "UAGF v2.0 canonical; v1.x historical migration input only; Canonical Knowledge Model is primary source of truth; documents are publication artifacts."
+  - id: UFD-003
+    date: "2026-07-28"
+    title: "Model-First transition & WP-004 initiation"
+  - id: UFD-004
+    date: "2026-07-28"
+    title: "WP-004 scope control (Kernel first, Proof second, Expansion last)"
+  - id: UFD-005
+    date: "2026-07-28"
+    title: "Kernel Proof PASSED; WP-006 Rendering Engine ordered; expansion frozen"
+  - id: UFD-006
+    date: "2026-07-28"
+    title: "Operational Validation Phase; WP-005 approved; Execution Tasks replace Working Papers; validator explainability enhancements"
+  - id: UFD-007
+    date: "2026-07-28"
+    title: "Conflict resolution, ratifications, Release 2.0.0-Alpha"
+    decisions: "CONFLICT resolutions approved: activate UGR-030/031 (per D-03) and UGR-052 (heals EF-2). RATIFIED: OD-K1 Kernel WP-004 v0.2; OD-K2 CV terms legalize live values; OD-K3 legacy stage mapping; OD-13 UFD prefix + this ledger; OD-06 canonical name 'Universal AI Governance Knowledge Infrastructure' for IRIs. Ordered: release cut CKM 2.0.0-Alpha; Build-in-Public alpha package."
+    note: "Recorded by the Engineer from the Founder directive of 2026-07-28; ledger entries await Founder counter-signature in the public repository."

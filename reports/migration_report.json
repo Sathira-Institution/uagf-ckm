@@ -2,7 +2,7 @@
   "runner": "uagf-migration-runner/0.1",
   "manifest_id": "MIG-2026-001",
   "pipeline": "WP-005 S1-S7 (S5 identification-only; D-06 verification pending)",
-  "timestamp": "2026-07-29T10:43:50.831680+00:00",
+  "timestamp": "2026-08-01T10:10:50.067508+00:00",
   "source_hash_sha256": "9f547154b524f9eda8dc35e44ba6b2e73d1c7570887f3325aa8785e3930d676a",
   "batches": {
     "A_requirements": 30,

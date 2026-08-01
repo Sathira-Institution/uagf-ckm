@@ -33,10 +33,22 @@ def pad(oid):  # ID-3: padding is a rendering concern
     m = re.match(r"UGR-(\d+)$", oid)
     return f"UGR-{int(m.group(1)):03d}" if m else oid
 
-def stamp(profile, scope, ckm_release):
+def stamp(profile, scope, ckm_release, ckm_dir):
+    """Deterministic stamp: derived ONLY from release metadata + dataset content hash.
+    No wall clock. Same (profile, scope, release, dataset) => byte-identical artifact (RC-2)."""
+    import hashlib
+    rel_cut = "unreleased"
+    mp = os.path.join(ckm_dir, "release_manifest.json")
+    if os.path.exists(mp):
+        rel_cut = json.load(open(mp, encoding="utf-8")).get("cut", "unreleased")
+    h = hashlib.sha256()
+    for dp, _, fs in sorted(os.walk(ckm_dir)):
+        for fn in sorted(fs):
+            if fn.endswith((".yaml", ".yml")):
+                h.update(open(os.path.join(dp, fn), "rb").read())
     return {"profile": profile, "scope": scope, "ckm_release": ckm_release,
-            "render_date": "2026-07-28", "engine": "uagf-renderer/0.1",
-            "source_of_truth": BASE_IRI}
+            "release_cut": rel_cut, "render_token": h.hexdigest()[:16],
+            "engine": "uagf-renderer/0.2", "source_of_truth": BASE_IRI}
 
 def ugrs_by_domain(objs, ids):
     doms = sorted([o for o in objs.values() if o.get("type") == "Domain" and o["id"] in ids],
@@ -64,7 +76,7 @@ def fmt_sources(u):
 def render_doc(objs, ids, st):
     L = ["# UAGF-002 — Canonical Knowledge Registry (Rendered View)", "",
          f"*Rendered from CKM — profile={st['profile']} · ckm_release={st['ckm_release']} · "
-         f"render_date={st['render_date']} · engine={st['engine']}*",
+         f"release_cut={st['release_cut']} · render_token={st['render_token']} · engine={st['engine']}*",
          "", "*This artifact is a disposable render. Truth lives in the Canonical Knowledge Model.*", ""]
     for d, us in ugrs_by_domain(objs, ids):
         L.append(f"## {d['label']} ({d['id']})")
@@ -177,7 +189,7 @@ def main():
     a = ap.parse_args()
     objs = load_model(a.ckm)
     ids = resolve_scope(objs, a.scope)
-    st = stamp(a.profile, a.scope, a.ckm_release)
+    st = stamp(a.profile, a.scope, a.ckm_release, a.ckm)
     artifact, loss = PROFILES[a.profile](objs, ids, st)
     os.makedirs(os.path.dirname(a.out) or ".", exist_ok=True)
     open(a.out, "w", encoding="utf-8").write(artifact)

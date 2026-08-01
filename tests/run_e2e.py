@@ -177,7 +177,15 @@ def main():
                r.returncode == 0 and hash_ok and ratify_ok,
                f"{man['objects']} published objects, ratified_by present, manifest hashes verified")
 
-    summary = {"suite": "uagf-e2e-regression/0.2", "started": t0,
+    # G11: reproducibility — two renders byte-identical (deterministic stamp, RC-2)
+    sh("render_ckm.py", "--ckm", "ckm-2.0.0-alpha", "--ckm-release", "2.0.0-alpha",
+       "--profile", "registry-doc", "--out", "/tmp/g11a.md")
+    sh("render_ckm.py", "--ckm", "ckm-2.0.0-alpha", "--ckm-release", "2.0.0-alpha",
+       "--profile", "registry-doc", "--out", "/tmp/g11b.md")
+    same = open("/tmp/g11a.md","rb").read() == open("/tmp/g11b.md","rb").read()
+    ok &= gate("G11 reproducible render (byte-identical, deterministic stamp)", same)
+
+    summary = {"suite": "uagf-e2e-regression/0.3", "started": t0,
                "finished": datetime.datetime.now(datetime.timezone.utc).isoformat(),
                "expected_differences_register": EXPECTED_DIFF,
                "gates": results,

@@ -1,7 +1,7 @@
 {
-  "suite": "uagf-e2e-regression/0.2",
-  "started": "2026-07-29T10:43:50.505871+00:00",
-  "finished": "2026-07-29T10:43:52.789227+00:00",
+  "suite": "uagf-e2e-regression/0.3",
+  "started": "2026-08-01T10:10:49.818460+00:00",
+  "finished": "2026-08-01T10:10:51.808292+00:00",
   "expected_differences_register": {
     "XD-1": "cv token presentation (casefolded/hyphenated enum tokens)",
     "XD-2/D-03": "legacy dangling references held out of staging as recorded CONFLICT (UGR-30/31, UGR-52)",
@@ -59,6 +59,11 @@
       "gate": "G10 release 2.0.0-alpha integrity (validator PASS + hashes + V-7 ratification)",
       "result": "PASS",
       "detail": "57 published objects, ratified_by present, manifest hashes verified"
+    },
+    {
+      "gate": "G11 reproducible render (byte-identical, deterministic stamp)",
+      "result": "PASS",
+      "detail": ""
     }
   ],
   "result": "PASS"

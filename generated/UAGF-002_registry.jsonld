@@ -13,8 +13,9 @@
     "profile": "registry-jsonld",
     "scope": "module:M-CORE",
     "ckm_release": "2.0.0-staging",
-    "render_date": "2026-07-28",
-    "engine": "uagf-renderer/0.1",
+    "release_cut": "unreleased",
+    "render_token": "ffd03a4137ff3227",
+    "engine": "uagf-renderer/0.2",
     "source_of_truth": "https://uagf.sathira.institute"
   },
   "@graph": [

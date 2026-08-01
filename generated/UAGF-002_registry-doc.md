@@ -1,6 +1,6 @@
 # UAGF-002 — Canonical Knowledge Registry (Rendered View)
 
-*Rendered from CKM — profile=registry-doc · ckm_release=2.0.0-staging · render_date=2026-07-28 · engine=uagf-renderer/0.1*
+*Rendered from CKM — profile=registry-doc · ckm_release=2.0.0-staging · release_cut=unreleased · render_token=ffd03a4137ff3227 · engine=uagf-renderer/0.2*
 
 *This artifact is a disposable render. Truth lives in the Canonical Knowledge Model.*
 

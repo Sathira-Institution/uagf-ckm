@@ -9,11 +9,15 @@ manifest:
   id: MIG-2026-001
   target_ckm_release: "2.0.0"
   preconditions:            # pipeline refuses to run a stage whose ruling is missing
-    OD-K1: {required_for: S1, status: pending}
-    OD-K2: {required_for: S3, status: pending}
-    OD-K3: {required_for: S3, status: pending}
-    OD-13: {required_for: S8, status: pending}
-    OD-06: {required_for: S9, status: pending}
+    OD-K1: {required_for: S1, status: ratified, ruling: UFD-007}
+    OD-K2: {required_for: S3, status: ratified, ruling: UFD-007}
+    OD-K3: {required_for: S3, status: ratified, ruling: UFD-007}
+    OD-13: {required_for: S8, status: ratified, ruling: UFD-007}
+    OD-06: {required_for: S9, status: ratified, ruling: UFD-007, canonical_name: "Universal AI Governance Knowledge Infrastructure"}
+  open_items:               # genuinely pending (alpha disclosures)
+    D-06-verification-pass: {status: pending, note: "all derives_from locators carry pending-verification until executed"}
+    batch-b-remainder: {status: pending, note: "12 of 15 D-02-approved UGRs not yet activated"}
+    ledger-countersign: {status: pending, note: "UFD ledger awaits Founder counter-signature in public repo"}
 
 sources:                     # S1 — snapshot + hash before anything else
   - id: SRC-UAGF-002-v1.0
