@@ -109,6 +109,16 @@
       "status": "proposed"
     },
     {
+      "@id": "uagf:domain/DOM-FAIRNESS",
+      "@type": "Domain",
+      "label": {
+        "@value": "Fairness & Non-Discrimination",
+        "@language": "en"
+      },
+      "version": "1.0",
+      "status": "proposed"
+    },
+    {
       "@id": "uagf:domain/DOM-GOV",
       "@type": "Domain",
       "label": {
@@ -623,7 +633,9 @@
         }
       ],
       "references": [
-        "uagf:requirement/UGR-20"
+        "uagf:requirement/UGR-20",
+        "uagf:requirement/UGR-30",
+        "uagf:requirement/UGR-31"
       ]
     },
     {
@@ -795,6 +807,91 @@
       "references": [
         "uagf:requirement/UGR-1",
         "uagf:requirement/UGR-2"
+      ]
+    },
+    {
+      "@id": "uagf:requirement/UGR-30",
+      "@type": "Requirement",
+      "label": {
+        "@value": "Bias Assessment and Mitigation",
+        "@language": "en"
+      },
+      "statement": "The organization SHALL examine data and models for possible biases likely to affect health, safety, or fundamental rights, and SHALL apply documented mitigation measures.",
+      "intent": "Ensure biases that could harm people are systematically identified and mitigated before and during use of AI systems.",
+      "applicability": "Organizations developing or deploying AI systems whose outputs may affect persons",
+      "priority": "critical",
+      "version": "1.0",
+      "status": "proposed",
+      "requirement_type": [
+        "legal",
+        "standard"
+      ],
+      "lifecycle_stages": [
+        "design",
+        "development",
+        "operation"
+      ],
+      "risk_categories": [
+        "fairness",
+        "human-rights"
+      ],
+      "belongsTo": "uagf:domain/DOM-FAIRNESS",
+      "derivesFrom": [
+        {
+          "@id": "uagf:externalreference/REF-EUAIA",
+          "locator": "Article 10(2)",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-NIST-AIRMF",
+          "locator": null,
+          "verification": "pending"
+        }
+      ],
+      "references": [
+        "uagf:requirement/UGR-22",
+        "uagf:requirement/UGR-31"
+      ]
+    },
+    {
+      "@id": "uagf:requirement/UGR-31",
+      "@type": "Requirement",
+      "label": {
+        "@value": "Fairness Monitoring in Operation",
+        "@language": "en"
+      },
+      "statement": "The organization SHOULD define fairness metrics appropriate to the use case and monitor deployed AI systems against them, with review triggers on degradation.",
+      "intent": "Detect fairness degradation of deployed AI systems early enough to act.",
+      "applicability": "Organizations operating AI systems whose outputs may affect persons",
+      "priority": "high",
+      "version": "1.0",
+      "status": "proposed",
+      "requirement_type": [
+        "standard",
+        "principle"
+      ],
+      "lifecycle_stages": [
+        "operation"
+      ],
+      "risk_categories": [
+        "fairness"
+      ],
+      "belongsTo": "uagf:domain/DOM-FAIRNESS",
+      "derivesFrom": [
+        {
+          "@id": "uagf:externalreference/REF-NIST-AIRMF",
+          "locator": null,
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-OECD-AIP",
+          "locator": null,
+          "verification": "pending"
+        }
+      ],
+      "references": [
+        "uagf:requirement/UGR-30",
+        "uagf:requirement/UGR-22"
       ]
     },
     {
@@ -1131,7 +1228,8 @@
         }
       ],
       "references": [
-        "uagf:requirement/UGR-51"
+        "uagf:requirement/UGR-51",
+        "uagf:requirement/UGR-52"
       ]
     },
     {
@@ -1177,7 +1275,50 @@
         }
       ],
       "references": [
-        "uagf:requirement/UGR-50"
+        "uagf:requirement/UGR-50",
+        "uagf:requirement/UGR-52"
+      ]
+    },
+    {
+      "@id": "uagf:requirement/UGR-52",
+      "@type": "Requirement",
+      "label": {
+        "@value": "Adversarial Robustness and AI Security Testing",
+        "@language": "en"
+      },
+      "statement": "The organization SHALL test AI systems against AI-specific attacks (e.g., data poisoning, adversarial inputs, model extraction) proportionate to risk, and remediate findings.",
+      "intent": "Ensure AI systems withstand AI-specific attack classes and that discovered weaknesses are remediated.",
+      "applicability": "Organizations developing or operating AI systems exposed to adversarial risk",
+      "priority": "high",
+      "version": "1.0",
+      "status": "proposed",
+      "requirement_type": [
+        "legal",
+        "standard"
+      ],
+      "lifecycle_stages": [
+        "development",
+        "operation"
+      ],
+      "risk_categories": [
+        "security"
+      ],
+      "belongsTo": "uagf:domain/DOM-SECURITY",
+      "derivesFrom": [
+        {
+          "@id": "uagf:externalreference/REF-EUAIA",
+          "locator": "Article 15",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-NIST-AIRMF",
+          "locator": null,
+          "verification": "pending"
+        }
+      ],
+      "references": [
+        "uagf:requirement/UGR-50",
+        "uagf:requirement/UGR-51"
       ]
     },
     {

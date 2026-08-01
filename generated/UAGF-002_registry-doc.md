@@ -181,7 +181,7 @@ The organization must classify data used in AI systems according to sensitivity,
 | Risk Categories | privacy, security |
 | Automation Potential | high |
 | Derived from | REF-TH-PDPA (Section 23) [pending-verification]; REF-ISO42001 (Annex A (Privacy)) [pending-verification]; REF-NIST-AIRMF [pending-verification] |
-| See also (informative) | UGR-020 |
+| See also (informative) | UGR-020, UGR-030, UGR-031 |
 | Expected Evidence | Data classification schema, classification assignments, control implementation records, classification review records |
 | Related Controls | Data Protection, Access Control, Data Handling Procedures |
 
@@ -191,6 +191,58 @@ The organization must classify data used in AI systems according to sensitivity,
 3. Apply controls based on classification
 4. Document classification decisions
 5. Review classifications periodically
+
+## Fairness & Non-Discrimination (DOM-FAIRNESS)
+
+### UGR-030 — Bias Assessment and Mitigation  [Normative]
+
+The organization SHALL examine data and models for possible biases likely to affect health, safety, or fundamental rights, and SHALL apply documented mitigation measures.
+
+**Intent.** Ensure biases that could harm people are systematically identified and mitigated before and during use of AI systems.
+
+| Field | Value |
+|---|---|
+| Requirement Type | legal, standard |
+| Applicability | Organizations developing or deploying AI systems whose outputs may affect persons |
+| Lifecycle Stages | design, development, operation |
+| Priority | critical |
+| Risk Categories | fairness, human-rights |
+| Automation Potential | medium |
+| Derived from | REF-EUAIA (Article 10(2)) [pending-verification]; REF-NIST-AIRMF [pending-verification] |
+| See also (informative) | UGR-022, UGR-031 |
+| Expected Evidence | Bias assessment reports, mitigation records, effectiveness verification records |
+| Related Controls | Bias Assessment Procedure, Mitigation Tracking |
+
+**Implementation Guidance**
+1. Define bias examination scope for data and models
+2. Run bias assessments at defined lifecycle points
+3. Document identified biases and mitigation measures
+4. Verify mitigation effectiveness
+
+### UGR-031 — Fairness Monitoring in Operation  [Normative]
+
+The organization SHOULD define fairness metrics appropriate to the use case and monitor deployed AI systems against them, with review triggers on degradation.
+
+**Intent.** Detect fairness degradation of deployed AI systems early enough to act.
+
+| Field | Value |
+|---|---|
+| Requirement Type | standard, principle |
+| Applicability | Organizations operating AI systems whose outputs may affect persons |
+| Lifecycle Stages | operation |
+| Priority | high |
+| Risk Categories | fairness |
+| Automation Potential | high |
+| Derived from | REF-NIST-AIRMF [pending-verification]; REF-OECD-AIP [pending-verification] |
+| See also (informative) | UGR-030, UGR-022 |
+| Expected Evidence | Fairness metric definitions, monitoring records, trigger review records |
+| Related Controls | Fairness Monitoring, Model Performance Review |
+
+**Implementation Guidance**
+1. Select fairness metrics appropriate to the use case
+2. Monitor deployed systems against the metrics
+3. Define degradation review triggers
+4. Record monitoring outcomes and actions
 
 ## Governance & Leadership (DOM-GOV)
 
@@ -686,7 +738,7 @@ AI systems must be protected against unauthorized access, manipulation, and misu
 | Risk Categories | security |
 | Automation Potential | high |
 | Derived from | REF-EUAIA (Article 15) [pending-verification]; REF-ISO42001 (Annex A (Security)) [pending-verification]; REF-NIST-AIRMF [pending-verification] |
-| See also (informative) | UGR-051 |
+| See also (informative) | UGR-051, UGR-052 |
 | Expected Evidence | Security control implementation records, security assessment results, incident response records, monitoring logs |
 | Related Controls | Access Control, Encryption, Security Monitoring, Incident Response |
 
@@ -712,7 +764,7 @@ AI systems must be tested for security vulnerabilities before deployment and per
 | Risk Categories | security |
 | Automation Potential | medium |
 | Derived from | REF-EUAIA (Article 15) [pending-verification]; REF-ISO42001 (Annex A (Security)) [pending-verification]; REF-NIST-AIRMF [pending-verification] |
-| See also (informative) | UGR-050 |
+| See also (informative) | UGR-050, UGR-052 |
 | Expected Evidence | Security testing reports, vulnerability remediation records, testing schedule, penetration test results |
 | Related Controls | Vulnerability Management, Security Testing, Penetration Testing |
 
@@ -722,6 +774,31 @@ AI systems must be tested for security vulnerabilities before deployment and per
 3. Schedule periodic testing
 4. Document findings
 5. Remediate vulnerabilities
+
+### UGR-052 — Adversarial Robustness and AI Security Testing  [Normative]
+
+The organization SHALL test AI systems against AI-specific attacks (e.g., data poisoning, adversarial inputs, model extraction) proportionate to risk, and remediate findings.
+
+**Intent.** Ensure AI systems withstand AI-specific attack classes and that discovered weaknesses are remediated.
+
+| Field | Value |
+|---|---|
+| Requirement Type | legal, standard |
+| Applicability | Organizations developing or operating AI systems exposed to adversarial risk |
+| Lifecycle Stages | development, operation |
+| Priority | high |
+| Risk Categories | security |
+| Automation Potential | high |
+| Derived from | REF-EUAIA (Article 15) [pending-verification]; REF-NIST-AIRMF [pending-verification] |
+| See also (informative) | UGR-050, UGR-051 |
+| Expected Evidence | AI security test plans, test results, remediation records |
+| Related Controls | Adversarial Testing, Security Remediation Tracking |
+
+**Implementation Guidance**
+1. Identify applicable AI-specific attack classes
+2. Test proportionate to system risk
+3. Record findings and remediation
+4. Re-test after remediation
 
 ## Transparency (DOM-TRANSPARENCY)
 

@@ -1,7 +1,7 @@
 {
-  "suite": "uagf-e2e-regression/0.1",
-  "started": "2026-07-28T14:07:51.970928+00:00",
-  "finished": "2026-07-28T14:07:53.673485+00:00",
+  "suite": "uagf-e2e-regression/0.2",
+  "started": "2026-07-29T10:43:50.505871+00:00",
+  "finished": "2026-07-29T10:43:52.789227+00:00",
   "expected_differences_register": {
     "XD-1": "cv token presentation (casefolded/hyphenated enum tokens)",
     "XD-2/D-03": "legacy dangling references held out of staging as recorded CONFLICT (UGR-30/31, UGR-52)",
@@ -23,7 +23,7 @@
     {
       "gate": "G3 migration executes (30 UGRs / 10 domains / REFs minted)",
       "result": "PASS",
-      "detail": "dispositions: {'TO_VERIFY': 11, 'CONFLICT': 4, 'REJECTED': 0}"
+      "detail": "dispositions: {'TO_VERIFY': 11, 'CONFLICT': 0, 'REJECTED': 0}"
     },
     {
       "gate": "G4 staged CKM validator PASS",
@@ -41,19 +41,24 @@
       "detail": "180 field comparisons; undeclared diffs: 0"
     },
     {
-      "gate": "G7 known dangling refs surfaced as CONFLICT (not silent)",
+      "gate": "G7 dangling refs healed via ratified Batch B (0 CONFLICT)",
       "result": "PASS",
-      "detail": "conflicts: ['UGR-30', 'UGR-31', 'UGR-52'] (expected per register XD-2/D-03 + new UGR-52 discovery)"
+      "detail": "UGR-22->30/31, UGR-50/51->52 restored mechanically (UFD-007, D-03, EF-2)"
     },
     {
       "gate": "G8 JSON-LD round-trip statement integrity",
       "result": "PASS",
-      "detail": "30 statements byte-checked"
+      "detail": "33 statements byte-checked"
     },
     {
       "gate": "G9 loss manifest present + AI-context statement byte-equal",
       "result": "PASS",
       "detail": ""
+    },
+    {
+      "gate": "G10 release 2.0.0-alpha integrity (validator PASS + hashes + V-7 ratification)",
+      "result": "PASS",
+      "detail": "57 published objects, ratified_by present, manifest hashes verified"
     }
   ],
   "result": "PASS"

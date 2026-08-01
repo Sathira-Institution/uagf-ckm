@@ -180,6 +180,7 @@ def main():
     ap.add_argument("--cv-dir", default="ckm/cv")
     ap.add_argument("--out", default="ckm-staging")
     ap.add_argument("--report", default="reports/migration_report.json")
+    ap.add_argument("--batch-b", default=None, help="dir of Founder-activated Batch B objects")
     a = ap.parse_args()
     manifest = yaml.safe_load(open(a.manifest, encoding="utf-8"))
     report = {"runner": "uagf-migration-runner/0.1", "manifest_id": manifest["manifest"]["id"],
@@ -190,6 +191,14 @@ def main():
     records, domains = parse_legacy(a.legacy, report)
     valid_ids = {f"UGR-{int(re.search(r'(\d+)', r['_fields'].get('UGR ID', r['_legacy_id'])).group(1))}"
                  for r in records}
+    batch_b_objs = []
+    if a.batch_b and os.path.isdir(a.batch_b):
+        for fn in sorted(os.listdir(a.batch_b)):
+            if fn.endswith(".yaml"):
+                bo = yaml.safe_load(open(os.path.join(a.batch_b, fn), encoding="utf-8"))
+                batch_b_objs.append(bo)
+                if bo.get("type") == "Requirement":
+                    valid_ids.add(bo["id"])
     refs = {}
     ugrs = [transform(r, valid_ids, refs, disp) for r in records]
     for d in sorted(os.listdir(a.cv_dir)) if os.path.isdir(a.cv_dir) else []:
@@ -226,7 +235,13 @@ def main():
     import shutil
     for fn in os.listdir(a.cv_dir):
         shutil.copy(os.path.join(a.cv_dir, fn), os.path.join(a.out, "cv", fn))
-    report["batches"] = {"A_requirements": len(ugrs), "C_domains_interim": len(domains),
+    for bo in batch_b_objs:
+        sub = {"Requirement": "requirements", "Domain": "domains"}.get(bo.get("type"), "requirements")
+        yaml.safe_dump(bo, open(os.path.join(a.out, sub, f"{bo['id']}.yaml"), "w",
+                       encoding="utf-8"), sort_keys=False, allow_unicode=True, width=1000)
+    report["batches"] = {"A_requirements": len(ugrs),
+                         "B_activated": len([b for b in batch_b_objs if b.get("type")=="Requirement"]),
+                         "C_domains_interim": len(domains),
                          "D_references_minted": len(refs), "cv_copied": len(os.listdir(a.cv_dir))}
     report["dispositions"] = disp
     report["disposition_counts"] = {c: sum(1 for d in disp if d["class"] == c)

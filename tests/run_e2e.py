@@ -80,7 +80,7 @@ def main():
                f"caught: {sorted(hits)}")
 
     # G3: migration runs, zero silent corrections, zero REJECTED (this corpus)
-    r = sh("migrate_ckm.py")
+    r = sh("migrate_ckm.py", "--batch-b", "batch-b")
     mig = json.load(open(os.path.join(ROOT, "reports/migration_report.json")))
     ok &= gate("G3 migration executes (30 UGRs / 10 domains / REFs minted)",
                r.returncode == 0 and mig["batches"]["A_requirements"] == 30
@@ -129,12 +129,18 @@ def main():
     ok &= gate("G6 verbatim fidelity Legacy->YAML->Render (M-2)",
                not undeclared, f"{checked} field comparisons; undeclared diffs: {len(undeclared)}")
 
-    # G7: conflicts recorded, never silently dropped (XD-2/D-03 register)
+    # G7: conflicts HEALED by ratified Batch B (UFD-007); zero CONFLICT; edges restored
     conf = [d for d in mig["dispositions"] if d["class"] == "CONFLICT"]
-    conf_vals = {d["value"] for d in conf}
-    ok &= gate("G7 known dangling refs surfaced as CONFLICT (not silent)",
-               {"UGR-30", "UGR-31", "UGR-52"} == conf_vals,
-               f"conflicts: {sorted(conf_vals)} (expected per register XD-2/D-03 + new UGR-52 discovery)")
+    import yaml as _y
+    u22 = _y.safe_load(open(os.path.join(ROOT, "ckm-staging/requirements/UGR-22.yaml")))
+    u50 = _y.safe_load(open(os.path.join(ROOT, "ckm-staging/requirements/UGR-50.yaml")))
+    u51 = _y.safe_load(open(os.path.join(ROOT, "ckm-staging/requirements/UGR-51.yaml")))
+    healed = (set(u22["edges"].get("references", [])) >= {"UGR-30", "UGR-31"}
+              and "UGR-52" in u50["edges"].get("references", [])
+              and "UGR-52" in u51["edges"].get("references", []))
+    ok &= gate("G7 dangling refs healed via ratified Batch B (0 CONFLICT)",
+               len(conf) == 0 and healed,
+               "UGR-22->30/31, UGR-50/51->52 restored mechanically (UFD-007, D-03, EF-2)")
 
     # G8: JSON-LD round-trip — statements byte-equal model
     ld = json.load(open(os.path.join(ROOT, "generated/UAGF-002_registry.jsonld")))
@@ -154,7 +160,24 @@ def main():
     ok &= gate("G9 loss manifest present + AI-context statement byte-equal",
                os.path.exists(lm) and stmt15 in ai)
 
-    summary = {"suite": "uagf-e2e-regression/0.1", "started": t0,
+    # G10: release integrity — validator PASS on release; every object published+ratified; hashes match
+    rel = os.path.join(ROOT, "ckm-2.0.0-alpha")
+    r = sh("validate_ckm.py", rel, "-q", "-o", "reports/release_validation.json")
+    man = json.load(open(os.path.join(rel, "release_manifest.json")))
+    import hashlib, yaml as _y2
+    hash_ok, ratify_ok = True, True
+    for relpath, h in man["files"].items():
+        p = os.path.join(rel, relpath)
+        if relpath != "release_manifest.json":
+            hash_ok &= hashlib.sha256(open(p, "rb").read()).hexdigest() == h
+            o = _y2.safe_load(open(p, encoding="utf-8"))
+            if isinstance(o, dict) and "id" in o:
+                ratify_ok &= (o.get("status") == "published" and bool(o.get("ratified_by")))
+    ok &= gate("G10 release 2.0.0-alpha integrity (validator PASS + hashes + V-7 ratification)",
+               r.returncode == 0 and hash_ok and ratify_ok,
+               f"{man['objects']} published objects, ratified_by present, manifest hashes verified")
+
+    summary = {"suite": "uagf-e2e-regression/0.2", "started": t0,
                "finished": datetime.datetime.now(datetime.timezone.utc).isoformat(),
                "expected_differences_register": EXPECTED_DIFF,
                "gates": results,
