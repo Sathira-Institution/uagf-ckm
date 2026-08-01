@@ -1,0 +1,24 @@
+id: UGR-901
+type: Requirement
+tier: 1
+version: "1.0"
+status: proposed
+label: "Dangling Reference Fixture"
+owner_module: M-CORE
+created: "2026-07-28"
+modified: "2026-07-28"
+statement: "Test statement."
+intent: "Trigger V-1."
+requirement_type: [standard]
+applicability: "test"
+lifecycle_stages: [design]
+priority: high
+risk_categories: [safety]
+implementation_guidance: ["step"]
+expected_evidence: "x"
+related_controls: "x"
+edges:
+  belongs_to: {primary: DOM-NOPE}
+  derives_from:
+    - {ref: REF-GHOST, version: "1", verification: pending}
+  references: [UGR-999]

@@ -1,0 +1,22 @@
+{
+  "stamp": {
+    "profile": "registry-doc",
+    "scope": "module:M-CORE",
+    "ckm_release": "2.0.0-staging",
+    "render_date": "2026-07-28",
+    "engine": "uagf-renderer/0.1",
+    "source_of_truth": "https://uagf.sathira.institute"
+  },
+  "loss": {
+    "omitted_slots": [
+      "provenance",
+      "owner_module",
+      "created",
+      "modified",
+      "version",
+      "status",
+      "tier"
+    ],
+    "note": "Documentation view omits machine metadata by declared design (RE-3)."
+  }
+}

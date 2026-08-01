@@ -1,0 +1,139 @@
+{
+  "validator": "uagf-ckm-validator/0.2",
+  "kernel": "WP-004 v0.2 (K-1..K-8)",
+  "dataset": "/tmp/redset",
+  "timestamp": "2026-07-28T14:04:08.432298+00:00",
+  "objects_loaded": 12,
+  "objects_by_type": {
+    "Domain": 1,
+    "Organization": 1,
+    "ExternalReference": 1,
+    "Requirement": 3,
+    "ControlledVocabulary": 6
+  },
+  "findings": [
+    {
+      "error": "N-3",
+      "object": "ORG-1",
+      "severity": "error",
+      "msg": "Prefix 'ORG' not in ratified prefix registry",
+      "field": "id",
+      "value": "ORG",
+      "allowed_values": [
+        "ASM",
+        "CV",
+        "DOM",
+        "REF",
+        "REL",
+        "UFD",
+        "UGR"
+      ],
+      "hint": "Reserved-not-activated prefixes require Founder activation before use.",
+      "reference": "Kernel K-7 (N-3)"
+    },
+    {
+      "error": "V-5",
+      "object": "ORG-1",
+      "severity": "error",
+      "msg": "Tier-2 instance data present in public model dataset (forbidden)",
+      "field": "tier",
+      "value": 2,
+      "allowed_values": null,
+      "hint": "Remove adopter-side instance; Tier-2 lives outside UAGF by design (OD-09).",
+      "reference": "Kernel K-8, Invariant V-5"
+    },
+    {
+      "error": "V-7",
+      "object": "UGR-903",
+      "severity": "error",
+      "msg": "Status 'approved' requires a ratified_by decision reference",
+      "field": "ratified_by",
+      "value": null,
+      "allowed_values": [
+        "UFD-<n> reference"
+      ],
+      "hint": "Attach the Founder decision reference (UFD ledger, pending OD-13) or keep status below 'approved'. Never fabricate a decision.",
+      "reference": "Kernel K-5/K-8, Invariant V-7"
+    },
+    {
+      "error": "V-1",
+      "object": "UGR-901",
+      "severity": "error",
+      "msg": "belongs_to target 'DOM-NOPE' does not resolve",
+      "field": "edges.belongs_to.primary",
+      "value": "DOM-NOPE",
+      "allowed_values": null,
+      "hint": "Add the Domain object or correct the id. Never delete the edge silently.",
+      "reference": "Kernel K-3, Invariant V-1"
+    },
+    {
+      "error": "V-1",
+      "object": "UGR-901",
+      "severity": "error",
+      "msg": "derives_from target 'REF-GHOST' does not resolve",
+      "field": "edges.derives_from[].ref",
+      "value": "REF-GHOST",
+      "allowed_values": null,
+      "hint": "Mint the ExternalReference in Migration S4 (verify via D-06/S5) or correct the id.",
+      "reference": "Kernel K-3, Invariant V-1"
+    },
+    {
+      "error": "V-1",
+      "object": "UGR-901",
+      "severity": "error",
+      "msg": "references target 'UGR-999' does not resolve",
+      "field": "edges.references[]",
+      "value": "UGR-999",
+      "allowed_values": null,
+      "hint": "If legacy dangling ref: record [CONFLICT] and route to Founder (cf. D-03). Never silently drop.",
+      "reference": "Kernel K-3, Invariant V-1"
+    },
+    {
+      "error": "V-4",
+      "object": "UGR-902",
+      "severity": "error",
+      "msg": "'training' is not a valid member of CV-Stage@0.1",
+      "field": "lifecycle_stages",
+      "value": "training",
+      "allowed_values": [
+        "all-stages",
+        "decommission",
+        "deployment",
+        "design",
+        "development",
+        "operation"
+      ],
+      "hint": "Map 'training' via the ratified legacy_map or request Founder ruling (OD-K2/OD-K3). Never auto-fix.",
+      "reference": "Kernel K-4, Invariant V-4"
+    },
+    {
+      "error": "V-4",
+      "object": "UGR-902",
+      "severity": "error",
+      "msg": "'urgent' is not a valid member of CV-Priority@0.1",
+      "field": "priority",
+      "value": "urgent",
+      "allowed_values": [
+        "critical",
+        "high",
+        "low",
+        "medium"
+      ],
+      "hint": "Map 'urgent' via the ratified legacy_map or request Founder ruling (OD-K2/OD-K3). Never auto-fix.",
+      "reference": "Kernel K-4, Invariant V-4"
+    },
+    {
+      "error": "V-3",
+      "object": "UGR-903",
+      "severity": "error",
+      "msg": "Requirement has no derives_from edge",
+      "field": "edges.derives_from",
+      "value": null,
+      "allowed_values": null,
+      "hint": "Every Requirement derives from >=1 ExternalReference (UGR-TRACE-001 successor); build the edge from legacy 'Sources'.",
+      "reference": "Kernel K-8, Invariant V-3"
+    }
+  ],
+  "result": "FAIL",
+  "error_count": 9
+}

@@ -1,0 +1,12 @@
+id: DOM-HUMAN
+type: Domain
+tier: 1
+version: "1.0"
+status: proposed
+label: "Human Oversight"
+owner_module: M-CORE
+created: "2026-06-28"
+modified: "2026-07-28"
+concern_statement: "Governance of human oversight over AI systems: the ability of humans to supervise, intervene in, override, and remain accountable for AI system behavior and consequential decisions."
+provenance:
+  seed_note: "Hand-written test fixture. Migration Batch C will source the canonical description from UAGF-001 v1.0 Section 8."

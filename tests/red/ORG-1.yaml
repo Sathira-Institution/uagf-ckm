@@ -1,0 +1,9 @@
+id: ORG-1
+type: Organization
+tier: 2
+version: "1.0"
+status: proposed
+label: "Tier-2 Instance Leak Fixture"
+owner_module: M-CORE
+created: "2026-07-28"
+modified: "2026-07-28"

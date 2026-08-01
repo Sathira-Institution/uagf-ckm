@@ -1,0 +1,130 @@
+{
+  "runner": "uagf-migration-runner/0.1",
+  "manifest_id": "MIG-2026-001",
+  "pipeline": "WP-005 S1-S7 (S5 identification-only; D-06 verification pending)",
+  "timestamp": "2026-07-28T14:07:52.246418+00:00",
+  "source_hash_sha256": "9f547154b524f9eda8dc35e44ba6b2e73d1c7570887f3325aa8785e3930d676a",
+  "batches": {
+    "A_requirements": 30,
+    "C_domains_interim": 10,
+    "D_references_minted": 7,
+    "cv_copied": 6
+  },
+  "extraction": {
+    "records_found": 30,
+    "domains_found": 10
+  },
+  "dispositions": [
+    {
+      "class": "CONFLICT",
+      "object": "UGR-22",
+      "field": "edges.references[]",
+      "value": "UGR-30",
+      "hint": "Legacy dangling reference UGR-30 (cf. OV-005). Held OUT of staging pending resolution; expected to resolve at Batch B per Founder decision D-03. Never silently dropped — recorded here and in provenance."
+    },
+    {
+      "class": "CONFLICT",
+      "object": "UGR-22",
+      "field": "edges.references[]",
+      "value": "UGR-31",
+      "hint": "Legacy dangling reference UGR-31 (cf. OV-005). Held OUT of staging pending resolution; expected to resolve at Batch B per Founder decision D-03. Never silently dropped — recorded here and in provenance."
+    },
+    {
+      "class": "TO_VERIFY",
+      "object": "UGR-25",
+      "field": "sources",
+      "value": "UNESCO Recommendation on the Ethics of AI",
+      "hint": "Instrument not in alias registry; identify and verify via D-06 before release (REF-UNESCO-RECOMMENDATION-ON)."
+    },
+    {
+      "class": "CONFLICT",
+      "object": "UGR-50",
+      "field": "edges.references[]",
+      "value": "UGR-52",
+      "hint": "Legacy dangling reference UGR-52 (cf. OV-005). Held OUT of staging pending resolution; expected to resolve at Batch B per Founder decision D-03. Never silently dropped — recorded here and in provenance."
+    },
+    {
+      "class": "CONFLICT",
+      "object": "UGR-51",
+      "field": "edges.references[]",
+      "value": "UGR-52",
+      "hint": "Legacy dangling reference UGR-52 (cf. OV-005). Held OUT of staging pending resolution; expected to resolve at Batch B per Founder decision D-03. Never silently dropped — recorded here and in provenance."
+    },
+    {
+      "class": "TO_VERIFY",
+      "object": "DOM-GOV",
+      "field": "concern_statement",
+      "value": "category-heading interim text",
+      "hint": "Batch C sources the canonical description from UAGF-001 Section 8."
+    },
+    {
+      "class": "TO_VERIFY",
+      "object": "DOM-RISK",
+      "field": "concern_statement",
+      "value": "category-heading interim text",
+      "hint": "Batch C sources the canonical description from UAGF-001 Section 8."
+    },
+    {
+      "class": "TO_VERIFY",
+      "object": "DOM-HUMAN",
+      "field": "concern_statement",
+      "value": "category-heading interim text",
+      "hint": "Batch C sources the canonical description from UAGF-001 Section 8."
+    },
+    {
+      "class": "TO_VERIFY",
+      "object": "DOM-DATA",
+      "field": "concern_statement",
+      "value": "category-heading interim text",
+      "hint": "Batch C sources the canonical description from UAGF-001 Section 8."
+    },
+    {
+      "class": "TO_VERIFY",
+      "object": "DOM-TRANSPARENCY",
+      "field": "concern_statement",
+      "value": "category-heading interim text",
+      "hint": "Batch C sources the canonical description from UAGF-001 Section 8."
+    },
+    {
+      "class": "TO_VERIFY",
+      "object": "DOM-AUDITABILITY",
+      "field": "concern_statement",
+      "value": "category-heading interim text",
+      "hint": "Batch C sources the canonical description from UAGF-001 Section 8."
+    },
+    {
+      "class": "TO_VERIFY",
+      "object": "DOM-ACCOUNTABILITY",
+      "field": "concern_statement",
+      "value": "category-heading interim text",
+      "hint": "Batch C sources the canonical description from UAGF-001 Section 8."
+    },
+    {
+      "class": "TO_VERIFY",
+      "object": "DOM-SECURITY",
+      "field": "concern_statement",
+      "value": "category-heading interim text",
+      "hint": "Batch C sources the canonical description from UAGF-001 Section 8."
+    },
+    {
+      "class": "TO_VERIFY",
+      "object": "DOM-PRIVACY",
+      "field": "concern_statement",
+      "value": "category-heading interim text",
+      "hint": "Batch C sources the canonical description from UAGF-001 Section 8."
+    },
+    {
+      "class": "TO_VERIFY",
+      "object": "DOM-SAFETY",
+      "field": "concern_statement",
+      "value": "category-heading interim text",
+      "hint": "Batch C sources the canonical description from UAGF-001 Section 8."
+    }
+  ],
+  "disposition_counts": {
+    "TO_VERIFY": 11,
+    "CONFLICT": 4,
+    "REJECTED": 0
+  },
+  "silent_corrections": 0
+}

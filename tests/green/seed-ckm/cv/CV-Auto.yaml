@@ -1,0 +1,14 @@
+id: CV-Auto
+type: ControlledVocabulary
+tier: 1
+version: "0.1"
+status: proposed
+label: "Automation Potential"
+owner_module: M-CORE
+created: "2026-07-28"
+modified: "2026-07-28"
+terms:
+  - {token: high, label_en: "High"}
+  - {token: medium, label_en: "Medium"}
+  - {token: low, label_en: "Low"}
+  - {token: none, label_en: "None"}

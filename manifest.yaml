@@ -1,0 +1,167 @@
+# =============================================================================
+# UAGF-WP-005 Companion — CKM Migration Manifest (Template)
+# Version: 0.1 DRAFT — for Founder review
+# Machine-readable definition of the v1.x -> CKM migration.
+# Nothing in this manifest may re-author content; transforms are mechanical only.
+# =============================================================================
+
+manifest:
+  id: MIG-2026-001
+  target_ckm_release: "2.0.0"
+  preconditions:            # pipeline refuses to run a stage whose ruling is missing
+    OD-K1: {required_for: S1, status: pending}
+    OD-K2: {required_for: S3, status: pending}
+    OD-K3: {required_for: S3, status: pending}
+    OD-13: {required_for: S8, status: pending}
+    OD-06: {required_for: S9, status: pending}
+
+sources:                     # S1 — snapshot + hash before anything else
+  - id: SRC-UAGF-002-v1.0
+    artifact: "UAGF-002 Canonical Knowledge Registry v1.0 PUBLIC RELEASE"
+    role: legacy_registry            # Batch A + REF candidates
+    content_hash: "<sha256-at-snapshot>"
+  - id: SRC-WP-002-v0.1-D02
+    artifact: "UAGF-WP-002 §4 as ratified by Founder decision D-02"
+    role: approved_additions         # Batch B
+    content_hash: "<sha256-at-snapshot>"
+  - id: SRC-UAGF-001-v1.0
+    artifact: "UAGF-001 Foundations v1.0 §8"
+    role: domain_descriptions        # Batch C
+    content_hash: "<sha256-at-snapshot>"
+
+# -----------------------------------------------------------------------------
+# FIELD -> ATTRIBUTE MAPPING (UGR records; Batch A primary, Batch B same shape)
+# transform vocabulary (closed set): verbatim | trim | split(delim) |
+#   parse_int_id | casefold_token | parse_numbered_list | parse_sources
+# -----------------------------------------------------------------------------
+ugr_mapping:
+  - from: "UGR ID"
+    to: id
+    transform: parse_int_id          # "UGR-015" -> 15 ; padding is rendering only
+    on_fail: CONFLICT
+  - from: "Title"
+    to: label
+    transform: ['trim']                # verbatim otherwise
+  - from: "Statement"
+    to: statement
+    transform: verbatim              # M-2: sacred; no SHALL-conversion
+  - from: "Intent"
+    to: intent
+    transform: verbatim
+  - from: "Requirement Type"
+    to: requirement_type
+    transform: ['split(/)', 'trim', 'casefold_token']
+    cv: CV-ReqType
+    on_unmapped: CONFLICT
+  - from: "Applicability"
+    to: applicability
+    transform: verbatim
+  - from: "Lifecycle Stage"
+    to: lifecycle_stages
+    transform: ['split(,)', 'trim', 'casefold_token']
+    cv: CV-Stage
+    legacy_map:                      # per OD-K3 (pending ratification)
+      "all stages": all-stages
+      "training": development
+      "pre-deployment": [development, deployment]
+    on_unmapped: CONFLICT
+  - from: "Priority"
+    to: priority
+    transform: casefold_token
+    cv: CV-Priority
+    on_unmapped: CONFLICT
+  - from: "Risk Category"
+    to: risk_categories
+    transform: ['split(,)', 'trim', 'casefold_token']
+    cv: CV-RiskCat
+    legacy_map:                      # per OD-K2 ruling: legalize (default) or map
+      "human rights": human-rights
+      # governance / accountability / auditability / compliance / disinformation:
+      #   legalized as CV terms if OD-K2 adopts recommendation; else mapping here
+    on_unmapped: CONFLICT
+  - from: "Primary Domain"
+    to: edge.belongs_to.primary
+    transform: ['trim']                # "DOM-HUMAN" -> resolvable DOM id
+    on_unresolved: CONFLICT
+  - from: "Sources"
+    to: edge.derives_from[]
+    transform: parse_sources         # -> {instrument, locator} tuples
+    ref_dedupe: ecosystem_wide       # one REF instance per instrument+version
+    born_flag: pending-verification  # cleared only by S5 (D-06)
+  - from: "Expected Evidence"
+    to: expected_evidence
+    transform: verbatim              # bridge field until EV activates (frozen)
+  - from: "Related Controls"
+    to: related_controls
+    transform: verbatim              # bridge field until CTRL activates (frozen)
+  - from: "Cross References"
+    to: edge.references[]
+    transform: ['split(,)', 'parse_int_id']
+    on_unresolved: CONFLICT          # expected to clear for 30/31 via Batch B (D-03)
+  - from: "Implementation Guidance"
+    to: implementation_guidance
+    transform: parse_numbered_list   # "1. x; 2. y" -> ordered list, text verbatim
+  - from: "Automation Potential"
+    to: automation_potential
+    transform: casefold_token
+    cv: CV-Auto
+    on_unmapped: CONFLICT
+  - from: "Status"
+    to: provenance.legacy_status     # NOT a CKM status; lifecycle set by pipeline
+    transform: verbatim
+  - from: "Revision History"
+    to: provenance.legacy_revision_history
+    transform: verbatim
+
+batch_b_overrides:                   # the 15 approved UGRs (D-02)
+  ratified_by_at_birth: "UFD:D-02"   # pending OD-13 ledger instantiation
+  additional_field:
+    - from: "Conf. Level"
+      to: conformance_level
+      transform: casefold_token
+      cv: CV-ConfLevel
+      on_unmapped: CONFLICT
+
+# -----------------------------------------------------------------------------
+# REF OBJECT WORKFLOW (S5 — the ONLY D-06 subjects)
+# -----------------------------------------------------------------------------
+ref_verification:
+  required_evidence: [official_source_locator, instrument_version, verifier, date]
+  outcomes: [verified, TO_VERIFY, REJECTED]
+  rejected_edge_policy: quarantine_edge_keep_ugr   # UGR stands on remaining
+                                                   # verified sources or fails V-3
+                                                   # and remains in staging
+
+# -----------------------------------------------------------------------------
+# VALIDATION GATES (S6) — WP-004 K-8, machine-checkable
+# -----------------------------------------------------------------------------
+invariants:
+  - {id: V-1, check: no_dangling_edges}
+  - {id: V-2, check: no_orphan_published_tier1}
+  - {id: V-3, check: requirement_has_verified_or_flagged_derivation}
+  - {id: V-4, check: all_enum_values_in_bound_cv_version}
+  - {id: V-5, check: no_tier2_instance_data_present}
+  - {id: V-6, check: declared_acyclicity_holds}
+  - {id: V-7, check: approved_objects_have_decision_reference}
+
+# -----------------------------------------------------------------------------
+# EXPECTED DIFFERENCES REGISTER (S10 render-regression allowlist)
+# any render difference NOT listed here fails the pipeline
+# -----------------------------------------------------------------------------
+expected_differences:
+  - {id: XD-1, kind: cv_token_presentation, note: "enum casing/tokenization"}
+  - {id: XD-2, kind: healed_reference, note: "UGR-030/031 now resolve (D-03)"}
+  - {id: XD-3, kind: id_padding_presentation, note: "3-digit padding is view param"}
+  - {id: XD-4, kind: generated_front_matter, note: "CKM release + render stamp"}
+  - {id: XD-5, kind: render_config_frame, note: "website line per OV-006 fix; from render config, not model data"}
+
+rollback:
+  staging_batches: atomic            # RB-2
+  releases: immutable_pointer_switch # RB-3
+  renders: disposable_regenerable    # RB-4
+
+success_criteria:
+  ingested_ugrs: 45
+  invariant_pass: all
+  undeclared_render_differences: 0
+  manual_authoring_events: 0

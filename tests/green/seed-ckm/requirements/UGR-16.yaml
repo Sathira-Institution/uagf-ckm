@@ -1,0 +1,36 @@
+id: UGR-16
+type: Requirement
+tier: 1
+version: "1.0"
+status: proposed
+label: "Human Approval Workflow"
+owner_module: M-CORE
+created: "2026-06-28"
+modified: "2026-07-28"
+statement: "The organization must establish documented approval workflows for AI system decisions, specifying who must approve which types of decisions, under what conditions, and within what timeframe."
+intent: "Ensure decisions of consequence are routed through a documented, accountable approval process before execution."
+requirement_type: [standard]
+applicability: "All organizations with AI systems that make consequential decisions"
+lifecycle_stages: [design, development, operation]
+priority: high
+risk_categories: [accountability, governance]
+automation_potential: medium
+implementation_guidance:
+  - "Identify decisions requiring approval"
+  - "Define approvers and conditions"
+  - "Document timeframes and escalation paths"
+  - "Implement workflow tooling"
+  - "Review workflow effectiveness periodically"
+expected_evidence: "Approval workflow documentation, approval records, escalation logs, workflow review records"
+related_controls: "Approval Workflow, Human Oversight Control, Escalation Procedure"
+edges:
+  belongs_to:
+    primary: DOM-HUMAN
+  derives_from:
+    - {ref: REF-ISO42001, version: "2023", locator: "Clause 8", verification: pending}
+    - {ref: REF-EUAIA, version: "2024", locator: "Article 14", verification: pending}
+  references: [UGR-15, UGR-17]
+provenance:
+  seed_note: "Verbatim from UAGF-002 v1.0 Section 5; references scoped to seed set (full set: UGR-015, UGR-017, UGR-045)."
+  legacy_status: "Active"
+  legacy_revision_history: "v1.0 (2026-06-28, UAGF WG, Initial creation)"

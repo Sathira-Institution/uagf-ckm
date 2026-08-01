@@ -1,0 +1,21 @@
+id: UGR-903
+type: Requirement
+tier: 1
+version: "1.0"
+status: approved
+label: "V-7 Violation Fixture (approved without decision reference)"
+owner_module: M-CORE
+created: "2026-07-28"
+modified: "2026-07-28"
+statement: "Test statement."
+intent: "Trigger V-7 and V-3."
+requirement_type: [standard]
+applicability: "test"
+lifecycle_stages: [design]
+priority: high
+risk_categories: [safety]
+implementation_guidance: ["step"]
+expected_evidence: "x"
+related_controls: "x"
+edges:
+  belongs_to: {primary: DOM-HUMAN}

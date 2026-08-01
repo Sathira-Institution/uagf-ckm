@@ -1,0 +1,7 @@
+[UAGF Requirement UGR-015 | Domain: DOM-HUMAN | Priority: CRITICAL | Force: Normative]
+Obligation: High-risk AI systems must be designed and operated in a way that enables effective human oversight, including the ability for humans to intervene, override, or stop the system when necessary.
+Why: Ensure human judgment remains the final authority for consequential AI decisions, preventing full automation of decisions with significant impact.
+Applies to: Organizations deploying high-risk AI systems
+Anchors: REF-EUAIA (Article 14) [pending-verification]; REF-ISO42001 (Clause 8) [pending-verification]; REF-OECD-AIP [pending-verification]
+Related: UGR-004, UGR-016, UGR-017, UGR-045
+Source of truth: https://uagf.sathira.institute/id/requirement/UGR-15 (CKM 2.0.0-staging)

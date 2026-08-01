@@ -1,0 +1,1653 @@
+{
+  "@context": {
+    "@vocab": "https://uagf.sathira.institute/vocab/",
+    "uagf": "https://uagf.sathira.institute/id/",
+    "belongsTo": {
+      "@type": "@id"
+    },
+    "references": {
+      "@type": "@id"
+    }
+  },
+  "stamp": {
+    "profile": "registry-jsonld",
+    "scope": "module:M-CORE",
+    "ckm_release": "2.0.0-staging",
+    "render_date": "2026-07-28",
+    "engine": "uagf-renderer/0.1",
+    "source_of_truth": "https://uagf.sathira.institute"
+  },
+  "@graph": [
+    {
+      "@id": "uagf:controlledvocabulary/CV-Auto",
+      "@type": "ControlledVocabulary",
+      "label": {
+        "@value": "Automation Potential",
+        "@language": "en"
+      },
+      "version": "0.1",
+      "status": "proposed"
+    },
+    {
+      "@id": "uagf:controlledvocabulary/CV-ConfLevel",
+      "@type": "ControlledVocabulary",
+      "label": {
+        "@value": "Conformance Level",
+        "@language": "en"
+      },
+      "version": "0.1",
+      "status": "proposed"
+    },
+    {
+      "@id": "uagf:controlledvocabulary/CV-Priority",
+      "@type": "ControlledVocabulary",
+      "label": {
+        "@value": "Priority",
+        "@language": "en"
+      },
+      "version": "0.1",
+      "status": "proposed"
+    },
+    {
+      "@id": "uagf:controlledvocabulary/CV-ReqType",
+      "@type": "ControlledVocabulary",
+      "label": {
+        "@value": "Requirement Type",
+        "@language": "en"
+      },
+      "version": "0.1",
+      "status": "proposed"
+    },
+    {
+      "@id": "uagf:controlledvocabulary/CV-RiskCat",
+      "@type": "ControlledVocabulary",
+      "label": {
+        "@value": "Risk Category",
+        "@language": "en"
+      },
+      "version": "0.1",
+      "status": "proposed"
+    },
+    {
+      "@id": "uagf:controlledvocabulary/CV-Stage",
+      "@type": "ControlledVocabulary",
+      "label": {
+        "@value": "Lifecycle Stage",
+        "@language": "en"
+      },
+      "version": "0.1",
+      "status": "proposed"
+    },
+    {
+      "@id": "uagf:domain/DOM-ACCOUNTABILITY",
+      "@type": "Domain",
+      "label": {
+        "@value": "Accountability",
+        "@language": "en"
+      },
+      "version": "1.0",
+      "status": "proposed"
+    },
+    {
+      "@id": "uagf:domain/DOM-AUDITABILITY",
+      "@type": "Domain",
+      "label": {
+        "@value": "Auditability",
+        "@language": "en"
+      },
+      "version": "1.0",
+      "status": "proposed"
+    },
+    {
+      "@id": "uagf:domain/DOM-DATA",
+      "@type": "Domain",
+      "label": {
+        "@value": "Data Governance",
+        "@language": "en"
+      },
+      "version": "1.0",
+      "status": "proposed"
+    },
+    {
+      "@id": "uagf:domain/DOM-GOV",
+      "@type": "Domain",
+      "label": {
+        "@value": "Governance & Leadership",
+        "@language": "en"
+      },
+      "version": "1.0",
+      "status": "proposed"
+    },
+    {
+      "@id": "uagf:domain/DOM-HUMAN",
+      "@type": "Domain",
+      "label": {
+        "@value": "Human Oversight",
+        "@language": "en"
+      },
+      "version": "1.0",
+      "status": "proposed"
+    },
+    {
+      "@id": "uagf:domain/DOM-PRIVACY",
+      "@type": "Domain",
+      "label": {
+        "@value": "Privacy",
+        "@language": "en"
+      },
+      "version": "1.0",
+      "status": "proposed"
+    },
+    {
+      "@id": "uagf:domain/DOM-RISK",
+      "@type": "Domain",
+      "label": {
+        "@value": "Risk Management",
+        "@language": "en"
+      },
+      "version": "1.0",
+      "status": "proposed"
+    },
+    {
+      "@id": "uagf:domain/DOM-SAFETY",
+      "@type": "Domain",
+      "label": {
+        "@value": "Safety",
+        "@language": "en"
+      },
+      "version": "1.0",
+      "status": "proposed"
+    },
+    {
+      "@id": "uagf:domain/DOM-SECURITY",
+      "@type": "Domain",
+      "label": {
+        "@value": "Security",
+        "@language": "en"
+      },
+      "version": "1.0",
+      "status": "proposed"
+    },
+    {
+      "@id": "uagf:domain/DOM-TRANSPARENCY",
+      "@type": "Domain",
+      "label": {
+        "@value": "Transparency",
+        "@language": "en"
+      },
+      "version": "1.0",
+      "status": "proposed"
+    },
+    {
+      "@id": "uagf:externalreference/REF-C2PA",
+      "@type": "ExternalReference",
+      "label": {
+        "@value": "C2PA Standard",
+        "@language": "en"
+      },
+      "version": "0.1",
+      "status": "proposed"
+    },
+    {
+      "@id": "uagf:externalreference/REF-EUAIA",
+      "@type": "ExternalReference",
+      "label": {
+        "@value": "EU AI Act",
+        "@language": "en"
+      },
+      "version": "0.1",
+      "status": "proposed"
+    },
+    {
+      "@id": "uagf:externalreference/REF-ISO42001",
+      "@type": "ExternalReference",
+      "label": {
+        "@value": "ISO/IEC 42001",
+        "@language": "en"
+      },
+      "version": "0.1",
+      "status": "proposed"
+    },
+    {
+      "@id": "uagf:externalreference/REF-NIST-AIRMF",
+      "@type": "ExternalReference",
+      "label": {
+        "@value": "NIST AI RMF",
+        "@language": "en"
+      },
+      "version": "0.1",
+      "status": "proposed"
+    },
+    {
+      "@id": "uagf:externalreference/REF-OECD-AIP",
+      "@type": "ExternalReference",
+      "label": {
+        "@value": "OECD AI Principles",
+        "@language": "en"
+      },
+      "version": "0.1",
+      "status": "proposed"
+    },
+    {
+      "@id": "uagf:externalreference/REF-TH-PDPA",
+      "@type": "ExternalReference",
+      "label": {
+        "@value": "PDPA Thailand",
+        "@language": "en"
+      },
+      "version": "0.1",
+      "status": "proposed"
+    },
+    {
+      "@id": "uagf:externalreference/REF-UNESCO-RECOMMENDATION-ON",
+      "@type": "ExternalReference",
+      "label": {
+        "@value": "UNESCO Recommendation on the Ethics of AI",
+        "@language": "en"
+      },
+      "version": "0.1",
+      "status": "proposed"
+    },
+    {
+      "@id": "uagf:requirement/UGR-1",
+      "@type": "Requirement",
+      "label": {
+        "@value": "AI Governance Ownership",
+        "@language": "en"
+      },
+      "statement": "The organization must designate a person or function with overall accountability for AI governance, including policy development, risk oversight, and compliance monitoring.",
+      "intent": "Ensure clear ownership and accountability for AI governance across the organization.",
+      "applicability": "All organizations that develop, deploy, or operate AI systems",
+      "priority": "high",
+      "version": "1.0",
+      "status": "proposed",
+      "requirement_type": [
+        "standard",
+        "legal"
+      ],
+      "lifecycle_stages": [
+        "all-stages"
+      ],
+      "risk_categories": [
+        "governance"
+      ],
+      "belongsTo": "uagf:domain/DOM-GOV",
+      "derivesFrom": [
+        {
+          "@id": "uagf:externalreference/REF-ISO42001",
+          "locator": "Clause 5.3",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-EUAIA",
+          "locator": "Article 26",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-TH-PDPA",
+          "locator": "Section 41",
+          "verification": "pending"
+        }
+      ],
+      "references": [
+        "uagf:requirement/UGR-2",
+        "uagf:requirement/UGR-3",
+        "uagf:requirement/UGR-15"
+      ]
+    },
+    {
+      "@id": "uagf:requirement/UGR-15",
+      "@type": "Requirement",
+      "label": {
+        "@value": "Human Oversight for High-Risk AI",
+        "@language": "en"
+      },
+      "statement": "High-risk AI systems must be designed and operated in a way that enables effective human oversight, including the ability for humans to intervene, override, or stop the system when necessary.",
+      "intent": "Ensure human judgment remains the final authority for consequential AI decisions, preventing full automation of decisions with significant impact.",
+      "applicability": "Organizations deploying high-risk AI systems",
+      "priority": "critical",
+      "version": "1.0",
+      "status": "proposed",
+      "requirement_type": [
+        "legal",
+        "standard"
+      ],
+      "lifecycle_stages": [
+        "design",
+        "development",
+        "operation"
+      ],
+      "risk_categories": [
+        "human-rights",
+        "safety",
+        "accountability"
+      ],
+      "belongsTo": "uagf:domain/DOM-HUMAN",
+      "derivesFrom": [
+        {
+          "@id": "uagf:externalreference/REF-EUAIA",
+          "locator": "Article 14",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-ISO42001",
+          "locator": "Clause 8",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-OECD-AIP",
+          "locator": null,
+          "verification": "pending"
+        }
+      ],
+      "references": [
+        "uagf:requirement/UGR-4",
+        "uagf:requirement/UGR-16",
+        "uagf:requirement/UGR-17",
+        "uagf:requirement/UGR-45"
+      ]
+    },
+    {
+      "@id": "uagf:requirement/UGR-16",
+      "@type": "Requirement",
+      "label": {
+        "@value": "Human Approval Workflow",
+        "@language": "en"
+      },
+      "statement": "The organization must establish documented approval workflows for AI system decisions, specifying who must approve which types of decisions, under what conditions, and within what timeframe.",
+      "intent": "Ensure decisions of consequence are routed through a documented, accountable approval process before execution.",
+      "applicability": "All organizations with AI systems that make consequential decisions",
+      "priority": "high",
+      "version": "1.0",
+      "status": "proposed",
+      "requirement_type": [
+        "standard"
+      ],
+      "lifecycle_stages": [
+        "design",
+        "development",
+        "operation"
+      ],
+      "risk_categories": [
+        "accountability",
+        "governance"
+      ],
+      "belongsTo": "uagf:domain/DOM-HUMAN",
+      "derivesFrom": [
+        {
+          "@id": "uagf:externalreference/REF-ISO42001",
+          "locator": "Clause 8",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-EUAIA",
+          "locator": "Article 14",
+          "verification": "pending"
+        }
+      ],
+      "references": [
+        "uagf:requirement/UGR-15",
+        "uagf:requirement/UGR-17",
+        "uagf:requirement/UGR-45"
+      ]
+    },
+    {
+      "@id": "uagf:requirement/UGR-17",
+      "@type": "Requirement",
+      "label": {
+        "@value": "Human Intervention Mechanism",
+        "@language": "en"
+      },
+      "statement": "The organization must implement mechanisms that allow authorized human operators to intervene, override, or halt AI system actions in real time when necessary to prevent harm or correct erroneous behavior.",
+      "intent": "Ensure humans can stop or correct AI actions when necessary.",
+      "applicability": "Organizations deploying high-risk AI systems",
+      "priority": "critical",
+      "version": "1.0",
+      "status": "proposed",
+      "requirement_type": [
+        "legal",
+        "standard"
+      ],
+      "lifecycle_stages": [
+        "design",
+        "development",
+        "operation"
+      ],
+      "risk_categories": [
+        "human-rights",
+        "safety",
+        "accountability"
+      ],
+      "belongsTo": "uagf:domain/DOM-HUMAN",
+      "derivesFrom": [
+        {
+          "@id": "uagf:externalreference/REF-EUAIA",
+          "locator": "Article 14",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-ISO42001",
+          "locator": "Clause 8",
+          "verification": "pending"
+        }
+      ],
+      "references": [
+        "uagf:requirement/UGR-15",
+        "uagf:requirement/UGR-45"
+      ]
+    },
+    {
+      "@id": "uagf:requirement/UGR-2",
+      "@type": "Requirement",
+      "label": {
+        "@value": "AI Policy Framework",
+        "@language": "en"
+      },
+      "statement": "The organization must establish, document, and maintain an AI policy that defines governance principles, risk tolerance, ethical commitments, and compliance requirements for AI systems.",
+      "intent": "Provide a formal, documented foundation for AI governance that communicates organizational commitments and expectations.",
+      "applicability": "All organizations that develop, deploy, or operate AI systems",
+      "priority": "high",
+      "version": "1.0",
+      "status": "proposed",
+      "requirement_type": [
+        "standard"
+      ],
+      "lifecycle_stages": [
+        "all-stages"
+      ],
+      "risk_categories": [
+        "governance"
+      ],
+      "belongsTo": "uagf:domain/DOM-GOV",
+      "derivesFrom": [
+        {
+          "@id": "uagf:externalreference/REF-ISO42001",
+          "locator": "Clause 5.2",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-EUAIA",
+          "locator": "Article 26",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-OECD-AIP",
+          "locator": null,
+          "verification": "pending"
+        }
+      ],
+      "references": [
+        "uagf:requirement/UGR-1",
+        "uagf:requirement/UGR-4"
+      ]
+    },
+    {
+      "@id": "uagf:requirement/UGR-20",
+      "@type": "Requirement",
+      "label": {
+        "@value": "Data Quality for AI Systems",
+        "@language": "en"
+      },
+      "statement": "The organization must ensure that data used for training, validation, and operation of AI systems is of sufficient quality, including accuracy, completeness, relevance, and representativeness for the intended use.",
+      "intent": "Prevent AI system errors and biases caused by poor quality data.",
+      "applicability": "All organizations that develop or operate AI systems",
+      "priority": "high",
+      "version": "1.0",
+      "status": "proposed",
+      "requirement_type": [
+        "legal",
+        "standard"
+      ],
+      "lifecycle_stages": [
+        "development",
+        "operation"
+      ],
+      "risk_categories": [
+        "fairness",
+        "safety",
+        "privacy"
+      ],
+      "belongsTo": "uagf:domain/DOM-DATA",
+      "derivesFrom": [
+        {
+          "@id": "uagf:externalreference/REF-EUAIA",
+          "locator": "Article 10",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-ISO42001",
+          "locator": "Annex A (Data Integrity)",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-TH-PDPA",
+          "locator": "Section 23",
+          "verification": "pending"
+        }
+      ],
+      "references": [
+        "uagf:requirement/UGR-21",
+        "uagf:requirement/UGR-22"
+      ]
+    },
+    {
+      "@id": "uagf:requirement/UGR-21",
+      "@type": "Requirement",
+      "label": {
+        "@value": "Data Lineage and Provenance",
+        "@language": "en"
+      },
+      "statement": "The organization must maintain data lineage records that track the origin, transformation, and flow of data used in AI systems from source to consumption, enabling traceability and auditability.",
+      "intent": "Enable traceability of data used in AI systems for audit, compliance, and error investigation.",
+      "applicability": "All organizations that develop or operate AI systems",
+      "priority": "high",
+      "version": "1.0",
+      "status": "proposed",
+      "requirement_type": [
+        "legal",
+        "standard"
+      ],
+      "lifecycle_stages": [
+        "development",
+        "operation"
+      ],
+      "risk_categories": [
+        "privacy",
+        "fairness",
+        "auditability"
+      ],
+      "belongsTo": "uagf:domain/DOM-DATA",
+      "derivesFrom": [
+        {
+          "@id": "uagf:externalreference/REF-EUAIA",
+          "locator": "Article 10",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-ISO42001",
+          "locator": "Annex A (Data Integrity)",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-NIST-AIRMF",
+          "locator": null,
+          "verification": "pending"
+        }
+      ],
+      "references": [
+        "uagf:requirement/UGR-20",
+        "uagf:requirement/UGR-35",
+        "uagf:requirement/UGR-36"
+      ]
+    },
+    {
+      "@id": "uagf:requirement/UGR-22",
+      "@type": "Requirement",
+      "label": {
+        "@value": "Data Classification for AI Systems",
+        "@language": "en"
+      },
+      "statement": "The organization must classify data used in AI systems according to sensitivity, regulatory requirements, and risk, and apply appropriate controls based on classification.",
+      "intent": "Ensure appropriate protection for data based on sensitivity and regulatory requirements.",
+      "applicability": "All organizations that process data through AI systems",
+      "priority": "high",
+      "version": "1.0",
+      "status": "proposed",
+      "requirement_type": [
+        "legal",
+        "standard"
+      ],
+      "lifecycle_stages": [
+        "all-stages"
+      ],
+      "risk_categories": [
+        "privacy",
+        "security"
+      ],
+      "belongsTo": "uagf:domain/DOM-DATA",
+      "derivesFrom": [
+        {
+          "@id": "uagf:externalreference/REF-TH-PDPA",
+          "locator": "Section 23",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-ISO42001",
+          "locator": "Annex A (Privacy)",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-NIST-AIRMF",
+          "locator": null,
+          "verification": "pending"
+        }
+      ],
+      "references": [
+        "uagf:requirement/UGR-20"
+      ]
+    },
+    {
+      "@id": "uagf:requirement/UGR-25",
+      "@type": "Requirement",
+      "label": {
+        "@value": "AI System Disclosure",
+        "@language": "en"
+      },
+      "statement": "Users must be informed when they are interacting with an AI system, including the nature and purpose of the system, in a clear and understandable manner.",
+      "intent": "Ensure users are aware they are interacting with AI and can make informed decisions about their engagement.",
+      "applicability": "All organizations with user-facing AI systems",
+      "priority": "high",
+      "version": "1.0",
+      "status": "proposed",
+      "requirement_type": [
+        "legal",
+        "principle"
+      ],
+      "lifecycle_stages": [
+        "operation"
+      ],
+      "risk_categories": [
+        "transparency",
+        "human-rights"
+      ],
+      "belongsTo": "uagf:domain/DOM-TRANSPARENCY",
+      "derivesFrom": [
+        {
+          "@id": "uagf:externalreference/REF-EUAIA",
+          "locator": "Article 50",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-OECD-AIP",
+          "locator": null,
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-UNESCO-RECOMMENDATION-ON",
+          "locator": null,
+          "verification": "pending"
+        }
+      ],
+      "references": [
+        "uagf:requirement/UGR-26",
+        "uagf:requirement/UGR-27"
+      ]
+    },
+    {
+      "@id": "uagf:requirement/UGR-26",
+      "@type": "Requirement",
+      "label": {
+        "@value": "Synthetic Content Labeling",
+        "@language": "en"
+      },
+      "statement": "AI-generated synthetic content (including text, images, audio, and video) must be clearly labeled as AI-generated or AI-manipulated in a machine-readable and human-readable format.",
+      "intent": "Prevent deception by ensuring users can identify AI-generated content.",
+      "applicability": "Organizations that generate synthetic content using AI",
+      "priority": "high",
+      "version": "1.0",
+      "status": "proposed",
+      "requirement_type": [
+        "legal",
+        "standard"
+      ],
+      "lifecycle_stages": [
+        "operation"
+      ],
+      "risk_categories": [
+        "transparency",
+        "disinformation"
+      ],
+      "belongsTo": "uagf:domain/DOM-TRANSPARENCY",
+      "derivesFrom": [
+        {
+          "@id": "uagf:externalreference/REF-EUAIA",
+          "locator": "Article 50",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-C2PA",
+          "locator": null,
+          "verification": "pending"
+        }
+      ],
+      "references": [
+        "uagf:requirement/UGR-25",
+        "uagf:requirement/UGR-27"
+      ]
+    },
+    {
+      "@id": "uagf:requirement/UGR-27",
+      "@type": "Requirement",
+      "label": {
+        "@value": "Deepfake Disclosure",
+        "@language": "en"
+      },
+      "statement": "Deepfake content (AI-generated or manipulated image, audio, or video that resembles real persons or events) must be clearly disclosed as artificially generated or manipulated.",
+      "intent": "Prevent misinformation and deception through realistic synthetic media.",
+      "applicability": "Organizations that generate or distribute deepfake content",
+      "priority": "high",
+      "version": "1.0",
+      "status": "proposed",
+      "requirement_type": [
+        "legal"
+      ],
+      "lifecycle_stages": [
+        "operation"
+      ],
+      "risk_categories": [
+        "transparency",
+        "disinformation",
+        "human-rights"
+      ],
+      "belongsTo": "uagf:domain/DOM-TRANSPARENCY",
+      "derivesFrom": [
+        {
+          "@id": "uagf:externalreference/REF-EUAIA",
+          "locator": "Article 50(4)",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-EUAIA",
+          "locator": "Article 3(66)",
+          "verification": "pending"
+        }
+      ],
+      "references": [
+        "uagf:requirement/UGR-25",
+        "uagf:requirement/UGR-26"
+      ]
+    },
+    {
+      "@id": "uagf:requirement/UGR-3",
+      "@type": "Requirement",
+      "label": {
+        "@value": "Top Management Commitment",
+        "@language": "en"
+      },
+      "statement": "Top management must demonstrate commitment to AI governance by approving the AI policy, allocating resources, and regularly reviewing AI governance performance.",
+      "intent": "Ensure AI governance has executive-level support and resources to be effective.",
+      "applicability": "All organizations that develop, deploy, or operate AI systems",
+      "priority": "high",
+      "version": "1.0",
+      "status": "proposed",
+      "requirement_type": [
+        "standard"
+      ],
+      "lifecycle_stages": [
+        "all-stages"
+      ],
+      "risk_categories": [
+        "governance"
+      ],
+      "belongsTo": "uagf:domain/DOM-GOV",
+      "derivesFrom": [
+        {
+          "@id": "uagf:externalreference/REF-ISO42001",
+          "locator": "Clause 5.1",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-EUAIA",
+          "locator": "Article 26",
+          "verification": "pending"
+        }
+      ],
+      "references": [
+        "uagf:requirement/UGR-1",
+        "uagf:requirement/UGR-2"
+      ]
+    },
+    {
+      "@id": "uagf:requirement/UGR-35",
+      "@type": "Requirement",
+      "label": {
+        "@value": "AI System Logging",
+        "@language": "en"
+      },
+      "statement": "AI systems must log all material decisions, actions, and events, including inputs, outputs, decision rationale, and human interventions, in a format suitable for audit and review.",
+      "intent": "Enable audit, investigation, and continuous improvement through complete records of AI system behavior.",
+      "applicability": "All organizations with AI systems",
+      "priority": "critical",
+      "version": "1.0",
+      "status": "proposed",
+      "requirement_type": [
+        "legal",
+        "standard"
+      ],
+      "lifecycle_stages": [
+        "all-stages"
+      ],
+      "risk_categories": [
+        "auditability",
+        "accountability"
+      ],
+      "belongsTo": "uagf:domain/DOM-AUDITABILITY",
+      "derivesFrom": [
+        {
+          "@id": "uagf:externalreference/REF-EUAIA",
+          "locator": "Article 12",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-ISO42001",
+          "locator": "Clause 8",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-NIST-AIRMF",
+          "locator": null,
+          "verification": "pending"
+        }
+      ],
+      "references": [
+        "uagf:requirement/UGR-36",
+        "uagf:requirement/UGR-37",
+        "uagf:requirement/UGR-45"
+      ]
+    },
+    {
+      "@id": "uagf:requirement/UGR-36",
+      "@type": "Requirement",
+      "label": {
+        "@value": "Audit Trail Retention",
+        "@language": "en"
+      },
+      "statement": "The organization must retain audit trails for AI systems for a defined retention period (minimum 5 years for high-risk systems) in a tamper-evident format that supports retrieval and replay.",
+      "intent": "Ensure evidence is available for audits, investigations, and regulatory reviews.",
+      "applicability": "All organizations with AI systems",
+      "priority": "high",
+      "version": "1.0",
+      "status": "proposed",
+      "requirement_type": [
+        "legal",
+        "standard"
+      ],
+      "lifecycle_stages": [
+        "all-stages"
+      ],
+      "risk_categories": [
+        "auditability",
+        "compliance"
+      ],
+      "belongsTo": "uagf:domain/DOM-AUDITABILITY",
+      "derivesFrom": [
+        {
+          "@id": "uagf:externalreference/REF-EUAIA",
+          "locator": "Article 12",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-ISO42001",
+          "locator": "Clause 8",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-TH-PDPA",
+          "locator": "Section 23",
+          "verification": "pending"
+        }
+      ],
+      "references": [
+        "uagf:requirement/UGR-35",
+        "uagf:requirement/UGR-37",
+        "uagf:requirement/UGR-45"
+      ]
+    },
+    {
+      "@id": "uagf:requirement/UGR-37",
+      "@type": "Requirement",
+      "label": {
+        "@value": "Audit Trail Retrieval",
+        "@language": "en"
+      },
+      "statement": "The organization must be able to retrieve audit trails for AI systems upon request from authorized parties (auditors, regulators, data subjects) within a reasonable timeframe.",
+      "intent": "Enable timely response to audit and regulatory requests.",
+      "applicability": "All organizations with AI systems",
+      "priority": "high",
+      "version": "1.0",
+      "status": "proposed",
+      "requirement_type": [
+        "legal",
+        "standard"
+      ],
+      "lifecycle_stages": [
+        "all-stages"
+      ],
+      "risk_categories": [
+        "auditability",
+        "compliance"
+      ],
+      "belongsTo": "uagf:domain/DOM-AUDITABILITY",
+      "derivesFrom": [
+        {
+          "@id": "uagf:externalreference/REF-EUAIA",
+          "locator": "Article 12",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-ISO42001",
+          "locator": "Clause 8",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-TH-PDPA",
+          "locator": "Sections 30-36",
+          "verification": "pending"
+        }
+      ],
+      "references": [
+        "uagf:requirement/UGR-35",
+        "uagf:requirement/UGR-36"
+      ]
+    },
+    {
+      "@id": "uagf:requirement/UGR-4",
+      "@type": "Requirement",
+      "label": {
+        "@value": "AI Governance Roles and Responsibilities",
+        "@language": "en"
+      },
+      "statement": "The organization must define and document roles, responsibilities, and authorities for AI governance, including who is accountable for AI system decisions, risk management, and compliance.",
+      "intent": "Ensure clear accountability for AI-related decisions and activities across the organization.",
+      "applicability": "All organizations that develop, deploy, or operate AI systems",
+      "priority": "high",
+      "version": "1.0",
+      "status": "proposed",
+      "requirement_type": [
+        "standard",
+        "legal"
+      ],
+      "lifecycle_stages": [
+        "all-stages"
+      ],
+      "risk_categories": [
+        "governance",
+        "accountability"
+      ],
+      "belongsTo": "uagf:domain/DOM-GOV",
+      "derivesFrom": [
+        {
+          "@id": "uagf:externalreference/REF-ISO42001",
+          "locator": "Clause 5.3",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-EUAIA",
+          "locator": "Article 26",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-TH-PDPA",
+          "locator": "Section 41",
+          "verification": "pending"
+        }
+      ],
+      "references": [
+        "uagf:requirement/UGR-1",
+        "uagf:requirement/UGR-15",
+        "uagf:requirement/UGR-45"
+      ]
+    },
+    {
+      "@id": "uagf:requirement/UGR-45",
+      "@type": "Requirement",
+      "label": {
+        "@value": "Human Accountability for AI Outcomes",
+        "@language": "en"
+      },
+      "statement": "The organization must ensure that every consequential AI decision has a clearly identified human accountable for the outcome, with documented responsibility and authority.",
+      "intent": "Maintain human responsibility for AI outcomes, preventing accountability gaps.",
+      "applicability": "All organizations with AI systems that make consequential decisions",
+      "priority": "critical",
+      "version": "1.0",
+      "status": "proposed",
+      "requirement_type": [
+        "legal",
+        "standard",
+        "principle"
+      ],
+      "lifecycle_stages": [
+        "all-stages"
+      ],
+      "risk_categories": [
+        "accountability",
+        "human-rights"
+      ],
+      "belongsTo": "uagf:domain/DOM-ACCOUNTABILITY",
+      "derivesFrom": [
+        {
+          "@id": "uagf:externalreference/REF-EUAIA",
+          "locator": "Article 14",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-ISO42001",
+          "locator": "Clause 5.3",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-OECD-AIP",
+          "locator": null,
+          "verification": "pending"
+        }
+      ],
+      "references": [
+        "uagf:requirement/UGR-1",
+        "uagf:requirement/UGR-4",
+        "uagf:requirement/UGR-15",
+        "uagf:requirement/UGR-16"
+      ]
+    },
+    {
+      "@id": "uagf:requirement/UGR-5",
+      "@type": "Requirement",
+      "label": {
+        "@value": "AI Risk Management System",
+        "@language": "en"
+      },
+      "statement": "The organization must establish, implement, and maintain a risk management system for AI systems that identifies, analyzes, evaluates, treats, and monitors AI-related risks throughout the AI system lifecycle.",
+      "intent": "Ensure systematic identification and management of AI risks from design through deployment and operation.",
+      "applicability": "Organizations deploying high-risk AI systems; all organizations with AI systems",
+      "priority": "critical",
+      "version": "1.0",
+      "status": "proposed",
+      "requirement_type": [
+        "legal",
+        "standard"
+      ],
+      "lifecycle_stages": [
+        "design",
+        "development",
+        "deployment",
+        "operation"
+      ],
+      "risk_categories": [
+        "safety",
+        "human-rights",
+        "governance"
+      ],
+      "belongsTo": "uagf:domain/DOM-RISK",
+      "derivesFrom": [
+        {
+          "@id": "uagf:externalreference/REF-EUAIA",
+          "locator": "Article 9",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-ISO42001",
+          "locator": "Clause 6.1",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-NIST-AIRMF",
+          "locator": "Govern Function",
+          "verification": "pending"
+        }
+      ],
+      "references": [
+        "uagf:requirement/UGR-6",
+        "uagf:requirement/UGR-7"
+      ]
+    },
+    {
+      "@id": "uagf:requirement/UGR-50",
+      "@type": "Requirement",
+      "label": {
+        "@value": "AI System Security",
+        "@language": "en"
+      },
+      "statement": "AI systems must be protected against unauthorized access, manipulation, and misuse through appropriate security controls, including access control, encryption, and monitoring.",
+      "intent": "Prevent security breaches that could compromise AI system integrity, confidentiality, or availability.",
+      "applicability": "All organizations with AI systems",
+      "priority": "high",
+      "version": "1.0",
+      "status": "proposed",
+      "requirement_type": [
+        "legal",
+        "standard"
+      ],
+      "lifecycle_stages": [
+        "all-stages"
+      ],
+      "risk_categories": [
+        "security"
+      ],
+      "belongsTo": "uagf:domain/DOM-SECURITY",
+      "derivesFrom": [
+        {
+          "@id": "uagf:externalreference/REF-EUAIA",
+          "locator": "Article 15",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-ISO42001",
+          "locator": "Annex A (Security)",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-NIST-AIRMF",
+          "locator": null,
+          "verification": "pending"
+        }
+      ],
+      "references": [
+        "uagf:requirement/UGR-51"
+      ]
+    },
+    {
+      "@id": "uagf:requirement/UGR-51",
+      "@type": "Requirement",
+      "label": {
+        "@value": "AI System Security Testing",
+        "@language": "en"
+      },
+      "statement": "AI systems must be tested for security vulnerabilities before deployment and periodically during operation, with findings documented and remediated.",
+      "intent": "Identify and remediate security vulnerabilities before they can be exploited.",
+      "applicability": "All organizations with AI systems",
+      "priority": "medium",
+      "version": "1.0",
+      "status": "proposed",
+      "requirement_type": [
+        "standard"
+      ],
+      "lifecycle_stages": [
+        "development",
+        "deployment",
+        "operation"
+      ],
+      "risk_categories": [
+        "security"
+      ],
+      "belongsTo": "uagf:domain/DOM-SECURITY",
+      "derivesFrom": [
+        {
+          "@id": "uagf:externalreference/REF-EUAIA",
+          "locator": "Article 15",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-ISO42001",
+          "locator": "Annex A (Security)",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-NIST-AIRMF",
+          "locator": null,
+          "verification": "pending"
+        }
+      ],
+      "references": [
+        "uagf:requirement/UGR-50"
+      ]
+    },
+    {
+      "@id": "uagf:requirement/UGR-6",
+      "@type": "Requirement",
+      "label": {
+        "@value": "AI Risk Classification",
+        "@language": "en"
+      },
+      "statement": "The organization must classify each AI system according to its risk level, considering the potential impact on health, safety, fundamental rights, and organizational objectives.",
+      "intent": "Enable proportionate governance by matching controls to risk level.",
+      "applicability": "All organizations that deploy AI systems",
+      "priority": "high",
+      "version": "1.0",
+      "status": "proposed",
+      "requirement_type": [
+        "legal",
+        "standard"
+      ],
+      "lifecycle_stages": [
+        "design",
+        "development",
+        "deployment"
+      ],
+      "risk_categories": [
+        "safety",
+        "human-rights",
+        "governance"
+      ],
+      "belongsTo": "uagf:domain/DOM-RISK",
+      "derivesFrom": [
+        {
+          "@id": "uagf:externalreference/REF-EUAIA",
+          "locator": "Article 6",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-ISO42001",
+          "locator": "Clause 6.1",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-NIST-AIRMF",
+          "locator": null,
+          "verification": "pending"
+        }
+      ],
+      "references": [
+        "uagf:requirement/UGR-5",
+        "uagf:requirement/UGR-15"
+      ]
+    },
+    {
+      "@id": "uagf:requirement/UGR-60",
+      "@type": "Requirement",
+      "label": {
+        "@value": "Lawful Basis for Personal Data Processing",
+        "@language": "en"
+      },
+      "statement": "The organization must establish and document a lawful basis for all processing of personal data by AI systems, including consent, contract, legal obligation, vital interest, public task, or legitimate interest.",
+      "intent": "Ensure all personal data processing by AI systems has a valid legal foundation.",
+      "applicability": "Organizations processing personal data through AI systems",
+      "priority": "critical",
+      "version": "1.0",
+      "status": "proposed",
+      "requirement_type": [
+        "legal"
+      ],
+      "lifecycle_stages": [
+        "all-stages"
+      ],
+      "risk_categories": [
+        "privacy",
+        "human-rights"
+      ],
+      "belongsTo": "uagf:domain/DOM-PRIVACY",
+      "derivesFrom": [
+        {
+          "@id": "uagf:externalreference/REF-TH-PDPA",
+          "locator": "Section 24",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-EUAIA",
+          "locator": "Article 10",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-ISO42001",
+          "locator": "Annex A (Privacy)",
+          "verification": "pending"
+        }
+      ],
+      "references": [
+        "uagf:requirement/UGR-61",
+        "uagf:requirement/UGR-62",
+        "uagf:requirement/UGR-64"
+      ]
+    },
+    {
+      "@id": "uagf:requirement/UGR-61",
+      "@type": "Requirement",
+      "label": {
+        "@value": "Data Subject Rights",
+        "@language": "en"
+      },
+      "statement": "The organization must support data subject rights in AI systems, including the right to access, correct, delete, restrict processing, object, and data portability, with documented procedures and response timelines.",
+      "intent": "Protect individual rights regarding personal data processed by AI systems.",
+      "applicability": "Organizations processing personal data through AI systems",
+      "priority": "high",
+      "version": "1.0",
+      "status": "proposed",
+      "requirement_type": [
+        "legal"
+      ],
+      "lifecycle_stages": [
+        "operation"
+      ],
+      "risk_categories": [
+        "privacy",
+        "human-rights"
+      ],
+      "belongsTo": "uagf:domain/DOM-PRIVACY",
+      "derivesFrom": [
+        {
+          "@id": "uagf:externalreference/REF-TH-PDPA",
+          "locator": "Sections 30-36",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-ISO42001",
+          "locator": "Annex A (Privacy)",
+          "verification": "pending"
+        }
+      ],
+      "references": [
+        "uagf:requirement/UGR-60",
+        "uagf:requirement/UGR-62",
+        "uagf:requirement/UGR-64"
+      ]
+    },
+    {
+      "@id": "uagf:requirement/UGR-62",
+      "@type": "Requirement",
+      "label": {
+        "@value": "Data Protection Impact Assessment",
+        "@language": "en"
+      },
+      "statement": "The organization must conduct Data Protection Impact Assessments (DPIAs) for AI systems that process personal data, particularly where processing is likely to result in high risk to individuals' rights and freedoms.",
+      "intent": "Identify and mitigate privacy risks before AI systems process personal data.",
+      "applicability": "Organizations processing personal data through AI systems",
+      "priority": "high",
+      "version": "1.0",
+      "status": "proposed",
+      "requirement_type": [
+        "legal",
+        "standard"
+      ],
+      "lifecycle_stages": [
+        "design",
+        "development",
+        "deployment"
+      ],
+      "risk_categories": [
+        "privacy"
+      ],
+      "belongsTo": "uagf:domain/DOM-PRIVACY",
+      "derivesFrom": [
+        {
+          "@id": "uagf:externalreference/REF-TH-PDPA",
+          "locator": "Section 23",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-ISO42001",
+          "locator": "Clause 6",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-NIST-AIRMF",
+          "locator": null,
+          "verification": "pending"
+        }
+      ],
+      "references": [
+        "uagf:requirement/UGR-60",
+        "uagf:requirement/UGR-61",
+        "uagf:requirement/UGR-64"
+      ]
+    },
+    {
+      "@id": "uagf:requirement/UGR-63",
+      "@type": "Requirement",
+      "label": {
+        "@value": "Sensitive Data Protection",
+        "@language": "en"
+      },
+      "statement": "The organization must apply enhanced protections for sensitive personal data (e.g., health data, biometric data, racial or ethnic origin, political opinions, religious beliefs) processed by AI systems, including explicit consent where required.",
+      "intent": "Ensure enhanced protection for sensitive data that carries higher privacy risk.",
+      "applicability": "Organizations processing sensitive personal data through AI systems",
+      "priority": "high",
+      "version": "1.0",
+      "status": "proposed",
+      "requirement_type": [
+        "legal"
+      ],
+      "lifecycle_stages": [
+        "all-stages"
+      ],
+      "risk_categories": [
+        "privacy",
+        "human-rights"
+      ],
+      "belongsTo": "uagf:domain/DOM-PRIVACY",
+      "derivesFrom": [
+        {
+          "@id": "uagf:externalreference/REF-TH-PDPA",
+          "locator": "Section 26",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-EUAIA",
+          "locator": "Article 10",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-ISO42001",
+          "locator": "Annex A (Privacy)",
+          "verification": "pending"
+        }
+      ],
+      "references": [
+        "uagf:requirement/UGR-60",
+        "uagf:requirement/UGR-61"
+      ]
+    },
+    {
+      "@id": "uagf:requirement/UGR-64",
+      "@type": "Requirement",
+      "label": {
+        "@value": "Privacy Impact Assessment",
+        "@language": "en"
+      },
+      "statement": "The organization must conduct privacy impact assessments for AI systems that process personal data, evaluating privacy risks and implementing appropriate mitigations before deployment.",
+      "intent": "Systematically identify and address privacy risks in AI systems.",
+      "applicability": "Organizations processing personal data through AI systems",
+      "priority": "high",
+      "version": "1.0",
+      "status": "proposed",
+      "requirement_type": [
+        "legal",
+        "standard"
+      ],
+      "lifecycle_stages": [
+        "design",
+        "development",
+        "deployment"
+      ],
+      "risk_categories": [
+        "privacy"
+      ],
+      "belongsTo": "uagf:domain/DOM-PRIVACY",
+      "derivesFrom": [
+        {
+          "@id": "uagf:externalreference/REF-TH-PDPA",
+          "locator": "Section 23",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-ISO42001",
+          "locator": "Clause 6",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-NIST-AIRMF",
+          "locator": null,
+          "verification": "pending"
+        }
+      ],
+      "references": [
+        "uagf:requirement/UGR-60",
+        "uagf:requirement/UGR-61",
+        "uagf:requirement/UGR-62"
+      ]
+    },
+    {
+      "@id": "uagf:requirement/UGR-7",
+      "@type": "Requirement",
+      "label": {
+        "@value": "AI Impact Assessment",
+        "@language": "en"
+      },
+      "statement": "The organization must conduct impact assessments for high-risk AI systems to evaluate potential effects on individuals, communities, and organizational operations before deployment.",
+      "intent": "Identify and mitigate potential negative impacts before AI systems are deployed.",
+      "applicability": "Organizations deploying high-risk AI systems",
+      "priority": "high",
+      "version": "1.0",
+      "status": "proposed",
+      "requirement_type": [
+        "legal",
+        "standard"
+      ],
+      "lifecycle_stages": [
+        "development",
+        "deployment"
+      ],
+      "risk_categories": [
+        "human-rights",
+        "safety",
+        "privacy"
+      ],
+      "belongsTo": "uagf:domain/DOM-RISK",
+      "derivesFrom": [
+        {
+          "@id": "uagf:externalreference/REF-EUAIA",
+          "locator": "Article 26",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-ISO42001",
+          "locator": "Clause 6.1",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-NIST-AIRMF",
+          "locator": null,
+          "verification": "pending"
+        }
+      ],
+      "references": [
+        "uagf:requirement/UGR-5",
+        "uagf:requirement/UGR-6"
+      ]
+    },
+    {
+      "@id": "uagf:requirement/UGR-70",
+      "@type": "Requirement",
+      "label": {
+        "@value": "AI System Safety Testing",
+        "@language": "en"
+      },
+      "statement": "AI systems must be tested for safety before deployment, including testing for harmful outputs, unintended behaviors, and failure modes, with results documented and reviewed.",
+      "intent": "Prevent harm from AI system failures or unintended behaviors.",
+      "applicability": "Organizations deploying AI systems",
+      "priority": "high",
+      "version": "1.0",
+      "status": "proposed",
+      "requirement_type": [
+        "legal",
+        "standard"
+      ],
+      "lifecycle_stages": [
+        "development",
+        "deployment"
+      ],
+      "risk_categories": [
+        "safety"
+      ],
+      "belongsTo": "uagf:domain/DOM-SAFETY",
+      "derivesFrom": [
+        {
+          "@id": "uagf:externalreference/REF-EUAIA",
+          "locator": "Article 15",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-ISO42001",
+          "locator": "Clause 8",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-NIST-AIRMF",
+          "locator": null,
+          "verification": "pending"
+        }
+      ],
+      "references": [
+        "uagf:requirement/UGR-71",
+        "uagf:requirement/UGR-72"
+      ]
+    },
+    {
+      "@id": "uagf:requirement/UGR-71",
+      "@type": "Requirement",
+      "label": {
+        "@value": "Safety Thresholds and Monitoring",
+        "@language": "en"
+      },
+      "statement": "The organization must define safety thresholds for AI system behavior and continuously monitor system performance against these thresholds during operation.",
+      "intent": "Detect and respond to unsafe AI system behavior during operation.",
+      "applicability": "Organizations deploying AI systems",
+      "priority": "high",
+      "version": "1.0",
+      "status": "proposed",
+      "requirement_type": [
+        "standard"
+      ],
+      "lifecycle_stages": [
+        "operation"
+      ],
+      "risk_categories": [
+        "safety"
+      ],
+      "belongsTo": "uagf:domain/DOM-SAFETY",
+      "derivesFrom": [
+        {
+          "@id": "uagf:externalreference/REF-EUAIA",
+          "locator": "Article 15",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-ISO42001",
+          "locator": "Clause 8",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-NIST-AIRMF",
+          "locator": null,
+          "verification": "pending"
+        }
+      ],
+      "references": [
+        "uagf:requirement/UGR-70",
+        "uagf:requirement/UGR-72"
+      ]
+    },
+    {
+      "@id": "uagf:requirement/UGR-72",
+      "@type": "Requirement",
+      "label": {
+        "@value": "AI System Rollback and Suspension",
+        "@language": "en"
+      },
+      "statement": "The organization must have documented procedures to suspend or roll back AI systems when unsafe behavior is detected, with clear authority and escalation paths.",
+      "intent": "Enable rapid response to unsafe AI system behavior.",
+      "applicability": "Organizations deploying AI systems",
+      "priority": "high",
+      "version": "1.0",
+      "status": "proposed",
+      "requirement_type": [
+        "standard"
+      ],
+      "lifecycle_stages": [
+        "operation"
+      ],
+      "risk_categories": [
+        "safety"
+      ],
+      "belongsTo": "uagf:domain/DOM-SAFETY",
+      "derivesFrom": [
+        {
+          "@id": "uagf:externalreference/REF-EUAIA",
+          "locator": "Article 15",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-ISO42001",
+          "locator": "Clause 8",
+          "verification": "pending"
+        },
+        {
+          "@id": "uagf:externalreference/REF-NIST-AIRMF",
+          "locator": null,
+          "verification": "pending"
+        }
+      ],
+      "references": [
+        "uagf:requirement/UGR-70",
+        "uagf:requirement/UGR-71"
+      ]
+    }
+  ]
+}

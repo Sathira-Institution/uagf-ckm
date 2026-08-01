@@ -1,0 +1,23 @@
+id: UGR-902
+type: Requirement
+tier: 1
+version: "1.0"
+status: proposed
+label: "Bad CV Term Fixture"
+owner_module: M-CORE
+created: "2026-07-28"
+modified: "2026-07-28"
+statement: "Test statement."
+intent: "Trigger V-4."
+requirement_type: [standard]
+applicability: "test"
+lifecycle_stages: [training]
+priority: urgent
+risk_categories: [governance]
+implementation_guidance: ["step"]
+expected_evidence: "x"
+related_controls: "x"
+edges:
+  belongs_to: {primary: DOM-HUMAN}
+  derives_from:
+    - {ref: REF-EUAIA, version: "2024", verification: pending}

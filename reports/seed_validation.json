@@ -1,0 +1,16 @@
+{
+  "validator": "uagf-ckm-validator/0.2",
+  "kernel": "WP-004 v0.2 (K-1..K-8)",
+  "dataset": "/home/claude/uagf-ckm/ckm",
+  "timestamp": "2026-07-28T14:04:08.340949+00:00",
+  "objects_loaded": 13,
+  "objects_by_type": {
+    "ExternalReference": 3,
+    "Requirement": 3,
+    "Domain": 1,
+    "ControlledVocabulary": 6
+  },
+  "findings": [],
+  "result": "PASS",
+  "error_count": 0
+}

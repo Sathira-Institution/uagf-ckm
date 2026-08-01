@@ -1,0 +1,15 @@
+id: CV-ReqType
+type: ControlledVocabulary
+tier: 1
+version: "0.1"
+status: proposed
+label: "Requirement Type"
+owner_module: M-CORE
+created: "2026-07-28"
+modified: "2026-07-28"
+terms:
+  - {token: legal, label_en: "Legal"}
+  - {token: standard, label_en: "Standard"}
+  - {token: principle, label_en: "Principle"}
+  - {token: guideline, label_en: "Guideline"}
+  - {token: best-practice, label_en: "Best Practice"}

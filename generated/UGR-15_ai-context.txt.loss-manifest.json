@@ -1,0 +1,27 @@
+{
+  "stamp": {
+    "profile": "registry-ai-context",
+    "scope": "object:UGR-15",
+    "ckm_release": "2.0.0-staging",
+    "render_date": "2026-07-28",
+    "engine": "uagf-renderer/0.1",
+    "source_of_truth": "https://uagf.sathira.institute"
+  },
+  "loss": {
+    "profile_rule": "registry-ai-context is declared-lossy; normative statement is never truncated or paraphrased",
+    "items": [
+      {
+        "object": "UGR-15",
+        "compressed": [
+          "implementation_guidance",
+          "expected_evidence",
+          "related_controls",
+          "requirement_type",
+          "lifecycle_stages",
+          "risk_categories"
+        ],
+        "statement_integrity": "byte-equal (uncompressed by rule)"
+      }
+    ]
+  }
+}
