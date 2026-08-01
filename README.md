@@ -124,7 +124,7 @@ Documentation is generated from the knowledge model—not maintained independent
 
         ▼       ▼        ▼
 
- Documentation  APIs   AI Context
+ Documents  APIs   AI Context
 ```
 
 The CKM is the single source of truth.
@@ -277,7 +277,6 @@ Supported profiles include:
 - registry-doc
 - registry-json
 - registry-jsonld
-- registry-rdf
 - registry-ai-context
 
 ---
@@ -306,7 +305,13 @@ pip install pyyaml
 ## Validate the CKM
 
 ```bash
-python validate_ckm.py --ckm-dir ckm
+python validate_ckm.py ckm
+```
+
+(Or produce a machine-readable validation report:)
+
+```bash
+python validate_ckm.py ckm -o ./reports/validation_report.json
 ```
 
 ---
@@ -315,8 +320,10 @@ python validate_ckm.py --ckm-dir ckm
 
 ```bash
 python render_ckm.py \
+  --ckm ckm \
   --profile registry-doc \
-  --release 2.0.0
+  --ckm-release 2.0.0-alpha \
+  --out ./generated/docs.md
 ```
 
 ---
@@ -325,8 +332,22 @@ python render_ckm.py \
 
 ```bash
 python render_ckm.py \
+  --ckm ckm \
   --profile registry-jsonld \
-  --release 2.0.0
+  --ckm-release 2.0.0-alpha \
+  --out ./generated/registry.jsonld
+```
+
+---
+
+## Generate JSON
+
+```bash
+python render_ckm.py \
+  --ckm ckm \
+  --profile registry-json \
+  --ckm-release 2.0.0-alpha \
+  --out ./generated/registry.json
 ```
 
 ---
@@ -485,5 +506,3 @@ If you use UAGF in research, academic publications, or derived work, please cite
 UAGF is developed as an open public-good initiative by **Sathira Institution**.
 
 Our goal is to make trustworthy AI governance knowledge openly available, interoperable, and machine-readable for the benefit of the global community.
-
-
