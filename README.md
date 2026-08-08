@@ -1977,70 +1977,296 @@ This separation allows UAGF to provide a canonical knowledge infrastructure with
 
 ---
 
-### Versioning
+## Versioning
 
-Version numbers describe the evolution of the Canonical Knowledge Model, not manually edited documentation. Version changes reflect:
+UAGF versioning describes the evolution of the Canonical Knowledge Model (CKM), its applicable schemas, validation constraints, controlled vocabularies, and governed release state.
 
-- CKM schema evolution
-- governance knowledge additions
-- semantic improvements
-- interoperability enhancements
-- validation rule evolution
-- controlled vocabulary updates
+Version changes may reflect:
 
-Generated documentation inherits the version of the CKM from which it was rendered. Documentation itself is never versioned independently.
+-   CKM schema evolution
+-   Governance knowledge additions or removals
+-   Semantic changes
+-   Controlled vocabulary updates
+-   Validation rule evolution
+-   Provenance or governance metadata changes
+-   Interoperability enhancements
+-   Rendering profile changes
+-   Other governed architectural changes
+
+A UAGF release identifies a specific validated state of the knowledge infrastructure at a defined point in its evolution.
+
+Generated documentation and other derived representations inherit the relevant version and release metadata of the CKM state from which they were rendered.
+
+Derived artifacts do not establish an independent canonical version of governance knowledge.
+
+Their version and release metadata exist primarily to preserve:
+
+-   Traceability
+-   Reproducibility
+-   Compatibility information
+-   Provenance
+-   Release integrity
+
+Accordingly, a generated representation may carry its own artifact or format metadata while remaining non-canonical with respect to the underlying governance knowledge representation.
+
+---
+
+### Version Evolution
+
+UAGF distinguishes between changes to the representation of governance knowledge and changes to the governance knowledge itself.
+
+Examples include:
+
+| Change Type | Potential Version Impact |
+| :--- | :--- |
+| Schema evolution | May require a new compatible or breaking version |
+| New governance knowledge | May result in a new knowledge release |
+| Controlled vocabulary update | May affect semantic compatibility |
+| Identifier change | May constitute a compatibility-impacting change |
+| Validation rule change | May affect release validity |
+| Rendering profile change | May affect derived artifact compatibility |
+| Semantic change | Requires explicit governance review and traceability |
+| Breaking structural change | Requires migration guidance |
+
+Version changes must remain explicit, reviewable, and traceable.
+
+UAGF does not rely on undocumented changes between releases.
 
 ---
 
 ### Compatibility
 
-Backward compatibility is a core architectural commitment. Whenever possible:
+Compatibility is treated as a controlled architectural property rather than an unconditional guarantee.
 
-- existing CKM objects remain valid,
-- previously published identifiers remain stable,
-- canonical semantics remain consistent,
-- rendering behavior remains deterministic.
+Where compatibility is maintained, UAGF aims to preserve:
 
-Breaking changes require explicit governance review and clear migration guidance. Most importantly, UAGF will never introduce silent semantic shifts. If the meaning of governance knowledge changes, the change must be explicit, documented, reviewable, and traceable.
+-   Validity of existing CKM objects
+-   Stability of previously published identifiers
+-   Consistency of established canonical semantics
+-   Compatibility of applicable schemas
+-   Reproducibility of defined rendering behavior
+-   Traceability across supported version transitions
 
-**Reality First** applies not only to governance data but also to governance evolution itself. The Canonical Knowledge Model therefore remains a stable foundation upon which organizations can confidently build interoperable AI governance systems.
+Compatibility may differ across:
+
+-   CKM schema versions
+-   Canonical knowledge versions
+-   Controlled vocabulary versions
+-   Rendering profiles
+-   Serialization formats
+-   Downstream consumer interfaces
+
+A change that cannot preserve compatibility must be explicitly classified and governed.
+
+Breaking changes require:
+
+-   Explicit governance review
+-   Documented compatibility impact
+-   Migration guidance where applicable
+-   Preservation of provenance
+-   Clear version identification
+-   Validation of the resulting canonical state
+
+Most importantly:
+
+> **UAGF does not introduce silent semantic shifts.**
+
+If the meaning of a canonical governance object changes, the change must be explicit, documented, reviewable, and traceable.
+
+Where a change affects the relationship between a canonical object and its authoritative source, the relevant provenance and governance records must remain identifiable.
+
+**Reality First** therefore applies not only to governance knowledge, but also to the evolution of the knowledge infrastructure itself.
+
+---
+
+### Version Integrity
+
+A versioned UAGF release should provide sufficient information to determine:
+
+-   Which CKM state was released
+-   Which schema and validation rules applied
+-   Which controlled vocabularies were active
+-   Which rendering profiles were used
+-   Which governance decisions affected the release
+-   Which validation results were obtained
+-   Which derived artifacts belong to that release
+
+This allows organizations and researchers to distinguish between:
+
+1.  **What changed in the knowledge**
+2.  **What changed in the architecture**
+3.  **What changed only in its representation**
+
+Such distinctions are essential for long-term interoperability and governance traceability.
+
+---
+
 ## Public Ecosystem
 
 The Universal AI Governance Framework is designed as a **public knowledge infrastructure** rather than a proprietary governance product.
 
-Its purpose is to establish a shared, deterministic foundation upon which governments, researchers, enterprises, developers, and civil society can build interoperable AI governance systems.
+Its purpose is to provide a shared, deterministic architectural foundation through which governments, standards organizations, researchers, enterprises, developers, technology providers, and civil society can structure and exchange AI governance knowledge.
 
-Because every artifact is generated from the Canonical Knowledge Model, all participants interact with the same governance knowledge while consuming it through representations appropriate to their own environments. The framework therefore promotes interoperability without imposing uniform implementation.
+UAGF does not require participants to adopt identical governance frameworks.
+
+Instead, participants may preserve their own governance authorities, institutional processes, and implementation environments while using UAGF-compatible canonical representations and interoperability mechanisms where appropriate.
+
+Because downstream artifacts are derived from the Canonical Knowledge Model, different participants can consume the same canonical release state through representations appropriate to their technical or operational environments.
+
+These representations remain subject to their defined profiles, serialization characteristics, and declared information-loss constraints.
+
+UAGF therefore promotes interoperability without requiring uniform implementation.
 
 ---
 
 ### Public Good
 
-UAGF is developed as an open public-good initiative. Its objective is to make trustworthy AI governance knowledge openly accessible, machine-readable, and reusable across jurisdictions and sectors.
+UAGF is developed as an open public-good initiative.
 
-Unlike proprietary governance repositories that duplicate or fragment knowledge, UAGF provides a shared canonical foundation that remains:
+Its objective is to make governance knowledge more accessible, structured, machine-readable, traceable, and reusable across jurisdictions, sectors, and technical environments.
 
-- openly accessible;
-- vendor-neutral;
-- implementation-independent;
-- deterministic;
-- transparent.
+The public-good model is based on several principles:
 
-The framework is intended to strengthen the global AI governance ecosystem by reducing ambiguity rather than creating another competing standard.
+-   **Open accessibility**
+-   **Vendor neutrality**
+-   **Implementation independence**
+-   **Machine readability**
+-   **Deterministic transformation**
+-   **Transparent provenance**
+-   **Reproducible releases**
+
+UAGF is intended to strengthen the broader AI governance ecosystem by providing infrastructure for connecting governance knowledge rather than establishing another competing source of legal, regulatory, or normative authority.
+
+The framework therefore complements existing governance ecosystems rather than attempting to replace them.
 
 ---
 
 ### Research
 
-Academic researchers require governance knowledge that is reproducible, citable, and computationally analyzable. The Canonical Knowledge Model enables research by providing:
+Academic and independent researchers require governance knowledge that is reproducible, citable, structurally analyzable, and computationally accessible.
 
-- structured governance objects;
-- stable identifiers;
-- explicit semantic relationships;
-- machine-readable representations;
-- deterministic rendering.
+The Canonical Knowledge Model can support research through:
 
-Researchers can analyze governance concepts directly without manually extracting information from heterogeneous documents. Because JSON, JSON-LD, and RDF are generated from the same canonical model, experiments remain reproducible across institutions and research environments. The CKM therefore serves as a common research substrate for governance science.
+-   Structured governance objects
+-   Stable identifiers
+-   Explicit semantic relationships
+-   Provenance metadata
+-   Machine-readable representations
+-   Deterministic rendering
+-   Versioned release states
+
+Researchers can analyze canonical governance objects and their relationships without relying exclusively on manual extraction from heterogeneous document collections.
+
+Where JSON, JSON-LD, RDF, or other representations are generated from the same CKM release state, researchers can work with consistent representations of the same canonical knowledge while preserving traceability to the source release.
+
+This can support research areas including:
+
+-   AI governance comparison
+-   Regulatory and standards analysis
+-   Governance ontology research
+-   Semantic interoperability
+-   Governance knowledge graphs
+-   Machine-readable policy research
+-   AI governance automation
+-   Longitudinal governance analysis
+-   Reproducibility studies
+
+The CKM can therefore serve as a shared research substrate for computational and interdisciplinary study of AI governance.
+
+> **Research Note:** Generated representations remain subject to their respective profiles and declared information-loss characteristics. Researchers should therefore use the canonical release and provenance information when semantic or historical fidelity is material to their analysis.
+
+---
+
+### Standards and Governance Community
+
+UAGF is intended to support collaboration among communities that produce, interpret, implement, and study governance knowledge.
+
+Potential participants include:
+
+-   Standards organizations
+-   Regulatory institutions
+-   Government agencies
+-   Universities
+-   Research institutions
+-   Enterprises
+-   Technology providers
+-   Open-source communities
+-   Civil society organizations
+
+UAGF does not require these communities to relinquish their existing governance authorities.
+
+Instead, the framework provides an architectural mechanism through which relationships between heterogeneous governance sources can be represented, validated, traced, and exchanged.
+
+This allows interoperability to occur at the knowledge layer while preserving institutional independence.
+
+---
+
+### Vendor Neutrality
+
+UAGF is designed to remain vendor-neutral.
+
+The Canonical Knowledge Model is not dependent on:
+
+-   A specific AI model
+-   A specific cloud provider
+-   A specific software vendor
+-   A specific database
+-   A specific AI platform
+-   A specific implementation technology
+
+Implementations may use different technologies while preserving compatibility with the applicable UAGF knowledge and interoperability requirements.
+
+This separation allows organizations to adopt UAGF without creating architectural dependence on a particular technology provider.
+
+---
+
+### Interoperability Without Uniformity
+
+UAGF does not define interoperability as requiring every organization to implement governance in the same way.
+
+Instead:
+
+```text
+Institution A Governance
+          │
+          ▼
+   Canonical Representation
+          │
+          ├──────────────┐
+          ▼              ▼
+   Machine Interface   Human View
+
+
+Institution B Governance
+          │
+          ▼
+   Canonical Representation
+          │
+          ├──────────────┐
+          ▼              ▼
+   Knowledge Graph     AI Context
+```
+
+The purpose of the canonical layer is to establish shared semantic and structural interoperability while allowing institutions to retain their own governance processes, authorities, controls, and implementation environments.
+
+This distinction is fundamental to the public ecosystem model of UAGF.
+
+### Public Ecosystem Principle
+
+The public ecosystem can therefore be summarized as:
+
+> **Shared canonical knowledge does not require shared institutional authority or identical implementation.**
+
+UAGF provides the infrastructure for interoperability while preserving:
+
+-   Source authority
+-   Institutional independence
+-   Provenance
+-   Semantic traceability
+-   Implementation freedom
+-   Governed evolution
+
+The result is an ecosystem in which governance knowledge can be shared and computationally reused without requiring the underlying governance institutions to become identical.
 
 ---
 
