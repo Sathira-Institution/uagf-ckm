@@ -1167,171 +1167,267 @@ Successful validation does **not** establish that:
 
 > **Constitutional Alignment:** These distinctions preserve the absolute boundary between UAGF architectural validity and external governance authority, strictly adhering to Institutional Rule 003 (Human Accountability) and Rule 005 (Public Neutrality).
 
-### The 10-Gate Validation Kernel (G1–G10)
+## The Validation Kernel
 
-The Validation Kernel is the architectural gatekeeper of UAGF. Every CKM release must successfully pass all ten validation gates. Failure at any gate immediately terminates the pipeline.
+Before downstream artifacts may be generated or released, the Canonical Knowledge Model (CKM) is evaluated by the UAGF Validation Kernel.
 
-- There is no partial success.
-- There is no warning mode.
-- There is no degraded mode.
+The Validation Kernel enforces defined UAGF architectural invariants, structural constraints, semantic constraints, provenance requirements, and pipeline integrity conditions.
 
-The Validation Kernel follows a strict **Fail-Closed** philosophy.
+> **Important Distinction:** The purpose of the Validation Kernel is not to determine the legal, regulatory, normative, or institutional validity of an underlying governance source. Instead, it verifies whether governance knowledge represented within the CKM conforms to the structures, constraints, relationships, metadata requirements, and transformation conditions defined by the UAGF architecture.
 
-#### Gate G1 — CKM Structural Integrity
-Verifies:
-- object structure
-- schema correctness
-- mandatory fields
-- namespace validity
+The Validation Kernel may evaluate properties including:
 
-#### Gate G2 — Controlled Vocabulary Validation
-Verifies:
-- Controlled Vocabulary references
-- canonical identifiers
-- vocabulary consistency
-- prohibited vocabulary drift
+-   Schema integrity
+-   Namespace consistency
+-   Identifier uniqueness
+-   Relationship validity
+-   Controlled vocabulary bindings
+-   Provenance completeness
+-   Graph consistency
+-   Release integrity
+-   Source-to-CKM-to-render fidelity
+-   Loss Manifest compliance
+-   Required governance metadata
 
-#### Gate G3 — Relationship Consistency
-Verifies:
-- cross-object references
-- dependency integrity
-- graph consistency
-- orphan detection
+Where a validation condition is defined as blocking, failure of that condition prevents the affected downstream transformation or release from proceeding.
 
-#### Gate G4 — Kernel Invariant Validation
-Verifies every mandatory Kernel invariant. Examples include:
-- deterministic behavior
-- namespace integrity
-- canonical identity preservation
-- governance consistency
+This fail-closed behavior prevents knowledge that violates defined UAGF architectural constraints from propagating through the downstream representation or release pipeline.
 
-Kernel invariants are constitutional. They cannot be bypassed.
-
-#### Gate G5 — Migration Provenance Validation
-Verifies that every migrated object records:
-- source
-- provenance
-- transformation path
-- migration disposition
-
-Nothing may appear inside the CKM without traceable origin.
-
-#### Gate G6 — Loss Manifest Validation
-Verifies that every lossy render declares:
-- omitted fields
-- omitted structures
-- compression behavior
-- reconstruction limitations
-
-No information loss may occur silently.
-
-#### Gate G7 — Deterministic Rendering Validation
-Ensures identical CKM inputs always generate identical outputs. The renderer must never introduce:
-- randomness
-- ordering drift
-- formatting instability
-- semantic variation
-
-#### Gate G8 — Round-Trip Integrity
-Verifies that lossless representations can reconstruct the original CKM without semantic change. Applies to formats including:
-- JSON
-- JSON-LD
-- RDF
-
-#### Gate G9 — Canonical Fidelity
-Verifies that generated artifacts preserve:
-- canonical terminology
-- governance semantics
-- identifier integrity
-- normative statements
-
-Generated documentation must never alter governance meaning.
-
-#### Gate G10 — End-to-End Consistency
-Validates the complete pipeline:
-
-```text
-CKM
-  ↓
-Validation
-  ↓
-Migration
-  ↓
-Rendering
-  ↓
-Generated Artifacts
-  ↓
-Regression Verification
-```
-
-Every stage must remain internally consistent.
+The Validation Kernel therefore acts as an **architectural integrity boundary**. It does not replace the authority of the underlying governance sources, and successful validation must not be interpreted as legal, regulatory, normative, or institutional approval of those sources or of the knowledge represented within them.
 
 ---
 
-### Zero-Conflict Validation Policy
+## The Validation Gates
 
-The Validation Kernel enforces strict operational criteria. A release is considered valid only when:
+The UAGF Validation Kernel is implemented as a sequence of defined validation gates.
 
-- **0 conflicts**
-- **0 silent corrections**
+Each gate evaluates a specific class of architectural conditions. A gate may produce validation evidence, but conditions designated as blocking must pass before the affected transformation or release may proceed.
 
-Any detected conflict immediately blocks the pipeline. Any silent correction immediately blocks the pipeline.
+The exact gate set and gate semantics are defined by the corresponding UAGF validation implementation and canonical validation specification. Where the repository defines a ten-gate release profile, the gates are:
 
-- There is no automatic repair.
-- There is no hidden normalization.
-- There is no undocumented transformation.
+### Gate G1 — CKM Structural Integrity
+Verifies:
+-   Object structure
+-   Schema correctness
+-   Mandatory fields
+-   Namespace validity
+-   Structural constraints
 
-### No Silent Correction
+G1 ensures that canonical objects conform to the structural requirements defined by UAGF.
 
-One of the constitutional principles of UAGF is:
+### Gate G2 — Controlled Vocabulary Validation
+Verifies:
+-   Controlled Vocabulary references
+-   Canonical identifiers
+-   Vocabulary consistency
+-   Prohibited or undefined vocabulary usage
 
-> **Reality First.**
+G2 ensures that canonical objects use controlled semantic classifications consistently.
 
-The system must describe reality exactly as it exists. If governance knowledge contains inconsistencies, ambiguity, or missing information:
+### Gate G3 — Relationship Consistency
+Verifies:
+-   Cross-object references
+-   Dependency integrity
+-   Relationship validity
+-   Graph consistency
+-   Orphan detection
 
-- the system reports them.
-- It never "fixes" them automatically.
+G3 ensures that relationships between canonical objects remain structurally valid and internally consistent.
 
-This guarantees that human governance decisions remain explicit, reviewable, and accountable.
+### Gate G4 — Kernel Invariant Validation
+Verifies mandatory UAGF Kernel invariants. Examples may include:
+-   Deterministic behavior requirements
+-   Namespace integrity
+-   Canonical identity preservation
+-   Governance consistency
+-   Required architectural constraints
+
+Kernel invariants are architectural constraints of UAGF and cannot be bypassed by downstream rendering or representation processes.
+
+### Gate G5 — Migration Provenance Validation
+For migrated knowledge, verifies that applicable objects retain required provenance information, including:
+-   Source reference
+-   Provenance metadata
+-   Transformation path
+-   Migration disposition
+-   Applicable migration metadata
+
+Migration provenance allows the origin and transformation history of represented knowledge to remain traceable.
+
+> **Note:** This gate does not imply that every CKM object must originate from an external document. UAGF-native objects and metadata may have their own defined creation and governance rules.
+
+### Gate G6 — Loss Manifest Validation
+Verifies that applicable lossy transformations declare their information loss. A Loss Manifest may identify:
+-   Omitted fields
+-   Omitted structures
+-   Compression or simplification behavior
+-   Reconstruction limitations
+-   Intended representation scope
+
+No information loss defined as reportable by the UAGF transformation rules may occur silently.
+
+### Gate G7 — Deterministic Rendering Validation
+Verifies that deterministic rendering behaves reproducibly under defined transformation conditions. Where identical CKM inputs, rendering profiles, release inputs, and applicable transformation conditions are supplied, the renderer must produce reproducible outputs according to the defined determinism requirements.
+
+The renderer must not introduce uncontrolled:
+-   Randomness
+-   Ordering drift
+-   Formatting instability
+-   Semantic variation
+
+### Gate G8 — Round-Trip Integrity
+Verifies round-trip integrity for representations explicitly defined as lossless or reconstructable under the applicable UAGF representation rules.
+
+Where round-trip reconstruction is supported, the reconstructed knowledge must preserve the required semantic and structural properties of the originating CKM.
+
+> **Clarification:** Round-trip integrity does not require every representation format to reproduce the original CKM byte-for-byte. Representations that are intentionally lossy or projection-based are evaluated according to their applicable Loss Manifest and representation-specific constraints.
+
+### Gate G9 — Canonical Fidelity
+Verifies that applicable derived artifacts preserve the required properties of the canonical knowledge representation, including:
+-   Canonical terminology
+-   Governance semantics
+-   Identifier integrity
+-   Applicable normative statements
+-   Required provenance relationships
+
+Generated documentation and machine-readable representations must not silently alter the meaning of canonical knowledge. Where a representation intentionally omits or transforms information, the applicable transformation and Loss Manifest rules apply.
+
+### Gate G10 — End-to-End Consistency
+Validates the consistency of the complete UAGF knowledge pipeline.
+
+```text
+Authoritative Governance Sources
+        │
+        ▼
+Migration / Mapping / Provenance
+        │
+        ▼
+Canonical Knowledge Model
+        │
+        ▼
+Validation Kernel
+        │
+        ▼
+Deterministic Transformation / Rendering
+        │
+        ▼
+Derived Representations
+        │
+        ▼
+Regression & Verification
+```
+
+Every stage must remain consistent with the architectural constraints applicable to that stage. The End-to-End gate therefore verifies pipeline integrity rather than treating any individual artifact as independently authoritative.
+
+---
+
+## Fail-Closed Validation Policy
+
+UAGF applies a fail-closed policy to validation conditions explicitly designated as blocking.
+
+A release or transformation is valid only when all applicable blocking conditions have passed. For release purposes, the intended condition is:
+
+-   0 unresolved blocking conflicts
+-   0 silent corrections
+-   0 undocumented transformations
+-   0 unreported required information loss
+
+A detected conflict may exist within source material or during migration without implying that the source itself is invalid. However, an unresolved conflict that is designated as blocking must prevent the affected knowledge from being released as validated canonical knowledge until the applicable governance or verification process resolves or explicitly disposes of it.
+
+-   There is no automatic repair of governance meaning.
+-   There is no hidden normalization of ambiguous source material.
+-   There is no undocumented transformation of canonical knowledge.
+
+Where uncertainty, ambiguity, conflict, or missing information is detected, the system records and reports the condition according to the applicable migration, validation, and governance rules.
+
+### Reality Before Convenience
+
+One of the constitutional principles of UAGF is: **Reality First.**
+
+UAGF is designed to represent governance knowledge faithfully rather than silently making that knowledge appear more consistent than its underlying sources actually are. If governance knowledge contains inconsistencies, ambiguity, missing information, conflicting interpretations, or unresolved provenance, the system reports the condition rather than silently inventing a resolution.
+
+Automated validation therefore does not replace human or institutional governance judgment. Instead, it provides structured evidence that enables such decisions to remain explicit, reviewable, traceable, and accountable.
+
+> **Fundamental Distinction:** UAGF validates representation against UAGF constraints. It does not confer external authority upon the represented governance knowledge.
 
 ---
 
 ## Migration Pipeline
 
-The Migration Pipeline converts legacy governance documents into CKM objects.
+The Migration Pipeline transforms legacy governance material and other supported source representations into candidate CKM objects.
 
-Migration is intentionally conservative. Its objective is preservation, not reinterpretation. Every migrated object records:
+Migration is intentionally conservative. Its objective is preservation, traceability, and explicit transformation—not silent reinterpretation.
 
-- provenance
-- migration source
-- transformation history
-- migration disposition
+```text
+Authoritative Governance Source
+        │
+        ▼
+Source Analysis / Mapping
+        │
+        ▼
+Migration Transformation
+        │
+        ▼
+CKM Staging
+        │
+        ▼
+Validation & Governance Review
+        │
+        ▼
+Canonical Knowledge Model
+```
 
-No governance knowledge enters the CKM without historical traceability.
+Every migrated object retains applicable information required to establish:
 
-### Migration Dispositions
+-   Provenance
+-   Source reference
+-   Transformation history
+-   Migration disposition
+-   Verification status
+-   Applicable unresolved issues
 
-Every migrated object receives an explicit disposition.
+No migrated knowledge should enter the canonical knowledge layer without satisfying the applicable UAGF validation and governance requirements.
+
+---
+
+## Migration Dispositions
+
+Migration dispositions provide explicit machine-readable status for migrated knowledge.
 
 | Disposition | Meaning |
 | :--- | :--- |
-| **ACCEPTED** | Imported without issue |
-| **TO_VERIFY** | Requires human verification |
-| **CONFLICT** | Competing interpretations detected |
-| **REJECTED** | Explicitly excluded from CKM |
+| `ACCEPTED` | Migrated into the applicable workflow without currently identified blocking issues. |
+| `TO_VERIFY` | Requires human or designated institutional verification before applicable release or canonicalization. |
+| `CONFLICT` | Competing interpretations, source conflicts, or unresolved semantic conditions have been detected. |
+| `REJECTED` | Explicitly excluded from the applicable canonicalization workflow. |
 
-These dispositions remain machine-readable throughout the pipeline.
+These dispositions are not themselves statements of legal or regulatory authority. They describe the status of the migration and governance process within UAGF. A disposition may therefore change as verification, review, or governance decisions occur.
 
-### Provenance Preservation
+---
 
-Migration never destroys historical context. Each CKM object preserves sufficient metadata to answer:
+## Provenance Preservation
 
-- Where did this knowledge originate?
-- How was it transformed?
-- Which document introduced it?
-- Which migration rule produced it?
+Migration preserves historical and transformation context to the extent required by the applicable UAGF provenance rules.
 
-This enables complete governance lineage across document generations.
+For applicable migrated knowledge, provenance should allow the system to answer questions such as:
+
+-   Where did this knowledge originate?
+-   Which source introduced the knowledge?
+-   How was the source transformed?
+-   Which migration rule or method was applied?
+-   What verification status was assigned?
+-   Were ambiguities or conflicts identified?
+-   What governance disposition was applied?
+
+This provenance establishes traceable lineage between source material, canonical knowledge, and derived representations.
+
+The objective is not merely to preserve document history. The objective is to preserve sufficient lineage for governance knowledge to remain:
+
+-   Traceable
+-   Reviewable
+-   Auditable
+-   Reproducible where applicable
+-   Accountable across transformations
 
 ---
 
