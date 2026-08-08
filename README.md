@@ -941,19 +941,20 @@ Their purpose is to make the behavior and results of the UAGF pipeline **observa
 The `tests/` directory contains automated verification of the major architectural properties of the UAGF pipeline.
 
 Examples include:
--   Kernel validation
--   Migration validation
--   Renderer regression testing
--   End-to-End verification
--   Loss Manifest verification
--   Source-to-CKM-to-render fidelity verification
--   Reproducibility testing
+- Kernel validation
+- Migration validation
+- Renderer regression testing
+- End-to-End verification
+- Loss Manifest verification
+- Source-to-CKM-to-render fidelity verification
+- Reproducibility testing
 
 Testing is designed to verify that defined UAGF transformations and constraints behave consistently across the governance pipeline.
 
 Where determinism is an explicit requirement, tests verify that identical inputs and defined transformation conditions produce reproducible results.
 
-Testing therefore provides evidence that the architecture behaves according to its defined constraints; it does not by itself establish the legal or institutional authority of the underlying governance sources.
+> **Note:** Testing therefore provides evidence that the architecture behaves according to its defined constraints; it does not by itself establish the legal or institutional authority of the underlying governance sources.
+
 ---
 
 ### Repository Design Principles
