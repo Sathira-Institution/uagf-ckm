@@ -245,351 +245,525 @@ Instead, UAGF provides a canonical knowledge architecture through which heteroge
 
 ## Design Philosophy
 
-UAGF is founded upon a small number of architectural principles.
+UAGF is founded upon a set of architectural principles that define how governance knowledge is represented, validated, transformed, and exchanged within the framework.
+
+These principles establish the relationship between authoritative governance sources, the Canonical Knowledge Model, and derived representations while preserving source authority, provenance, semantic integrity, and architectural determinism.
 
 ### Model Before Documents
-Governance knowledge exists inside the Canonical Knowledge Model. Documentation is generated. Documents are never the authoritative source.
+
+Governance knowledge within UAGF is structured through the Canonical Knowledge Model before it is rendered into documentation or other representations.
+
+-   The CKM provides the canonical knowledge layer within the UAGF architecture. Documentation is a derived representation of that knowledge.
+-   Documents may communicate, explain, or expose governance knowledge, but they do not become the canonical knowledge layer merely by being published.
 
 ### Knowledge Before Representation
-A governance concept exists independently of how it is presented. Markdown, JSON, JSON-LD, RDF, REST APIs, and AI Context are representations—not knowledge itself.
+
+Governance knowledge exists independently of the format in which it is represented.
+
+Markdown, JSON, JSON-LD, RDF, REST APIs, knowledge graphs, and AI-context representations are representations or interfaces through which canonical knowledge may be consumed. They are not themselves the governance knowledge.
+
+This separation allows UAGF to evolve its representations without changing the underlying semantic and structural model.
+
+### Authority Before Canonicalization
+
+Canonicalization within UAGF does not transfer legal, regulatory, normative, or institutional authority from an underlying source to the CKM.
+
+-   Authoritative governance sources retain their original authority.
+-   The CKM provides a canonical representation and structural organization of governance knowledge within UAGF, together with traceable provenance to the sources from which that knowledge is derived.
+
+This principle prevents canonical representation from being confused with institutional authority.
 
 ### Reality Before Convenience
-The framework never silently modifies governance knowledge. Migration preserves provenance. Validation reports violations. Rendering declares information loss. Architecture must remain faithful to reality, even when reality is imperfect.
+
+UAGF does not silently modify, reinterpret, or normalize governance knowledge merely to simplify processing.
+
+-   Migration preserves provenance.
+-   Validation reports violations and unresolved conditions.
+-   Transformation preserves traceability.
+-   Rendering declares intentional information loss where applicable.
+
+When source material is ambiguous, incomplete, conflicting, or uncertain, the architecture favors explicit reporting over silent correction. The framework therefore prioritizes fidelity to observable source reality over convenience.
 
 ### Determinism Before Automation
-Automation without determinism creates inconsistency. Every rendering process within UAGF is deterministic. Identical inputs always produce identical outputs.
+
+Automation without determinism can reproduce inconsistency at scale. UAGF therefore requires deterministic transformation processes where deterministic behavior is defined and applicable.
+
+Given identical canonical inputs, transformation rules, rendering profiles, and relevant release metadata, the same rendering process should produce reproducible outputs.
+
+Determinism supports:
+
+-   Reproducible releases
+-   Regression testing
+-   Verification
+-   Audit reproducibility
+-   Controlled evolution
+-   Long-term archival integrity
+
+Determinism is therefore treated as an architectural property rather than merely an implementation convenience.
 
 ### Transparency Before Abstraction
-Every architectural transformation should remain observable. Every migration should preserve provenance. Every lossy transformation should declare its losses. Nothing should disappear silently.
 
----
+Architectural transformations should remain observable and traceable.
 
-## Public Benefit
+-   Migration should preserve provenance.
+-   Transformation should retain lineage.
+-   Intentional information loss should be declared.
+-   Validation results should remain inspectable.
+-   Uncertainty should not disappear behind abstraction.
 
-UAGF is developed as an open public-good initiative. Its purpose is to improve the quality, transparency, and interoperability of AI governance for the global community.
+UAGF therefore treats transparency as a prerequisite for trustworthy transformation rather than as an optional documentation feature.
+
+### Provenance Before Reconciliation
+
+When governance knowledge from different authoritative sources is represented within the CKM, its provenance must remain identifiable.
+
+UAGF does not require heterogeneous sources to be artificially collapsed into a single undifferentiated authority. Instead, relationships, mappings, derivations, and transformations should preserve information about their origins and applicable contexts.
+
+This enables governance knowledge to be related and interoperated while retaining the distinctions between its underlying sources.
+
+### Public Benefit
+
+UAGF is developed as an open public-good initiative. Its purpose is to improve the quality, transparency, traceability, and interoperability of AI governance knowledge for the global community.
 
 The framework is intended to support:
 
-- Governments
-- Standards organizations
-- Regulatory agencies
-- Universities
-- Research institutions
-- Industry
-- Open-source communities
-- Civil society
+-   Governments
+-   Standards organizations
+-   Regulatory agencies
+-   Universities and research institutions
+-   Industry and technology providers
+-   Open-source communities
+-   Civil society
 
-UAGF complements existing governance ecosystems. It does not replace them. Its objective is to enable them to communicate through a common canonical knowledge layer.
+UAGF complements existing governance ecosystems. It does not replace them.
 
-Because the Canonical Knowledge Model remains vendor-neutral and machine-readable, organizations retain full freedom to adopt whichever governance standards best fit their own regulatory and operational environments while still participating in a shared governance ecosystem.
+Its objective is to provide a common canonical knowledge layer through which heterogeneous governance knowledge can be structured, related, validated, and exchanged while preserving the authority and context of its underlying sources.
 
----
+Because the CKM is designed to remain vendor-neutral and machine-readable, organizations retain the freedom to adopt whichever governance standards, regulations, policies, and control frameworks are appropriate to their own environments while participating in interoperable governance ecosystems.
 
 ## High-Level Overview
 
-UAGF introduces a Model-First Architecture. Instead of maintaining multiple independent governance artifacts, UAGF maintains one canonical model. From that single model, every downstream artifact is generated deterministically.
+UAGF introduces a **Model-First Architecture** in which governance knowledge is structured through the Canonical Knowledge Model before being transformed into downstream representations.
+
+The architecture separates authoritative sources from canonical knowledge representation and derived outputs.
 
 ```text
-External Governance Sources
-    ISO/IEC 42001
-    EU AI Act
-    NIST AI RMF
-    OECD AI Principles
-    National Regulations
-    Organizational Policies
-                    │
-                    ▼
-        Canonical Knowledge Model (CKM)
-                    │
-     ┌──────────────┼──────────────┐
-     ▼              ▼              ▼
- Markdown        JSON-LD          RDF
-     ▼              ▼              ▼
- Documentation   APIs        AI Context
+Authoritative Governance Sources
+────────────────────────────────────────────
+ISO/IEC 42001
+EU AI Act
+NIST AI RMF
+OECD AI Principles
+National Regulations
+Organizational Policies
+Technical Specifications
+                    │
+                    ▼
+       Migration / Mapping / Provenance
+                    │
+                    ▼
+       Canonical Knowledge Model (CKM)
+                    │
+                    ▼
+          Validation & Constraints
+                    │
+                    ▼
+       Deterministic Transformation
+                    │
+        ┌───────────┼───────────
+        ▼           ▼           ▼
+    Markdown      JSON-LD       RDF
+        │           │           │
+        ▼           ▼           ▼
+ Documentation    APIs     Knowledge Graphs
+                                │
+                                ▼
+                        AI Context Profiles
 ```
 
-The Canonical Knowledge Model remains the single authoritative source. Everything else is rendered. Documentation is generated. Representations are disposable. Knowledge remains permanent.
-## Architectural Innovations
+-   The CKM provides the canonical knowledge layer within UAGF.
+-   The underlying governance sources remain authoritative within their respective domains.
+-   Downstream representations are derived from the canonical model and are not independently maintained sources of governance knowledge.
 
-UAGF is not a new AI governance standard. It is a new knowledge architecture for AI governance.
-
-The framework introduces a set of architectural capabilities that enable governance knowledge to become deterministic, machine-readable, interoperable, and continuously renderable from a single canonical source.
-
-Unlike traditional governance systems, these capabilities are not independent features—they are designed to operate together as a coherent architecture.
+This separation enables UAGF to maintain consistency between representations without conflating canonical representation with source authority.
 
 ---
+
+## Architectural Innovations
+
+UAGF is not intended to become another AI governance standard. It is a **canonical knowledge architecture for AI governance**.
+
+The framework introduces a set of architectural capabilities that enable governance knowledge from heterogeneous sources to be structured, validated, traced, transformed, and represented in deterministic and machine-readable forms.
+
+These capabilities are not independent features. They are designed to operate together as a coherent architecture.
 
 ### The Core Differentiator
 
-Traditional governance ecosystems treat documentation as the authoritative source. UAGF treats the Canonical Knowledge Model (CKM) as the authoritative source. Everything else is generated.
+Traditional governance ecosystems are frequently organized around documents and framework-specific representations.
 
-This seemingly simple inversion fundamentally changes how governance knowledge evolves. Instead of synchronizing multiple representations manually, UAGF synchronizes nothing. Every representation is regenerated whenever the CKM changes. The architecture therefore eliminates an entire category of governance maintenance problems.
+UAGF introduces a different architectural model:
 
----
+```text
+Authoritative Sources → Canonical Knowledge Model → Derived Representations
+```
+
+The key architectural shift is therefore not from one document format to another. It is from **document-centric governance knowledge management** to **canonical knowledge infrastructure**.
+
+Instead of maintaining independent versions of the same governance knowledge across multiple representations, UAGF establishes a canonical knowledge layer from which compatible representations can be derived.
+
+This **reduces unnecessary synchronization** between independently maintained representations and creates a clearer basis for validation, provenance, reproducibility, and interoperability.
 
 ### Architectural Innovation Overview
 
 | Capability | Purpose |
 | :--- | :--- |
-| **Model-First Architecture** | Governance originates from a Canonical Knowledge Model rather than documentation. |
-| **Canonical Knowledge Model** | Governance knowledge exists as structured machine-readable objects. |
-| **Render-from-Model** | Every downstream artifact is deterministically generated from the CKM. |
-| **Deterministic Rendering** | Identical inputs always produce identical outputs. |
-| **Loss Manifest** | Every lossy transformation is explicitly declared and machine-verifiable. |
-| **No Silent Correction** | Migration never modifies governance knowledge implicitly. |
-| **Migration Provenance** | Every migrated object preserves traceable origin information. |
-| **Machine-readable Governance** | Governance knowledge is designed for humans and machines simultaneously. |
-| **Public Knowledge Infrastructure** | Governance knowledge becomes reusable public infrastructure rather than isolated documentation. |
-
----
+| **Model-First Architecture** | Structures governance knowledge through the CKM before downstream representations are generated. |
+| **Canonical Knowledge Model** | Provides the canonical semantic and structural knowledge layer within UAGF. |
+| **Render-from-Model** | Derives downstream representations from canonical knowledge rather than treating each representation as an independent source. |
+| **Deterministic Transformation** | Enables reproducible transformation when defined inputs, rules, and profiles are identical. |
+| **Loss Manifest** | Explicitly identifies information intentionally omitted during transformation. |
+| **No Silent Correction** | Prevents migration or transformation processes from silently altering uncertain or conflicting source knowledge. |
+| **Migration Provenance** | Preserves traceable origin and transformation history for migrated knowledge. |
+| **Machine-Readable Governance** | Treats machine readability as a first-class architectural requirement. |
+| **Canonical Semantic Interoperability** | Provides a shared semantic layer through which heterogeneous governance knowledge can be related and exchanged. |
+| **Public Knowledge Infrastructure** | Makes reusable governance knowledge infrastructure available as an open public-good foundation. |
 
 ### Model-First Architecture
 
-Model-First Architecture is the foundational architectural principle of UAGF. Rather than designing governance around documents, UAGF designs governance around knowledge. The Canonical Knowledge Model becomes the only authoritative representation. Every downstream artifact is generated from that model.
+Model-First Architecture is the foundational architectural principle of UAGF.
+
+Rather than designing governance knowledge around independently maintained documents, UAGF structures governance knowledge through the Canonical Knowledge Model.
 
 ```text
 Canonical Knowledge Model
-        │
-        ▼
-Deterministic Renderer
-        │
- ┌──────┼────────────┐
- ▼      ▼            ▼
-Markdown JSON-LD     RDF
- ▼      ▼            ▼
-Humans APIs       Knowledge Graphs
+            │
+            ▼
+     Validation Layer
+            │
+            ▼
+ Deterministic Transformation
+            │
+     ┌──────┼───────────
+     ▼      ▼           ▼
+ Markdown JSON-LD       RDF
+     │      │           │
+     ▼      ▼           ▼
+Documents  APIs    Knowledge Graphs
+                         │
+                         ▼
+                  AI Context Profiles
 ```
 
 In this architecture:
-- documents become generated artifacts;
-- APIs become generated artifacts;
-- knowledge graphs become generated artifacts;
-- AI contexts become generated artifacts.
 
-The CKM remains the only maintained source.
+-   Documents are derived representations.
+-   APIs may expose derived canonical knowledge.
+-   Knowledge graphs may represent relationships derived from the CKM.
+-   AI-context profiles may provide purpose-specific representations.
+-   Each representation remains traceable to the canonical knowledge from which it was derived.
+
+The CKM is the canonical knowledge layer within UAGF. It does not replace the authority of the governance sources from which the knowledge originates.
 
 ---
 
 ### Canonical Knowledge Model (CKM)
 
-The Canonical Knowledge Model is the architectural center of UAGF. It represents governance concepts as structured knowledge objects rather than paragraphs of documentation.
+The Canonical Knowledge Model is the architectural center of UAGF.
 
-Each object contains:
-- identity
-- semantics
-- relationships
-- provenance
-- controlled vocabulary bindings
-- governance metadata
+It represents governance knowledge as structured, machine-readable knowledge objects rather than relying exclusively on paragraphs of documentation.
 
-The CKM is intentionally independent from any presentation format. It is neither Markdown nor JSON-LD. Those are merely rendered views. Because the CKM exists independently of representation, new output formats can be added without modifying governance knowledge.
+Depending on the object type, canonical knowledge may include:
+
+-   Identity
+-   Semantics
+-   Relationships
+-   Provenance
+-   Controlled vocabulary bindings
+-   Governance metadata
+-   Constraints
+-   Dependencies
+-   Source references
+
+The CKM is intentionally independent from any individual presentation or serialization format. It is neither Markdown nor JSON-LD nor RDF. These are representations of knowledge structured through the canonical model.
+
+This separation allows UAGF to introduce additional representations and interfaces without changing the underlying semantic model unnecessarily.
 
 ---
 
 ### Render-from-Model
 
-Render-from-Model is one of the defining architectural innovations of UAGF. Traditional governance workflows often resemble the following:
+Render-from-Model is one of the defining architectural capabilities of UAGF.
+
+Traditional governance workflows may resemble:
 
 ```text
-Policy Document
-      │
-    Update
-      ▼
-    Markdown
-      │
-  Manual Sync
-      ▼
-      JSON
-      │
-  Manual Sync
-      ▼
-Knowledge Graph
-      │
-  Manual Sync
-      ▼
-  AI Context
+Policy / Governance Source
+          │
+        Update
+          ▼
+      Document
+          │
+     Manual Sync
+          ▼
+    Structured Data
+          │
+     Manual Sync
+          ▼
+   Knowledge Graph
+          │
+     Manual Sync
+          ▼
+     AI Context
 ```
 
-Every synchronization step introduces potential inconsistency. UAGF removes synchronization entirely. Instead:
+Every independently maintained synchronization point introduces an opportunity for divergence.
+
+UAGF instead establishes:
 
 ```text
 Canonical Knowledge Model
-        │
-        ▼
-      Renderer
-        │
- ┌──────┼───────────────┐
- ▼      ▼               ▼
-Markdown JSON-LD        RDF
- ▼      ▼               ▼
-Website APIs        AI Context
+            │
+            ▼
+   Validation / Constraints
+            │
+            ▼
+ Deterministic Transformation
+            │
+    ┌───────┼───────────────
+    ▼       ▼               ▼
+Markdown  JSON-LD           RDF
+    │       │               │
+    ▼       ▼               ▼
+Website   APIs       Knowledge Graphs
+                            │
+                            ▼
+                     AI Context
 ```
 
-Every representation is recreated directly from the CKM. There is no secondary editing. There is no manual synchronization. There is no divergence.
+Representations are derived from the CKM rather than maintained as independent sources of governance knowledge.
+
+This does not mean that every output is identical in structure or information content. Different representations may intentionally expose different subsets of the canonical knowledge.
+
+Where information is omitted or transformed, UAGF requires the transformation to remain traceable and, where applicable, explicitly documented through a Loss Manifest.
 
 ---
 
 ### Deterministic Rendering
 
-Rendering must never depend on execution order, operating system, or implementation details. Given:
-- identical CKM,
-- identical rendering profile,
-- identical release metadata,
+UAGF treats deterministic rendering as an architectural property.
 
-the renderer must always produce byte-identical artifacts.
+Where a rendering process is defined as deterministic, identical:
 
-This property enables:
-- reproducible releases;
-- regression testing;
-- cryptographic verification;
-- audit reproducibility;
-- long-term archival integrity.
+-   Canonical knowledge inputs
+-   Rendering rules
+-   Rendering profiles
+-   Relevant release metadata
 
-Deterministic rendering is therefore treated as a Kernel invariant rather than an implementation convenience.
+...should produce reproducible outputs.
+
+This property supports:
+
+-   Reproducible releases
+-   Regression testing
+-   Verification
+-   Audit reproducibility
+-   Long-term archival integrity
+
+Deterministic rendering therefore provides a foundation for verifying that derived representations correspond to the canonical knowledge and transformation rules used to produce them.
 
 ---
 
 ### Loss Manifest
 
-Not every representation can preserve every property of the Canonical Knowledge Model. For example:
-- Markdown cannot preserve graph topology.
-- AI context may intentionally omit metadata.
-- Plain text cannot preserve semantic identifiers.
+Not every representation can preserve every property of the Canonical Knowledge Model.
 
-Traditional systems silently lose this information. UAGF does not.
+For example:
 
-Whenever information is intentionally omitted, the renderer produces a corresponding Loss Manifest. A Loss Manifest declares:
-- which fields were omitted;
-- why they were omitted;
-- whether omission is reversible;
-- whether the rendered artifact remains suitable for its intended purpose.
+-   Markdown may not preserve complete graph topology.
+-   AI-context profiles may intentionally omit metadata not required for their purpose.
+-   Plain-text representations may not preserve machine-resolvable semantic identifiers.
 
-This transforms hidden information loss into explicit architectural metadata.
+Traditional transformation pipelines may allow such information loss to remain implicit. UAGF makes intentional information loss explicit.
+
+Where applicable, a renderer produces a corresponding Loss Manifest describing:
+
+-   Which information was omitted
+-   Why it was omitted
+-   Whether the omission is reversible
+-   Whether the resulting representation remains suitable for its intended purpose
+
+This transforms information loss from an implicit side effect into an observable architectural property.
 
 ---
 
 ### No Silent Correction
 
-Migration is intentionally conservative. Legacy governance knowledge is never silently rewritten. Instead, every migration follows three rules:
-1. Transform mechanically.
-2. Preserve provenance.
-3. Report uncertainty.
+UAGF treats migration as a conservative transformation process.
 
-If ambiguity exists, migration reports it. If conflict exists, migration reports it. If verification is required, migration reports it. The migration engine never "guesses." Architectural integrity is preferred over convenience.
+Legacy governance knowledge is not silently rewritten merely because a target representation would be easier to process.
+
+Migration follows three core principles:
+
+1.  **Transform mechanically.**
+2.  **Preserve provenance.**
+3.  **Report uncertainty.**
+
+-   If ambiguity exists, it is reported.
+-   If conflicting information exists, it is reported.
+-   If verification is required, it is reported.
+
+The migration process does not silently guess what the source intended. Architectural integrity takes precedence over convenience.
 
 ---
 
 ### Migration Provenance
 
-Migration is not merely a data conversion process. It is an evidence-preserving architectural process. Every migrated object retains information about:
-- original source;
-- migration method;
-- transformation history;
-- verification status;
-- unresolved issues.
+Migration is not merely a data conversion operation. Within UAGF, migration is an evidence-preserving transformation process.
 
-This provenance enables auditors to reconstruct how governance knowledge evolved across versions. Nothing disappears without record.
+Where applicable, migrated knowledge retains information concerning:
+
+-   Original source
+-   Source identity
+-   Migration method
+-   Transformation history
+-   Verification status
+-   Unresolved issues
+-   Provenance relationships
+
+This enables users and auditors to reconstruct how governance knowledge moved from an originating source into the canonical knowledge layer and subsequently into derived representations.
+
+The objective is not to prevent transformation. The objective is to ensure that transformation does not erase the history necessary to understand what happened.
 
 ---
 
-### Machine-readable Governance
+### Machine-Readable Governance
 
-Most governance frameworks are written primarily for human readers. Machine-readable representations are typically created afterwards. UAGF reverses this order.
+Many governance systems are designed primarily for human readers, with machine-readable representations introduced afterwards.
 
-Governance knowledge is authored once in a structured canonical model. Human-readable documentation becomes only one possible rendering. As a result:
-- AI systems consume the same governance knowledge as humans.
-- APIs expose the same governance knowledge as documentation.
-- Knowledge graphs represent the same governance knowledge as reports.
+UAGF instead treats machine readability as a **first-class architectural requirement**.
 
-There is no translation layer between human governance and machine governance. There is only rendering.
+Governance knowledge is structured through the canonical model so that the same underlying knowledge can support both human and machine consumption.
+
+For example:
+
+-   Documentation can expose human-readable views.
+-   APIs can expose structured knowledge.
+-   Knowledge graphs can represent relationships.
+-   AI-context profiles can provide purpose-specific machine-readable representations.
+
+These are different representations of related canonical knowledge rather than independently authored versions. This reduces unnecessary translation between human-facing and machine-facing governance representations.
 
 ---
 
 ### Public Knowledge Infrastructure
 
-UAGF views governance knowledge as public infrastructure rather than proprietary documentation. Infrastructure differs from documentation in one important respect: **Infrastructure is designed to be reused.**
+UAGF treats governance knowledge as reusable public infrastructure rather than isolated proprietary documentation.
+
+Infrastructure is intended to be reused across organizations, jurisdictions, technologies, and governance environments.
 
 The Canonical Knowledge Model can support:
-- standards organizations;
-- regulatory agencies;
-- enterprise governance systems;
-- academic research;
-- AI applications;
-- interoperability platforms.
 
-without requiring any of these communities to adopt identical governance frameworks. Instead, each community maps its governance knowledge into a shared canonical representation. The infrastructure enables interoperability while preserving institutional independence.
+-   Standards organizations
+-   Regulatory agencies
+-   Enterprise governance systems
+-   Academic research
+-   AI applications
+-   Interoperability platforms
+-   Public-sector systems
+-   Open-source governance tooling
 
----
+These communities do not need to adopt identical governance frameworks. Instead, governance knowledge from different authoritative sources can be represented, related, and exchanged through a shared canonical knowledge architecture while preserving source authority and contextual distinctions.
 
 ### Why These Innovations Matter
 
-Taken individually, each capability improves governance engineering. Taken together, they fundamentally change the architecture of governance systems.
+Taken individually, each capability improves governance engineering. Taken together, they establish a different architectural approach to governance knowledge.
 
 Instead of asking:
-> "How should we maintain all these documents?"
+
+> *"How should we maintain all these documents?"*
 
 UAGF asks:
-> "How should governance knowledge exist before documents are created?"
 
-This shift—from documentation-centric governance to knowledge-centric governance—is the central architectural contribution of UAGF.
+> *"How should governance knowledge be structured before documents and other representations are created?"*
 
-It enables governance ecosystems that are:
-- reproducible;
-- deterministic;
-- machine-native;
-- interoperable;
-- auditable;
-- evolution-ready.
+This represents a shift from documentation-centric governance knowledge management toward **knowledge-centric governance infrastructure**.
 
-These properties emerge not from individual implementation choices, but from the architecture itself.
+The resulting architecture is designed to support governance ecosystems that are:
+
+-   Reproducible
+-   Deterministic
+-   Machine-readable
+-   Interoperable
+-   Traceable
+-   Auditable
+-   Evolution-ready
+
+These properties are intended to emerge from the architecture and its defined constraints rather than from individual implementation choices.
+
+---
+
 ### Architectural Layers
 
+UAGF separates governance architecture into distinct layers, each with a defined responsibility.
+
 ```text
-External Governance Sources
-        ──────────────────────────────────────────────
-        ISO/IEC 42001
-        EU AI Act
-        NIST AI RMF
-        OECD AI Principles
-        National Regulations
-        Organizational Policies
+External Authoritative Governance Sources
+────────────────────────────────────────────────────
+ISO/IEC 42001
+EU AI Act
+NIST AI RMF
+OECD AI Principles
+National Regulations
+Organizational Policies
+Technical Specifications
+Industry / Domain Frameworks
 
                          │
                          ▼
 
-             Migration & Provenance Layer
+              Migration / Mapping /
+                 Provenance Layer
 
                          │
                          ▼
 
-          Canonical Knowledge Model (CKM)
+             Canonical Knowledge Model
+                         (CKM)
 
                          │
                          ▼
 
-         10-Gate Validation Kernel (G1-G10)
+              Validation & Constraints
+                    Kernel
 
                          │
                          ▼
 
-              Deterministic Rendering Engine
+            Deterministic Transformation
+                   / Rendering
 
                          │
-         ┌───────────────┼──────────────────┐
+         ┌───────────────┼──────────────────
          ▼               ▼                  ▼
-
-    Markdown         JSON-LD             RDF
-
+     Markdown         JSON-LD             RDF
+         │               │                  │
          ▼               ▼                  ▼
-
- Documentation      APIs            Knowledge Graphs
-
-                         ▼
-
-                  AI Context Profiles
+   Documentation       APIs          Knowledge Graphs
+                                             │
+                                             ▼
+                                      AI Context Profiles
 ```
 
-Each layer exists for a specific architectural purpose. No layer duplicates responsibilities belonging to another layer.
+Each layer exists for a specific architectural purpose:
+
+-   **Authoritative sources** retain their original authority.
+-   **The Migration / Mapping / Provenance Layer** preserves source relationships and transformation history.
+-   **The Canonical Knowledge Model** provides the canonical knowledge layer within UAGF.
+-   **The Validation & Constraints Kernel** verifies that canonical knowledge conforms to defined structural and semantic constraints before downstream transformation.
+-   **The Deterministic Transformation / Rendering Layer** produces derived representations according to defined rules and profiles.
+-   **The resulting representations** provide different interfaces for humans and machines while remaining traceable to the canonical knowledge from which they were derived.
+
+No layer is intended to replace the authority of another layer, and no derived representation becomes authoritative merely because it is generated or published.
 
 ---
 
