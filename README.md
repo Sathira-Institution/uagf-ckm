@@ -767,30 +767,43 @@ No layer is intended to replace the authority of another layer, and no derived r
 
 ---
 
-### Validation Kernel
+## Validation Kernel
 
-Before any artifact may be generated, the Canonical Knowledge Model passes through the 10-Gate Validation Kernel (G1-G10). The Validation Kernel enforces architectural invariants and pipeline integrity gates. These gates ensure that the CKM remains internally consistent regardless of its size or complexity, and that only verified knowledge propagates downstream.
+Before downstream artifacts may be generated, the Canonical Knowledge Model is evaluated by the UAGF Validation Kernel.
 
-Typical validation responsibilities include:
-- schema integrity;
-- namespace consistency;
-- identifier uniqueness;
-- relationship validation;
-- controlled vocabulary bindings;
-- provenance completeness;
-- graph consistency;
-- release integrity;
-- verbatim fidelity (Legacy → YAML → Render);
-- loss manifest compliance.
+The Validation Kernel enforces defined architectural invariants, structural constraints, semantic constraints, provenance requirements, and pipeline integrity conditions.
 
-Rendering is impossible if Kernel validation fails. This guarantees that invalid governance knowledge never propagates downstream.
+> **Important Distinction:** The purpose of the Validation Kernel is not to determine the legal, regulatory, or institutional validity of an underlying governance source. Rather, it verifies whether knowledge represented within the CKM conforms to the rules and constraints required by the UAGF architecture.
+
+The Validation Kernel may evaluate properties including:
+
+-   Schema integrity
+-   Namespace consistency
+-   Identifier uniqueness
+-   Relationship validity
+-   Controlled vocabulary bindings
+-   Provenance completeness
+-   Graph consistency
+-   Release integrity
+-   Source-to-CKM-to-render fidelity
+-   Loss Manifest compliance
+-   Required governance metadata
+
+Where validation is defined as a blocking condition, downstream transformation or release is prevented when the relevant validation gate fails.
+
+This fail-closed behavior prevents knowledge that violates defined UAGF architectural constraints from being propagated through the downstream representation pipeline.
+
+The Validation Kernel therefore acts as an **architectural integrity boundary**, not as a replacement for the authority of the underlying governance sources.
+
+---
+
 ## Repository Structure & Canonical Knowledge Model
 
-UAGF is organized around a single principle:
+UAGF is organized around a Model-First principle:
 
-> **Everything originates from the Canonical Knowledge Model (CKM).**
+> Governance knowledge represented within UAGF is structured through the Canonical Knowledge Model before being transformed into downstream representations.
 
-The repository intentionally separates authoritative knowledge from generated artifacts.
+The repository separates canonical knowledge, staging material, generated artifacts, operational evidence, and verification mechanisms.
 
 ```text
 .
@@ -816,80 +829,131 @@ The repository intentionally separates authoritative knowledge from generated ar
 └── README.md
 ```
 
-Each directory has a single responsibility. No directory duplicates authority. No rendered artifact becomes a source of truth.
+Each directory has a defined architectural responsibility.
+
+The repository structure is designed to prevent different representations from silently becoming competing sources of canonical knowledge.
+
+Generated artifacts do not acquire authority merely because they are published, and operational reports do not become canonical knowledge merely because they are used as evidence.
 
 ---
 
-### Canonical Knowledge Model (CKM)
+### Canonical Knowledge Model (`ckm/`)
 
-The `ckm/` directory is the only authoritative knowledge repository within UAGF. All governance knowledge is represented as structured YAML objects rather than manually maintained documents.
+The `ckm/` directory contains the **canonical knowledge representation maintained within UAGF**.
 
-The CKM currently contains four primary categories.
+The CKM represents governance knowledge as structured, machine-readable objects rather than relying exclusively on manually maintained documentation.
 
-#### Requirements (`ckm/requirements/`)
-Contains Unified Governance Requirements (UGRs). Each requirement represents an atomic governance statement that can be uniquely identified, referenced, validated, rendered, and reused. Requirements are intentionally independent from any specific regulation or standard.
+The CKM does not replace the authoritative governance sources from which its knowledge is derived. Instead, it provides the canonical semantic and structural layer through which that knowledge is represented within UAGF, while maintaining references and provenance to its originating sources.
 
-#### Domains (`ckm/domains/`)
-Defines the governance domains used by the framework. Domains provide semantic organization while remaining independent from presentation formats. Examples include Risk Management, Human Oversight, Transparency, Security, and Accountability. Domains may evolve independently without affecting Requirement identities.
+The CKM currently contains four primary categories:
 
-#### References (`ckm/references/`)
-Contains normalized references to external governance sources (e.g., ISO/IEC 42001, NIST AI RMF, EU AI Act, OECD AI Principles, National regulations). References are treated as provenance information rather than copied documentation.
+#### 1. Requirements (`ckm/requirements/`)
+Contains Unified Governance Requirements (UGRs). Each requirement represents an atomic governance statement that can be:
+-   Uniquely identified
+-   Referenced
+-   Validated
+-   Related to other canonical objects
+-   Rendered into downstream representations
+-   Reused across compatible governance contexts
 
-#### Controlled Vocabulary (`ckm/cv/`)
-Contains controlled vocabularies used throughout the Canonical Knowledge Model. These vocabularies ensure semantic consistency across Requirement categories, Governance domains, Reference types, Status values, and Relationship types. Controlled vocabularies are validated during every CKM validation run.
+Requirements are intentionally represented independently from any single regulation, standard, or implementation environment while retaining their source relationships and provenance.
+
+#### 2. Domains (`ckm/domains/`)
+Defines the governance domains used by the framework. Domains provide semantic organization for canonical knowledge while remaining independent from presentation formats.
+-   *Examples:* Risk Management, Human Oversight, Transparency, Security, Accountability.
+-   Domains may evolve independently without requiring changes to the identities of existing Requirements, subject to the applicable UAGF validation and evolution rules.
+
+#### 3. References (`ckm/references/`)
+Contains normalized references to external governance sources (e.g., ISO/IEC 42001, NIST AI RMF, EU AI Act, OECD AI Principles, National regulations).
+-   References preserve the relationship between canonical knowledge represented within UAGF and the authoritative sources from which that knowledge originates.
+-   They are treated as **provenance and source-reference information** rather than copied documentation.
+
+#### 4. Controlled Vocabulary (`ckm/cv/`)
+Contains controlled vocabularies used throughout the Canonical Knowledge Model to support semantic consistency across:
+-   Requirement categories
+-   Governance domains
+-   Reference types
+-   Status values
+-   Relationship types
+-   Other controlled semantic classifications
+
+Controlled vocabularies are evaluated as part of CKM validation to ensure that canonical objects use permitted and consistent terminology.
 
 ---
 
 ### CKM Staging (`ckm-staging/`)
 
-The staging area is an isolated workspace used during migration. Legacy governance material is transformed into CKM objects inside this directory before entering the canonical model.
+The staging area is an isolated workspace used during migration and preparation of canonical knowledge.
 
-The staging workspace exists to guarantee that migration never modifies canonical knowledge directly. Objects enter the CKM only after successful validation and Founder review.
+Legacy governance material may be transformed into candidate CKM objects within this directory before those objects are introduced into the canonical knowledge layer.
+
+The staging workspace provides an architectural boundary between:
+`source material → transformation → candidate canonical knowledge`
+and the already established CKM.
+
+This separation helps ensure that migration processes do not silently modify existing canonical knowledge. Candidate objects may enter the canonical model only after satisfying the applicable validation, review, and governance requirements defined by UAGF.
+
+> **Note on Ratification:** Where Founder or institutional ratification is required, such ratification remains a governance decision and is not replaced by automated validation.
 
 ---
 
 ### Generated Artifacts (`generated/`)
 
-All human-readable and machine-readable outputs are produced by the rendering engine. Typical outputs include:
+The `generated/` directory contains artifacts produced by UAGF transformation and rendering processes.
 
-- Markdown documentation
-- JSON
-- JSON-LD
-- RDF
-- AI Context
-- Registry views
+Typical outputs may include:
+-   Markdown documentation
+-   JSON / JSON-LD
+-   RDF
+-   AI Context representations
+-   Registry views
+-   Other defined machine-readable or human-readable representations
 
-These files are generated artifacts. They are reproducible. They are disposable. **They are never edited manually.** If a generated artifact is deleted, it can always be recreated from the Canonical Knowledge Model.
+These files are **derived artifacts**. They are not independently maintained sources of canonical knowledge.
+
+Generated artifacts should therefore not be manually edited as a substitute for modifying the canonical knowledge layer. When the applicable source inputs and transformation rules remain available, a generated artifact should be reproducible through the corresponding rendering process.
+
+If a generated artifact is deleted, its recreation depends on the continued availability of the relevant canonical knowledge, rendering profile, transformation rules, and release inputs. This distinction is important: reproducibility is an architectural objective, not a claim that every artifact is permanently recoverable regardless of repository state.
 
 ---
 
 ### Reports (`reports/`)
 
-The reports directory stores machine-generated operational reports. Typical reports include:
+The `reports/` directory stores machine-generated operational and verification reports.
 
-- Validation reports
-- Migration reports
-- Regression reports
-- End-to-End summaries
-- Rendering diagnostics
+Typical reports may include:
+-   Validation reports
+-   Migration reports
+-   Regression reports
+-   End-to-End summaries
+-   Rendering diagnostics
+-   Loss Manifest reports
+-   Fidelity verification results
 
-Reports provide operational evidence but never become canonical knowledge.
+Reports provide operational and verification evidence. They do not become canonical knowledge merely because they record the results of processing canonical knowledge.
+
+Their purpose is to make the behavior and results of the UAGF pipeline **observable, reviewable, and auditable**.
 
 ---
 
 ### Tests (`tests/`)
 
-The testing suite verifies every major property of the framework. Examples include:
+The `tests/` directory contains automated verification of the major architectural properties of the UAGF pipeline.
 
-- Kernel validation
-- Migration validation
-- Renderer regression
-- End-to-End verification
-- Loss Manifest verification
-- Verbatim fidelity verification
+Examples include:
+-   Kernel validation
+-   Migration validation
+-   Renderer regression testing
+-   End-to-End verification
+-   Loss Manifest verification
+-   Source-to-CKM-to-render fidelity verification
+-   Reproducibility testing
 
-Testing is designed to ensure deterministic behavior across the complete governance pipeline.
+Testing is designed to verify that defined UAGF transformations and constraints behave consistently across the governance pipeline.
 
+Where determinism is an explicit requirement, tests verify that identical inputs and defined transformation conditions produce reproducible results.
+
+Testing therefore provides evidence that the architecture behaves according to its defined constraints; it does not by itself establish the legal or institutional authority of the underlying governance sources.
 ---
 
 ### Repository Design Principles
