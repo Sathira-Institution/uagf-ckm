@@ -2272,145 +2272,278 @@ The result is an ecosystem in which governance knowledge can be shared and compu
 
 ### Government
 
-Governments increasingly operate across multiple legal frameworks, regulatory bodies, and international standards. UAGF provides a canonical knowledge infrastructure capable of connecting these governance sources while preserving their original authority.
+Governments increasingly operate across multiple legal frameworks, regulatory bodies, national policies, and international standards.
+
+UAGF provides a canonical knowledge infrastructure through which governance knowledge originating from these heterogeneous sources can be structured, related, validated, and exchanged while preserving the original authority of each source.
 
 Potential applications include:
 
-- regulatory mapping;
-- cross-ministry interoperability;
-- policy harmonization;
-- public-sector governance registries;
-- digital government initiatives.
+-   Regulatory mapping
+-   Cross-ministry governance interoperability
+-   Policy relationship management
+-   Public-sector governance registries
+-   Digital government initiatives
+-   Governance knowledge exchange across agencies
+-   Machine-readable policy infrastructure
 
-> The framework does not replace legislation or regulation. Instead, it enables government systems to represent governance knowledge consistently across organizational boundaries.
+> **Boundary Note:** UAGF does not replace legislation, regulation, or institutional authority. It provides an architectural layer for representing relationships among governance knowledge while preserving source authority and provenance.
 
-Because governance knowledge is deterministic and machine-readable, public-sector systems can reduce manual interpretation while maintaining transparency and auditability.
+Public-sector systems may use UAGF-derived representations to reduce duplicated manual interpretation, improve traceability, and support more consistent governance processes across organizational boundaries.
+
+The resulting interoperability is intended to improve governance coordination without requiring government institutions to surrender their existing legal mandates, regulatory responsibilities, or institutional decision-making authority.
 
 ---
 
 ### Enterprise
 
-Enterprises frequently operate under overlapping governance obligations. A single organization may simultaneously comply with:
+Enterprises frequently operate under overlapping governance obligations.
 
-- international standards;
-- national regulations;
-- industry frameworks;
-- internal corporate policies;
-- contractual governance requirements.
+A single organization may simultaneously be subject to:
 
-The Canonical Knowledge Model enables these heterogeneous governance sources to coexist within a unified semantic structure. Enterprise systems may therefore:
+-   International standards
+-   National regulations
+-   Industry-specific frameworks
+-   Internal corporate policies
+-   Contractual governance requirements
+-   Organizational control frameworks
 
-- normalize governance requirements;
-- automate compliance mapping;
-- reduce duplicated governance logic;
-- improve audit readiness;
-- maintain consistent governance terminology across business units.
+The Canonical Knowledge Model provides a structured semantic layer through which these heterogeneous governance sources can be represented and related within UAGF.
 
-Deterministic governance reduces operational uncertainty while supporting scalable governance automation.
+Enterprise systems may therefore use UAGF-compatible infrastructure to:
+
+-   Structure governance requirements
+-   Maintain relationships between governance sources
+-   Support compliance and control mapping
+-   Reduce duplicated governance logic
+-   Improve audit readiness
+-   Maintain consistent governance terminology across business units
+-   Expose governance knowledge to internal automation systems
+
+UAGF does not determine whether an enterprise is legally or normatively compliant.
+
+Instead, it provides infrastructure that can help organizations structure, trace, validate, and operationalize governance knowledge derived from the authorities applicable to their environment.
+
+Deterministic transformation and explicit provenance can reduce operational ambiguity while supporting scalable governance automation.
 
 ---
 
 ### Developers
 
-Developers interact directly with the Canonical Knowledge Model rather than manually interpreting documentation. Because the CKM is available as structured knowledge, software systems can integrate governance directly into engineering workflows.
+Developers and engineering systems can interact with structured representations of the Canonical Knowledge Model rather than relying exclusively on manually interpreted documentation.
 
-Typical integration scenarios include:
+Because canonical knowledge is represented as structured objects, compatible software systems can integrate governance knowledge directly into engineering and operational workflows.
 
-- CI/CD pipelines;
-- policy-as-code systems;
-- AI guardrail engines;
-- validation services;
-- governance automation platforms;
-- internal developer tooling.
+Potential integration scenarios include:
 
-Rather than parsing natural-language documentation, applications consume canonical machine-readable representations generated from the CKM. Supported representations include:
+-   CI/CD pipelines
+-   Policy-as-code systems
+-   AI guardrail engines
+-   Validation services
+-   Governance automation platforms
+-   Internal developer tooling
+-   Governance APIs
+-   Machine-readable policy services
 
-- JSON
-- JSON-LD
-- RDF
-- AI Context Profiles
+Potential machine-readable representations include:
 
-This approach minimizes ambiguity while ensuring that every integration uses exactly the same governance knowledge.
+-   JSON
+-   JSON-LD
+-   RDF
+-   AI Context Profiles
+
+These representations are derived from the CKM and remain subject to their applicable rendering profiles and declared information-loss characteristics.
+
+Where a representation is lossless for its defined purpose, it may preserve the relevant canonical structures required for machine processing. Where a representation is intentionally lossy, its associated Loss Manifest identifies the relevant omissions and constraints.
+
+This allows developers to consume governance knowledge through machine-readable interfaces while maintaining traceability to the canonical release from which the representation was derived.
 
 ---
 
 ### Community
 
-Community participation is essential for long-term governance evolution. UAGF encourages collaboration while preserving deterministic governance principles.
+Community participation is essential to the long-term evolution of UAGF.
 
-Contributors may propose:
+UAGF encourages contributions from individuals and organizations while preserving the deterministic governance and validation principles of the framework.
 
-- new governance concepts;
-- additional reference mappings;
-- controlled vocabulary improvements;
-- rendering profiles;
-- validation enhancements;
-- interoperability extensions.
+Community contributors may propose:
 
-Every contribution follows the same governance process regardless of contributor. Community participation therefore strengthens the Canonical Knowledge Model without compromising architectural integrity.
+-   New governance concepts
+-   Additional reference relationships
+-   Controlled vocabulary improvements
+-   Rendering profiles
+-   Validation enhancements
+-   Interoperability extensions
+-   Documentation improvements
+-   Architectural proposals
 
-**Reality First** remains the governing principle:
+Community participation does not itself grant normative or institutional authority.
 
-- No contribution bypasses validation.
-- No contribution introduces undocumented semantic change.
+Contributions become part of the canonical knowledge infrastructure only through the applicable UAGF governance, review, validation, and approval processes.
 
-Every accepted contribution preserves:
+Every contribution is therefore subject to the same architectural constraints regardless of contributor.
 
-- deterministic behavior;
-- zero silent correction;
-- explicit provenance;
-- machine verifiability.
+**Reality First** remains a governing principle:
+
+-   No contribution bypasses applicable validation.
+-   No contribution introduces undocumented semantic change.
+-   No contribution silently corrects canonical knowledge.
+-   No contribution may override the authority of an underlying governance source.
+
+Accepted contributions should preserve:
+
+-   Deterministic behavior
+-   Explicit provenance
+-   Machine verifiability
+-   Traceable semantic relationships
+-   Controlled evolution
 
 ---
 
 ### Future Expansion
 
-The architecture of UAGF is intentionally designed for long-term evolution. Because governance knowledge is separated from presentation, new capabilities can be introduced without restructuring existing knowledge.
+The architecture of UAGF is intentionally designed for long-term evolution.
 
-Future expansion may include:
+Because governance knowledge is separated from its representations, new capabilities can be introduced without requiring the Canonical Knowledge Model to become dependent on a particular presentation technology.
 
-- public governance registries;
-- semantic search platforms;
-- governance knowledge APIs;
-- graph database integrations;
-- automated compliance assistants;
-- AI governance reasoning systems;
-- cross-border governance interoperability services;
-- domain-specific governance profiles.
+Potential future capabilities may include:
 
-Each new capability consumes the same Canonical Knowledge Model. No additional copies of governance knowledge are created. 
+-   Public governance registries
+-   Semantic search platforms
+-   Governance knowledge APIs
+-   Knowledge graph integrations
+-   Automated compliance assistance
+-   AI governance reasoning systems
+-   Cross-border governance interoperability services
+-   Domain-specific governance profiles
+-   Governance analytics platforms
+-   Machine-assisted governance research environments
 
-This ar## Release Checklist
+Each capability should consume the applicable Canonical Knowledge Model and release state rather than establishing an independent competing source of governance knowledge.
 
-**Technical Gates (Automated — enforced by CI)**
-- [ ] E2E suite G1–G13 green (`make test`)
-- [ ] Regenerate-and-diff guard green (committed `generated/` == fresh render)
-- [ ] Release SHA-256 manifest verified (`ckm-2.0.0-alpha/release_manifest.json`)
-- [ ] Manifest success-criteria enforced (G12: A=30, B=3, total=33, 0 manual authoring)
-- [ ] Expected-Differences Register enforced (G13: no undeclared diff class)
-- [ ] LICENSE present and matches CC BY 4.0 legal code
+New capabilities may introduce new representations, interfaces, or processing mechanisms, but they must remain subject to the applicable UAGF architectural constraints.
 
-**Governance Gates (Manual — Founder authority)**
-- [ ] UFD Decisions Ledger counter-signed in the public repository
-- [ ] Security disclosure contact designated in `SECURITY.md`
-- [ ] Code of Conduct ratified (interim text in force until then)
-- [ ] D-06 source-verification pass scheduled
+The architecture therefore allows UAGF to evolve alongside advances in:
 
-**Documentation Gates**
-- [ ] README version and badges current
-- [ ] Release notes list resolved and pending decisions (`governance/decisions_register.yaml`)
-- [ ] Branch protection enabled on `main` with required status checkschitectural approach allows the framework to evolve alongside advances in AI, regulation, and information systems while preserving deterministic governance and semantic consistency. As AI governance becomes increasingly global, interoperable, and machine-assisted, UAGF aims to provide the stable knowledge infrastructure upon which that future can be built.
+-   Artificial intelligence
+-   Regulatory systems
+-   Governance methodologies
+-   Information systems
+-   Machine-readable knowledge technologies
 
+The long-term objective is to provide a stable knowledge infrastructure through which governance ecosystems can evolve without repeatedly recreating the same underlying knowledge in incompatible forms.
+
+---
+
+## Release Checklist
+
+A UAGF release is considered eligible for publication only when the applicable technical, governance, and documentation requirements have been satisfied.
+
+### Technical Gates
+
+Technical release gates should be enforced automatically wherever the relevant checks are implemented in CI/CD.
+
+-   [ ] End-to-End validation suite passes all applicable validation gates.
+-   [ ] Regenerate-and-diff verification confirms that committed generated artifacts correspond to the applicable canonical inputs and rendering process.
+-   [ ] Release SHA-256 manifest is generated and verified.
+-   [ ] Release success criteria defined by the applicable validation suite are satisfied.
+-   [ ] Expected-Differences Register contains no undeclared differences.
+-   [ ] License file is present and corresponds to the declared release license.
+-   [ ] Applicable schema, validation, and rendering checks pass.
+
+### Governance Gates
+
+Governance gates require explicit human or institutional action where authority cannot be delegated to automated validation.
+
+-   [ ] Required Founder or institutional decisions have been recorded according to the applicable governance process.
+-   [ ] Required governance ledger or decision records have been reviewed and signed where applicable.
+-   [ ] Security disclosure contact has been designated.
+-   [ ] Required governance policies have been ratified or explicitly marked as interim.
+-   [ ] Required source-verification activities have been completed or explicitly recorded as pending.
+
+### Documentation Gates
+
+-   [ ] README version and release metadata are current.
+-   [ ] Release notes identify resolved and pending governance decisions.
+-   [ ] Applicable decision registers are included and traceable.
+-   [ ] Branch protection and required CI status checks are enabled where applicable.
+-   [ ] Documentation accurately reflects the actual release state.
+-   [ ] Known limitations and pending verification items are explicitly disclosed.
+
+> **Note:** A release checklist records release readiness. It does not itself confer legal, regulatory, or institutional authority.
+
+---
 
 ## Known Pending Items
 
-- **Ledger counter-signature** (`decisions_register: LEDGER-SIGN`) — pending Founder manual sign-off.
-  This is an institutional governance item, not a technical blocker.
-- **D-06 source-verification pass has not run** — every external-law locator in the release carries
-  `pending-verification`. Citations to specific articles or clauses must not be treated as verified.
-- **Batch B remainder** — 12 of the 15 requirements approved under D-02 are not yet activated.
-  The release contains 33 requirements (30 migrated + 3 activated: UGR-030, UGR-031, UGR-052).
-- **Security contact** — `SECURITY.md` carries a placeholder address pending Founder designation.
+The following items represent known outstanding conditions associated with the current release state.
+
+### Ledger Counter-Signature
+
+The `decisions_register: LEDGER-SIGN` item remains pending Founder manual sign-off.
+
+This is an institutional governance action rather than a technical validation failure.
+
+Until the required sign-off is completed, the corresponding governance state should remain explicitly identified as pending.
+
+### D-06 Source Verification
+
+The D-06 source-verification pass has not yet been completed.
+
+External-law locators associated with the current release carry `pending-verification` status.
+
+Accordingly, references to specific legal articles, clauses, or locators must not be represented as independently verified until the required source-verification process has been completed.
+
+### Batch B Remainder
+
+Of the 15 requirements approved under D-02, 12 have not yet been activated.
+
+The current release therefore contains:
+
+-   30 migrated requirements
+-   3 activated requirements:
+    -   `UGR-030`
+    -   `UGR-031`
+    -   `UGR-052`
+
+This produces a current release population of 33 requirements.
+
+The remaining approved-but-not-activated requirements should remain distinguishable from active canonical knowledge until their applicable activation process is completed.
+
+### Security Contact
+
+`SECURITY.md` currently contains a placeholder security contact pending Founder designation.
+
+Until a permanent contact is designated, the placeholder should remain explicitly identifiable rather than being presented as an active institutional security contact.
+
+---
+
+## Release-State Transparency
+
+Known pending items are part of the observable governance state of a release.
+
+UAGF does not treat incomplete governance actions as failures to be hidden or automatically repaired.
+
+Instead, pending conditions should remain:
+
+-   Explicitly identified
+-   Machine-readable where practical
+-   Traceable to the relevant decision or process
+-   Distinguishable from completed requirements
+-   Resolved through the applicable governance process
+
+This reflects the **Reality First** principle:
+
+> **An incomplete governance state must be represented as incomplete rather than being presented as complete for convenience.**
+
+The purpose of release-state transparency is to ensure that users, implementers, auditors, researchers, and other ecosystem participants can distinguish between:
+
+-   Technically validated conditions
+-   Governance-approved conditions
+-   Source-verified conditions
+-   Pending governance actions
+-   Known limitations
+
+This distinction allows UAGF releases to remain auditable without implying that technical validation alone constitutes legal, regulatory, or institutional approval.
 
 ## Appendix
 
@@ -2418,42 +2551,45 @@ This ar## Release Checklist
 
 ### Roadmap
 
-The long-term evolution of UAGF focuses on strengthening the Canonical Knowledge Model (CKM) as a universal governance infrastructure rather than expanding documentation.
+The long-term evolution of UAGF focuses on strengthening the Canonical Knowledge Model (CKM) as a universal governance knowledge infrastructure rather than expanding documentation as an independent source of authority.
 
 Future development priorities include:
 
-- Expansion of CKM schemas to cover additional governance domains
-- New deterministic rendering profiles for emerging implementation scenarios
-- Native support for additional machine-readable formats and semantic technologies
-- Integration with international AI governance standards and regulatory frameworks
-- Crosswalk libraries between global governance ecosystems
-- Reference implementations for public-sector and enterprise deployment
-- Enhanced validation kernels for future governance capabilities
-- Long-term stability guarantees for canonical governance knowledge
+-   Expansion of CKM schemas to cover additional governance domains
+-   New deterministic rendering profiles for emerging implementation scenarios
+-   Native support for additional machine-readable formats and semantic technologies
+-   Integration with international AI governance standards and regulatory frameworks
+-   Crosswalk libraries between global governance ecosystems
+-   Reference implementations for public-sector and enterprise deployment
+-   Enhanced validation capabilities for future governance requirements
+-   Long-term stability and controlled evolution of canonical governance knowledge
 
-The roadmap is intentionally incremental. Every capability is added by extending the Canonical Knowledge Model rather than introducing parallel governance artifacts.
+The roadmap is intentionally incremental.
+
+New capabilities are introduced by extending the Canonical Knowledge Model and its defined transformation, validation, and rendering mechanisms rather than by creating parallel sources of governance knowledge.
+
+UAGF therefore aims to evolve its capabilities while preserving the separation between:
+**Authoritative Governance Sources → Canonical Knowledge Representation → Derived Representations**
 
 ---
 
 ### Citation
 
-Researchers, standards organizations, governments, and enterprises are encouraged to cite UAGF when referencing its architecture, governance model, or Canonical Knowledge Model.
+Researchers, standards organizations, governments, enterprises, and other users are encouraged to cite UAGF when referencing its architecture, governance model, or Canonical Knowledge Model.
 
 **Plain Text Citation**
-
-> Sathira Institution. *Universal AI Governance Framework (UAGF): A Canonical Knowledge Infrastructure for Interoperable AI Governance*. Version 2.0.0-alpha. Available at: https://github.com/Sathira-Institution/uagf-ckm
+> SATHIRA Institution. Universal AI Governance Framework (UAGF): A Canonical Knowledge Infrastructure for Interoperable AI Governance. Version 2.0.0-alpha. Available at: https://github.com/SATHIRA-Institute/uagf-ckm
 
 **BibTeX**
-
 ```bibtex
 @software{uagf2026,
   title        = {Universal AI Governance Framework},
   subtitle     = {A Canonical Knowledge Infrastructure for Interoperable AI Governance},
-  author       = {{Sathira Institution}},
+  author       = {{SATHIRA Institution}},
   version      = {2.0.0-alpha},
   year         = {2026},
-  url          = {https://github.com/Sathira-Institution/uagf-ckm},
-  note         = {Model-First AI Governance Infrastructure}
+  url          = {https://github.com/SATHIRA-Institute/uagf-ckm},
+  note         = {Model-First AI Governance Knowledge Infrastructure}
 }
 ```
 
@@ -2461,35 +2597,30 @@ Researchers, standards organizations, governments, and enterprises are encourage
 
 ### License
 
-The UAGF project is released under the **Creative Commons Attribution 4.0 International License (CC BY 4.0)**.
+The UAGF project includes both governance knowledge and software tooling. These components are treated according to their respective licensing terms to maintain explicit boundaries.
 
-This applies to:
+The documentation and Canonical Knowledge Model (CKM) are released under the **Creative Commons Attribution 4.0 International License (CC BY 4.0)**, unless otherwise specified by the repository's applicable license files.
 
-- Documentation
-- Canonical Knowledge Model (CKM)
-- Validation tools
-- Rendering tools
-- Migration tools
-- Reference implementations
+Under CC BY 4.0, users are free to:
+-   **Share** — copy and redistribute the material in any medium or format
+-   **Adapt** — remix, transform, and build upon the material
 
-You are free to:
+Under the following condition:
+-   **Attribution** — appropriate credit must be given, a link to the license must be provided, and changes must be indicated.
 
-- **Share** — copy and redistribute the material in any medium or format
-- **Adapt** — remix, transform, and build upon the material
+Software tooling, including validation, migration, rendering, and reference implementation code, is governed by the specific software license declared for those components.
 
-Under the following terms:
+> **Licensing Note:** The repository maintains explicit licensing boundaries between governance knowledge, documentation, and software code to avoid ambiguity regarding reuse and derivative works.
 
-- **Attribution** — You must give appropriate credit, provide a link to the license, and indicate if changes were made.
-
-See the full license text at: [https://creativecommons.org/licenses/by/4.0/](https://creativecommons.org/licenses/by/4.0/)
+See the full CC BY 4.0 license text at: https://creativecommons.org/licenses/by/4.0/
 
 ---
 
 ### Acknowledgement
 
-UAGF is inspired by decades of work across the international governance, standards, semantic web, systems engineering, and open-source communities.
+UAGF is inspired by decades of work across the international governance, standards, semantic web, systems engineering, knowledge representation, and open-source communities.
 
-The framework does not attempt to replace existing standards. Instead, it provides an interoperable canonical knowledge layer capable of connecting them through deterministic representation.
+The framework does not attempt to replace existing standards, regulations, or institutional governance processes. Instead, UAGF provides a canonical knowledge layer through which governance knowledge originating from heterogeneous authoritative sources can be represented, related, validated, and transformed into interoperable representations.
 
 ---
 
@@ -2497,14 +2628,14 @@ The framework does not attempt to replace existing standards. Instead, it provid
 
 UAGF has been designed around several foundational architectural principles:
 
-- **Reality First**
-- **Canonical Knowledge Modeling**
-- **Deterministic Systems Engineering**
-- **Machine-Readable Governance**
-- **Single Source of Truth Architecture**
-- **Declarative Knowledge Representation**
-- **Explicit Provenance**
-- **Verifiable Governance**
+-   **Reality First**
+-   **Canonical Knowledge Modeling**
+-   **Deterministic Systems Engineering**
+-   **Machine-Readable Governance**
+-   **Canonical Representation Architecture**
+-   **Declarative Knowledge Representation**
+-   **Explicit Provenance**
+-   **Verifiable Governance**
 
 These principles collectively shape the architecture of the Universal AI Governance Framework.
 
@@ -2514,40 +2645,40 @@ These principles collectively shape the architecture of the Universal AI Governa
 
 | Channel | Link |
 | :--- | :--- |
-| **Official Website** | https://sathira.institute |
-| **GitHub Repository** | https://github.com/Sathira-Institution/uagf-ckm |
-| **Issue Tracker** | https://github.com/Sathira-Institution/uagf-ckm/issues |
+| **Official Website** | [https://sathira.institute](https://sathira.institute) |
+| **GitHub Repository** | [github.com/SATHIRA-Institute/uagf-ckm](https://github.com/SATHIRA-Institute/uagf-ckm) |
+| **Issue Tracker** | [github.com/SATHIRA-Institute/uagf-ckm/issues](https://github.com/SATHIRA-Institute/uagf-ckm/issues) |
 | **Maintainer** | Apichai Chuensuang (Rootz), SATHIRA Institution |
-| **Community Discussions** | https://github.com/Sathira-Institution/uagf-ckm/discussions |
+| **Community Discussions** | [github.com/SATHIRA-Institute/uagf-ckm/discussions](https://github.com/SATHIRA-Institute/uagf-ckm/discussions) |
 
 ---
 
 ### Final Closing
 
-> **Artificial intelligence will increasingly participate in decisions that affect individuals, organizations, and societies.**
->
-> As governance becomes more complex, documentation alone is no longer sufficient.
->
-> Governance knowledge must be **deterministic**.
-> It must be **machine-readable**.
-> It must be **verifiable**.
-> It must remain **internally consistent** regardless of how many documents, standards, or regulatory systems are involved.
-
-The Universal AI Governance Framework is built on that belief.
-
-Its purpose is not merely to publish documentation, but to establish a **Canonical Knowledge Infrastructure** from which trustworthy governance artifacts can be rendered consistently, validated deterministically, and shared interoperably across the global AI ecosystem.
-
-Documentation may evolve.
-Rendering formats may change.
-Technologies will continue to advance.
-
-**The Canonical Knowledge Model remains the single source of truth.**
-
-**Everything else is a render.**
-
-**Reality First.**
+> *"Artificial intelligence will increasingly participate in decisions that affect individuals, organizations, and societies.*
+> 
+> *As governance becomes more complex, documentation alone is no longer sufficient.*
+> 
+> *Governance knowledge must be deterministic.*
+> *It must be machine-readable.*
+> *It must be verifiable.*
+> *It must remain internally consistent across diverse governance sources, representations, and systems.*
+> 
+> *The Universal AI Governance Framework is built on that principle.*
+> 
+> *Its purpose is not merely to publish documentation, but to establish a Canonical Knowledge Infrastructure through which governance knowledge can be structured, validated against defined architectural constraints, traced to authoritative sources, and rendered into interoperable representations across the global AI governance ecosystem.*
+> 
+> *Documentation may evolve.*
+> *Rendering formats may change.*
+> *Technologies will continue to advance.*
+> 
+> ***Within UAGF, the Canonical Knowledge Model remains the single canonical source for the structured representation of governance knowledge.***
+> 
+> *Everything else is a derived representation.*
+> 
+> ***Reality First.****"*
 
 ---
 
-*Developed by SATHIRA Institution as a public-good initiative.*
-*Technology should remain accountable to humanity.*
+**Developed by SATHIRA Institution as a public-good initiative.**  
+*Technology must remain accountable to humanity.*
