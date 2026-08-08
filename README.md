@@ -29,6 +29,18 @@ This approach transforms AI governance from a document-centric discipline into a
 
 ---
 
+## Traditional Governance vs UAGF
+
+| Aspect | Traditional Approach | UAGF Approach |
+|:--|:--|:--|
+| Source of Truth | Documents (Markdown/PDF) | Canonical Knowledge Model (YAML) |
+| Synchronization | Manual editing | Deterministic rendering |
+| Information Loss | Hidden and silent | Explicit Loss Manifest |
+| Validation | Manual review | 13-Gate Validation Kernel |
+| Machine Readability | Afterthought | First-class citizen |
+| Provenance | Lost over time | Preserved mechanically |
+| Evolution | Breaking changes | Backward-compatible extensions |
+
 ## Why UAGF Exists
 
 Modern AI governance has reached a level of complexity where documentation alone is no longer sufficient.
@@ -1223,7 +1235,38 @@ Future expansion may include:
 
 Each new capability consumes the same Canonical Knowledge Model. No additional copies of governance knowledge are created. 
 
-This architectural approach allows the framework to evolve alongside advances in AI, regulation, and information systems while preserving deterministic governance and semantic consistency. As AI governance becomes increasingly global, interoperable, and machine-assisted, UAGF aims to provide the stable knowledge infrastructure upon which that future can be built.
+This ar## Release Checklist
+
+**Technical Gates (Automated — enforced by CI)**
+- [ ] E2E suite G1–G13 green (`make test`)
+- [ ] Regenerate-and-diff guard green (committed `generated/` == fresh render)
+- [ ] Release SHA-256 manifest verified (`ckm-2.0.0-alpha/release_manifest.json`)
+- [ ] Manifest success-criteria enforced (G12: A=30, B=3, total=33, 0 manual authoring)
+- [ ] Expected-Differences Register enforced (G13: no undeclared diff class)
+- [ ] LICENSE present and matches CC BY 4.0 legal code
+
+**Governance Gates (Manual — Founder authority)**
+- [ ] UFD Decisions Ledger counter-signed in the public repository
+- [ ] Security disclosure contact designated in `SECURITY.md`
+- [ ] Code of Conduct ratified (interim text in force until then)
+- [ ] D-06 source-verification pass scheduled
+
+**Documentation Gates**
+- [ ] README version and badges current
+- [ ] Release notes list resolved and pending decisions (`governance/decisions_register.yaml`)
+- [ ] Branch protection enabled on `main` with required status checkschitectural approach allows the framework to evolve alongside advances in AI, regulation, and information systems while preserving deterministic governance and semantic consistency. As AI governance becomes increasingly global, interoperable, and machine-assisted, UAGF aims to provide the stable knowledge infrastructure upon which that future can be built.
+
+
+## Known Pending Items
+
+- **Ledger counter-signature** (`decisions_register: LEDGER-SIGN`) — pending Founder manual sign-off.
+  This is an institutional governance item, not a technical blocker.
+- **D-06 source-verification pass has not run** — every external-law locator in the release carries
+  `pending-verification`. Citations to specific articles or clauses must not be treated as verified.
+- **Batch B remainder** — 12 of the 15 requirements approved under D-02 are not yet activated.
+  The release contains 33 requirements (30 migrated + 3 activated: UGR-030, UGR-031, UGR-052).
+- **Security contact** — `SECURITY.md` carries a placeholder address pending Founder designation.
+
 ## Appendix
 
 ---
