@@ -15,17 +15,23 @@
 
 Artificial Intelligence governance is rapidly becoming one of the defining infrastructure challenges of the digital era.
 
-Organizations today operate across an increasingly fragmented landscape of regulations, international standards, internal governance policies, industry best practices, and AI-specific compliance requirements. Although many of these governance systems pursue similar objectives, they were created independently, using different terminology, different structures, different assumptions, and different implementation models.
+Organizations today operate across an increasingly fragmented landscape of regulations, international standards, internal governance policies, industry practices, technical specifications, and AI-specific governance requirements. Although many of these governance sources pursue similar objectives, they were developed independently, using different terminology, structures, assumptions, semantic models, and implementation approaches.
 
-As a result, AI governance knowledge is frequently duplicated, translated manually, maintained independently, and gradually diverges over time.
+As a result, governance knowledge is frequently duplicated, interpreted and translated manually, maintained across disconnected systems, and gradually diverges over time. This fragmentation makes governance knowledge difficult to compare, validate, reconcile, reuse, and operationalize consistently across organizations, jurisdictions, technologies, and AI contexts.
 
-The Universal AI Governance Framework (UAGF) addresses this problem by introducing a fundamentally different architectural approach.
+The Universal AI Governance Framework (UAGF) addresses this problem by introducing a fundamentally different architectural approach: a canonical knowledge infrastructure for structuring, validating, and interoperably representing governance knowledge in a machine-readable form.
 
-Rather than treating documents as the authoritative source of governance knowledge, UAGF treats a Canonical Knowledge Model (CKM) as the single source of truth.
+UAGF does not replace or supersede the legal, regulatory, normative, or institutional authority of underlying governance sources. Instead, it establishes the Canonical Knowledge Model (CKM) as the canonical, machine-readable knowledge foundation of the UAGF architecture. The CKM provides a structured semantic layer for representing governance concepts, requirements, controls, relationships, constraints, dependencies, and provenance in a consistent and machine-processable form.
 
-Everything else—including documentation, APIs, JSON-LD, RDF, AI contexts, governance dashboards, and future interfaces—is deterministically rendered from that model.
+The canonical status of the CKM applies to the representation and structural organization of governance knowledge within UAGF, while preserving traceability to the authoritative sources from which that knowledge is derived. This distinction allows UAGF to unify fragmented governance knowledge without creating a competing source of legal, regulatory, or institutional authority.
 
-This approach transforms AI governance from a document-centric discipline into a knowledge-centric infrastructure.
+The CKM enables governance knowledge to be validated against defined structures and constraints and transformed into deterministic, interoperable representations and interfaces. These may include documentation, structured data formats such as JSON-LD and RDF, APIs, knowledge graphs, AI-context representations, governance dashboards, and other machine-readable interfaces.
+
+Through this architecture, UAGF establishes a clear separation between authoritative governance sources, canonical knowledge, and derived representations. Authoritative sources retain their original authority; the CKM provides a canonical semantic and structural foundation for governance knowledge within UAGF; and interoperable representations provide consistent ways for humans and machines to consume and apply that knowledge.
+
+This approach transforms AI governance from a predominantly document-centric discipline into a knowledge-centric infrastructure—where governance knowledge can be represented canonically, validated systematically, transformed deterministically, exchanged interoperably, and operationalized across diverse governance environments while maintaining provenance and accountability.
+
+UAGF therefore provides an open, vendor-neutral foundation for turning fragmented governance knowledge into structured, machine-readable infrastructure capable of supporting interoperable governance across standards, regulations, policies, governance systems, APIs, knowledge graphs, and AI contexts.
 
 ---
 
