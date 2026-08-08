@@ -93,86 +93,153 @@ UAGF was created to address this architectural problem by establishing a canonic
 
 Current AI governance suffers from structural fragmentation.
 
-The same governance requirement may appear:
+The same or closely related governance requirement may appear across:
 
-- in an international standard,
-- inside a regulatory document,
-- inside an enterprise AI policy,
-- inside implementation guidelines,
-- inside operational procedures,
+-   An international standard
+-   A regulatory document
+-   An enterprise AI policy
+-   Implementation guidance
+-   Operational procedures
+-   Technical controls
 
-while being expressed differently in every location.
+...while being expressed differently in each context.
 
-This creates multiple independent versions of the same governance concept. Eventually:
+These independent representations can create multiple versions, mappings, interpretations, and implementations of related governance concepts. Over time:
 
-- terminology diverges
-- mappings become inconsistent
-- compliance becomes difficult to automate
-- governance knowledge becomes expensive to maintain
+-   Terminology diverges
+-   Semantic mappings become inconsistent
+-   Provenance becomes difficult to maintain
+-   Machine-readable representations can become outdated
+-   Compliance and governance processes become difficult to automate consistently
+-   Governance knowledge becomes increasingly expensive to maintain
 
-The larger the governance ecosystem becomes, the more expensive this fragmentation becomes.
+As the number of governance sources and their relationships increase, the cost of maintaining consistent governance knowledge grows accordingly.
 
----
-
-## Current AI Governance Landscape
-
-Organizations commonly work across multiple governance systems simultaneously. Examples include:
-
-- ISO/IEC 42001
-- NIST AI Risk Management Framework
-- EU AI Act
-- OECD AI Principles
-- National AI regulations
-- Privacy regulations
-- Organizational governance policies
-- Internal operating procedures
-
-Each framework contributes valuable governance knowledge. None of them were designed to function as a unified knowledge infrastructure.
-
-Instead, organizations build manual crosswalks between documents. These mappings frequently become outdated. The maintenance burden grows over time.
+The underlying challenge is therefore not simply the volume of governance documentation. It is the **absence of a shared canonical knowledge architecture** capable of preserving meaning, provenance, structure, and relationships across heterogeneous governance sources.
 
 ---
 
-## Why Existing Governance Doesn't Interoperate
+### Current AI Governance Landscape
 
-The challenge is not that governance frameworks disagree. The challenge is that they were never designed to share a common knowledge representation.
+Organizations commonly operate across multiple governance systems simultaneously. Examples include:
 
-Traditional governance is fundamentally document-oriented. Each document defines:
+-   ISO/IEC 42001
+-   NIST AI Risk Management Framework
+-   EU AI Act
+-   OECD AI Principles
+-   National AI regulations
+-   Privacy and data protection regulations
+-   Organizational governance policies
+-   Internal standards and operating procedures
+-   Technical and industry-specific control frameworks
 
-- its own terminology
-- its own hierarchy
-- its own identifiers
-- its own lifecycle
-- its own update process
+Each of these sources contributes valuable governance knowledge within its intended scope and authority.
 
-Consequently, documents become the source of truth, machine-readable representations become secondary artifacts, and synchronization becomes a continuous manual effort.
+UAGF does not seek to replace, consolidate, or supersede these sources. Instead, it recognizes that governance knowledge originating from different authoritative sources needs a common architectural layer through which it can be structured, related, validated, and exchanged.
 
-This architecture inevitably produces documentation drift. The larger the governance ecosystem becomes, the larger the drift becomes.
+Existing governance ecosystems were generally not designed to function as a unified, machine-readable knowledge infrastructure across heterogeneous sources.
+
+Organizations therefore frequently construct crosswalks, mappings, catalogs, and integrations between governance artifacts. These relationships require ongoing maintenance and can become outdated as their underlying sources evolve.
+
+The resulting challenge is not a lack of governance knowledge. It is the **lack of a canonical infrastructure for maintaining relationships among that knowledge at scale**.
+
+---
+
+### Why Existing Governance Does Not Interoperate
+
+The primary interoperability challenge is not that governance frameworks necessarily disagree. Rather, they were developed with different scopes, objectives, vocabularies, structures, identifiers, semantic assumptions, lifecycles, and update processes.
+
+Traditional governance artifacts are often document-oriented, with knowledge expressed primarily through human-readable text and framework-specific structures.
+
+Each source may define:
+
+-   Its own terminology
+-   Its own hierarchy
+-   Its own identifiers
+-   Its own semantic relationships
+-   Its own lifecycle
+-   Its own update process
+-   Its own representation formats
+
+When these sources are connected without a canonical knowledge layer, organizations must maintain relationships between independently evolving representations.
+
+This can result in:
+
+-   Terminology drift
+-   Mapping drift
+-   Inconsistent interpretations
+-   Duplicated governance knowledge
+-   Synchronization failures
+-   Outdated machine-readable representations
+
+The larger the governance ecosystem becomes, the more difficult it becomes to maintain these relationships manually.
+
+UAGF addresses this architectural gap by introducing a **canonical knowledge layer** between authoritative governance sources and their interoperable machine-readable representations.
+
+---
+
+### The UAGF Architectural Principle
+
+UAGF establishes a clear separation between three fundamental layers:
+
+#### 1. Authoritative Governance Sources
+Regulations, standards, policies, technical specifications, and other sources retain their original legal, regulatory, normative, or institutional authority.
+
+#### 2. Canonical Knowledge Model (CKM)
+The CKM provides the canonical, machine-readable knowledge layer within UAGF. It structurally and semantically represents governance knowledge, including relevant concepts, requirements, controls, relationships, constraints, and provenance.
+
+#### 3. Derived Interoperable Representations
+Governance knowledge represented through the CKM can be transformed into interoperable machine-readable and human-consumable representations, including documentation, structured data, APIs, knowledge graphs, AI-context representations, and other interfaces.
+
+> **Note:** The canonical status of the CKM applies to the *representation and structural organization* of governance knowledge within UAGF. It does not supersede the authority of the underlying governance sources.
 
 ---
 
 ## Vision
 
-To establish an open, canonical, machine-readable knowledge infrastructure that enables AI governance systems to interoperate without replacing existing standards, regulations, or organizational frameworks.
+To establish an open, canonical, machine-readable knowledge infrastructure that enables AI governance ecosystems to interoperate without replacing existing standards, regulations, policies, or organizational governance frameworks.
 
-UAGF envisions a future where governance knowledge becomes:
+UAGF envisions a future in which governance knowledge can become:
 
-- deterministic
-- interoperable
-- reusable
-- auditable
-- machine-native
-- continuously renderable
+-   Deterministic
+-   Interoperable
+-   Reusable
+-   Traceable
+-   Auditable
+-   Machine-readable
+-   Continuously maintainable
+-   Operationally usable
 
-instead of existing as isolated documents maintained independently.
+...rather than remaining fragmented across independently maintained representations.
+
+In this vision, governance knowledge becomes **infrastructure**: structured once at the canonical knowledge layer and made available through consistent, traceable representations across diverse governance contexts.
 
 ---
 
 ## Mission
 
-The mission of UAGF is to provide a public, vendor-neutral Canonical Knowledge Infrastructure that enables governments, industry, researchers, standards organizations, and AI systems to exchange governance knowledge through a shared semantic model.
+The mission of UAGF is to provide an open, vendor-neutral Canonical Knowledge Infrastructure that enables governments, industry, researchers, standards organizations, technology providers, and AI systems to structure, exchange, validate, and use governance knowledge through a shared semantic model.
 
-UAGF does not seek to become another governance standard. Instead, it provides the knowledge architecture that allows governance standards to work together.
+UAGF does not seek to become another governance standard, regulation, certification scheme, or compliance product.
+
+Instead, UAGF provides the knowledge architecture through which existing and future governance sources can be represented, related, validated, and made interoperable.
+
+Its purpose is not to determine what governance authority should exist, but to provide infrastructure for making governance knowledge more structured, traceable, machine-readable, and interoperable.
+
+---
+
+## What UAGF Does Not Do
+
+UAGF does not:
+
+-   Replace laws, regulations, standards, or organizational policies
+-   Establish legal or regulatory authority
+-   Declare one governance framework superior to another
+-   Eliminate the need for human or institutional judgment
+-   Treat a serialization format as the governance knowledge itself
+-   Require organizations to abandon their existing governance systems
+
+Instead, UAGF provides a canonical knowledge architecture through which heterogeneous governance knowledge can be connected while preserving source authority, provenance, and contextual meaning.
 
 ---
 
