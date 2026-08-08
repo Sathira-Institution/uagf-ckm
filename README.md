@@ -35,17 +35,28 @@ UAGF therefore provides an open, vendor-neutral foundation for turning fragmente
 
 ---
 
-## Traditional Governance vs UAGF
+### Conventional Governance vs UAGF Canonical Knowledge Architecture
 
-| Aspect | Traditional Approach | UAGF Approach |
-|:--|:--|:--|
-| Source of Truth | Documents (Markdown/PDF) | Canonical Knowledge Model (YAML) |
-| Synchronization | Manual editing | Deterministic rendering |
-| Information Loss | Hidden and silent | Explicit Loss Manifest |
-| Validation | Manual review | 13-Gate Validation Kernel |
-| Machine Readability | Afterthought | First-class citizen |
-| Provenance | Lost over time | Preserved mechanically |
-| Evolution | Breaking changes | Backward-compatible extensions |
+UAGF does not seek to replace existing governance sources, standards, regulations, or institutional processes. It introduces a canonical knowledge architecture that enables governance knowledge from heterogeneous authoritative sources to be structured, validated, traced, and transformed into interoperable machine-readable representations.
+
+| Aspect | Conventional / Fragmented Approach | UAGF Canonical Knowledge Architecture |
+| :--- | :--- | :--- |
+| **Knowledge Foundation** | Document-centric | Canonical Knowledge Model (CKM) as the canonical knowledge layer |
+| **Source Authority** | Embedded or interpreted through documents | Preserved in underlying authoritative sources with explicit provenance |
+| **Knowledge Structure** | Primarily textual and heterogeneous | Canonical semantic and structural model |
+| **Semantic Identity** | Often implicit or context-dependent | Explicitly defined and machine-resolvable |
+| **Serialization** | Document formats such as Markdown/PDF | Machine-readable serialization, including YAML |
+| **Synchronization** | Manual synchronization across artifacts | Deterministic transformation and synchronization |
+| **Information Loss** | Often implicit or difficult to detect | Explicitly identified and traceable |
+| **Validation** | Human-centric and fragmented review | Structured multi-gate validation through the 13-Gate Validation Kernel |
+| **Machine Readability** | Often secondary or added later | First-class architectural requirement |
+| **Provenance** | Can degrade across copies and transformations | Machine-traceable provenance |
+| **Lineage** | Difficult to maintain across artifacts | Traceable from authoritative source through CKM to derived representations |
+| **Determinism** | Dependent on manual interpretation and process | Deterministic transformation subject to defined rules and constraints |
+| **Interoperability** | Point-to-point or format-dependent | Canonical semantic interoperability |
+| **Evolution** | Potentially breaking and manually coordinated | Versioned, traceable, and controlled evolution |
+| **Representations** | Documents maintained as primary artifacts | Deterministically derived interoperable representations |
+| **Accountability** | Dependent on manual documentation and process | Supported by structured provenance, validation, and traceability |
 
 ## Why UAGF Exists
 
