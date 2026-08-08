@@ -1619,124 +1619,361 @@ This boundary prevents a generated document, API response, knowledge graph, or A
 
 ## Governance
 
-The Universal AI Governance Framework is governed using the same principles it promotes.
+The Universal AI Governance Framework is governed using the same architectural principles it promotes.
 
-Governance is deterministic, evidence-driven, machine-verifiable, and rooted in the Canonical Knowledge Model (CKM). The framework itself is treated as governed knowledge rather than a collection of manually maintained documents.
+UAGF treats governance knowledge as structured, traceable, and verifiable knowledge rather than as a collection of independently maintained documents.
 
-### Governance Model
+Governance within UAGF therefore separates:
+
+-   Authoritative external governance sources
+-   Canonical knowledge representation within UAGF
+-   Governance decisions and ratification
+-   Validation and architectural enforcement
+-   Derived representations
+-   Immutable release states
+
+This separation prevents governance authority from being confused with the representation, processing, or publication of governance knowledge.
+
+---
+
+## Governance Model
 
 UAGF adopts a **Model-First Governance Architecture**.
 
-The Canonical Knowledge Model is the only authoritative governance artifact. Every other representation—including documentation, APIs, JSON-LD graphs, RDF exports, AI Context packages, and future interfaces—is derived deterministically from the CKM.
+The **Canonical Knowledge Model (CKM)** is the canonical governance knowledge representation maintained within UAGF.
 
-Governance therefore operates on knowledge objects rather than documents. All governance activities—including proposal, review, validation, approval, rendering, publication, and versioning—occur against the CKM. This guarantees that governance decisions are always applied to a single source of truth.
+The CKM provides the canonical semantic and structural layer through which governance knowledge is represented, related, validated, and transformed within the UAGF architecture.
 
-Core governance principles include:
-- **Reality First**
-- **Evidence over Assumption**
-- **Deterministic Processing**
-- **Zero Silent Correction**
-- **Canonical Knowledge First**
-- **Public Transparency**
-- **Machine Verifiability**
+The CKM does **not** replace or supersede the legal, regulatory, normative, or institutional authority of the governance sources from which its knowledge is derived.
+
+> **Core Principle:** Source authority remains with the authoritative source. Canonicality applies to the representation of governance knowledge within UAGF.
+
+Governance activities therefore operate across multiple controlled stages rather than treating a document or rendered artifact as an independent source of authority.
+
+These activities may include:
+
+-   Proposal
+-   Staging
+-   Provenance capture
+-   Validation
+-   Review
+-   Ratification
+-   Canonicalization
+-   Rendering
+-   Publication
+-   Release management
+
+Each activity has a defined architectural or governance responsibility.
+
+### Core Governance Principles
+
+-   **Reality First** — Represent knowledge faithfully without silent correction
+-   **Evidence over Assumption** — Decisions supported by traceable evidence
+-   **Deterministic Processing** — Reproducible transformations under defined conditions
+-   **Zero Silent Correction** — No undocumented modifications to governance knowledge
+-   **Canonical Knowledge First** — CKM as the structured representation layer
+-   **Public Transparency** — Observable and auditable governance processes
+-   **Machine Verifiability** — Programmatically evaluable constraints and invariants
+-   **Preservation of Source Authority** — External authority remains with originating sources
 
 ---
 
-### Lifecycle
+## Governance Lifecycle
 
-Every governance object follows a deterministic lifecycle.
+UAGF separates candidate knowledge from established canonical knowledge.
+
+A simplified governance lifecycle is:
 
 ```text
-Proposal
-    │
-    ▼
-Canonical Knowledge Object
-    │
-    ▼
-Validation Kernel (G1–G10)
-    │
-PASS │ FAIL
-    ▼
-Rendering
-    │
-    ▼
-Publication
-    │
-    ▼
-Immutable Release
+Proposal / Source Material
+          │
+          ▼
+   Staging / Candidate Object
+          │
+          ▼
+   Provenance & Transformation
+          │
+          ▼
+    Validation Kernel
+       (G1–G10)
+          │
+     ┌────┴────┐
+   FAIL       PASS
+     │          │
+     ▼          ▼
+  Reject /    Review /
+  Resolve    Ratification
+                │
+                ▼
+       Canonical Knowledge
+          Model (CKM)
+                │
+                ▼
+       Release Validation
+                │
+                ▼
+     Deterministic Rendering
+                │
+                ▼
+           Publication
+                │
+                ▼
+       Immutable Release
 ```
 
-Every stage is reproducible. Every transition is observable. Every rendered artifact can always be regenerated from the CKM.
+A failed validation gate prevents the relevant candidate or release from progressing through a blocking stage.
+
+Automated validation does not replace human or institutional governance decisions where such decisions are required.
+
+> **Ratification Note:** Where Founder or institutional ratification is required, ratification remains an explicit governance decision and must be recorded through the applicable governance mechanism.
 
 ---
 
-### Contribution
+## Contribution
 
-UAGF accepts community contributions. However, all contributions must target the Canonical Knowledge Model directly. Contributors are expected to modify canonical YAML knowledge objects inside the CKM rather than generated artifacts.
+UAGF accepts community contributions to the framework.
 
-| Category | Targets |
-| :--- | :--- |
-| ✅ **Acceptable (CKM Source)** | Requirements, Governance Domains, Controlled Vocabulary, Reference Objects, Relationship Definitions, Canonical Metadata |
-| ❌ **Prohibited (Generated Artifacts)** | Generated Markdown, Generated JSON, Generated JSON-LD, Generated RDF, Generated AI Context Packages |
+Contributors should modify the canonical knowledge layer or other explicitly designated source-controlled governance artifacts rather than manually modifying generated representations.
 
-These files are generated outputs. They are never edited manually. Pull Requests attempting to modify generated artifacts directly will be rejected because they violate the **Single Source of Truth** invariant.
+The repository distinguishes between source material that may be intentionally edited and representations that are derived by the rendering pipeline.
 
-#### The Absolute Gatekeeper
-Every contribution must successfully pass the complete **10-Gate Validation Kernel (G1–G10)** before it is eligible for review. The framework enforces strict production requirements:
+| Category | Examples | Contribution Status |
+| :--- | :--- | :--- |
+| **Canonical Knowledge** | Requirements, Governance Domains, Controlled Vocabulary, Reference Objects, Relationship Definitions, Canonical Metadata | Acceptable |
+| **Governance / Decision Records** | Working Papers, ADRs, Ratification Records, Release Metadata | Acceptable where applicable |
+| **Generated Artifacts** | Generated Markdown, JSON, JSON-LD, RDF, AI Context Packages | Derived — not manually edited |
+| **Operational Reports** | Validation Reports, Migration Reports, Regression Reports, Rendering Diagnostics | Generated Evidence — not canonical knowledge |
 
-- **0** architectural conflicts
-- **0** silent corrections
-- **100%** deterministic rendering
-- **100%** schema compliance
+Generated artifacts are not independent sources of governance knowledge.
 
-If any validation gate fails, processing stops immediately. No governance knowledge is permitted to reach the rendering stage until every gate passes successfully. The Validation Kernel therefore functions as the absolute gatekeeper of the Canonical Knowledge Model.
+Where generated artifacts are committed to the repository, they remain derived representations and must remain reproducible from their applicable source inputs and transformation rules.
 
----
-
-### Working Papers
-
-Architectural evolution occurs through Working Papers (WP). Working Papers allow ideas to be explored without immediately modifying the canonical governance model.
-
-Typical Working Paper topics include:
-- Architectural experiments
-- Knowledge model extensions
-- Schema evolution
-- New rendering profiles
-- Governance methodologies
-- Cross-standard interoperability
-- Performance improvements
-
-Working Papers are informative. They carry no normative authority until incorporated into the CKM through the formal governance process.
+> **Repository Integrity:** Pull Requests that modify generated artifacts directly, without the corresponding source-level change or approved regeneration process, should be treated as repository integrity violations.
 
 ---
 
-### Architecture Decisions
+## Validation and Governance Enforcement
 
-Architectural decisions are recorded explicitly. Major changes affecting the framework—including schema evolution, validation rules, rendering behavior, interoperability mechanisms, or governance semantics—must be documented through formal Architecture Decision Records (ADRs) or equivalent governance artifacts.
+The Validation Kernel functions as an **architectural integrity gate** within the UAGF processing pipeline.
 
-Each decision should include:
-- Problem statement
-- Decision rationale
-- Alternatives considered
-- Expected impact
-- Compatibility implications
-- References to affected CKM objects
+It verifies whether candidate or release knowledge conforms to the structural, semantic, provenance, and pipeline constraints defined by UAGF.
 
-This ensures that architectural evolution remains transparent, reproducible, and historically traceable.
+The Validation Kernel does **not** determine:
+
+-   Legal validity
+-   Regulatory authority
+-   Normative authority
+-   Institutional legitimacy
+-   The correctness of an external governance source
+
+Its role is to determine whether represented knowledge satisfies the applicable UAGF architectural constraints.
+
+Where a validation gate is defined as blocking, failure terminates the relevant processing stage.
+
+This fail-closed behavior prevents knowledge that violates defined UAGF constraints from propagating into downstream representations or releases.
 
 ---
 
-### Release Model
+## Release Governance
 
-UAGF releases are deterministic and immutable. A release represents a specific, validated state of the Canonical Knowledge Model.
+A UAGF release represents a specific validated state of the Canonical Knowledge Model.
 
-Once published:
-- the CKM snapshot is immutable,
-- rendered artifacts are reproducible,
-- semantic meaning is fixed,
-- validation outcomes are reproducible.
+A release is eligible for publication only when the applicable release validation requirements have been satisfied.
 
-Given identical inputs, identical software, and identical release metadata, every rendered artifact must be byte-identical. A release therefore becomes a reproducible governance reference rather than a mutable documentation snapshot.
+These requirements may include:
+
+-   All required Validation Kernel gates passing
+-   Required Kernel invariants remaining satisfied
+-   Migration provenance being complete
+-   Loss Manifest requirements being satisfied
+-   Deterministic rendering succeeding
+-   End-to-end regression verification passing
+-   Required governance or ratification decisions being recorded
+
+The release process therefore establishes a controlled boundary between an evolving canonical knowledge repository and a published governance reference.
+
+---
+
+## Immutable Releases
+
+UAGF distinguishes between an evolving canonical knowledge repository and a published release.
+
+The CKM may evolve through subsequent governed changes and versioned releases.
+
+Once a release is published, the **release snapshot is immutable**.
+
+An immutable release fixes:
+
+-   The CKM snapshot
+-   Applicable governance metadata
+-   Validation results
+-   Rendering profiles
+-   Derived artifacts
+-   Release integrity metadata
+
+> **Scope Clarification:** The immutability of a release applies to that specific published state rather than to the continuously evolving CKM repository.
+
+This enables governance knowledge to evolve while preserving historical release states as reproducible governance references.
+
+---
+
+## Reproducible Governance References
+
+A published UAGF release is intended to provide a reproducible reference point for governance knowledge represented within UAGF.
+
+Given the same:
+
+-   CKM release snapshot
+-   Rendering profile
+-   Applicable transformation rules
+-   Release metadata
+-   Compatible rendering environment
+
+...the rendering process is expected to produce reproducible artifacts according to the determinism requirements defined by UAGF.
+
+This enables:
+
+-   Reproducible governance documentation
+-   Historical verification
+-   Regression testing
+-   Artifact integrity verification
+-   Long-term governance traceability
+
+> **Reproducibility Scope:** Reproducibility applies to the defined processing conditions of a release and does not imply that governance knowledge itself is permanently immutable.
+
+---
+
+## Working Papers
+
+Architectural and governance evolution may be explored through **Working Papers (WP)**.
+
+Working Papers provide a controlled mechanism for exploring ideas without immediately modifying the canonical knowledge model.
+
+Typical Working Paper topics may include:
+
+-   Architectural experiments
+-   Knowledge model extensions
+-   Schema evolution
+-   New rendering profiles
+-   Governance methodologies
+-   Cross-standard interoperability
+-   Validation improvements
+-   Performance improvements
+
+Working Papers are informative and exploratory. They do not acquire normative status merely through publication.
+
+A Working Paper becomes part of the canonical UAGF governance model only through the applicable review, validation, and governance process.
+
+---
+
+## Architecture Decision Records
+
+Major architectural decisions are recorded explicitly through **Architecture Decision Records (ADRs)** or equivalent governance artifacts.
+
+ADRs may be required for changes affecting areas such as:
+
+-   CKM structure
+-   Schema evolution
+-   Validation rules
+-   Rendering behavior
+-   Interoperability mechanisms
+-   Provenance requirements
+-   Governance semantics
+-   Release behavior
+
+An architectural decision should record, as applicable:
+
+-   Problem statement
+-   Decision rationale
+-   Alternatives considered
+-   Expected impact
+-   Compatibility implications
+-   Affected CKM objects
+-   Relevant validation constraints
+-   Supporting references
+
+This ensures that architectural evolution remains transparent, reviewable, reproducible, and historically traceable.
+
+---
+
+## Governance Records and Evidence
+
+Governance decisions and processing outcomes should remain distinguishable from canonical knowledge.
+
+Governance records may include:
+
+-   Ratification records
+-   Architecture Decision Records
+-   Working Papers
+-   Review records
+-   Release records
+-   Validation evidence
+
+These records provide evidence of how UAGF knowledge and architecture evolved.
+
+They do not automatically become canonical knowledge merely because they document a governance decision or processing result.
+
+Where a governance decision changes canonical knowledge, the resulting canonical state must be represented through the CKM and subjected to the applicable validation and release process.
+
+---
+
+## Governance Integrity Principles
+
+UAGF governance is based on the following integrity principles:
+
+### Authority Before Representation
+External legal, regulatory, normative, and institutional authority remains with its originating source. UAGF does not create authority merely by representing a source within the CKM.
+
+### Canonical Knowledge Before Representation
+The CKM provides the canonical knowledge representation maintained within UAGF. Generated documents, APIs, knowledge graphs, and AI Context representations are derived views.
+
+### Evidence Before Assumption
+Governance decisions and transformations should be supported by traceable evidence rather than undocumented assumptions.
+
+### Reality Before Convenience
+Inconsistencies, ambiguity, missing information, and conflicts are reported rather than silently corrected.
+
+### Determinism Before Automation
+Automation must operate according to defined deterministic rules and constraints.
+
+### Transparency Before Abstraction
+Governance transformations, decisions, provenance, and declared information loss should remain observable and traceable.
+
+### Immutable Release State
+Published releases preserve a specific validated state of the UAGF knowledge infrastructure even while subsequent versions continue to evolve.
+
+---
+
+## Governance Boundary
+
+UAGF governance can therefore be understood as a controlled relationship between four elements:
+
+```text
+Authoritative Governance Sources
+            │
+            │ provenance / references
+            ▼
+   Canonical Knowledge Model
+            │
+            │ validation / governance
+            ▼
+    Validated Release State
+            │
+            │ deterministic rendering
+            ▼
+    Derived Representations
+```
+
+The architectural boundary is intentional:
+
+-   **Authority** remains with authoritative sources
+-   **Canonical knowledge representation** is maintained within the CKM
+-   **Governance decisions** determine how knowledge is reviewed, ratified, evolved, and released
+-   **Validation** enforces UAGF architectural constraints
+-   **Rendering** produces derived representations
+-   **Published releases** preserve immutable historical states
+
+This separation allows UAGF to provide a canonical knowledge infrastructure without becoming a competing source of legal, regulatory, or institutional authority.
 
 ---
 
