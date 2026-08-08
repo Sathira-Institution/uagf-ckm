@@ -1043,27 +1043,129 @@ Transformations performed by UAGF tooling should be:
 
 The tooling layer therefore exists to enforce and operationalize the UAGF architecture rather than to become an independent source of governance authority.
 
-### Core Toolchain
+## Core Toolchain
+
+UAGF is implemented as a deterministic knowledge engineering toolchain. Each tool performs a defined function within the canonical knowledge pipeline and operates subject to the architectural constraints established by UAGF.
 
 | Tool | Purpose |
 | :--- | :--- |
-| `validate_ckm.py` | Validates the Canonical Knowledge Model against Kernel invariants |
-| `migrate_ckm.py` | Migrates legacy governance documents into CKM objects |
-| `render_ckm.py` | Generates all public artifacts from the CKM |
-| `tests/run_e2e.py` | Executes complete end-to-end regression validation |
-| `manifest.yaml` | Defines migration behavior and provenance rules |
+| `validate_ckm.py` | Validates the Canonical Knowledge Model against defined UAGF architectural invariants and validation constraints. |
+| `migrate_ckm.py` | Transforms legacy governance material into candidate CKM objects while preserving applicable provenance and migration information. |
+| `render_ckm.py` | Generates defined downstream representations and public artifacts from the validated CKM. |
+| `tests/run_e2e.py` | Executes end-to-end verification of the defined migration, validation, rendering, fidelity, and reproducibility pipeline. |
+| `manifest.yaml` | Defines applicable migration, release, provenance, and pipeline metadata and processing rules. |
 
-These tools together form the **Canonical Knowledge Infrastructure Pipeline**.
+Together, these components form the **UAGF Canonical Knowledge Infrastructure Pipeline**.
+
+The toolchain separates the major responsibilities of the architecture:
+
+```text
+Authoritative Governance Sources
+              │
+              ▼
+      Migration / Mapping
+              │
+              ▼
+       CKM Staging Area
+              │
+              ▼
+     Validation Kernel
+              │
+       ┌────────────┐
+       │             │
+     FAIL          PASS
+       │             │
+       ▼             ▼
+     HOLD      Transformation
+                     │
+                     ▼
+              Deterministic
+                 Rendering
+                     │
+                     ▼
+          Derived Representations
+```
+
+> **Architectural Boundary:** The toolchain does not replace the authority of the underlying governance sources. Its purpose is to preserve, structure, validate, transform, and represent governance knowledge within the defined UAGF architecture.
 
 ---
 
 ## Validation Pipeline
 
-The Validation Pipeline is the first and most important execution stage of UAGF.
+The Validation Pipeline is a primary execution stage of the UAGF knowledge infrastructure pipeline.
 
-Its purpose is not merely to detect errors. Its purpose is to ensure that **invalid governance knowledge can never enter the Canonical Knowledge Model**.
+Its purpose is to determine whether canonical knowledge and pipeline outputs conform to the architectural invariants, structural constraints, semantic constraints, provenance requirements, and other validation conditions defined by UAGF.
 
-Validation always occurs before rendering. No rendered artifact is considered trustworthy unless the CKM has successfully passed validation.
+> **Important Distinction:** Validation does not determine whether an underlying governance source is legally, regulatorily, normatively, or institutionally authoritative. Instead, validation establishes whether the representation of governance knowledge within UAGF satisfies the conditions required for the applicable stage of the pipeline.
+
+### Validation Boundary
+
+The validation boundary separates candidate knowledge from knowledge that is eligible to proceed through defined downstream processing.
+
+```text
+Candidate CKM Objects
+        │
+        ▼
+┌───────────────────────────┐
+│     Validation Kernel     │
+│                           │
+│ Schema                    │
+│ Semantics                 │
+│ Relationships             │
+│ Vocabulary                │
+│ Provenance                │
+│ Fidelity                  │
+│ Release Constraints       │
+└─────────────┬─────────────┘
+              │
+       ┌──────┴──────┐
+       ▼             ▼
+     FAIL           PASS
+       │             │
+       ▼             ▼
+     HOLD      Eligible for
+               downstream
+               processing
+                     │
+                     ▼
+                Rendering
+```
+
+Where a validation condition is defined as blocking, failure prevents the affected knowledge or artifact from progressing to the next stage. This **fail-closed behavior** ensures that objects or transformations that violate applicable UAGF architectural constraints do not silently propagate through the downstream pipeline.
+
+### Validation Before Rendering
+
+Validation precedes rendering for pipeline stages in which the CKM is the source of the resulting representation.
+
+A rendered artifact is therefore eligible for downstream release or use only when the applicable CKM and rendering conditions have successfully satisfied the required validation gates.
+
+This establishes a controlled relationship between:
+`canonical knowledge → validation → transformation → derived representation`
+
+...rather than allowing rendering to become an independent path around the Validation Kernel.
+
+### What Validation Establishes
+
+Successful validation may establish that:
+
+-   The CKM conforms to defined structural constraints.
+-   Required identifiers and namespaces are valid.
+-   Required relationships satisfy defined rules.
+-   Controlled vocabularies are applied consistently.
+-   Required provenance information is present.
+-   Applicable fidelity conditions are satisfied.
+-   Required release metadata is present.
+-   Defined transformation and rendering prerequisites have been met.
+
+Successful validation does **not** establish that:
+
+-   A source is legally authoritative.
+-   A regulation has been interpreted correctly by a regulator.
+-   An organizational policy is legally compliant.
+-   A governance requirement is universally applicable.
+-   UAGF has superseded the authority of the underlying source.
+
+> **Constitutional Alignment:** These distinctions preserve the absolute boundary between UAGF architectural validity and external governance authority, strictly adhering to Institutional Rule 003 (Human Accountability) and Rule 005 (Public Neutrality).
 
 ### The 10-Gate Validation Kernel (G1–G10)
 
