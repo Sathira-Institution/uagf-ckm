@@ -58,40 +58,36 @@ UAGF does not seek to replace existing governance sources, standards, regulation
 | **Representations** | Documents maintained as primary artifacts | Deterministically derived interoperable representations |
 | **Accountability** | Dependent on manual documentation and process | Supported by structured provenance, validation, and traceability |
 
+
 ## Why UAGF Exists
 
-Modern AI governance has reached a level of complexity where documentation alone is no longer sufficient.
+Modern AI governance has reached a level of complexity where documentation alone is no longer sufficient to support consistent, traceable, and machine-operable governance across diverse environments.
 
 Organizations increasingly need to demonstrate:
 
-- regulatory compliance
-- governance consistency
-- traceability
-- explainability
-- auditability
-- interoperability
+-   Regulatory compliance
+-   Governance consistency
+-   Traceability
+-   Explainability
+-   Auditability
+-   Interoperability
 
 across multiple governance ecosystems simultaneously.
 
-However, today's governance artifacts are typically maintained as independent documents.
+Yet governance knowledge remains distributed across regulations, standards, policies, control frameworks, technical specifications, organizational procedures, and other governance artifacts. These sources are often developed and maintained independently, using different vocabularies, structures, semantic assumptions, and representations.
 
-Every framework introduces its own vocabulary.
-Every regulation introduces its own terminology.
-Every organization creates its own governance language.
+Every framework introduces its own terminology. Every regulation defines its own concepts and requirements. Every organization develops governance language and mappings suited to its own context.
 
-Over time, these independent representations inevitably diverge.
+Over time, these independent representations can diverge:
 
-- Documentation is updated.
-- Machine-readable artifacts remain outdated.
-- Knowledge graphs become inconsistent.
-- Internal policies evolve separately from regulatory mappings.
-- AI systems consume obsolete governance knowledge.
+-   Documentation is updated while derived machine-readable representations may remain outdated.
+-   Knowledge graphs may lose alignment with their source material.
+-   Internal policies may evolve separately from regulatory mappings.
+-   APIs and AI-context representations may continue to expose superseded governance knowledge.
 
-This phenomenon is not a tooling problem. **It is an architectural problem.**
+The resulting problem is not simply one of tooling or document management. It is an **architectural problem** of fragmented governance knowledge, semantic inconsistency, provenance, and synchronization.
 
-UAGF was created to solve this architectural problem.
-
----
+UAGF was created to address this architectural problem by establishing a canonical knowledge infrastructure through which governance knowledge from heterogeneous authoritative sources can be structured, validated, traced, and transformed into interoperable machine-readable representations.
 
 ## The Problem
 
