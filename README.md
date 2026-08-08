@@ -957,51 +957,91 @@ Where determinism is an explicit requirement, tests verify that identical inputs
 
 ---
 
-### Repository Design Principles
+## Repository Design Principles
 
-The repository architecture intentionally separates four distinct concepts to prevent accidental authority drift between documentation and governance knowledge.
+The UAGF repository architecture intentionally separates four distinct concepts to prevent accidental authority drift between authoritative governance sources, canonical knowledge, generated representations, and operational evidence.
 
-| Layer | Authority | Editable |
-| :--- | :---: | :---: |
-| **Canonical Knowledge Model** | ✅ Yes | ✅ Yes |
-| **Generated Artifacts** | ❌ No | ❌ No |
-| **Operational Reports** | ❌ No | ❌ No |
-| **Documentation Views** | ❌ No | ❌ No |
+| Layer | Role within UAGF | Directly Editable |
+| :--- | :--- | :--- |
+| **Canonical Knowledge Model (CKM)** | Canonical knowledge representation within UAGF | ✅ Yes |
+| **Generated Artifacts** | Derived representations rendered from canonical knowledge | ❌ No |
+| **Operational Reports** | Machine-generated evidence of validation, migration, rendering, and testing activities | ❌ No |
+| **Documentation Views** | Human-readable representations derived from canonical knowledge | ❌ No |
+
+> **⚖️ Authority Boundary:** The CKM is canonical *within the UAGF architecture*, but it does not supersede the legal, regulatory, normative, or institutional authority of the underlying governance sources. *(SATHIRA Constitution Rule 003 & Rule 005)*
 
 ---
 
-### Single Source of Truth
+### Canonical Knowledge Source within UAGF
 
 One of the core architectural invariants of UAGF is:
 
-> **The Canonical Knowledge Model is the single source of truth.**
+> **The Canonical Knowledge Model is the single canonical knowledge source within UAGF.**
 
-- No generated document is authoritative.
-- No JSON export is authoritative.
-- No RDF graph is authoritative.
-- No AI context file is authoritative.
+This means that the CKM is the maintained source from which UAGF generates its downstream representations.
 
-Only the Canonical Knowledge Model may be edited directly. Every other representation exists solely as a rendered view of the same knowledge.
+It does **not** mean that the CKM becomes the legal, regulatory, normative, or institutional authority of the governance knowledge it represents. Authoritative governance sources retain their original authority.
+
+The CKM provides the canonical semantic and structural representation of governance knowledge within UAGF while maintaining references and provenance to those authoritative sources.
+
+Accordingly:
+
+-   No generated document is a canonical source of UAGF knowledge.
+-   No JSON export is a canonical source of UAGF knowledge.
+-   No JSON-LD representation is a canonical source of UAGF knowledge.
+-   No RDF graph is a canonical source of UAGF knowledge.
+-   No AI Context representation is a canonical source of UAGF knowledge.
+-   No operational report is a canonical source of UAGF knowledge.
+-   **Only the CKM is directly maintained as the canonical knowledge representation within UAGF.**
+
+All downstream representations are derived from the CKM through defined transformation and rendering processes.
 
 ---
 
 ### Why This Matters
 
-Traditional governance repositories often duplicate knowledge across multiple files. Over time, those copies inevitably diverge. Different documents begin to disagree, updates become inconsistent, and audits become increasingly difficult.
+Traditional governance repositories may duplicate related governance knowledge across multiple files and representations. Over time, these independently maintained copies can diverge:
 
-UAGF avoids this class of failure entirely. 
+-   Different representations may contain different versions of the same information.
+-   Updates may be applied inconsistently.
+-   Mappings may become outdated.
+-   Provenance may become difficult to reconstruct.
+-   Audits may require reconciliation across multiple representations.
 
-Knowledge exists once. Everything else is rendered. This architecture enables deterministic governance documentation while dramatically reducing long-term maintenance complexity.
-## Tooling
+UAGF addresses this architectural failure mode by maintaining a canonical knowledge layer within the repository and deriving downstream representations from it.
+
+The objective is not to eliminate the existence of multiple representations.  
+The objective is to eliminate **independent authority and independent maintenance of those representations**.
+
+Knowledge represented within UAGF is maintained at the canonical knowledge layer. Documentation, structured exports, APIs, knowledge graphs, and AI-context representations are **derived views** of that knowledge.
+
+This architecture supports:
+
+-   Deterministic transformation
+-   Reproducible rendering
+-   Consistent machine-readable representations
+-   Traceable provenance
+-   Controlled evolution
+-   Reduced representation drift
+-   Simplified long-term maintenance
+
+---
+
+### Tooling
 
 UAGF is implemented as a deterministic knowledge engineering pipeline.
 
-Every tool exists to preserve the integrity of the Canonical Knowledge Model (CKM). No tool is allowed to modify governance knowledge implicitly. Every transformation must be:
+Each tool has a defined responsibility within the governance knowledge lifecycle and must operate within the authority boundaries established by the UAGF architecture. Tools must not silently modify canonical governance knowledge or bypass defined validation and governance controls.
 
-- deterministic
-- traceable
-- reproducible
-- machine-verifiable
+Transformations performed by UAGF tooling should be:
+
+-   **Deterministic** — Identical defined inputs and transformation conditions produce reproducible results.
+-   **Traceable** — Transformations preserve relevant provenance and lineage information.
+-   **Reproducible** — Defined pipeline operations can be independently repeated under equivalent conditions.
+-   **Machine-verifiable** — Applicable outputs and invariants can be evaluated programmatically.
+-   **Fail-closed where required** — Defined blocking conditions prevent invalid or non-conforming artifacts from progressing through the pipeline.
+
+The tooling layer therefore exists to enforce and operationalize the UAGF architecture rather than to become an independent source of governance authority.
 
 ### Core Toolchain
 
