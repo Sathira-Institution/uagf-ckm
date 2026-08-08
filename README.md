@@ -1433,65 +1433,190 @@ The objective is not merely to preserve document history. The objective is to pr
 
 ## Rendering Engine
 
-The Rendering Engine transforms the CKM into multiple representations.
+The UAGF Rendering Engine transforms validated Canonical Knowledge Model (CKM) content into defined downstream representations.
 
-Rendering is deterministic. The renderer does not create knowledge. It only projects existing canonical knowledge into different views. Every rendered artifact is disposable. The CKM remains the only authoritative source.
+Rendering is a transformation process. The Rendering Engine does not establish governance authority and does not independently create canonical governance knowledge.
 
-### Supported Rendering Profiles
+Instead, it projects canonical knowledge represented within UAGF into representation-specific views according to defined rendering profiles and transformation rules.
 
-| Profile | Format | Characteristics |
-| :--- | :--- | :--- |
-| **Registry Documentation** | Markdown | Human-readable, declared-lossy |
-| **Registry JSON** | JSON | Lossless |
-| **Registry JSON-LD** | JSON-LD | Lossless, linked-data compatible |
-| **Registry RDF** | RDF/Turtle | Lossless, semantic-web compatible |
-| **AI Context** | Plain Text | Declared-lossy, optimized for LLM ingestion |
+The CKM remains the canonical knowledge representation maintained within UAGF. Derived artifacts do not acquire canonical status merely because they are published, distributed, or consumed by downstream systems.
 
-Additional rendering profiles may be introduced without changing governance knowledge.
-
-### Declared-Loss Rendering
-
-Some rendering targets cannot preserve every attribute of the CKM. Examples include:
-
-- Markdown
-- AI Context
-- Presentation-oriented formats
-
-When this occurs:
-
-- every omission must be explicitly documented.
-- Each lossy artifact is accompanied by a Loss Manifest, enabling downstream systems to understand precisely what information has been omitted.
-
-**Declared loss is acceptable. Undeclared loss is not.**
-
-### Rendering Guarantees
-
-The Rendering Engine guarantees:
-
-- deterministic output
-- canonical terminology preservation
-- reproducible artifacts
-- declared information loss
-- zero semantic modification
-
-Generated documentation is therefore an artifact of the CKM—not an independent source of governance knowledge.
+Rendering profiles may therefore evolve, and additional representations may be introduced, without changing the underlying governance knowledge represented by the CKM.
 
 ---
 
-## Release Validation
+### Supported Rendering Profiles
 
-Before any UAGF release may be published, the entire toolchain must complete successfully.
+UAGF may provide multiple rendering profiles for different consumption requirements.
 
-A release is eligible only if:
+| Profile | Format | Characteristics |
+| :--- | :--- | :--- |
+| **Registry Documentation** | Markdown | Human-readable representation; may be declared-lossy. |
+| **Registry JSON** | JSON | Structured machine-readable representation; losslessness subject to the applicable profile. |
+| **Registry JSON-LD** | JSON-LD | Linked-data representation; preservation properties defined by the applicable mapping. |
+| **Registry RDF** | RDF/Turtle | Semantic-web representation; preservation properties defined by the applicable mapping. |
+| **AI Context** | Plain Text | Declared-lossy representation optimized for machine or LLM consumption. |
+| **Additional Profiles** | Profile-defined | Governed by their respective transformation and fidelity rules. |
 
-- all 10 validation gates pass
-- no Kernel invariant is violated
-- migration provenance is complete
-- deterministic rendering succeeds
-- loss manifests are valid
-- end-to-end regression passes
+A rendering profile is not itself a source of governance authority. Its preservation, transformation, and information-loss characteristics are defined by the applicable UAGF rendering specification.
 
-Only then may rendered artifacts be distributed as official outputs of the Canonical Knowledge Model.
+Additional rendering profiles may be introduced without modifying canonical governance knowledge, provided that their transformation rules and validation requirements are explicitly defined.
+
+---
+
+### Rendering Profiles and Preservation Semantics
+
+Different representations may preserve different subsets or structures of the CKM. UAGF therefore distinguishes between:
+
+-   **Lossless representation** — A representation whose defined transformation preserves all properties required by its profile for reconstruction or equivalent semantic interpretation.
+-   **Declared-lossy representation** — A representation that intentionally omits or transforms defined information.
+-   **Profile-defined representation** — A representation whose preservation and transformation semantics are explicitly specified by its rendering profile.
+
+Losslessness is therefore a property of a **defined transformation profile**, not an inherent property of a serialization format alone.
+
+For example, JSON, JSON-LD, and RDF may support lossless representations under appropriately defined mappings, but their actual preservation guarantees depend on the corresponding UAGF rendering profile and transformation rules.
+
+---
+
+### Declared Information Loss
+
+Some rendering targets cannot preserve every property of the CKM. Examples may include:
+
+-   Markdown documentation
+-   AI Context representations
+-   Presentation-oriented formats
+-   Simplified interoperability views
+
+When a rendering profile intentionally omits information:
+
+1.  The omission must be defined by the applicable rendering profile.
+2.  The omitted information must be recorded in the corresponding Loss Manifest where required.
+3.  The reason or transformation condition must be identifiable.
+4.  Reconstruction limitations must be declared where applicable.
+5.  The resulting artifact must not be represented as preserving information that it intentionally discards.
+
+A declared loss is therefore an explicit property of a transformation.
+
+> **Core Principle:** Declared loss is acceptable. Undeclared loss is not.
+
+The purpose of the Loss Manifest is to make information loss observable and machine-processable rather than allowing it to remain implicit.
+
+---
+
+### Rendering Fidelity
+
+The Rendering Engine must preserve the applicable properties of canonical knowledge according to the requirements of each rendering profile.
+
+These properties may include:
+
+-   Canonical terminology
+-   Identifiers
+-   Represented governance semantics
+-   Required relationships
+-   Applicable provenance
+-   Declared metadata
+-   Profile-specific structural requirements
+
+A rendering process must not introduce **undeclared semantic modification**. Where a transformation intentionally changes representation, structure, or information content, the applicable rendering profile must define that transformation and declare any resulting information loss or limitation.
+
+---
+
+### Rendering Guarantees
+
+Subject to the applicable rendering profile and transformation conditions, the Rendering Engine provides the following architectural guarantees:
+
+-   Deterministic transformation
+-   Reproducible outputs
+-   Preservation of applicable canonical terminology
+-   Preservation of required identifiers
+-   Explicit transformation semantics
+-   Declared information loss where applicable
+-   No undeclared semantic modification
+-   Traceable rendering inputs and profiles
+
+Generated documentation and machine-readable artifacts are therefore **derived representations of canonical knowledge maintained within UAGF**, rather than independent sources of canonical knowledge.
+
+---
+
+### Deterministic Rendering
+
+Where deterministic rendering is required, identical:
+
+-   CKM inputs
+-   Rendering profiles
+-   Transformation rules
+-   Release metadata
+-   Applicable execution conditions
+
+...must produce reproducible outputs.
+
+Deterministic rendering enables:
+
+-   Reproducible releases
+-   Regression testing
+-   Artifact comparison
+-   Verification of transformation behavior
+-   Audit reproducibility
+-   Long-term archival verification
+
+Determinism is therefore treated as an architectural property of applicable UAGF rendering processes rather than merely an implementation convenience.
+
+---
+
+### Release Validation
+
+Before a UAGF release subject to the release validation policy may be published, the applicable validation, migration, rendering, and verification stages must complete successfully.
+
+A release is eligible for publication only when the applicable release criteria have been satisfied, including:
+
+-   All applicable blocking Validation Kernel gates pass
+-   No mandatory UAGF architectural invariant is violated
+-   Required migration provenance is complete
+-   Required rendering determinism checks pass
+-   Applicable Loss Manifests are valid
+-   Required end-to-end and regression verification passes
+-   Required release metadata and integrity checks pass
+
+Where the current release profile defines a ten-gate Validation Kernel, all applicable G1–G10 release gates must pass. If the implementation defines a different gate set, the authoritative validation specification and implementation take precedence over this documentation.
+
+Only after the applicable release criteria have been satisfied may the resulting rendered artifacts be distributed as official **derived outputs of the UAGF Canonical Knowledge Model**.
+
+---
+
+### Representation Authority Boundary
+
+The Rendering Engine maintains a strict separation between canonical knowledge and its representations.
+
+```text
+Canonical Knowledge Model
+          │
+          ▼
+   Validation Kernel
+          │
+          ▼
+ Rendering Profile
+          │
+          ▼
+ Rendering Engine
+          │
+    ┌─────┼─────┬──────────┐
+    ▼     ▼     ▼          ▼
+ Markdown JSON-LD RDF   AI Context
+    │     │     │          │
+    └──────────┴──────────┘
+              │
+              ▼
+       Derived Artifacts
+```
+
+The authority relationship is therefore:
+
+-   **Authoritative Sources** → Retain external authority.
+-   **CKM** → Canonical knowledge representation within UAGF.
+-   **Rendered Artifacts** → Derived representations.
+
+This boundary prevents a generated document, API response, knowledge graph, or AI-context artifact from becoming an unintended competing source of canonical knowledge.
+
 ## Governance
 
 The Universal AI Governance Framework is governed using the same principles it promotes.
