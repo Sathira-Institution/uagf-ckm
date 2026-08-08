@@ -1,0 +1,171 @@
+# UAGF Certification — Tier 1: Associate Practitioner
+# Status: DRAFT v0.1 — pending Founder ratification
+# Every scenario below is answerable by running the shipped toolchain; nothing requires opinion.
+exam:
+  id: UAGF-CERT-T1
+  title: "UAGF Associate Practitioner"
+  version: "0.1"
+  status: draft
+  tier: 1
+  passing_score_percent: 75
+  open_book: true
+  time_limit_minutes: 90
+  grading: automated
+  tracks: [A, B]
+  candidate_selects_one_track: true
+  toolchain_alignment:
+    validator: "validate_ckm.py v0.2 — findings carry error/object/field/value/allowed_values/hint/reference"
+    invariants: [V-1, V-2, V-3, V-4, V-5, V-6, V-7]
+    reports: [migration_report.json, staging_validation.json, e2e_summary.json]
+    note: "Scenario answers are the validator's own finding codes, so marking is exact-match, not interpretive."
+
+# ---------------------------------------------------------------- TRACK A
+track_A:
+  name: "CKM Engineer"
+  competencies:
+    - "Author and repair CKM YAML objects against the Kernel envelope (K-1) and UGR schema"
+    - "Bind enumerated attributes to Controlled Vocabularies; never invent terms (K-4/V-4)"
+    - "Read a validator report and act on the hint without auto-fixing data"
+    - "Interpret a migration report: batches, dispositions, silent_corrections"
+  objective_items: 12          # auto-marked MCQ / short-token answers
+  scenario_items: 3
+
+  scenarios:
+    - id: A-S1
+      name: "Missing derivation"
+      prompt: "Validate the snippet. State the invariant code that fails, the field involved, and the correct remediation."
+      snippet: |
+        id: UGR-901
+        type: Requirement
+        tier: 1
+        version: "1.0"
+        status: proposed
+        label: "Model Documentation"
+        owner_module: M-CORE
+        created: "2026-08-01"
+        modified: "2026-08-01"
+        statement: "The organization must document model training data sources."
+        intent: "Traceability of training data."
+        requirement_type: [standard]
+        applicability: "All organizations training models"
+        lifecycle_stages: [development]
+        priority: high
+        risk_categories: [transparency]
+        implementation_guidance: ["Record data sources"]
+        expected_evidence: "Data source register"
+        related_controls: "Data Lineage Control"
+        edges:
+          belongs_to: {primary: DOM-TRANSPARENCY}
+      expected_answer:
+        invariant: "V-3"
+        field: "edges.derives_from"
+        remediation: "Add at least one derives_from edge to an ExternalReference with a verification disposition; do not publish a requirement with no legal or standards anchor."
+      distractor_traps: ["Candidates who answer V-1 have confused a missing edge with a broken edge."]
+
+    - id: A-S2
+      name: "Unmapped vocabulary term"
+      prompt: "Validate the snippet. Identify every failing invariant and state why the fix is NOT to add the term to the CV yourself."
+      snippet: |
+        id: UGR-902
+        type: Requirement
+        tier: 1
+        version: "1.0"
+        status: proposed
+        label: "Retention Review"
+        owner_module: M-CORE
+        created: "2026-08-01"
+        modified: "2026-08-01"
+        statement: "The organization must review retention periods annually."
+        intent: "Prevent indefinite retention."
+        requirement_type: [standard]
+        applicability: "All organizations"
+        lifecycle_stages: [training]
+        priority: urgent
+        risk_categories: [privacy]
+        implementation_guidance: ["Review annually"]
+        expected_evidence: "Review records"
+        related_controls: "Retention Control"
+        edges:
+          belongs_to: {primary: DOM-PRIVACY}
+          derives_from:
+            - {ref: REF-TH-PDPA, version: "2019", verification: pending}
+      expected_answer:
+        invariants: ["V-4"]
+        failing_values: ["lifecycle_stages=training", "priority=urgent"]
+        remediation: "Apply the ratified legacy mapping (training -> development) for the stage; 'urgent' has no CV-Priority mapping and requires a Founder ruling. A practitioner never adds CV terms unilaterally — vocabularies are ratified objects (K-4)."
+
+    - id: A-S3
+      name: "Premature approval"
+      prompt: "Explain why this object cannot be published, citing the invariant, and describe the only legitimate path forward."
+      snippet: |
+        id: UGR-903
+        type: Requirement
+        tier: 1
+        version: "1.0"
+        status: approved
+        label: "Third-Party Assurance"
+        owner_module: M-CORE
+        created: "2026-08-01"
+        modified: "2026-08-01"
+        statement: "The organization must obtain assurance over third-party AI components."
+        intent: "Supply chain accountability."
+        requirement_type: [standard]
+        applicability: "Organizations using third-party AI components"
+        lifecycle_stages: [development, operation]
+        priority: high
+        risk_categories: [governance]
+        implementation_guidance: ["Obtain supplier attestations"]
+        expected_evidence: "Supplier attestations"
+        related_controls: "Supplier Assurance"
+        edges:
+          belongs_to: {primary: DOM-GOV}
+          derives_from:
+            - {ref: REF-ISO42001, version: "2023", locator: "Annex A", verification: pending}
+      expected_answer:
+        invariant: "V-7"
+        field: "ratified_by"
+        remediation: "Either return status to 'proposed', or obtain a Founder decision record and cite it in ratified_by. Writing a decision reference that does not exist is falsification, not remediation."
+
+# ---------------------------------------------------------------- TRACK B
+track_B:
+  name: "Compliance Specialist"
+  competencies:
+    - "Read derives_from edges as a crosswalk and state what a mapping does and does not assert"
+    - "Interpret a provenance record: source, transforms applied, dispositions"
+    - "Read a loss manifest and determine whether a view is safe for a given use"
+    - "Distinguish verified from pending-verification citations"
+  objective_items: 12
+  scenario_items: 3
+
+  scenarios:
+    - id: B-S1
+      name: "Reading a crosswalk honestly"
+      prompt: "A requirement carries derives_from edges to two instruments, both with verification 'pending'. A client asks whether this proves compliance with those instruments. Answer, with reasoning."
+      expected_answer:
+        claim_permitted: "The requirement was derived from those instruments at the cited locators."
+        claim_forbidden: "That the organization complies with those instruments, or that the citation itself has been verified."
+        reasoning: "A derives_from edge records lineage, not conformance; and 'pending' means the D-06 source-verification pass has not confirmed the locator. Two separate limits, both must be stated."
+
+    - id: B-S2
+      name: "Provenance interrogation"
+      prompt: "Given the provenance record below, state (a) whether any content was rewritten, (b) what the disposition means, and (c) what a reviewer must do before this object can be relied on."
+      snippet: |
+        provenance:
+          source_document: "UAGF-002 v1.0 PUBLIC RELEASE"
+          source_location: "Section 5 record UGR-017"
+          batch: "A"
+          transform_log: ["trim", "split-declared-delims", "parse_int_id", "casefold_token", "parse_numbered_list", "parse_sources"]
+          legacy_status: "Active"
+          dispositions: ["[TO VERIFY] implementation_guidance completeness vs source file"]
+      expected_answer:
+        a: "No. Every transform listed is mechanical; no rewriting transform exists in the log."
+        b: "TO VERIFY means the truth is believed to exist but the evidence is not yet in hand — here, whether the guidance list is complete against the source."
+        c: "Re-extract the guidance from the cited source location and clear or escalate the disposition. The object may be used with the flag visible, never with the flag hidden."
+
+    - id: B-S3
+      name: "Loss manifest and fitness for use"
+      prompt: "An AI-context view of a requirement declares that implementation_guidance, expected_evidence and related_controls were compressed away, and that the statement is byte-equal to the model. A team wants to use this view as the basis of an audit. Advise."
+      expected_answer:
+        verdict: "Not fit for that purpose."
+        reasoning: "The obligation text is intact and may be quoted, but the evidence expectations and controls — precisely what an audit tests against — were declared omitted. Use a view whose loss manifest omits nothing relevant to the purpose, or the model itself."
+        principle: "A declared omission is not a harmless one; the manifest exists so the consumer can make this judgement instead of discovering the gap later."

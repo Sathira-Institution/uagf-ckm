@@ -1,0 +1,203 @@
+# UAGF Certification — Tier 0: Foundation Exam
+# Status: DRAFT v0.1 — pending Founder ratification (see governance_flags below)
+# Design rule: this tier teaches WHY UAGF exists before WHAT the CKM is.
+#              Questions 1-9 are "why"; CKM mechanics appear only from Q10 onward.
+exam:
+  id: UAGF-CERT-T0
+  title: "UAGF Foundation — Why Governance Knowledge Must Be a Model"
+  version: "0.1"
+  status: draft
+  tier: 0
+  format: multiple_choice
+  question_count: 15
+  passing_score_percent: 70          # 11 of 15 correct
+  open_book: true
+  time_limit_minutes: 45
+  grading: automated                 # answer-key comparison; no human marking
+  reference_corpus:
+    - "README — Traditional Governance vs UAGF (comparison table)"
+    - "README — Architectural Innovations"
+    - "README — Alpha Release / Known Pending Items"
+    - "README — Regeneration Policy"
+    - "docs/adr/ADR-001-model-first.md .. ADR-004-loss-manifest.md"
+
+governance_flags:
+  - "ASSUMPTION: the brief cited 'README Part 1-2'. The current repository README has no numbered parts; answer explanations therefore cite section titles and ADR files that exist in the repo. If a Part-numbered README is adopted, explanations must be re-pointed."
+  - "Tier 0 certifies an individual's understanding. It makes no conformance claim about any organization or AI system."
+
+sections:
+  - id: S1
+    name: "The Governance Polycrisis — why traditional compliance fails"
+    questions: [Q1, Q2, Q3, Q4, Q5]
+  - id: S2
+    name: "UAGF as a Universal Translation Layer"
+    questions: [Q6, Q7, Q8, Q9]
+  - id: S3
+    name: "Cost of Documentation Drift vs value of Deterministic Rendering"
+    questions: [Q10, Q11, Q12, Q13, Q14, Q15]
+
+questions:
+  - id: Q1
+    section: S1
+    stem: "An organization must satisfy the EU AI Act, ISO/IEC 42001, a national data-protection act, and an internal AI policy at the same time. Each regime uses different words for overlapping obligations. What does UAGF call this condition?"
+    options:
+      A: "A compliance backlog — solved by hiring more auditors"
+      B: "A governance polycrisis — overlapping regimes with no shared vocabulary"
+      C: "A certification gap — solved by obtaining more certificates"
+      D: "A tooling problem — solved by buying a GRC platform"
+    answer: B
+    explanation: "The failure is structural, not resource-based: obligations overlap but their expressions do not interoperate, so effort multiplies per regime instead of being reused. README, comparison table — 'Source of Truth: Documents' vs 'Canonical Knowledge Model'."
+
+  - id: Q2
+    section: S1
+    stem: "Why does adding another framework document usually NOT reduce the polycrisis?"
+    options:
+      A: "Because frameworks are always poorly written"
+      B: "Because each new document becomes another unsynchronized source of truth"
+      C: "Because regulators do not accept framework documents"
+      D: "Because documents cannot be stored in version control"
+    answer: B
+    explanation: "Every document added is another artifact that must be manually kept in agreement with all the others. UAGF's response is not another document but a model from which documents are rendered. ADR-001 Context."
+
+  - id: Q3
+    section: S1
+    stem: "In the UAGF v1.x corpus, a published requirement referenced two requirement IDs that did not exist, and a third dangling reference was found only when a machine ran the migration. What does this demonstrate?"
+    options:
+      A: "That the authors were careless and should be replaced"
+      B: "That manual review cannot guarantee reference integrity at corpus scale"
+      C: "That cross-references should be removed from governance documents"
+      D: "That the requirements themselves were wrong"
+    answer: B
+    explanation: "Human review found UGR-030/031; only the machine found the UGR-052 case (EF-2). The lesson is about the limits of review as a control, not about individual competence. ADR-001 Context."
+
+  - id: Q4
+    section: S1
+    stem: "A governance claim is asserted in a PDF but cannot be checked by any program. Under UAGF's Reality First principle, how should it be treated?"
+    options:
+      A: "As verified, because it was formally published"
+      B: "As unverified until evidence supports it — publication is not proof"
+      C: "As verified if a senior executive approved it"
+      D: "As irrelevant, because PDFs are obsolete"
+    answer: B
+    explanation: "Reality First: evidence over assumption. Publication status confers no truth. This is why the alpha release marks every unverified external citation as pending-verification. README, Known Pending Items."
+
+  - id: Q5
+    section: S1
+    stem: "Which best describes what UAGF is NOT?"
+    options:
+      A: "It is not a public knowledge infrastructure"
+      B: "It is not a replacement for ISO, NIST, or the EU AI Act, and not a regulator"
+      C: "It is not machine-readable"
+      D: "It is not openly licensed"
+    answer: B
+    explanation: "The Interoperability Declaration: UAGF connects existing standards rather than competing with them, and holds no regulatory authority."
+
+  - id: Q6
+    section: S2
+    stem: "What does it mean that UAGF acts as a 'universal translation layer'?"
+    options:
+      A: "It translates governance documents between human languages only"
+      B: "It expresses obligations from many regimes as canonical requirements linked to versioned external references, so regimes become comparable"
+      C: "It converts all standards into a single mandatory standard"
+      D: "It automatically makes an organization compliant with every regime"
+    answer: B
+    explanation: "Each requirement derives from one or more versioned External Reference objects; the shared model is what makes different regimes mappable. Translation here is semantic, not linguistic."
+
+  - id: Q7
+    section: S2
+    stem: "An external standard is revised and its clause numbering changes. Why does the UAGF model survive this without a rewrite?"
+    options:
+      A: "Because UAGF ignores external standards after first mapping"
+      B: "Because references are version-pinned objects, so the old mapping stays valid and a new version is added alongside it"
+      C: "Because UAGF forbids citing standards that change"
+      D: "Because the renderer rewrites citations automatically"
+    answer: B
+    explanation: "Temporal Interoperability: external instruments are modelled as versioned objects with pinned locators, so history remains valid instead of being overwritten."
+
+  - id: Q8
+    section: S2
+    stem: "Two organizations in different jurisdictions both claim to satisfy the same governance intent. How does a shared model help an assessor?"
+    options:
+      A: "It forces both to adopt the same national law"
+      B: "It lets both claims be expressed against the same canonical requirements, making the comparison structural rather than rhetorical"
+      C: "It removes the need for assessment entirely"
+      D: "It guarantees both organizations are compliant"
+    answer: B
+    explanation: "Jurisdiction-aware design: UAGF does not adjudicate between legal systems; it provides a common expression so differences become visible and comparable."
+
+  - id: Q9
+    section: S2
+    stem: "Why is vendor and origin neutrality a structural requirement rather than a marketing statement in UAGF?"
+    options:
+      A: "Because vendors refuse to participate otherwise"
+      B: "Because adopter-side data and product concepts are excluded from the public model by design, so no vendor's implementation is embedded in the shared vocabulary"
+      C: "Because neutrality is required by copyright law"
+      D: "Because it makes the model smaller"
+    answer: B
+    explanation: "The public model holds canonical classes and requirements; adopter instances and product architectures stay outside it. Neutrality is enforced by what the model refuses to contain."
+
+  - id: Q10
+    section: S3
+    stem: "Documentation drift is best defined as:"
+    options:
+      A: "Documents becoming longer over time"
+      B: "Two or more artifacts that should agree silently diverging because each is maintained by hand"
+      C: "Documents being translated into other languages"
+      D: "Readers losing interest in documentation"
+    answer: B
+    explanation: "The defining property is silence: nothing signals the divergence. README comparison table, 'Synchronization: Manual editing' vs 'Deterministic rendering'."
+
+  - id: Q11
+    section: S3
+    stem: "A team keeps a human-readable handbook and a machine-readable registry in sync by hand. What is the predicted long-run outcome, and what does UAGF prescribe instead?"
+    options:
+      A: "They stay in sync; UAGF prescribes stricter review checklists"
+      B: "They diverge; UAGF prescribes generating both from one canonical source"
+      C: "They diverge; UAGF prescribes deleting the machine-readable version"
+      D: "They stay in sync; UAGF prescribes annual audits"
+    answer: B
+    explanation: "Human and machine editions are sibling renders of the same objects, never separately authored. ADR-002."
+
+  - id: Q12
+    section: S3
+    stem: "'Deterministic rendering' means that:"
+    options:
+      A: "The renderer always produces beautiful output"
+      B: "Identical inputs produce byte-identical output, so any difference signals a real change"
+      C: "Rendering happens automatically on a schedule"
+      D: "Only one output format is permitted"
+    answer: B
+    explanation: "Renders are pure functions of profile, scope, release, and dataset; stamps carry no wall clock. ADR-003."
+
+  - id: Q13
+    section: S3
+    stem: "Why is a wall-clock timestamp inside a rendered artifact a problem for a governance system?"
+    options:
+      A: "It reveals the working hours of the team"
+      B: "It makes every re-render differ, so genuine changes can no longer be distinguished from noise"
+      C: "Timestamps are prohibited by open-source licences"
+      D: "It slows the renderer down"
+    answer: B
+    explanation: "Non-determinism destroys the diff as evidence. Release metadata and content hashes replace wall-clock values. ADR-003 Decision."
+
+  - id: Q14
+    section: S3
+    stem: "A summary view omits implementation guidance to fit a table. Under UAGF rendering rules this is:"
+    options:
+      A: "Forbidden — every view must contain everything"
+      B: "Permitted only if the omission is declared in a loss manifest"
+      C: "Permitted silently, because summaries are informal"
+      D: "Permitted only for machine-readable views"
+    answer: B
+    explanation: "Loss is acceptable; undeclared loss is the defect. One rule is absolute: the normative statement is never truncated or paraphrased in any view. ADR-004."
+
+  - id: Q15
+    section: S3
+    stem: "A contributor edits a generated document directly to correct a typo. Why does the pipeline reject this even though the edit looks harmless?"
+    options:
+      A: "Because typos are not considered errors"
+      B: "Because the artifact is a render; the change would be erased on regeneration and the model would remain wrong"
+      C: "Because only the Founder may edit typos"
+      D: "Because generated files are read-only in Git"
+    answer: B
+    explanation: "Generated artifacts are disposable; truth lives in the model. CI regenerates and rejects any hand-edited artifact. README, Regeneration Policy."

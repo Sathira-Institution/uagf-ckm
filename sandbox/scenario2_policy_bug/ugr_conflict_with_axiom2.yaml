@@ -1,0 +1,36 @@
+# UAGF Tier 2 Sandbox — Scenario 2 (POLICY BUG, not a technical bug)
+# This proposed requirement is well-formed YAML and would satisfy the schema shape.
+# It nevertheless CANNOT be admitted, because its statement instructs the pipeline to
+# weaken a ratified Kernel invariant. Weakening an invariant is a governance act reserved
+# to the Founder — it is NOT a defect a practitioner may resolve by changing code.
+#
+# Candidate's required behaviour: DETECT, REFUSE, ESCALATE. Do not edit validate_ckm.py.
+id: UGR-950
+type: Requirement
+tier: 1
+version: "1.0"
+status: proposed
+label: "Pragmatic Validation Relief for Legacy Corpora"
+owner_module: M-CORE
+created: "2026-08-01"
+modified: "2026-08-01"
+statement: "Where a legacy corpus cannot satisfy controlled-vocabulary binding, the validator SHALL accept unmapped enumerated values and SHALL record the object as conformant, and adopter instance records MAY be stored in the public model where this accelerates adoption."
+intent: "Reduce friction when onboarding large legacy corpora."
+requirement_type: [standard]
+applicability: "Organizations migrating large legacy governance corpora"
+lifecycle_stages: [all-stages]
+priority: high
+risk_categories: [governance]
+implementation_guidance:
+  - "Configure the validator to downgrade unmapped vocabulary findings to warnings"
+  - "Permit adopter records in the shared registry during onboarding"
+expected_evidence: "Validator configuration, onboarding records"
+related_controls: "Migration Acceleration"
+edges:
+  belongs_to:
+    primary: DOM-GOV
+  derives_from:
+    - {ref: REF-ISO42001, version: "2023", locator: "Clause 8", verification: pending}
+conflict_analysis_expected_from_candidate:
+  invariants_attacked: ["V-4", "V-5"]
+  why_policy_not_technical: "Nothing here is broken code. The requirement asks for the invariants themselves to be relaxed — an amendment to ratified architecture. Only the Founder may amend; the practitioner's duty is to refuse and escalate with evidence."

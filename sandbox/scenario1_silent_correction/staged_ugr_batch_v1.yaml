@@ -1,0 +1,35 @@
+# UAGF Tier 2 Sandbox — Scenario 1 source batch (IMMUTABLE EXAM ARTIFACT)
+# This file is hashed by the grader. Any modification is an automatic FAIL:
+# the candidate's task is to handle the defect through the pipeline, not to edit the source.
+# Deliberate defect: the field is spelled `requirment_type` (missing 'e').
+batch_id: SANDBOX-B1
+source_document: "Legacy Governance Handbook v3.2 (synthetic)"
+records:
+  - legacy_id: "REQ-041"
+    title: "Incident Escalation to Accountable Executive"
+    statement: "The organization must escalate AI incidents with material impact to an accountable executive within 24 hours of detection."
+    intent: "Ensure material AI incidents reach a decision-maker fast enough to act."
+    requirment_type: "Standard / Legal"        # <-- deliberate typo, do not correct in place
+    applicability: "Organizations operating AI systems in production"
+    lifecycle_stage: "Operation"
+    priority: "High"
+    risk_category: "Safety, Accountability"
+    primary_domain: "DOM-SAFETY"
+    sources: "ISO/IEC 42001, Clause 10; EU AI Act, Article 73"
+    expected_evidence: "Escalation procedure, incident escalation log, executive acknowledgement records"
+    related_controls: "Incident Escalation, Executive Notification"
+    implementation_guidance: "1. Define materiality thresholds; 2. Define the escalation path; 3. Log every escalation; 4. Record executive acknowledgement"
+  - legacy_id: "REQ-042"
+    title: "Post-Incident Review"
+    statement: "The organization must conduct a documented review after every material AI incident and record corrective actions."
+    intent: "Convert incidents into corrective action rather than repetition."
+    requirment_type: "Standard"                # <-- same typo, consistently present
+    applicability: "Organizations operating AI systems in production"
+    lifecycle_stage: "Operation"
+    priority: "High"
+    risk_category: "Safety"
+    primary_domain: "DOM-SAFETY"
+    sources: "ISO/IEC 42001, Clause 10"
+    expected_evidence: "Post-incident review reports, corrective action register"
+    related_controls: "Post-Incident Review, Corrective Action Tracking"
+    implementation_guidance: "1. Convene review within 10 working days; 2. Record root cause; 3. Assign corrective actions; 4. Verify closure"

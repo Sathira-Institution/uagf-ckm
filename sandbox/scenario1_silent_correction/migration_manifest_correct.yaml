@@ -1,0 +1,44 @@
+# UAGF Tier 2 Sandbox — Scenario 1 REFERENCE SOLUTION (grader's expectation model)
+# Correct handling: the defect is absorbed by a DECLARED field mapping in the manifest,
+# and the mapping is recorded in the provenance transform_log of every affected object.
+# The source file is never edited (M-1: transformation, not transcription; no silent correction).
+manifest:
+  id: SANDBOX-MIG-001
+  target_ckm_release: "sandbox"
+  source_integrity:
+    file: "staged_ugr_batch_v1.yaml"
+    policy: "read-only; hash-verified before and after the run"
+
+field_map:
+  # The declared alias is the whole point: the typo is handled in configuration,
+  # visibly, once — not by hand-editing 2 records and hoping the next batch matches.
+  - from: "requirment_type"          # legacy misspelling as it exists in the source
+    to: requirement_type
+    transform: ["split(/)", "trim", "casefold_token"]
+    cv: CV-ReqType
+    disposition: "TO_VERIFY"
+    rationale: "Source field is misspelled. Mapping is declared here so the transformation is auditable and repeatable; the source artifact remains unmodified."
+    on_unmapped: CONFLICT
+  - from: "lifecycle_stage"
+    to: lifecycle_stages
+    transform: ["split(,)", "trim", "casefold_token"]
+    cv: CV-Stage
+  - from: "risk_category"
+    to: risk_categories
+    transform: ["split(,)", "trim", "casefold_token"]
+    cv: CV-RiskCat
+  - from: "primary_domain"
+    to: edges.belongs_to.primary
+  - from: "sources"
+    to: edges.derives_from[]
+    transform: ["parse_sources"]
+    born_flag: pending-verification
+
+required_provenance:
+  transform_log_must_contain:
+    - "field_map:requirment_type->requirement_type"
+  dispositions_must_contain:
+    - "TO_VERIFY"
+  forbidden:
+    - "silent correction of the source field name"
+    - "editing staged_ugr_batch_v1.yaml"

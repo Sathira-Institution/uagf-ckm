@@ -1,0 +1,132 @@
+# UAGF Certification Registry — Entry Schema
+# Status: DRAFT v0.1 — pending Founder ratification
+# Expressed as a CKM object so the certification registry obeys the same Kernel it teaches.
+id: CERTREG-1
+type: RegistrySchema
+tier: 1                       # schema is public; ENTRIES are Tier 2 (see tier_policy)
+version: "0.1"
+status: proposed
+label: "Certification Registry Entry Schema"
+owner_module: M-PROCESS       # certification is process governance, not core knowledge
+created: "2026-08-02"
+modified: "2026-08-02"
+ratified_by: null             # V-7: stays null until a Founder decision exists — never fabricated
+
+lineage_flags:
+  - "⚑ The brief specifies 'UAGF I001 §9 Entry Schema' and integration with ACTOR-REG-001 / GCID-REG-001. Verified against project sources: those are SYN4 (reference-implementation) artifacts, not UAGF ones, and I005 records GCID-REG-001 v1.2 as scheduled for supersession (SUP-W1 → A005 · I001). Per the standing boundary rule they are used here as STRUCTURAL PATTERN ONLY (entry-schema shape, evidence-reference discipline); no reference-implementation identifier, vocabulary, or namespace is imported."
+  - "⚑ The GCID-2026-CERT-NNNNNN identifier format is retained as directed by the Founder. Note that it does not follow Kernel rule K-2 (opaque integer under a ratified prefix); it embeds a year and a class token. Recommendation: register CERT as a prefix and treat the GCID string as an EXTERNAL display identifier mapped 1:1 to a canonical CERT-<n>, so both the Founder's format and the Kernel survive intact. Founder ruling required."
+  - "⚑ Certification of persons (Tiers 0-2) does not conflict with UAGF-OOS-003. Organization-level trust signalling (Tier 3) does. See tier3_dynamic_badge_spec.md §7."
+
+tier_policy:
+  schema_tier: 1
+  entry_tier: 2
+  rationale: "Certificate records identify real people and organizations. Under invariant V-5 they are adopter/institution-side instance data and SHALL NOT be stored inside the public CKM. The certification registry is a separate, access-controlled store that references canonical objects; only aggregate, non-identifying status is published."
+
+entry_schema:
+  cert_id:
+    type: string
+    required: true
+    pattern: "^GCID-2026-CERT-[0-9]{6}$"
+    note: "Founder-directed display format. Canonical internal alias: CERT-<opaque integer>."
+    example: "GCID-2026-CERT-000117"
+  canonical_alias:
+    type: identifier
+    required: true
+    pattern: "^CERT-[0-9]+$"
+    note: "Kernel-conformant identifier (K-2). Permanent, opaque, never reused."
+  holder_actor_id:
+    type: reference
+    required: true
+    target_type: Actor
+    note: "References the canonical Actor role taxonomy for the role certified; the holder's personal identity lives in the Tier-2 store, not in this reference."
+  holder_record_ref:
+    type: reference
+    required: true
+    target_store: "certification-registry (Tier 2, access-controlled)"
+    note: "Pointer to the identifying record. Never rendered in any public view."
+  tier:
+    type: integer
+    required: true
+    allowed: [0, 1, 2, 3]
+  track:
+    type: string
+    required: false
+    allowed: ["A-CKM-Engineer", "B-Compliance-Specialist"]
+    note: "Tier 1 only."
+  issue_date: {type: date, required: true}
+  expiry_date:
+    type: date
+    required: true
+    note: "Default validity 24 months. Expiry is temporal only and independent of live badge status."
+  status:
+    type: cv_term
+    required: true
+    vocabulary: CV-CertStatus
+    note: "Bound vocabulary, not an inline enum (K-4)."
+  ckm_release_examined:
+    type: string
+    required: true
+    note: "Which CKM release the examination was set against. A certificate is always relative to a release; this is what makes it re-verifiable years later."
+  grading_evidence:
+    type: object
+    required: true
+    fields:
+      grader: "tool identifier and version, e.g. tier2_grader/0.1"
+      result_hash: "SHA-256 of the structured grading result"
+      gates_passed: "list"
+      graded_at: "ISO 8601"
+    note: "Reality First: a certificate with no machine-produced evidence record is not issuable."
+  verification_hash:
+    type: string
+    required: true
+    note: "SHA-256 over the canonical JSON of this entry excluding this field. Recomputed on every public verification; mismatch fails closed."
+  ratified_by:
+    type: reference
+    required: false
+    note: "Required only for entries at status 'active' or beyond, mirroring invariant V-7. Revocation likewise requires a decision reference."
+  revocation:
+    type: object
+    required: false
+    fields: {revoked_at: date, reason: string, decision_ref: string}
+
+controlled_vocabulary:
+  id: CV-CertStatus
+  version: "0.1"
+  status: proposed
+  terms:
+    - {token: issued, label_en: "Issued"}
+    - {token: active, label_en: "Active"}
+    - {token: under-review, label_en: "Under Review"}
+    - {token: suspended, label_en: "Suspended"}
+    - {token: expired, label_en: "Expired"}
+    - {token: revoked, label_en: "Revoked"}
+
+invariants:
+  - id: C-1
+    rule: "No entry may reach status 'active' without a grading_evidence record produced by an automated grader."
+  - id: C-2
+    rule: "No entry may reach 'active' or 'suspended' or 'revoked' without a ratified_by / decision_ref. Machines may set 'under-review' and 'expired' only."
+  - id: C-3
+    rule: "Entry data is Tier 2 and SHALL NOT be written into the public CKM (Kernel V-5)."
+  - id: C-4
+    rule: "cert_id and canonical_alias are permanent and never reused, including after revocation (Kernel K-2/ID-2)."
+  - id: C-5
+    rule: "Every public verification recomputes verification_hash; mismatch emits no result rather than a degraded one (fail-closed)."
+
+example_entry:
+  cert_id: "GCID-2026-CERT-000117"
+  canonical_alias: "CERT-117"
+  holder_actor_id: "ACT-PRACTITIONER"
+  holder_record_ref: "certreg://holders/8f21c4"
+  tier: 2
+  issue_date: "2026-08-02"
+  expiry_date: "2028-08-02"
+  status: issued
+  ckm_release_examined: "2.0.0-alpha"
+  grading_evidence:
+    grader: "tier2_grader/0.1"
+    result_hash: "<sha256 of the grader JSON result>"
+    gates_passed: [SOURCE_INTEGRITY, AUTHORITY_BOUNDARY, DECLARED_MAPPING, PROVENANCE, TYPO_LEAK, POLICY_ESCALATION]
+    graded_at: "2026-08-02T11:03:00Z"
+  verification_hash: "<sha256 of canonical JSON excluding this field>"
+  ratified_by: null      # remains null until the issuing decision exists
