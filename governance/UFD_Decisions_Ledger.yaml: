@@ -1,0 +1,45 @@
+ledger_version: "1.0"
+ledger_id: "UFD-LEDGER-ALPHA-001"
+maintained_by: "SATHIRA Institution"
+last_updated: "2026-08-09"
+
+decisions:
+  UFD-001:
+    decision: "Establish UAGF v2.0.0 CKM architecture"
+    status: "ratified"
+    date: "2026-06-15"
+    references: ["UAGF-WP-004", "UAGF-WP-005"]
+  
+  UFD-007:
+    decision: "Ratify Phase 1 CKM dataset (Batch A+B+C+D)"
+    status: "ratified"
+    date: "2026-08-09"
+    approves: ["ckm-2.0.0-alpha"]
+    canonical_name: "Universal AI Governance Knowledge Infrastructure"
+    objects_count: 45
+    
+  OD-K1:
+    decision: "Ratify Batch A governance import rules"
+    status: "ratified"
+    date: "2026-06-20"
+    
+  OD-K2:
+    decision: "Ratify CV token mappings (Risk Categories)"
+    status: "ratified"
+    date: "2026-07-01"
+    
+  OD-K3:
+    decision: "Ratify Lifecycle Stage mappings"
+    status: "ratified"
+    date: "2026-07-05"
+    
+  OD-06:
+    decision: "Establish canonical namespace and authority"
+    status: "ratified"
+    date: "2026-08-01"
+    canonical_name: "Universal AI Governance Knowledge Infrastructure"
+    
+  OD-13:
+    decision: "Activate institutional ledger for CKM versioning"
+    status: "ratified"
+    date: "2026-08-05"
