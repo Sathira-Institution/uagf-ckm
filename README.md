@@ -1534,21 +1534,22 @@ Determinism is therefore treated as an architectural property of applicable UAGF
 
 ### Release Validation
 
-Before a UAGF release subject to the release validation policy may be published, the applicable validation, migration, rendering, and verification stages must complete successfully.
+A UAGF release represents a specific validated state of the Canonical Knowledge Model.
 
-A release is eligible for publication only when the applicable release criteria have been satisfied, including:
+A release is eligible for publication only when the **Full Institutional Release Profile (G1–G13)** has been satisfied. These requirements include:
 
--   All applicable blocking Validation Kernel gates pass
--   No mandatory UAGF architectural invariant is violated
--   Required migration provenance is complete
--   Required rendering determinism checks pass
--   Applicable Loss Manifests are valid
--   Required end-to-end and regression verification passes
--   Required release metadata and integrity checks pass
+-   All applicable Core Validation Kernel gates (G1–G10) passing.
+-   Cryptographic integrity and artifact manifests verified (G11).
+-   Required institutional ledger and ratification decisions recorded (G12).
+-   License boundaries and security contacts validated (G13).
+-   Migration provenance being complete.
+-   Loss Manifest requirements being satisfied.
+-   Deterministic rendering succeeding.
+-   End-to-end regression verification passing.
 
-Where the current release profile defines a ten-gate Validation Kernel, all applicable G1–G10 release gates must pass. If the implementation defines a different gate set, the authoritative validation specification and implementation take precedence over this documentation.
+If the implementation defines a different gate set or profile in the future, the authoritative validation specification and implementation take precedence over this documentation.
 
-Only after the applicable release criteria have been satisfied may the resulting rendered artifacts be distributed as official **derived outputs of the UAGF Canonical Knowledge Model**.
+Only after the applicable release criteria have been satisfied may the resulting rendered artifacts be distributed as official **derived outputs of the UAGF Canonical Knowledge Model**. 
 
 ---
 
