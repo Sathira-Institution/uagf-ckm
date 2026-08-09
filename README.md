@@ -1167,13 +1167,11 @@ Successful validation does **not** establish that:
 
 > **Constitutional Alignment:** These distinctions preserve the absolute boundary between UAGF architectural validity and external governance authority, strictly adhering to Institutional Rule 003 (Human Accountability) and Rule 005 (Public Neutrality).
 
-## The Validation Kernel
+## Validation Kernel
+The UAGF Validation Kernel defines thirteen architectural gates. Standard CKM transformation and rendering pipelines execute the Core Validation Profile (G1–G10), while official publication and immutable institutional releases require the Full Institutional Release Profile (G1–G13).
+Before downstream artifacts may be generated or released, the Canonical Knowledge Model (CKM) is evaluated by this kernel to enforce defined UAGF architectural invariants, structural constraints, semantic constraints, provenance requirements, and pipeline integrity conditions.
 
-Before downstream artifacts may be generated or released, the Canonical Knowledge Model (CKM) is evaluated by the UAGF Validation Kernel.
-
-The Validation Kernel enforces defined UAGF architectural invariants, structural constraints, semantic constraints, provenance requirements, and pipeline integrity conditions.
-
-> **Important Distinction:** The purpose of the Validation Kernel is not to determine the legal, regulatory, normative, or institutional validity of an underlying governance source. Instead, it verifies whether governance knowledge represented within the CKM conforms to the structures, constraints, relationships, metadata requirements, and transformation conditions defined by the UAGF architecture.
+> **Important Distinction:** The purpose of the Validation Kernel is not to determine the legal,regulatory,normative,or institutional validity of an underlying governance source. Instead, it verifies whether governance knowledge represented within the CKM conforms to the structures, constraints,relationships, metadata requirements,and transformation conditions defined by the UAGF architecture.
 
 The Validation Kernel may evaluate properties including:
 
@@ -1193,131 +1191,102 @@ Where a validation condition is defined as blocking, failure of that condition p
 
 This fail-closed behavior prevents knowledge that violates defined UAGF architectural constraints from propagating through the downstream representation or release pipeline.
 
-The Validation Kernel therefore acts as an **architectural integrity boundary**. It does not replace the authority of the underlying governance sources, and successful validation must not be interpreted as legal, regulatory, normative, or institutional approval of those sources or of the knowledge represented within them.
+The Validation Kernel therefore acts as an **architectural integrity boundary**.It does not replace the authority of the underlying governance sources, and successful validation must not be interpreted as legal, regulatory, normative,or institutional approval of those sources or of the knowledge represented within them.
 
 ---
-
 ## The Validation Gates
 
-The UAGF Validation Kernel is implemented as a sequence of defined validation gates.
+The UAGF Validation Kernel operates through two distinct execution profiles to balance continuous development with institutional rigor:
 
-Each gate evaluates a specific class of architectural conditions. A gate may produce validation evidence, but conditions designated as blocking must pass before the affected transformation or release may proceed.
+-   **Core Validation Profile (G1–G10):** Executed automatically during continuous integration (CI) for standard CKM transformation, migration, validation, and deterministic rendering.
+-   **Full Institutional Release Profile (G1–G13):** Enforced exclusively for official publication and immutable institutional release snapshots, incorporating additional cryptographic, institutional, and compliance verifications.
 
-The exact gate set and gate semantics are defined by the corresponding UAGF validation implementation and canonical validation specification. Where the repository defines a ten-gate release profile, the gates are:
+Each gate evaluates a specific class of architectural conditions. Conditions designated as blocking must pass before the affected transformation or release may proceed.
 
-### Gate G1 — CKM Structural Integrity
-Verifies:
--   Object structure
--   Schema correctness
--   Mandatory fields
--   Namespace validity
--   Structural constraints
+### Validation Gate Architecture
 
-G1 ensures that canonical objects conform to the structural requirements defined by UAGF.
+```mermaid
+graph TD
+    subgraph Phase1 ["Phase 1: Structural & Semantic Foundation (G1–G4)"]
+        G1["<b>G1</b><br/>CKM Structural Integrity"] --> G2["<b>G2</b><br/>Controlled Vocabulary"]
+        G2 --> G3["<b>G3</b><br/>Relationship Consistency"]
+        G3 --> G4["<b>G4</b><br/>Kernel Invariants"]
+    end
 
-### Gate G2 — Controlled Vocabulary Validation
-Verifies:
--   Controlled Vocabulary references
--   Canonical identifiers
--   Vocabulary consistency
--   Prohibited or undefined vocabulary usage
+    subgraph Phase2 ["Phase 2: Traceability & Transformation (G5–G7)"]
+        G4 --> G5["<b>G5</b><br/>Migration Provenance"]
+        G5 --> G6["<b>G6</b><br/>Loss Manifest Validation"]
+        G6 --> G7["<b>G7</b><br/>Deterministic Rendering"]
+    end
 
-G2 ensures that canonical objects use controlled semantic classifications consistently.
+    subgraph Phase3 ["Phase 3: Integrity & End-to-End (G8–G10)"]
+        G7 --> G8["<b>G8</b><br/>Round-Trip Integrity"]
+        G8 --> G9["<b>G9</b><br/>Canonical Fidelity"]
+        G9 --> G10["<b>G10</b><br/>End-to-End Consistency"]
+    end
 
-### Gate G3 — Relationship Consistency
-Verifies:
--   Cross-object references
--   Dependency integrity
--   Relationship validity
--   Graph consistency
--   Orphan detection
+    subgraph Phase4 ["Phase 4: Institutional & Release Boundary (G11–G13)"]
+        G10 --> G11["<b>G11</b><br/>Cryptographic Integrity"]
+        G11 --> G12["<b>G12</b><br/>Institutional Ratification"]
+        G12 --> G13["<b>G13</b><br/>License & Security Compliance"]
+    end
 
-G3 ensures that relationships between canonical objects remain structurally valid and internally consistent.
+    G13 -->|ALL PASS| RELEASE["<b>✓ Validated Immutable Release</b>"]
 
-### Gate G4 — Kernel Invariant Validation
-Verifies mandatory UAGF Kernel invariants. Examples may include:
--   Deterministic behavior requirements
--   Namespace integrity
--   Canonical identity preservation
--   Governance consistency
--   Required architectural constraints
+    G1 -.->|FAIL| HOLD
+    G6 -.->|FAIL| HOLD
+    G10 -.->|FAIL| HOLD
+    G12 -.->|FAIL| HOLD
 
-Kernel invariants are architectural constraints of UAGF and cannot be bypassed by downstream rendering or representation processes.
+    HOLD["<b>✗ HOLD / Quarantine State</b>"]
 
-### Gate G5 — Migration Provenance Validation
-For migrated knowledge, verifies that applicable objects retain required provenance information, including:
--   Source reference
--   Provenance metadata
--   Transformation path
--   Migration disposition
--   Applicable migration metadata
-
-Migration provenance allows the origin and transformation history of represented knowledge to remain traceable.
-
-> **Note:** This gate does not imply that every CKM object must originate from an external document. UAGF-native objects and metadata may have their own defined creation and governance rules.
-
-### Gate G6 — Loss Manifest Validation
-Verifies that applicable lossy transformations declare their information loss. A Loss Manifest may identify:
--   Omitted fields
--   Omitted structures
--   Compression or simplification behavior
--   Reconstruction limitations
--   Intended representation scope
-
-No information loss defined as reportable by the UAGF transformation rules may occur silently.
-
-### Gate G7 — Deterministic Rendering Validation
-Verifies that deterministic rendering behaves reproducibly under defined transformation conditions. Where identical CKM inputs, rendering profiles, release inputs, and applicable transformation conditions are supplied, the renderer must produce reproducible outputs according to the defined determinism requirements.
-
-The renderer must not introduce uncontrolled:
--   Randomness
--   Ordering drift
--   Formatting instability
--   Semantic variation
-
-### Gate G8 — Round-Trip Integrity
-Verifies round-trip integrity for representations explicitly defined as lossless or reconstructable under the applicable UAGF representation rules.
-
-Where round-trip reconstruction is supported, the reconstructed knowledge must preserve the required semantic and structural properties of the originating CKM.
-
-> **Clarification:** Round-trip integrity does not require every representation format to reproduce the original CKM byte-for-byte. Representations that are intentionally lossy or projection-based are evaluated according to their applicable Loss Manifest and representation-specific constraints.
-
-### Gate G9 — Canonical Fidelity
-Verifies that applicable derived artifacts preserve the required properties of the canonical knowledge representation, including:
--   Canonical terminology
--   Governance semantics
--   Identifier integrity
--   Applicable normative statements
--   Required provenance relationships
-
-Generated documentation and machine-readable representations must not silently alter the meaning of canonical knowledge. Where a representation intentionally omits or transforms information, the applicable transformation and Loss Manifest rules apply.
-
-### Gate G10 — End-to-End Consistency
-Validates the consistency of the complete UAGF knowledge pipeline.
-
-```text
-Authoritative Governance Sources
-        │
-        ▼
-Migration / Mapping / Provenance
-        │
-        ▼
-Canonical Knowledge Model
-        │
-        ▼
-Validation Kernel
-        │
-        ▼
-Deterministic Transformation / Rendering
-        │
-        ▼
-Derived Representations
-        │
-        ▼
-Regression & Verification
+    style Phase1 fill:#0A1833,stroke:#C7CBD3,stroke-width:2px,color:#F5F3EE
+    style Phase2 fill:#0A1833,stroke:#C7CBD3,stroke-width:2px,color:#F5F3EE
+    style Phase3 fill:#0A1833,stroke:#C7CBD3,stroke-width:2px,color:#F5F3EE
+    style Phase4 fill:#071026,stroke:#C9A45A,stroke-width:3px,color:#F5F3EE
+    style RELEASE fill:#0A1833,stroke:#2e7d32,stroke-width:3px,color:#F5F3EE
+    style HOLD fill:#1A1D21,stroke:#c62828,stroke-width:3px,color:#F5F3EE
+    style G1 fill:#F5F3EE,stroke:#0A1833,color:#0A1833
+    style G2 fill:#F5F3EE,stroke:#0A1833,color:#0A1833
+    style G3 fill:#F5F3EE,stroke:#0A1833,color:#0A1833
+    style G4 fill:#F5F3EE,stroke:#0A1833,color:#0A1833
+    style G5 fill:#F5F3EE,stroke:#0A1833,color:#0A1833
+    style G6 fill:#F5F3EE,stroke:#0A1833,color:#0A1833
+    style G7 fill:#F5F3EE,stroke:#0A1833,color:#0A1833
+    style G8 fill:#F5F3EE,stroke:#0A1833,color:#0A1833
+    style G9 fill:#F5F3EE,stroke:#0A1833,color:#0A1833
+    style G10 fill:#F5F3EE,stroke:#0A1833,color:#0A1833
+    style G11 fill:#F5F3EE,stroke:#C9A45A,color:#0A1833
+    style G12 fill:#F5F3EE,stroke:#C9A45A,color:#0A1833
+    style G13 fill:#F5F3EE,stroke:#C9A45A,color:#0A1833
 ```
 
-Every stage must remain consistent with the architectural constraints applicable to that stage. The End-to-End gate therefore verifies pipeline integrity rather than treating any individual artifact as independently authoritative.
+### Execution Profile Summary
+
+| Profile | Gates | Use Case | Enforcement |
+| :--- | :--- | :--- | :--- |
+| **Core Validation Profile** | G1–G10 | Standard CKM transformation, CI/CD, PR validation | Automated |
+| **Full Institutional Release Profile** | G1–G13 | Official publication, immutable release snapshots | Automated + Human Ratification |
+
+### Gate Definitions
+
+| Gate | Name | Purpose |
+| :--- | :--- | :--- |
+| **G1** | CKM Structural Integrity | Schema correctness, mandatory fields, namespace validity |
+| **G2** | Controlled Vocabulary Validation | Permitted terminology bindings, classification consistency |
+| **G3** | Relationship Consistency | Cross-object references, dependency integrity, orphan detection |
+| **G4** | Kernel Invariant Validation | Namespace integrity, canonical identity preservation, core determinism |
+| **G5** | Migration Provenance Validation | Source references, transformation history, migration metadata |
+| **G6** | Loss Manifest Validation | Explicit declaration of omitted fields during lossy transformations |
+| **G7** | Deterministic Rendering Validation | Reproducibility under identical inputs, profiles, and metadata |
+| **G8** | Round-Trip Integrity | Reconstruction integrity for lossless profiles |
+| **G9** | Canonical Fidelity | No undeclared semantic drift in derived artifacts |
+| **G10** | End-to-End Consistency | Complete pipeline integrity from source to output |
+| **G11** | Cryptographic Integrity & Artifact Manifest | SHA-256 manifest verification for all committed outputs |
+| **G12** | Institutional Ledger & Ratification | Founder/Institutional sign-offs and decision records |
+| **G13** | License & Security Compliance | CC BY 4.0 boundaries, software licenses, security disclosures |
+
+> **Architectural Note:** Gates G11–G13 (highlighted in Institutional Gold) represent the **Full Institutional Release Profile** boundary. These gates enforce human accountability, cryptographic integrity, and legal compliance—ensuring that no automated system can bypass institutional ratification.
 
 ---
 
