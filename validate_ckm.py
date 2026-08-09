@@ -184,22 +184,95 @@ def validate(objs):
             if st.get(n) is None: dfs(n)
     return fs
 
+# ==========================================
+# NEW ADDITION: K-8 Ledger Validation (for Full Institutional Release Profile)
+# ==========================================
+
+def load_ledger(ledger_path):
+    """Load and parse the UFD Decisions Ledger YAML file.
+
+    Returns (ledger_dict, error_message). On success error_message is None.
+    """
+    if not ledger_path:
+        return None, "No ledger path provided"
+    if not os.path.exists(ledger_path):
+        return None, f"Ledger file not found at {ledger_path}"
+    try:
+        with open(ledger_path, 'r', encoding='utf-8') as f:
+            data = yaml.safe_load(f)
+        if not isinstance(data, dict):
+            return None, "Ledger content is not a mapping"
+        return data, None
+    except Exception as e:
+        return None, f"Error parsing ledger: {e}"
+
+
+def validate_ratification_ledger(obj, ledger_decisions):
+    """
+    K-8 Invariant: Verify that 'ratified_by' references a valid decision in the ledger
+    and that the referenced decision is in 'ratified' status.
+    ledger_decisions is expected to be a mapping of decision_id -> decision_object.
+    """
+    ratified_by = obj.get('ratified_by')
+    if not ratified_by:
+        # Draft/staging items may legitimately lack a ratified_by reference.
+        return True, None
+    if ratified_by not in ledger_decisions:
+        return False, f"K-8 VIOLATION: 'ratified_by' references '{ratified_by}', which is not found in the UFD Decisions Ledger."
+    decision = ledger_decisions[ratified_by]
+    decision_status = decision.get('status')
+    if decision_status != 'ratified':
+        return False, f"K-8 VIOLATION: Decision '{ratified_by}' is not in 'ratified' status (current: {decision_status})."
+    return True, None
+
+# ==========================================
+# NEW ADDITION: CLI Argument for Ledger
+# ==========================================
+
+def parse_args():
+    parser = argparse.ArgumentParser(description="UAGF Validation Kernel")
+    parser.add_argument("ckm_dir", help="Path to the CKM directory")
+    parser.add_argument("-o","--out",default=None,help="Write JSON report to file")
+    parser.add_argument("-q","--quiet",action="store_true",help="Suppress human output")
+    parser.add_argument("--require-ledger", help="Path to UFD_Decisions_Ledger.yaml (Enforces K-8)", default=None)
+    return parser.parse_args()
+
+# ==========================================
+# Main execution (modified to optionally load ledger and enforce K-8 checks)
+# ==========================================
+
 def main():
-    ap=argparse.ArgumentParser()
-    ap.add_argument("ckm_dir"); ap.add_argument("-o","--out",default=None)
-    ap.add_argument("-q","--quiet",action="store_true")
-    a=ap.parse_args()
-    objs,le=load(a.ckm_dir)
-    findings=le+validate(objs)
+    args = parse_args()
+
+    # Load ledger if requested
+    ledger_data = None
+    if args.require_ledger:
+        ledger, error = load_ledger(args.require_ledger)
+        if error:
+            print(f"[CRITICAL] {error}", file=sys.stderr)
+            sys.exit(2)  # Exit 2: CRITICAL_KERNEL_ERROR
+        ledger_data = ledger.get('decisions', {}) or {}
+        print(f"[INFO] Ledger loaded: {len(ledger_data)} decisions found.", file=sys.stderr)
+
+    objs,le = load(args.ckm_dir)
+    findings = le + validate(objs)
+
+    # If ledger loaded, run K-8 ratification checks against each object
+    if ledger_data is not None:
+        for oid,obj in objs.items():
+            is_valid, msg = validate_ratification_ledger(obj, ledger_data)
+            if not is_valid:
+                findings.append(F("K-8", oid, msg, sev="error", field="ratified_by", value=obj.get('ratified_by'), ref="Kernel K-8"))
+
     errors=[f for f in findings if f["severity"]=="error"]
     rep={"validator":"uagf-ckm-validator/0.2","kernel":"WP-004 v0.2 (K-1..K-8)",
-         "dataset":os.path.abspath(a.ckm_dir),
+         "dataset":os.path.abspath(args.ckm_dir),
          "timestamp":datetime.datetime.now(datetime.timezone.utc).isoformat(),
          "objects_loaded":len(objs),"objects_by_type":{},
          "findings":findings,"result":"PASS" if not errors else "FAIL","error_count":len(errors)}
     for o in objs.values():
         t=o.get("type","<untyped>"); rep["objects_by_type"][t]=rep["objects_by_type"].get(t,0)+1
-    if not a.quiet:
+    if not args.quiet:
         for f in findings:
             L=[f"{'ERROR' if f['severity']=='error' else 'WARN'} [{f['error']}]", f"Object: {f['object']}"]
             if f.get("field"): L.append(f"Attribute: {f['field']}")
@@ -210,9 +283,9 @@ def main():
             L.append(f"Reference: {f['reference']}")
             print("  "+"\n    ".join(L)+"\n",file=sys.stderr)
     out=json.dumps(rep,indent=2,ensure_ascii=False)
-    if a.out: open(a.out,"w",encoding="utf-8").write(out)
-    print(out if a.quiet else f"RESULT: {rep['result']} | objects: {len(objs)} | errors: {rep['error_count']}")
-    if a.out is None and a.quiet: pass
+    if args.out: open(args.out,"w",encoding="utf-8").write(out)
+    print(out if args.quiet else f"RESULT: {rep['result']} | objects: {len(objs)} | errors: {rep['error_count']}")
+    if args.out is None and args.quiet: pass
     sys.exit(0 if rep["result"]=="PASS" else 1)
 
 if __name__=="__main__": main()
