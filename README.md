@@ -243,6 +243,149 @@ Instead, UAGF provides a canonical knowledge architecture through which heteroge
 
 ---
 
+## Quick Start Guide
+
+This section provides a streamlined entry point for developers, researchers, and governance practitioners to interact with the UAGF repository.
+
+The primary workflow follows a single architectural invariant:
+
+> **Authoritative Source → CKM → Validation → Rendering → Derived Representation**
+
+Contributors and implementers should modify the Canonical Knowledge Model (CKM) rather than editing generated documentation or machine-readable outputs directly. All downstream artifacts are deterministically derived from validated canonical knowledge.
+
+### 1. Understand the Repository
+
+The repository is organized around the Model-First principle. It separates canonical knowledge, staging material, generated artifacts, and operational evidence:
+
+```text
+.
+├── ckm/                 # Canonical Knowledge Model (Source of truth within UAGF)
+│   ├── requirements/    # Unified Governance Requirements (UGRs)
+│   ├── domains/         # Governance Domains (e.g., Risk, Transparency)
+│   ├── references/      # Source Locators & Provenance References
+│   └── cv/              # Controlled Vocabularies & Terminology Bindings
+│
+├── ckm-staging/         # Isolated Migration & Preparation Workspace
+── generated/           # Read-Only Derived Rendered Artifacts
+├── reports/             # Machine-Generated Operational & Verification Reports
+├── tests/               # Automated Testing & Pipeline Verification Suite
+│
+── migrate_ckm.py       # Ingestion & Migration Tooling
+├── validate_ckm.py      # Validation Kernel Execution CLI
+├── render_ckm.py        # Deterministic Rendering Engine CLI
+└── manifest.yaml        # Pipeline, Release & Validation Ruleset Metadata
+```
+
+### 2. Inspect the Canonical Knowledge Model
+
+Start by examining the structured knowledge layer. Typical CKM objects include:
+-   Unified Governance Requirements (UGRs)
+-   Governance Domains and Controlled Vocabulary definitions
+-   External Governance References (e.g., ISO 42001, EU AI Act)
+-   Canonical metadata and relationship definitions
+
+### 3. Validate the CKM
+
+Before rendering downstream artifacts, validate the CKM against the UAGF Validation Kernel.
+
+Standard development and transformation workflows use the **10-Gate Core Validation Profile (G1–G10)**:
+
+```bash
+# Execute Core Validation Profile (G1-G10)
+python validate_ckm.py --target ckm/ --profile core-validation
+```
+
+Validation verifies that the CKM conforms to the structural, semantic, provenance, and architectural constraints defined by UAGF. A failed blocking gate prevents downstream processing (Fail-Closed behavior).
+
+### 4. Render Derived Representations
+
+Once validation succeeds, render the CKM into the required representations:
+
+```bash
+# Render all active profiles (Markdown, JSON-LD, RDF, AI Context)
+python render_ckm.py --profile all --out generated/
+```
+
+**Important:** Generated artifacts in `generated/` should not be manually edited as a substitute for modifying the CKM. If a change is needed, update the CKM, validate, and re-render.
+
+### 5. Run End-to-End Verification
+
+For a complete pipeline verification (Migration → Validation → Rendering → Fidelity Check):
+
+```bash
+python tests/run_e2e.py
+```
+
+This process verifies the defined behavior of the governance knowledge pipeline, including validation, transformation, rendering, and regression properties.
+
+### 6. Preparing an Official Release
+
+Development workflows use the **10-Gate Core Validation Profile (G1–G10)**. However, official publication and immutable institutional releases require the **13-Gate Full Institutional Release Profile (G1–G13)**.
+
+The additional institutional release gates (G11–G13) verify:
+-   **G11:** Cryptographic artifact integrity (SHA-256 manifests).
+-   **G12:** Institutional ledger and ratification status (Human Accountability).
+-   **G13:** Licensing (CC BY 4.0) and security compliance.
+
+An official release is not simply a successful rendering; it is a validated and institutionally verified snapshot of the Canonical Knowledge Model.
+
+### 7. The UAGF Mental Model
+
+If you remember only one thing about the architecture:
+
+```text
+                    Authoritative Governance Sources
+                              │
+                              ▼
+                      Migration / Mapping
+                       + Provenance
+                              │
+                              ▼
+                    Canonical Knowledge Model (CKM)
+                              │
+                              ▼
+                     ┌────────────────┐
+                     │ Validation     │
+                     │ Kernel         │
+                     │                │
+                     │  Core Profile  │  ← Standard CI/CD (G1–G10)
+                     │    (G1–G10)    │
+                     ────────────────┘
+                              │
+                              ▼
+                    Deterministic Rendering
+                              │
+              ┌───────────────┼───────────────┐
+              ▼               ▼               ▼
+           Markdown         JSON-LD           RDF
+              │               │               │
+              └───────────────┼───────────────┘
+                              ▼
+                    Human / Machine
+                   Representations
+
+
+              ┌─────────────────────────────┐
+              │   Official Release Path     │
+              │                             │
+              │  Full Institutional Profile │  ← Immutable Snapshot
+              │        (G1–G13)             │
+              │                             │
+              │  + Cryptographic Integrity  │
+              │  + Institutional Ratification│
+              │  + License & Security       │
+              └─────────────────────────────┘
+                              │
+                              ▼
+                    Immutable Release
+```
+
+**Edit the CKM. Validate the CKM. Render the CKM.**  
+Do not treat a rendered artifact as the source of governance knowledge.
+
+---
+*For the complete architectural rationale, see [Design Philosophy](#design-philosophy). For validation gate details, see [The Validation Gates](#the-validation-gates). For governance and contribution rules, see [Governance](#governance).*
+
 ## Design Philosophy
 
 UAGF is founded upon a set of architectural principles that define how governance knowledge is represented, validated, transformed, and exchanged within the framework.
