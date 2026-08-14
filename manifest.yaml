@@ -1,3 +1,11 @@
+# -----------------------------------------------------------------------------
+# Migration Configuration Manifest — clarifying header
+# This file is the Migration Configuration Manifest (UAGF-WP-005). IT IS NOT the release manifest.
+# Placeholders like <sha256-at-snapshot> refer to source snapshots for migration, NOT release artifact hashes.
+# The immutable release manifest is generated separately by cut_release.py at ckm-<release>/release_manifest.json.
+# DO NOT populate release hashes in this file.
+# -----------------------------------------------------------------------------
+
 # =============================================================================
 # UAGF-WP-005 Companion — CKM Migration Manifest (Template)
 # Version: 0.1 DRAFT — for Founder review
