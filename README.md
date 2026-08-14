@@ -3,7 +3,7 @@
 > A Canonical Knowledge Infrastructure for Deterministic, Interoperable, and Machine-Readable AI Governance
 
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
-[![E2E: 11/11 PASS](https://img.shields.io/badge/E2E-11/11%20PASS-brightgreen)](reports/e2e_summary_RELEASE.json)
+[![E2E: 11/11 PASS](https://img.shields.io/badge/E2E-11/11%20PASS-brightgreen)](reports/e2e_summary.json)
 [![CI/CD](https://github.com/Sathira-Institution/uagf-ckm/actions/workflows/ci.yml/badge.svg)](https://github.com/Sathira-Institution/uagf-ckm/actions)
 [![Public Good](https://img.shields.io/badge/Public-Good-green)](#public-benefit)
 [![Machine Native](https://img.shields.io/badge/Machine-Native-blue)](#canonical-knowledge-model)
@@ -14,7 +14,7 @@
 
 Artificial Intelligence governance is rapidly becoming one of the defining infrastructure challenges of the digital era.
 
-Organizations today operate across an increasingly fragmented landscape of regulations, international standards, internal governance policies, industry practices, technical specifications, and AI-[...]
+Organizations today operate across an increasingly fragmented landscape of regulations, international standards, internal governance policies, industry practices, technical specifications, and AI-[...] 
 
 As a result, governance knowledge is frequently duplicated, interpreted and translated manually, maintained across disconnected systems, and gradually diverges over time. This fragmentation makes [...]
 
@@ -285,7 +285,7 @@ For a complete pipeline verification (Migration → Validation → Rendering →
 python tests/run_e2e.py
 ```
 
-The repository's current end-to-end (E2E) verification suite executes 11 gates (G1–G11). G1–G10 correspond to the Core Validation / pipeline integrity checks; G11 performs deterministic reproducibility verification (ensuring identical inputs, rendering rules, and release metadata produce reproducible outputs). The E2E gate count (G1–G11) is distinct from the Full Institutional Release Profile (G1–G13), which includes additional institutional ratification and release integrity gates.
+The repository's current end-to-end (E2E) verification suite executes 11 gates (G1–G11). G1–G10 correspond to the Core Validation / pipeline integrity checks; G11 performs deterministic repro[...]
 
 This process verifies the defined behavior of the governance knowledge pipeline, including validation, transformation, rendering, and regression properties.
 
@@ -362,129 +362,3 @@ Do not treat a rendered artifact as the source of governance knowledge.
 UAGF is founded upon a set of architectural principles that define how governance knowledge is represented, validated, transformed, and exchanged within the framework.
 
 These principles establish the relationship between authoritative governance sources, the Canonical Knowledge Model, and derived representations while preserving source authority, provenance, sem[...]
-
-### Model Before Documents
-
-Governance knowledge within UAGF is structured through the Canonical Knowledge Model before it is rendered into documentation or other representations.
-
--   The CKM provides the canonical knowledge layer within the UAGF architecture. Documentation is a derived representation of that knowledge.
--   Documents may communicate, explain, or expose governance knowledge, but they do not become the canonical knowledge layer merely by being published.
-
-### Knowledge Before Representation
-
-Governance knowledge exists independently of the format in which it is represented.
-
-Markdown, JSON, JSON-LD, RDF, REST APIs, knowledge graphs, and AI-context representations are representations or interfaces through which canonical knowledge may be consumed. They are not themsel[...]
-
-### Authority Before Canonicalization
-
-Canonicalization within UAGF does not transfer legal, regulatory, normative, or institutional authority from an underlying source to the CKM.
-
--   Authoritative governance sources retain their original authority.
--   The CKM provides a canonical representation and structural organization of governance knowledge within UAGF, together with traceable provenance to the sources from which that knowledge is der[...]
-
-### Reality Before Convenience
-
-UAGF does not silently modify, reinterpret, or normalize governance knowledge merely to simplify processing.
-
--   Migration preserves provenance.
--   Validation reports violations and unresolved conditions.
--   Transformation preserves traceability.
--   Rendering declares intentional information loss where applicable.
-
-When source material is ambiguous, incomplete, conflicting, or uncertain, the architecture favors explicit reporting over silent correction. The framework therefore prioritizes fidelity to observ[...]
-
-### Determinism Before Automation
-
-Automation without determinism can reproduce inconsistency at scale. UAGF therefore requires deterministic transformation processes where deterministic behavior is defined and applicable.
-
-Given identical canonical inputs, transformation rules, rendering profiles, and relevant release metadata, the same rendering process should produce reproducible outputs.
-
-Determinism supports:
-
--   Reproducible releases
--   Regression testing
--   Verification
--   Audit reproducibility
--   Controlled evolution
--   Long-term archival integrity
-
-Determinism is therefore treated as an architectural property rather than merely an implementation convenience.
-
-### Transparency Before Abstraction
-
-Architectural transformations should remain observable and traceable.
-
--   Migration should preserve provenance.
--   Transformation should retain lineage.
--   Intentional information loss should be declared.
--   Validation results should remain inspectable.
--   Uncertainty should not disappear behind abstraction.
-
-UAGF therefore treats transparency as a prerequisite for trustworthy transformation rather than as an optional documentation feature.
-
-### Provenance Before Reconciliation
-
-When governance knowledge from different authoritative sources is represented within the CKM, its provenance must remain identifiable.
-
-UAGF does not require heterogeneous sources to be artificially collapsed into a single undifferentiated authority. Instead, relationships, mappings, derivations, and transformations should preser[...]
-
-### Public Benefit
-
-UAGF is developed as an open public-good initiative. Its purpose is to improve the quality, transparency, traceability, and interoperability of AI governance knowledge for the global community.
-
-The framework is intended to support:
-
--   Governments
--   Standards organizations
--   Regulatory agencies
--   Universities and research institutions
--   Industry and technology providers
--   Open-source communities
--   Civil society
-
-UAGF complements existing governance ecosystems. It does not replace them.
-
-Its objective is to provide a common canonical knowledge layer through which heterogeneous governance knowledge can be structured, related, validated, and exchanged while preserving the authority[...]
-
-## High-Level Overview
-
-UAGF introduces a **Model-First Architecture** in which governance knowledge is structured through the Canonical Knowledge Model before being transformed into downstream representations.
-
-The architecture separates authoritative sources from canonical knowledge representation and derived outputs.
-
-```text
-Authoritative Governance Sources
-────────────────────────────────────────────
-ISO/IEC 42001
-EU AI Act
-NIST AI RMF
-OECD AI Principles
-National Regulations
-Organizational Policies
-Technical Specifications
-                    │
-                    ▼
-       Migration / Mapping / Provenance
-                    │
-                    ▼
-       Canonical Knowledge Model (CKM)
-                    │
-                    ▼
-          Validation & Constraints
-                    │
-                    ▼
-       Deterministic Transformation
-                    │
-         ┌───────────┼───────────
-         ▼           ▼           ▼
-     Markdown      JSON-LD       RDF
-         │           │           │
-         ▼           ▼           ▼
-  Documentation    APIs     Knowledge Graphs
-                                │
-                                ▼
-                        AI Context Profiles
-```
-
-... (rest of README unchanged) ...
