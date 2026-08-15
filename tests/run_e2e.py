@@ -38,7 +38,8 @@ def parse_legacy_records(path):
             cur = None
         m = re.match(r"^#+\s+\**\s*(UGR-\d+)\s*[—–-]+\s*(.+?)\**\s*$", ln.strip())
         if m:
-            cur = f"UGR-{int(re.search(r'(\d+)', m.group(1)).group(1))}"
+            num_match = re.search(r'(\d+)', m.group(1))
+            cur = f"UGR-{int(num_match.group(1))}"
             recs[cur] = {}
             continue
         if cur and ln.strip().startswith("|"):
