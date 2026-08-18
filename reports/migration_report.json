@@ -2,7 +2,7 @@
   "runner": "uagf-migration-runner/0.1",
   "manifest_id": "MIG-2026-001",
   "pipeline": "WP-005 S1-S7 (S5 identification-only; D-06 verification pending)",
-  "timestamp": "2026-08-01T10:10:50.067508+00:00",
+  "timestamp": "2026-08-18T08:25:44.773284+00:00",
   "source_hash_sha256": "9f547154b524f9eda8dc35e44ba6b2e73d1c7570887f3325aa8785e3930d676a",
   "batches": {
     "A_requirements": 30,
@@ -15,87 +15,9 @@
     "records_found": 30,
     "domains_found": 10
   },
-  "dispositions": [
-    {
-      "class": "TO_VERIFY",
-      "object": "UGR-25",
-      "field": "sources",
-      "value": "UNESCO Recommendation on the Ethics of AI",
-      "hint": "Instrument not in alias registry; identify and verify via D-06 before release (REF-UNESCO-RECOMMENDATION-ON)."
-    },
-    {
-      "class": "TO_VERIFY",
-      "object": "DOM-GOV",
-      "field": "concern_statement",
-      "value": "category-heading interim text",
-      "hint": "Batch C sources the canonical description from UAGF-001 Section 8."
-    },
-    {
-      "class": "TO_VERIFY",
-      "object": "DOM-RISK",
-      "field": "concern_statement",
-      "value": "category-heading interim text",
-      "hint": "Batch C sources the canonical description from UAGF-001 Section 8."
-    },
-    {
-      "class": "TO_VERIFY",
-      "object": "DOM-HUMAN",
-      "field": "concern_statement",
-      "value": "category-heading interim text",
-      "hint": "Batch C sources the canonical description from UAGF-001 Section 8."
-    },
-    {
-      "class": "TO_VERIFY",
-      "object": "DOM-DATA",
-      "field": "concern_statement",
-      "value": "category-heading interim text",
-      "hint": "Batch C sources the canonical description from UAGF-001 Section 8."
-    },
-    {
-      "class": "TO_VERIFY",
-      "object": "DOM-TRANSPARENCY",
-      "field": "concern_statement",
-      "value": "category-heading interim text",
-      "hint": "Batch C sources the canonical description from UAGF-001 Section 8."
-    },
-    {
-      "class": "TO_VERIFY",
-      "object": "DOM-AUDITABILITY",
-      "field": "concern_statement",
-      "value": "category-heading interim text",
-      "hint": "Batch C sources the canonical description from UAGF-001 Section 8."
-    },
-    {
-      "class": "TO_VERIFY",
-      "object": "DOM-ACCOUNTABILITY",
-      "field": "concern_statement",
-      "value": "category-heading interim text",
-      "hint": "Batch C sources the canonical description from UAGF-001 Section 8."
-    },
-    {
-      "class": "TO_VERIFY",
-      "object": "DOM-SECURITY",
-      "field": "concern_statement",
-      "value": "category-heading interim text",
-      "hint": "Batch C sources the canonical description from UAGF-001 Section 8."
-    },
-    {
-      "class": "TO_VERIFY",
-      "object": "DOM-PRIVACY",
-      "field": "concern_statement",
-      "value": "category-heading interim text",
-      "hint": "Batch C sources the canonical description from UAGF-001 Section 8."
-    },
-    {
-      "class": "TO_VERIFY",
-      "object": "DOM-SAFETY",
-      "field": "concern_statement",
-      "value": "category-heading interim text",
-      "hint": "Batch C sources the canonical description from UAGF-001 Section 8."
-    }
-  ],
+  "dispositions": [],
   "disposition_counts": {
-    "TO_VERIFY": 11,
+    "TO_VERIFY": 0,
     "CONFLICT": 0,
     "REJECTED": 0
   },

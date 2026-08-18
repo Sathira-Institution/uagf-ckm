@@ -1,14 +1,14 @@
 {
   "validator": "uagf-ckm-validator/0.2",
   "kernel": "WP-004 v0.2 (K-1..K-8)",
-  "dataset": "/home/claude/uagf-ckm/ckm-staging",
-  "timestamp": "2026-08-01T10:10:50.343511+00:00",
+  "dataset": "/home/runner/work/uagf-ckm/uagf-ckm/ckm-staging",
+  "timestamp": "2026-08-18T08:25:45.085519+00:00",
   "objects_loaded": 57,
   "objects_by_type": {
-    "ExternalReference": 7,
     "Requirement": 33,
-    "Domain": 11,
-    "ControlledVocabulary": 6
+    "ExternalReference": 7,
+    "ControlledVocabulary": 6,
+    "Domain": 11
   },
   "findings": [],
   "result": "PASS",
