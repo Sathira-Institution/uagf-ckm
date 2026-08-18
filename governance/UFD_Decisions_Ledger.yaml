@@ -26,3 +26,10 @@ ledger:
     title: "Conflict resolution, ratifications, Release 2.0.0-Alpha"
     decisions: "CONFLICT resolutions approved: activate UGR-030/031 (per D-03) and UGR-052 (heals EF-2). RATIFIED: OD-K1 Kernel WP-004 v0.2; OD-K2 CV terms legalize live values; OD-K3 legacy stage mapping; OD-13 UFD prefix + this ledger; OD-06 canonical name 'Universal AI Governance Knowledge Infrastructure' for IRIs. Ordered: release cut CKM 2.0.0-Alpha; Build-in-Public alpha package."
     note: "Recorded by the Engineer from the Founder directive of 2026-07-28; ledger entries await Founder counter-signature in the public repository."
+
+counter_signature:
+  signed_by: "Apichai Chuensuang (Rootz)"
+  role: "Founder, SATHIRA Institution"
+  date: "2026-08-18"
+  scope: "UFD-001 through UFD-007 (recorded 2026-07-28)"
+  statement: "I counter-sign and ratify ledger entries UFD-001..UFD-007 as accurate records of Founder directives. IC-2 institutional ratification is hereby satisfied in the public repository."

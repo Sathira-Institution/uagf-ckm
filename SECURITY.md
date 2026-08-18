@@ -1,6 +1,6 @@
 ## Security Policy (Alpha)
 
-SATHIRA Institute takes the security of UAGF seriously. If you believe you've found a security vulnerability in our framework or infrastructure, please report it to us privately before public disclosure.
+SATHIRA Institution takes the security of UAGF seriously. If you believe you've found a security vulnerability in our framework or infrastructure, please report it to us privately before public disclosure.
 
 ### Reporting
 
