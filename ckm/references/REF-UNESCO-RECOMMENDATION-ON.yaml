@@ -1,0 +1,19 @@
+id: REF-UNESCO-RECOMMENDATION-ON
+class: ExternalReference
+title: "UNESCO Recommendation on the Ethics of Artificial Intelligence"
+issuing_body: "UNESCO"
+publication_date: "2021-11-24"
+url: "https://www.unesco.org/en/artificial-intelligence/recommendation-ethics"
+status: ratified
+ratified_by: UFD-001
+summary: >
+  The first global standard on AI ethics, adopted by all 193 UNESCO Member States.
+  Establishes ethical principles and policy measures for AI development and deployment,
+  including respect for human rights, diversity, environmental sustainability,
+  and peaceful use of AI technologies.
+tags:
+  - international-standard
+  - unesco
+  - ai-ethics
+  - human-rights
+  - sustainability

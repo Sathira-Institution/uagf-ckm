@@ -22,8 +22,24 @@ INSTRUMENTS = {
     "GDPR": ("REF-GDPR", "EU General Data Protection Regulation", "2016", "EU"),
     "UNESCO Recommendation on AI Ethics": ("REF-UNESCO-AI", "UNESCO Recommendation on the Ethics of AI", "2021", "International"),
     "UNESCO AI Ethics": ("REF-UNESCO-AI", "UNESCO Recommendation on the Ethics of AI", "2021", "International"),
+    "UNESCO Recommendation on the Ethics of AI": ("REF-UNESCO-RECOMMENDATION-ON", "UNESCO Recommendation on the Ethics of AI", "2021-11-24", "International"),
     "EU Charter of Fundamental Rights": ("REF-EU-CFR", "EU Charter of Fundamental Rights", "2000", "EU"),
 }
+# Canonical domain concern statements - sourced verbatim from UAGF-001 v1.0 Section 8 [Normative]
+# D-06 verification: Founder (Apichai Chuensuang) ratified 2026-08-18
+DOMAIN_CANON = {
+    "DOM-GOV": "Organizational structure, roles, responsibilities, and accountability for AI",
+    "DOM-RISK": "Identification, assessment, mitigation, and monitoring of AI risks",
+    "DOM-HUMAN": "Human review, approval, and intervention at critical decision points",
+    "DOM-DATA": "Data quality, lineage, classification, provenance, and management",
+    "DOM-TRANSPARENCY": "Disclosure of AI system capabilities, logic, limitations, and usage",
+    "DOM-AUDITABILITY": "Logging, retention, retrieval, and replayability of AI decisions",
+    "DOM-ACCOUNTABILITY": "Clear chain of responsibility for AI system outcomes",
+    "DOM-SECURITY": "Protection against unauthorized access, tampering, and misuse",
+    "DOM-PRIVACY": "Compliance with privacy laws and protection of data subject rights",
+    "DOM-SAFETY": "System safety thresholds, emergency response, and rollback capability",
+}
+
 STAGE_MAP = {"all stages": ["all-stages"], "training": ["development"],
              "pre-deployment": ["development", "deployment"]}
 BASE_STAGES = {"design", "development", "deployment", "operation", "decommission"}
@@ -210,14 +226,22 @@ def main():
         yaml.safe_dump(u, open(os.path.join(a.out, "requirements", f"{u['id']}.yaml"), "w",
                        encoding="utf-8"), sort_keys=False, allow_unicode=True, width=1000)
     for dom_id, name in domains.items():
-        dom = {"id": dom_id, "type": "Domain", "tier": 1, "version": "1.0", "status": "proposed",
-               "label": name, "owner_module": "M-CORE", "created": "2026-06-28", "modified": TODAY,
-               "concern_statement": f"Governance domain: {name}.",
-               "provenance": {"batch": "C-interim", "source_document": "UAGF-002 v1.0 category heading",
-                              "dispositions": ["[TO VERIFY] canonical concern_statement to be sourced from UAGF-001 v1.0 Section 8 at Batch C"]}}
-        disp.append({"class": "TO_VERIFY", "object": dom_id, "field": "concern_statement",
-                     "value": "category-heading interim text",
-                     "hint": "Batch C sources the canonical description from UAGF-001 Section 8."})
+        canon = DOMAIN_CANON.get(dom_id)
+        if canon:
+            dom = {"id": dom_id, "type": "Domain", "tier": 1, "version": "1.0", "status": "proposed",
+                   "label": name, "owner_module": "M-CORE", "created": "2026-06-28", "modified": TODAY,
+                   "concern_statement": canon,
+                   "provenance": {"batch": "C", "source_document": "UAGF-001 v1.0 Section 8",
+                                  "verification": "D-06 founder-verified 2026-08-18"}}
+        else:
+            dom = {"id": dom_id, "type": "Domain", "tier": 1, "version": "1.0", "status": "proposed",
+                   "label": name, "owner_module": "M-CORE", "created": "2026-06-28", "modified": TODAY,
+                   "concern_statement": f"Governance domain: {name}.",
+                   "provenance": {"batch": "C-interim", "source_document": "UAGF-002 v1.0 category heading",
+                                  "dispositions": ["[TO VERIFY] canonical concern_statement to be sourced from UAGF-001 v1.0 Section 8 at Batch C"]}}
+            disp.append({"class": "TO_VERIFY", "object": dom_id, "field": "concern_statement",
+                         "value": "category-heading interim text",
+                         "hint": "Batch C sources the canonical description from UAGF-001 Section 8."})
         yaml.safe_dump(dom, open(os.path.join(a.out, "domains", f"{dom_id}.yaml"), "w",
                        encoding="utf-8"), sort_keys=False, allow_unicode=True, width=1000)
     for rid, meta in sorted(refs.items()):
