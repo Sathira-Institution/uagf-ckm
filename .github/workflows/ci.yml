@@ -7,30 +7,51 @@ on:
     branches: [ main ]
 
 jobs:
-  test:
+  verify:
     runs-on: ubuntu-latest
-    
     steps:
     - uses: actions/checkout@v4
-    
+
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
         python-version: '3.12'
-    
+
     - name: Install dependencies
       run: |
-        pip install -r requirements.txt
+        if [ -f requirements.txt ]; then
+          pip install -r requirements.txt
+        else
+          pip install pyyaml
+        fi
         pip install pytest pytest-cov
-    
-    - name: Run Validation Tests
+
+    - name: Optional: Run migration if legacy artifact present
+      if: ${{ always() }}
       run: |
-        python validate_ckm.py ckm-2.0.0-alpha
-    
-    - name: Run E2E Tests
+        if [ -f legacy/UAGF-002_v1.0_source.md ]; then
+          python migrate_ckm.py --legacy legacy/UAGF-002_v1.0_source.md --manifest manifest.yaml --out ckm-staging --report reports/migration_report.json
+        else
+          echo "No legacy source present; skipping migration step."
+        fi
+
+    - name: Run Validation (staging) with ledger
       run: |
-        python tests/run_e2e.py
-    
+        if [ -f governance/UFD_Decisions_Ledger.yaml ]; then
+          python validate_ckm.py ckm-staging --require-ledger governance/UFD_Decisions_Ledger.yaml -o reports/validation_report.json
+        else
+          python validate_ckm.py ckm-staging -o reports/validation_report.json
+        fi
+
+    - name: Render profiles (registry-doc, registry-jsonld)
+      run: |
+        python render_ckm.py --ckm ckm-staging --profile registry-doc --scope module:M-CORE --ckm-release 2.0.0-staging --out generated/registry-doc.md
+        python render_ckm.py --ckm ckm-staging --profile registry-jsonld --scope module:M-CORE --ckm-release 2.0.0-staging --out generated/registry.jsonld
+
+    - name: Run E2E runner
+      run: |
+        python tests/run_e2e.py --ckm ckm-staging --ledger governance/UFD_Decisions_Ledger.yaml --baseline-dir generated/baseline --out-summary reports/e2e_summary.json
+
     - name: Upload Test Results
       uses: actions/upload-artifact@v4
       with:
