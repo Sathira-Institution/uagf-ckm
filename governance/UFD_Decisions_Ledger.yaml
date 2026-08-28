@@ -1,20 +1,39 @@
-# UAGF Founder Decisions Ledger — skeleton (PENDING-only)
-# This file is intentionally a skeleton for validation/testing only.
-# All ratification/signature fields are PENDING-FOUNDER-COUNTERSIGN.
-# No signatures, dates, or signed_by fields are present in this skeleton.
+# UAGF Founder Decisions Ledger
+# Ratification state (2026-08-28):
+# - UFD-001: RATIFIED (Founder countersignature; restores the historical
+#   ratification referenced by UGR-30 / UGR-31 / DOM-FAIRNESS)
+# - UFD-007: RATIFIED (Founder countersignature; covers UGR-52 activation)
+# - UFD:D-02, OD-K2, OD-K3, OD-13: remain PENDING-FOUNDER-COUNTERSIGN.
+# Ratification entries require the Founder's explicit signature
+# (signed_by / signed_date). No other field may be ratified by tooling.
 
 decisions:
+  UFD-001:
+    id: UFD-001
+    title: "Ratification of UGR-030, UGR-31 and DOM-FAIRNESS"
+    status: ratified
+    ratification: RATIFIED
+    signed_by: "Apichai Chuensuang (Founder)"
+    signed_date: "2026-08-28"
+    decisions:
+      - "Ratify UGR-030 activation (CONFLICT resolution per D-03)"
+      - "Ratify UGR-31 activation (CONFLICT resolution per D-03)"
+      - "Ratify DOM-FAIRNESS governance domain"
+    note: "Restores the historical ratification record referenced by ratified_by fields; countersigned publicly on 2026-08-28."
+
   UFD-007:
     id: UFD-007
     title: "Conflict resolution, ratifications, Release 2.0.0-Alpha"
-    status: pending
-    ratification: PENDING-FOUNDER-COUNTERSIGN
+    status: ratified
+    ratification: RATIFIED
+    signed_by: "Apichai Chuensuang (Founder)"
+    signed_date: "2026-08-28"
     decisions:
       - "CONFLICT resolutions approved: activate UGR-030/031 (per D-03) and UGR-052"
       - "OD-K1 Kernel WP-004 v0.2 (Kernel checks)"
       - "OD-K2 CV terms: legalization/mapping (pending Founder ruling)"
       - "OD-K3 Lifecycle mapping: legacy -> CKM (pending Founder ruling)"
-    note: "Ledger entry placeholder. Founder counter-signature required for ratification."
+    note: "Countersigned publicly on 2026-08-28; ratifies UGR-52 activation."
 
   UFD:D-02:
     id: UFD:D-02
