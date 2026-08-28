@@ -26,7 +26,7 @@ jobs:
         fi
         pip install pytest pytest-cov
 
-    - name: Optional: Run migration if legacy artifact present
+    - name: "Optional: Run migration if legacy artifact present"
       if: ${{ always() }}
       run: |
         if [ -f legacy/UAGF-002_v1.0_source.md ]; then
@@ -35,20 +35,7 @@ jobs:
           echo "No legacy source present; skipping migration step."
         fi
 
-    - name: Run Validation (staging) with ledger
-      run: |
-        if [ -f governance/UFD_Decisions_Ledger.yaml ]; then
-          python validate_ckm.py ckm-staging --require-ledger governance/UFD_Decisions_Ledger.yaml -o reports/validation_report.json
-        else
-          python validate_ckm.py ckm-staging -o reports/validation_report.json
-        fi
-
-    - name: Render profiles (registry-doc, registry-jsonld)
-      run: |
-        python render_ckm.py --ckm ckm-staging --profile registry-doc --scope module:M-CORE --ckm-release 2.0.0-staging --out generated/registry-doc.md
-        python render_ckm.py --ckm ckm-staging --profile registry-jsonld --scope module:M-CORE --ckm-release 2.0.0-staging --out generated/registry.jsonld
-
-    - name: Run E2E runner
+    - name: Run E2E runner (merged-view validation + render + baselines)
       run: |
         python tests/run_e2e.py --ckm ckm-staging --ledger governance/UFD_Decisions_Ledger.yaml --baseline-dir generated/baseline --out-summary reports/e2e_summary.json
 
