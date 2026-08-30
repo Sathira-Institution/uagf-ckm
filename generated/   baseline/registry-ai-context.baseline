@@ -1,0 +1,263 @@
+[UAGF Requirement UGR-001 | Domain: DOM-GOV | Priority: HIGH | Force: Normative]
+Obligation: The organization must designate a person or function with overall accountability for AI governance, including policy development, risk oversight, and compliance monitoring.
+Why: Ensure clear ownership and accountability for AI governance across the organization.
+Applies to: All organizations that develop, deploy, or operate AI systems
+Anchors: REF-ISO42001 (Clause 5.3) [pending-verification]; REF-EUAIA (Article 26) [pending-verification]; REF-TH-PDPA (Section 41) [pending-verification]
+Related: UGR-002, UGR-003, UGR-015
+Source of truth: https://uagf.sathira.institute/id/requirement/UGR-1 (CKM 2.0.0-merged)
+
+[UAGF Requirement UGR-015 | Domain: DOM-HUMAN | Priority: CRITICAL | Force: Normative]
+Obligation: High-risk AI systems must be designed and operated in a way that enables effective human oversight, including the ability for humans to intervene, override, or stop the system when necessary.
+Why: Ensure human judgment remains the final authority for consequential AI decisions, preventing full automation of decisions with significant impact.
+Applies to: Organizations deploying high-risk AI systems
+Anchors: REF-EUAIA (Article 14) [pending-verification]; REF-ISO42001 (Clause 8) [pending-verification]; REF-OECD-AIP [pending-verification]
+Related: UGR-004, UGR-016, UGR-017, UGR-045
+Source of truth: https://uagf.sathira.institute/id/requirement/UGR-15 (CKM 2.0.0-merged)
+
+[UAGF Requirement UGR-016 | Domain: DOM-HUMAN | Priority: HIGH | Force: Normative]
+Obligation: The organization must establish documented approval workflows for AI system decisions, specifying who must approve which types of decisions, under what conditions, and within what timeframe.
+Why: Ensure decisions of consequence are routed through a documented, accountable approval process before execution.
+Applies to: All organizations with AI systems that make consequential decisions
+Anchors: REF-ISO42001 (Clause 8) [pending-verification]; REF-EUAIA (Article 14) [pending-verification]
+Related: UGR-015, UGR-017, UGR-045
+Source of truth: https://uagf.sathira.institute/id/requirement/UGR-16 (CKM 2.0.0-merged)
+
+[UAGF Requirement UGR-017 | Domain: DOM-HUMAN | Priority: CRITICAL | Force: Normative]
+Obligation: The organization must implement mechanisms that allow authorized human operators to intervene, override, or halt AI system actions in real time when necessary to prevent harm or correct erroneous behavior.
+Why: Ensure humans can stop or correct AI actions when necessary.
+Applies to: Organizations deploying high-risk AI systems
+Anchors: REF-EUAIA (Article 14) [pending-verification]; REF-ISO42001 (Clause 8) [pending-verification]
+Related: UGR-015, UGR-045
+Source of truth: https://uagf.sathira.institute/id/requirement/UGR-17 (CKM 2.0.0-merged)
+
+[UAGF Requirement UGR-002 | Domain: DOM-GOV | Priority: HIGH | Force: Normative]
+Obligation: The organization must establish, document, and maintain an AI policy that defines governance principles, risk tolerance, ethical commitments, and compliance requirements for AI systems.
+Why: Provide a formal, documented foundation for AI governance that communicates organizational commitments and expectations.
+Applies to: All organizations that develop, deploy, or operate AI systems
+Anchors: REF-ISO42001 (Clause 5.2) [pending-verification]; REF-EUAIA (Article 26) [pending-verification]; REF-OECD-AIP [pending-verification]
+Related: UGR-001, UGR-004
+Source of truth: https://uagf.sathira.institute/id/requirement/UGR-2 (CKM 2.0.0-merged)
+
+[UAGF Requirement UGR-020 | Domain: DOM-DATA | Priority: HIGH | Force: Normative]
+Obligation: The organization must ensure that data used for training, validation, and operation of AI systems is of sufficient quality, including accuracy, completeness, relevance, and representativeness for the intended use.
+Why: Prevent AI system errors and biases caused by poor quality data.
+Applies to: All organizations that develop or operate AI systems
+Anchors: REF-EUAIA (Article 10) [pending-verification]; REF-ISO42001 (Annex A (Data Integrity)) [pending-verification]; REF-TH-PDPA (Section 23) [pending-verification]
+Related: UGR-021, UGR-022
+Source of truth: https://uagf.sathira.institute/id/requirement/UGR-20 (CKM 2.0.0-merged)
+
+[UAGF Requirement UGR-021 | Domain: DOM-DATA | Priority: HIGH | Force: Normative]
+Obligation: The organization must maintain data lineage records that track the origin, transformation, and flow of data used in AI systems from source to consumption, enabling traceability and auditability.
+Why: Enable traceability of data used in AI systems for audit, compliance, and error investigation.
+Applies to: All organizations that develop or operate AI systems
+Anchors: REF-EUAIA (Article 10) [pending-verification]; REF-ISO42001 (Annex A (Data Integrity)) [pending-verification]; REF-NIST-AIRMF [pending-verification]
+Related: UGR-020, UGR-035, UGR-036
+Source of truth: https://uagf.sathira.institute/id/requirement/UGR-21 (CKM 2.0.0-merged)
+
+[UAGF Requirement UGR-022 | Domain: DOM-DATA | Priority: HIGH | Force: Normative]
+Obligation: The organization must classify data used in AI systems according to sensitivity, regulatory requirements, and risk, and apply appropriate controls based on classification.
+Why: Ensure appropriate protection for data based on sensitivity and regulatory requirements.
+Applies to: All organizations that process data through AI systems
+Anchors: REF-TH-PDPA (Section 23) [pending-verification]; REF-ISO42001 (Annex A (Privacy)) [pending-verification]; REF-NIST-AIRMF [pending-verification]
+Related: UGR-020
+Source of truth: https://uagf.sathira.institute/id/requirement/UGR-22 (CKM 2.0.0-merged)
+
+[UAGF Requirement UGR-025 | Domain: DOM-TRANSPARENCY | Priority: HIGH | Force: Normative]
+Obligation: Users must be informed when they are interacting with an AI system, including the nature and purpose of the system, in a clear and understandable manner.
+Why: Ensure users are aware they are interacting with AI and can make informed decisions about their engagement.
+Applies to: All organizations with user-facing AI systems
+Anchors: REF-EUAIA (Article 50) [pending-verification]; REF-OECD-AIP [pending-verification]; REF-UNESCO-RECOMMENDATION-ON [pending-verification]
+Related: UGR-026, UGR-027
+Source of truth: https://uagf.sathira.institute/id/requirement/UGR-25 (CKM 2.0.0-merged)
+
+[UAGF Requirement UGR-026 | Domain: DOM-TRANSPARENCY | Priority: HIGH | Force: Normative]
+Obligation: AI-generated synthetic content (including text, images, audio, and video) must be clearly labeled as AI-generated or AI-manipulated in a machine-readable and human-readable format.
+Why: Prevent deception by ensuring users can identify AI-generated content.
+Applies to: Organizations that generate synthetic content using AI
+Anchors: REF-EUAIA (Article 50) [pending-verification]; REF-C2PA [pending-verification]
+Related: UGR-025, UGR-027
+Source of truth: https://uagf.sathira.institute/id/requirement/UGR-26 (CKM 2.0.0-merged)
+
+[UAGF Requirement UGR-027 | Domain: DOM-TRANSPARENCY | Priority: HIGH | Force: Normative]
+Obligation: Deepfake content (AI-generated or manipulated image, audio, or video that resembles real persons or events) must be clearly disclosed as artificially generated or manipulated.
+Why: Prevent misinformation and deception through realistic synthetic media.
+Applies to: Organizations that generate or distribute deepfake content
+Anchors: REF-EUAIA (Article 50(4)) [pending-verification]; REF-EUAIA (Article 3(66)) [pending-verification]
+Related: UGR-025, UGR-026
+Source of truth: https://uagf.sathira.institute/id/requirement/UGR-27 (CKM 2.0.0-merged)
+
+[UAGF Requirement UGR-003 | Domain: DOM-GOV | Priority: HIGH | Force: Normative]
+Obligation: Top management must demonstrate commitment to AI governance by approving the AI policy, allocating resources, and regularly reviewing AI governance performance.
+Why: Ensure AI governance has executive-level support and resources to be effective.
+Applies to: All organizations that develop, deploy, or operate AI systems
+Anchors: REF-ISO42001 (Clause 5.1) [pending-verification]; REF-EUAIA (Article 26) [pending-verification]
+Related: UGR-001, UGR-002
+Source of truth: https://uagf.sathira.institute/id/requirement/UGR-3 (CKM 2.0.0-merged)
+
+[UAGF Requirement UGR-030 | Domain: DOM-FAIRNESS | Priority: CRITICAL | Force: Normative]
+Obligation: The organization SHALL examine data and models for possible biases likely to affect health, safety, or fundamental rights, and SHALL apply documented mitigation measures.
+Why: Ensure biases that could harm people are systematically identified and mitigated before and during use of AI systems.
+Applies to: Organizations developing or deploying AI systems whose outputs may affect persons
+Anchors: REF-EUAIA (Article 10(2)) [pending-verification]; REF-NIST-AIRMF [pending-verification]
+Related: UGR-022, UGR-031
+Source of truth: https://uagf.sathira.institute/id/requirement/UGR-30 (CKM 2.0.0-merged)
+
+[UAGF Requirement UGR-031 | Domain: DOM-FAIRNESS | Priority: HIGH | Force: Normative]
+Obligation: The organization SHOULD define fairness metrics appropriate to the use case and monitor deployed AI systems against them, with review triggers on degradation.
+Why: Detect fairness degradation of deployed AI systems early enough to act.
+Applies to: Organizations operating AI systems whose outputs may affect persons
+Anchors: REF-NIST-AIRMF [pending-verification]; REF-OECD-AIP [pending-verification]
+Related: UGR-030, UGR-022
+Source of truth: https://uagf.sathira.institute/id/requirement/UGR-31 (CKM 2.0.0-merged)
+
+[UAGF Requirement UGR-035 | Domain: DOM-AUDITABILITY | Priority: CRITICAL | Force: Normative]
+Obligation: AI systems must log all material decisions, actions, and events, including inputs, outputs, decision rationale, and human interventions, in a format suitable for audit and review.
+Why: Enable audit, investigation, and continuous improvement through complete records of AI system behavior.
+Applies to: All organizations with AI systems
+Anchors: REF-EUAIA (Article 12) [pending-verification]; REF-ISO42001 (Clause 8) [pending-verification]; REF-NIST-AIRMF [pending-verification]
+Related: UGR-036, UGR-037, UGR-045
+Source of truth: https://uagf.sathira.institute/id/requirement/UGR-35 (CKM 2.0.0-merged)
+
+[UAGF Requirement UGR-036 | Domain: DOM-AUDITABILITY | Priority: HIGH | Force: Normative]
+Obligation: The organization must retain audit trails for AI systems for a defined retention period (minimum 5 years for high-risk systems) in a tamper-evident format that supports retrieval and replay.
+Why: Ensure evidence is available for audits, investigations, and regulatory reviews.
+Applies to: All organizations with AI systems
+Anchors: REF-EUAIA (Article 12) [pending-verification]; REF-ISO42001 (Clause 8) [pending-verification]; REF-TH-PDPA (Section 23) [pending-verification]
+Related: UGR-035, UGR-037, UGR-045
+Source of truth: https://uagf.sathira.institute/id/requirement/UGR-36 (CKM 2.0.0-merged)
+
+[UAGF Requirement UGR-037 | Domain: DOM-AUDITABILITY | Priority: HIGH | Force: Normative]
+Obligation: The organization must be able to retrieve audit trails for AI systems upon request from authorized parties (auditors, regulators, data subjects) within a reasonable timeframe.
+Why: Enable timely response to audit and regulatory requests.
+Applies to: All organizations with AI systems
+Anchors: REF-EUAIA (Article 12) [pending-verification]; REF-ISO42001 (Clause 8) [pending-verification]; REF-TH-PDPA (Sections 30-36) [pending-verification]
+Related: UGR-035, UGR-036
+Source of truth: https://uagf.sathira.institute/id/requirement/UGR-37 (CKM 2.0.0-merged)
+
+[UAGF Requirement UGR-004 | Domain: DOM-GOV | Priority: HIGH | Force: Normative]
+Obligation: The organization must define and document roles, responsibilities, and authorities for AI governance, including who is accountable for AI system decisions, risk management, and compliance.
+Why: Ensure clear accountability for AI-related decisions and activities across the organization.
+Applies to: All organizations that develop, deploy, or operate AI systems
+Anchors: REF-ISO42001 (Clause 5.3) [pending-verification]; REF-EUAIA (Article 26) [pending-verification]; REF-TH-PDPA (Section 41) [pending-verification]
+Related: UGR-001, UGR-015, UGR-045
+Source of truth: https://uagf.sathira.institute/id/requirement/UGR-4 (CKM 2.0.0-merged)
+
+[UAGF Requirement UGR-045 | Domain: DOM-ACCOUNTABILITY | Priority: CRITICAL | Force: Normative]
+Obligation: The organization must ensure that every consequential AI decision has a clearly identified human accountable for the outcome, with documented responsibility and authority.
+Why: Maintain human responsibility for AI outcomes, preventing accountability gaps.
+Applies to: All organizations with AI systems that make consequential decisions
+Anchors: REF-EUAIA (Article 14) [pending-verification]; REF-ISO42001 (Clause 5.3) [pending-verification]; REF-OECD-AIP [pending-verification]
+Related: UGR-001, UGR-004, UGR-015, UGR-016
+Source of truth: https://uagf.sathira.institute/id/requirement/UGR-45 (CKM 2.0.0-merged)
+
+[UAGF Requirement UGR-005 | Domain: DOM-RISK | Priority: CRITICAL | Force: Normative]
+Obligation: The organization must establish, implement, and maintain a risk management system for AI systems that identifies, analyzes, evaluates, treats, and monitors AI-related risks throughout the AI system lifecycle.
+Why: Ensure systematic identification and management of AI risks from design through deployment and operation.
+Applies to: Organizations deploying high-risk AI systems; all organizations with AI systems
+Anchors: REF-EUAIA (Article 9) [pending-verification]; REF-ISO42001 (Clause 6.1) [pending-verification]; REF-NIST-AIRMF (Govern Function) [pending-verification]
+Related: UGR-006, UGR-007
+Source of truth: https://uagf.sathira.institute/id/requirement/UGR-5 (CKM 2.0.0-merged)
+
+[UAGF Requirement UGR-050 | Domain: DOM-SECURITY | Priority: HIGH | Force: Normative]
+Obligation: AI systems must be protected against unauthorized access, manipulation, and misuse through appropriate security controls, including access control, encryption, and monitoring.
+Why: Prevent security breaches that could compromise AI system integrity, confidentiality, or availability.
+Applies to: All organizations with AI systems
+Anchors: REF-EUAIA (Article 15) [pending-verification]; REF-ISO42001 (Annex A (Security)) [pending-verification]; REF-NIST-AIRMF [pending-verification]
+Related: UGR-051
+Source of truth: https://uagf.sathira.institute/id/requirement/UGR-50 (CKM 2.0.0-merged)
+
+[UAGF Requirement UGR-051 | Domain: DOM-SECURITY | Priority: MEDIUM | Force: Normative]
+Obligation: AI systems must be tested for security vulnerabilities before deployment and periodically during operation, with findings documented and remediated.
+Why: Identify and remediate security vulnerabilities before they can be exploited.
+Applies to: All organizations with AI systems
+Anchors: REF-EUAIA (Article 15) [pending-verification]; REF-ISO42001 (Annex A (Security)) [pending-verification]; REF-NIST-AIRMF [pending-verification]
+Related: UGR-050
+Source of truth: https://uagf.sathira.institute/id/requirement/UGR-51 (CKM 2.0.0-merged)
+
+[UAGF Requirement UGR-052 | Domain: DOM-SECURITY | Priority: HIGH | Force: Normative]
+Obligation: The organization SHALL test AI systems against AI-specific attacks (e.g., data poisoning, adversarial inputs, model extraction) proportionate to risk, and remediate findings.
+Why: Ensure AI systems withstand AI-specific attack classes and that discovered weaknesses are remediated.
+Applies to: Organizations developing or operating AI systems exposed to adversarial risk
+Anchors: REF-EUAIA (Article 15) [pending-verification]; REF-NIST-AIRMF [pending-verification]
+Related: UGR-050, UGR-051
+Source of truth: https://uagf.sathira.institute/id/requirement/UGR-52 (CKM 2.0.0-merged)
+
+[UAGF Requirement UGR-006 | Domain: DOM-RISK | Priority: HIGH | Force: Normative]
+Obligation: The organization must classify each AI system according to its risk level, considering the potential impact on health, safety, fundamental rights, and organizational objectives.
+Why: Enable proportionate governance by matching controls to risk level.
+Applies to: All organizations that deploy AI systems
+Anchors: REF-EUAIA (Article 6) [pending-verification]; REF-ISO42001 (Clause 6.1) [pending-verification]; REF-NIST-AIRMF [pending-verification]
+Related: UGR-005, UGR-015
+Source of truth: https://uagf.sathira.institute/id/requirement/UGR-6 (CKM 2.0.0-merged)
+
+[UAGF Requirement UGR-060 | Domain: DOM-PRIVACY | Priority: CRITICAL | Force: Normative]
+Obligation: The organization must establish and document a lawful basis for all processing of personal data by AI systems, including consent, contract, legal obligation, vital interest, public task, or legitimate interest.
+Why: Ensure all personal data processing by AI systems has a valid legal foundation.
+Applies to: Organizations processing personal data through AI systems
+Anchors: REF-TH-PDPA (Section 24) [pending-verification]; REF-EUAIA (Article 10) [pending-verification]; REF-ISO42001 (Annex A (Privacy)) [pending-verification]
+Related: UGR-061, UGR-062, UGR-064
+Source of truth: https://uagf.sathira.institute/id/requirement/UGR-60 (CKM 2.0.0-merged)
+
+[UAGF Requirement UGR-061 | Domain: DOM-PRIVACY | Priority: HIGH | Force: Normative]
+Obligation: The organization must support data subject rights in AI systems, including the right to access, correct, delete, restrict processing, object, and data portability, with documented procedures and response timelines.
+Why: Protect individual rights regarding personal data processed by AI systems.
+Applies to: Organizations processing personal data through AI systems
+Anchors: REF-TH-PDPA (Sections 30-36) [pending-verification]; REF-ISO42001 (Annex A (Privacy)) [pending-verification]
+Related: UGR-060, UGR-062, UGR-064
+Source of truth: https://uagf.sathira.institute/id/requirement/UGR-61 (CKM 2.0.0-merged)
+
+[UAGF Requirement UGR-062 | Domain: DOM-PRIVACY | Priority: HIGH | Force: Normative]
+Obligation: The organization must conduct Data Protection Impact Assessments (DPIAs) for AI systems that process personal data, particularly where processing is likely to result in high risk to individuals' rights and freedoms.
+Why: Identify and mitigate privacy risks before AI systems process personal data.
+Applies to: Organizations processing personal data through AI systems
+Anchors: REF-TH-PDPA (Section 23) [pending-verification]; REF-ISO42001 (Clause 6) [pending-verification]; REF-NIST-AIRMF [pending-verification]
+Related: UGR-060, UGR-061, UGR-064
+Source of truth: https://uagf.sathira.institute/id/requirement/UGR-62 (CKM 2.0.0-merged)
+
+[UAGF Requirement UGR-063 | Domain: DOM-PRIVACY | Priority: HIGH | Force: Normative]
+Obligation: The organization must apply enhanced protections for sensitive personal data (e.g., health data, biometric data, racial or ethnic origin, political opinions, religious beliefs) processed by AI systems, including explicit consent where required.
+Why: Ensure enhanced protection for sensitive data that carries higher privacy risk.
+Applies to: Organizations processing sensitive personal data through AI systems
+Anchors: REF-TH-PDPA (Section 26) [pending-verification]; REF-EUAIA (Article 10) [pending-verification]; REF-ISO42001 (Annex A (Privacy)) [pending-verification]
+Related: UGR-060, UGR-061
+Source of truth: https://uagf.sathira.institute/id/requirement/UGR-63 (CKM 2.0.0-merged)
+
+[UAGF Requirement UGR-064 | Domain: DOM-PRIVACY | Priority: HIGH | Force: Normative]
+Obligation: The organization must conduct privacy impact assessments for AI systems that process personal data, evaluating privacy risks and implementing appropriate mitigations before deployment.
+Why: Systematically identify and address privacy risks in AI systems.
+Applies to: Organizations processing personal data through AI systems
+Anchors: REF-TH-PDPA (Section 23) [pending-verification]; REF-ISO42001 (Clause 6) [pending-verification]; REF-NIST-AIRMF [pending-verification]
+Related: UGR-060, UGR-061, UGR-062
+Source of truth: https://uagf.sathira.institute/id/requirement/UGR-64 (CKM 2.0.0-merged)
+
+[UAGF Requirement UGR-007 | Domain: DOM-RISK | Priority: HIGH | Force: Normative]
+Obligation: The organization must conduct impact assessments for high-risk AI systems to evaluate potential effects on individuals, communities, and organizational operations before deployment.
+Why: Identify and mitigate potential negative impacts before AI systems are deployed.
+Applies to: Organizations deploying high-risk AI systems
+Anchors: REF-EUAIA (Article 26) [pending-verification]; REF-ISO42001 (Clause 6.1) [pending-verification]; REF-NIST-AIRMF [pending-verification]
+Related: UGR-005, UGR-006
+Source of truth: https://uagf.sathira.institute/id/requirement/UGR-7 (CKM 2.0.0-merged)
+
+[UAGF Requirement UGR-070 | Domain: DOM-SAFETY | Priority: HIGH | Force: Normative]
+Obligation: AI systems must be tested for safety before deployment, including testing for harmful outputs, unintended behaviors, and failure modes, with results documented and reviewed.
+Why: Prevent harm from AI system failures or unintended behaviors.
+Applies to: Organizations deploying AI systems
+Anchors: REF-EUAIA (Article 15) [pending-verification]; REF-ISO42001 (Clause 8) [pending-verification]; REF-NIST-AIRMF [pending-verification]
+Related: UGR-071, UGR-072
+Source of truth: https://uagf.sathira.institute/id/requirement/UGR-70 (CKM 2.0.0-merged)
+
+[UAGF Requirement UGR-071 | Domain: DOM-SAFETY | Priority: HIGH | Force: Normative]
+Obligation: The organization must define safety thresholds for AI system behavior and continuously monitor system performance against these thresholds during operation.
+Why: Detect and respond to unsafe AI system behavior during operation.
+Applies to: Organizations deploying AI systems
+Anchors: REF-EUAIA (Article 15) [pending-verification]; REF-ISO42001 (Clause 8) [pending-verification]; REF-NIST-AIRMF [pending-verification]
+Related: UGR-070, UGR-072
+Source of truth: https://uagf.sathira.institute/id/requirement/UGR-71 (CKM 2.0.0-merged)
+
+[UAGF Requirement UGR-072 | Domain: DOM-SAFETY | Priority: HIGH | Force: Normative]
+Obligation: The organization must have documented procedures to suspend or roll back AI systems when unsafe behavior is detected, with clear authority and escalation paths.
+Why: Enable rapid response to unsafe AI system behavior.
+Applies to: Organizations deploying AI systems
+Anchors: REF-EUAIA (Article 15) [pending-verification]; REF-ISO42001 (Clause 8) [pending-verification]; REF-NIST-AIRMF [pending-verification]
+Related: UGR-070, UGR-071
+Source of truth: https://uagf.sathira.institute/id/requirement/UGR-72 (CKM 2.0.0-merged)
