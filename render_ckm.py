@@ -127,7 +127,7 @@ def render_json(objs, ids, st):
         if omitted:
             loss_items.append({"object": o["id"], "omitted_slots": omitted,
                                "note": "machine metadata omitted by declared design (RE-3)"})
-    loss = {"profile_rule": "registry-json renders all slots verbatim except machine provenance metadata",
+    loss = {"profile_rule": "registry-json renders all model slots verbatim except machine provenance metadata; adds derived IRI and stamp wrapper",
             "items": loss_items}
     return json.dumps(data, indent=2, ensure_ascii=False), loss
 
@@ -154,16 +154,18 @@ def render_jsonld(objs, ids, st):
         if e.get("references"):
             node["references"] = [f"uagf:requirement/{r}" for r in e["references"]]
         g.append(node)
+        # F1+F2: declare ALL omitted slots, key-presence semantics (matches registry-json)
         omitted = [k for k in ("implementation_guidance", "expected_evidence",
                                "related_controls", "automation_potential",
-                               "conformance_level", "provenance") if o.get(k)]
+                               "conformance_level", "provenance",
+                               "owner_module", "created", "modified", "tier") if k in o]
         if omitted:
             loss_items.append({"object": o["id"], "omitted_slots": omitted,
                                "note": "implementation/operational metadata omitted by declared design (RE-3)"})
     doc = {"@context": {"@vocab": f"{BASE_IRI}/vocab/", "uagf": f"{BASE_IRI}/id/",
                         "belongsTo": {"@type": "@id"}, "references": {"@type": "@id"}},
            "stamp": st, "@graph": g}
-    loss = {"profile_rule": "registry-jsonld is declared-lossy; normative statement and traceability edges preserved verbatim",
+    loss = {"profile_rule": "registry-jsonld is declared-lossy; normative statement and traceability edges preserved verbatim; slots present with empty/null values are declared as loss by key presence",
             "items": loss_items}
     return json.dumps(doc, indent=2, ensure_ascii=False), loss
 
@@ -215,7 +217,9 @@ def main():
         lp = a.out + ".loss-manifest.json"
         json.dump({"stamp": st, "loss": loss}, open(lp, "w", encoding="utf-8"),
                   indent=2, ensure_ascii=False)
-    print(f"RENDERED {a.profile} -> {a.out} (+loss manifest)")
+    # F4: stdout ต้องตรงกับสิ่งที่เขียนจริง (แก้ predicate mismatch เดิม)
+    print(f"RENDERED {a.profile} -> {a.out}"
+          + (" (+loss manifest)" if loss is not None else " (lossless)"))
 
 if __name__ == "__main__":
     main()
