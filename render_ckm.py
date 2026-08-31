@@ -120,10 +120,20 @@ def to_json_obj(u):
 def render_json(objs, ids, st):
     data = {"stamp": st,
             "objects": [to_json_obj(objs[i]) for i in sorted(ids)]}
-    return json.dumps(data, indent=2, ensure_ascii=False), None   # lossless (minus provenance? declare)
+    loss_items = []
+    for i in sorted(ids):
+        o = objs[i]
+        omitted = [k for k in ("provenance", "_file") if k in o]
+        if omitted:
+            loss_items.append({"object": o["id"], "omitted_slots": omitted,
+                               "note": "machine metadata omitted by declared design (RE-3)"})
+    loss = {"profile_rule": "registry-json renders all slots verbatim except machine provenance metadata",
+            "items": loss_items}
+    return json.dumps(data, indent=2, ensure_ascii=False), loss
 
 def render_jsonld(objs, ids, st):
     g = []
+    loss_items = []
     for i in sorted(ids):
         o = objs[i]
         node = {"@id": f"uagf:{o['type'].lower()}/{o['id']}", "@type": o["type"],
@@ -144,10 +154,18 @@ def render_jsonld(objs, ids, st):
         if e.get("references"):
             node["references"] = [f"uagf:requirement/{r}" for r in e["references"]]
         g.append(node)
+        omitted = [k for k in ("implementation_guidance", "expected_evidence",
+                               "related_controls", "automation_potential",
+                               "conformance_level", "provenance") if o.get(k)]
+        if omitted:
+            loss_items.append({"object": o["id"], "omitted_slots": omitted,
+                               "note": "implementation/operational metadata omitted by declared design (RE-3)"})
     doc = {"@context": {"@vocab": f"{BASE_IRI}/vocab/", "uagf": f"{BASE_IRI}/id/",
                         "belongsTo": {"@type": "@id"}, "references": {"@type": "@id"}},
            "stamp": st, "@graph": g}
-    return json.dumps(doc, indent=2, ensure_ascii=False), None
+    loss = {"profile_rule": "registry-jsonld is declared-lossy; normative statement and traceability edges preserved verbatim",
+            "items": loss_items}
+    return json.dumps(doc, indent=2, ensure_ascii=False), loss
 
 def render_ai_context(objs, ids, st):
     outs, loss_items = [], []
@@ -197,7 +215,7 @@ def main():
         lp = a.out + ".loss-manifest.json"
         json.dump({"stamp": st, "loss": loss}, open(lp, "w", encoding="utf-8"),
                   indent=2, ensure_ascii=False)
-    print(f"RENDERED {a.profile} -> {a.out}" + (" (+loss manifest)" if loss else " (lossless)"))
+    print(f"RENDERED {a.profile} -> {a.out} (+loss manifest)")
 
 if __name__ == "__main__":
     main()
