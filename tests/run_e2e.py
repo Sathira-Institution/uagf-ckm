@@ -10,7 +10,7 @@ Semantics (see docs/validation-merge-semantics.md):
 - Baselines are created only when merged validation PASSes.
 - Dangling references (V-1) are recorded as [CONFLICT] for Founder routing (D-03).
 """
-import os, sys, subprocess, yaml, json, hashlib, argparse, tempfile, shutil, difflib, datetime
+import os, sys, subprocess, yaml, json, hashlib, argparse, tempfile, shutil, difflib, datetime, re
 from pathlib import Path
 
 PROFILES = ["registry-doc", "registry-jsonld", "registry-ai-context"]
@@ -60,24 +60,41 @@ def sha256(path):
             h.update(chunk)
     return h.hexdigest()
 
+def _normalized_lines(text, allowed_kinds):
+    """Apply declared normalizations (XD-*) symmetrically BEFORE diffing."""
+    out = []
+    for raw in text.splitlines():
+        line = raw
+        if "id_padding_presentation" in allowed_kinds:
+            line = re.sub(r"\bUGR-(\d{1,4})\b",
+                          lambda m: "UGR-%04d" % int(m.group(1)), line)
+        if "generated_front_matter" in allowed_kinds:
+            if re.search(r"\b(render_token|ckm_release|rendered_at)\b\s*[:=]", line):
+                continue
+        if "cv_token_presentation" in allowed_kinds:
+            s = line.strip()
+            if re.fullmatch(r"[-A-Za-z0-9_]+(\s*,\s*[-A-Za-z0-9_]+)*", s):
+                line = line.lower().replace("_", "-")
+        out.append(line)
+    return out
+
 def compare_and_classify_diff(profile, baseline_path, new_path, allowed_kinds):
     if not os.path.exists(baseline_path):
         return {"status": "NO_BASELINE", "undeclared_diffs": []}
     if sha256(baseline_path) == sha256(new_path):
         return {"status": "IDENTICAL", "undeclared_diffs": []}
-    with open(baseline_path, encoding="utf-8") as f: base = f.readlines()
-    with open(new_path, encoding="utf-8") as f: new = f.readlines()
-    diffs = list(difflib.unified_diff(base, new, lineterm=""))
-    undeclared = []
-    for line in diffs:
-        if any(k in allowed_kinds for k in ("id_padding_presentation",)) and ("UGR-" in line and any(ch.isdigit() for ch in line)):
-            continue
-        if any(k in allowed_kinds for k in ("generated_front_matter",)) and ("render_token" in line or "ckm_release" in line):
-            continue
-        if any(k in allowed_kinds for k in ("cv_token_presentation",)) and (line.strip().lower() == line.strip()):
-            continue
-        undeclared.append(line)
-    return {"status": "DIFFER", "undeclared_diffs": undeclared, "diff_count": len(diffs)}
+    with open(baseline_path, encoding="utf-8") as f: base = f.read()
+    with open(new_path, encoding="utf-8") as f: new = f.read()
+    base_n = _normalized_lines(base, allowed_kinds)
+    new_n  = _normalized_lines(new, allowed_kinds)
+    if base_n == new_n:
+        return {"status": "DIFFER_DECLARED_ONLY", "undeclared_diffs": [],
+                "diff_count": 0, "applied_kinds": sorted(allowed_kinds)}
+    diffs = list(difflib.unified_diff(base_n, new_n, lineterm=""))
+    undeclared = [ln for ln in diffs
+                  if ln[:1] in ("+", "-") and ln[:3] not in ("+++", "---")]
+    return {"status": "DIFFER", "undeclared_diffs": undeclared,
+            "diff_count": len(undeclared), "applied_kinds": sorted(allowed_kinds)}
 
 def main():
     ap = argparse.ArgumentParser()
