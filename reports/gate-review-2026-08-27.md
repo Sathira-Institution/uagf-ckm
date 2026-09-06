@@ -1,3 +1,7 @@
+> NOTE (2026-09-07): success_criteria schema superseded by D1 (P1-4):
+> ingested_ugrs: 45 split into ingested_ugrs_enforced: 33 + ingested_ugrs_target: 45.
+> This review records the pre-split state (historical).
+
 # UAGF Gate-by-Gate Review — 2026-08-27
 
 This report records the gate-by-gate analysis and findings for the UAGF v2.0.0-alpha repository as inspected on 2026-08-27. It is an evidence artifact for the automated pipeline remediation tasks executed thereafter.

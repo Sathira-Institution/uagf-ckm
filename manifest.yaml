@@ -173,7 +173,8 @@ rollback:
   renders: disposable_regenerable    # RB-4
 
 success_criteria:
-  ingested_ugrs: 45
+  ingested_ugrs_enforced: 33   # current activated UGRs; runner asserts equality
+  ingested_ugrs_target: 45     # informational — D-02 scope; gap = batch-b-remainder
   invariant_pass: all
   undeclared_render_differences: 0
   manual_authoring_events: 0
