@@ -196,7 +196,7 @@ def main():
     ap.add_argument("--cv-dir", default="ckm/cv")
     ap.add_argument("--out", default="ckm-staging")
     ap.add_argument("--report", default="reports/migration_report.json")
-    ap.add_argument("--batch-b", default=None, help="dir of Founder-activated Batch B objects")
+    ap.add_argument("--batch-b", default="batch-b", help="dir of Founder-activated Batch B objects")
     a = ap.parse_args()
     manifest = yaml.safe_load(open(a.manifest, encoding="utf-8"))
     report = {"runner": "uagf-migration-runner/0.1", "manifest_id": manifest["manifest"]["id"],

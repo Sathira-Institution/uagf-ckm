@@ -162,13 +162,14 @@ invariants:
 # any render difference NOT listed here fails the pipeline
 # -----------------------------------------------------------------------------
 expected_differences:
+  # XD-6 withdrawn: R-D (migration_lifecycle_reset) superseded by R-F (XD-7); number not reused.
   - {id: XD-1, kind: cv_token_presentation, note: "enum casing/tokenization"}
-  - {id: XD-2, kind: healed_reference, note: "UGR-030/031 now resolve (D-03); Batch B activation (UGR-0030, UGR-0031, UGR-0052) restores existing source references to activated targets; excludes new source relationships, removals, and lifecycle status changes"}
+  - {id: XD-2, kind: healed_reference, targets: [UGR-0030, UGR-0031, UGR-0052], note: "UGR-030/031 now resolve (D-03); Batch B activation (UGR-0030, UGR-0031, UGR-0052) restores existing source references to activated targets; excludes new source relationships, removals, and lifecycle status changes"}
   - {id: XD-3, kind: id_padding_presentation, note: "3-digit padding is view param"}
   - {id: XD-4, kind: generated_front_matter, note: "CKM release + render stamp; Batch B activation (UGR-0030, UGR-0031, UGR-0052) changes the dataset-derived render token, including JSON metadata; excludes requirement lifecycle status"}
   - {id: XD-5, kind: render_config_frame, note: "website line per OV-006 fix; from render config, not model data; excludes Batch B reference additions and lifecycle status changes"}
 
-  - {id: XD-7, kind: batch_b_lifecycle_reconciliation, note: "one-time reconciliation release-published vs Batch-B-proposed for DOM-FAIRNESS and UGR-52 only; time-boxed until follow-up settles final lifecycle; then remove"}
+  - {id: XD-7, kind: batch_b_lifecycle_reconciliation, records: [DOM-FAIRNESS, UGR-52], expires: "2026-12-31", note: "one-time reconciliation release-published vs Batch-B-proposed for DOM-FAIRNESS and UGR-52 only; time-boxed until follow-up settles final lifecycle; then remove"}
 
 rollback:
   staging_batches: atomic            # RB-2
