@@ -71,6 +71,8 @@ def _normalized_lines(text, allowed_kinds):
             line = re.sub(r"\bUGR-(\d{1,4})\b",
                           lambda m: "UGR-%04d" % int(m.group(1)), line)
         if "generated_front_matter" in allowed_kinds:
+            if re.fullmatch(r'\s*"render_token"\s*:\s*"[0-9a-f]{16}"\s*,?\s*', line):
+                continue
             if re.search(r"\b(render_token|ckm_release|rendered_at)\b\s*[:=]", line):
                 continue
         if "cv_token_presentation" in allowed_kinds:
@@ -80,7 +82,169 @@ def _normalized_lines(text, allowed_kinds):
         out.append(line)
     return out
 
-def compare_and_classify_diff(profile, baseline_path, new_path, allowed_kinds):
+# R-E: healed_reference normalization allowed ONLY for additions of pre-existing
+#      references pointing to UGR-0030 / UGR-0031 / UGR-0052; NOT for new source
+#      relationships, removals, or edge-kind changes.
+# R-F: new diff kind "batch_b_lifecycle_reconciliation" allowed ONLY for status lines
+#      changing published -> proposed on EXACTLY these record IDs: DOM-FAIRNESS, UGR-52.
+#      Time-boxed: removed once follow-up task settles their final lifecycle.
+#      Adding legacy_status to inputs to satisfy a rule is FORBIDDEN (fabricated provenance).
+def _record_id(value):
+    if not isinstance(value, str):
+        return None
+    if re.fullmatch(r"UGR-\d{1,4}", value):
+        return "UGR-%d" % int(value[4:])
+    return value if value == "DOM-FAIRNESS" else None
+
+
+def _source_references(merged_dir):
+    """Ambiguous or unreadable source evidence authorizes no restoration."""
+    if merged_dir is None:
+        return {}
+    refs, seen = {}, set()
+    try:
+        for path in sorted(Path(merged_dir).rglob("*")):
+            if path.suffix not in (".yaml", ".yml"):
+                continue
+            obj = yaml.safe_load(path.read_text(encoding="utf-8"))
+            if not isinstance(obj, dict):
+                continue
+            oid = _record_id(obj.get("id"))
+            if oid is None:
+                continue
+            if oid in seen:
+                return {}
+            seen.add(oid)
+            edges = obj.get("edges")
+            values = edges.get("references") if isinstance(edges, dict) else None
+            if obj.get("type") == "Requirement" and isinstance(values, list):
+                ids = [_record_id(v) for v in values]
+                if all(v and v.startswith("UGR-") for v in ids):
+                    refs[oid] = set(ids)
+    except (OSError, UnicodeError, yaml.YAMLError):
+        return {}
+    return refs
+
+
+def _unique_json_object(pairs):
+    obj = {}
+    for key, value in pairs:
+        if key in obj:
+            raise ValueError("duplicate JSON key")
+        obj[key] = value
+    return obj
+
+
+def _record_fields(lines, profile):
+    """Index only exact renderer field shapes within unique record boundaries."""
+    fields, seen = {}, set()
+    if profile == "registry-jsonld":
+        text = "\n".join(lines)
+        try:
+            parsed = json.loads(text, object_pairs_hook=_unique_json_object)
+            if not isinstance(parsed, dict) or not isinstance(parsed.get("@graph"), list):
+                return {}
+        except (ValueError, TypeError):
+            return {}
+        # Four-space objects are graph records; nested objects cannot match.
+        starts = [i for i, line in enumerate(lines) if line == "    {"]
+        for start in starts:
+            end = next((i for i in range(start + 1, len(lines))
+                        if lines[i] in ("    }", "    },")), None)
+            if end is None:
+                return {}
+            try:
+                node = json.loads("\n".join(lines[start:end + 1]).rstrip(","))
+            except ValueError:
+                return {}
+            match = re.fullmatch(r"uagf:(requirement|domain)/(.+)", node.get("@id", ""))
+            oid = _record_id(match[2]) if match else None
+            if oid is None:
+                continue
+            if oid in seen:
+                return {}
+            seen.add(oid)
+            expected_type = "Requirement" if oid.startswith("UGR-") else "Domain"
+            if node.get("@type") != expected_type or match[1] != expected_type.lower():
+                continue
+            for i in range(start + 1, end):
+                if re.fullmatch(r'      "status": "[a-z]+",?', lines[i]):
+                    fields[oid, "status"] = (i, i + 1, node.get("status"))
+                if lines[i] == '      "references": [':
+                    stop = next((j for j in range(i + 1, end)
+                                 if lines[j] in ('      ]', '      ],')), None)
+                    if stop is None:
+                        continue
+                    values = []
+                    for line in lines[i + 1:stop]:
+                        m = re.fullmatch(r'        "uagf:requirement/(UGR-\d{1,4})",?', line)
+                        if not m:
+                            break
+                        values.append(_record_id(m[1]))
+                    else:
+                        fields[oid, "references"] = (i, stop + 1, values)
+        return fields
+    if profile not in ("registry-doc", "registry-ai-context"):
+        return {}
+    oid = None
+    for i, line in enumerate(lines):
+        heading = (re.fullmatch(r"### (UGR-\d{1,4}) — .+  \[Normative\]", line)
+                   if profile == "registry-doc" else
+                   re.fullmatch(r"\[UAGF Requirement (UGR-\d{1,4}) \| Domain: .+ \| Priority: .+ \| Force: Normative\]", line))
+        if heading:
+            oid = _record_id(heading[1])
+            if oid in seen:
+                return {}
+            seen.add(oid)
+        elif line.startswith(("#", "[UAGF ", "Source of truth:")):
+            oid = None
+        pattern = (r"\| See also \(informative\) \| (UGR-\d{1,4}(?:, UGR-\d{1,4})*) \|"
+                   if profile == "registry-doc" else
+                   r"Related: (UGR-\d{1,4}(?:, UGR-\d{1,4})*)")
+        m = re.fullmatch(pattern, line)
+        if oid and m:
+            key = (oid, "references")
+            if key in fields:
+                return {}
+            fields[key] = (i, i + 1, [_record_id(v) for v in m[1].split(", ")])
+    return fields
+
+
+def _reconcile_records(base, new, profile, allowed_kinds, source_refs):
+    """Replace only a proven directional field change with its baseline span."""
+    before, after = _record_fields(base, profile), _record_fields(new, profile)
+    replacements = []
+    for (oid, field), (start, end, values) in after.items():
+        old = before.get((oid, field))
+        if old is None:
+            continue  # New records/edge fields are never normalized.
+        a, b, previous = old
+        safe = False
+        if field == "references" and "healed_reference" in allowed_kinds:
+            added = set(values) - set(previous)
+            safe = (bool(added) and added <= {"UGR-30", "UGR-31", "UGR-52"}
+                    and added <= source_refs.get(oid, set())
+                    and len(values) == len(set(values))
+                    and len(previous) == len(set(previous))
+                    and [v for v in values if v not in added] == previous)
+            old_tokens = re.findall(r"UGR-\d{1,4}", "\n".join(base[a:b]))
+            new_tokens = re.findall(r"UGR-\d{1,4}", "\n".join(new[start:end]))
+            safe = safe and [v for v in new_tokens if _record_id(v) not in added] == old_tokens
+            if profile == "registry-jsonld":
+                safe = safe and base[a] == new[start] and base[b - 1] == new[end - 1]
+        if field == "status" and "batch_b_lifecycle_reconciliation" in allowed_kinds:
+            safe = (oid in {"DOM-FAIRNESS", "UGR-52"}
+                    and previous == "published" and values == "proposed"
+                    and new[start] == base[a].replace('"published"', '"proposed"'))
+        if safe:
+            replacements.append((start, end, base[a:b]))
+    result = list(new)
+    for start, end, replacement in sorted(replacements, reverse=True):
+        result[start:end] = replacement
+    return result
+
+
+def compare_and_classify_diff(profile, baseline_path, new_path, allowed_kinds, merged_dir=None):
     if not os.path.exists(baseline_path):
         return {"status": "NO_BASELINE", "undeclared_diffs": []}
     if sha256(baseline_path) == sha256(new_path):
@@ -89,6 +253,8 @@ def compare_and_classify_diff(profile, baseline_path, new_path, allowed_kinds):
     with open(new_path, encoding="utf-8") as f: new = f.read()
     base_n = _normalized_lines(base, allowed_kinds)
     new_n  = _normalized_lines(new, allowed_kinds)
+    new_n = _reconcile_records(base_n, new_n, profile, allowed_kinds,
+                               _source_references(merged_dir))
     if base_n == new_n:
         return {"status": "DIFFER_DECLARED_ONLY", "undeclared_diffs": [],
                 "diff_count": 0, "applied_kinds": sorted(allowed_kinds)}
@@ -363,7 +529,8 @@ def main():
                     entry["baseline_comparison"] = {"status": "BASELINE_PENDING"}
                     summary["pending_actions"].append(f"commit baseline for {profile} after validation PASS")
             else:
-                comp = compare_and_classify_diff(profile, baseline, p1, allowed_kinds)
+                comp = compare_and_classify_diff(profile, baseline, p1, allowed_kinds,
+                                                 merged_dir=merged_dir)
                 entry["baseline_comparison"] = comp
 
             summary["profiles"][profile] = entry
