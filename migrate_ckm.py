@@ -196,7 +196,7 @@ def main():
     ap.add_argument("--cv-dir", default="ckm/cv")
     ap.add_argument("--out", default="ckm-staging")
     ap.add_argument("--report", default="reports/migration_report.json")
-    ap.add_argument("--batch-b", default=None, help="dir of Founder-activated Batch B objects")
+    ap.add_argument("--batch-b", default="batch-b", help="dir of Founder-activated Batch B objects")
     a = ap.parse_args()
     manifest = yaml.safe_load(open(a.manifest, encoding="utf-8"))
     report = {"runner": "uagf-migration-runner/0.1", "manifest_id": manifest["manifest"]["id"],
@@ -208,6 +208,9 @@ def main():
     valid_ids = {f"UGR-{int(re.search(r'(\d+)', r['_fields'].get('UGR ID', r['_legacy_id'])).group(1))}"
                  for r in records}
     batch_b_objs = []
+    if a.batch_b and not os.path.isdir(a.batch_b):
+        print(f"WARN: Batch B directory absent: {a.batch_b}; no Batch B objects activated")
+        disp.append({"class": "BATCH-B-ABSENT", "object": "batch-b", "field": "batch_b", "value": a.batch_b})
     if a.batch_b and os.path.isdir(a.batch_b):
         for fn in sorted(os.listdir(a.batch_b)):
             if fn.endswith(".yaml"):
