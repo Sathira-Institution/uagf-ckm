@@ -121,20 +121,20 @@ def _record_id(value):
 def _source_references(release_base):
     """Ambiguous or unreadable source evidence authorizes no restoration."""
     if release_base is None:
-        return {}
+        return {}, "release_base is None"
     refs, seen = {}, set()
     try:
         for path in sorted(Path(release_base).rglob("*")):
             if path.suffix not in (".yaml", ".yml"):
                 continue
-            obj = yaml.safe_load(path.read_text(encoding="utf-8"))
+            obj = yaml.load(path.read_text(encoding="utf-8"), Loader=UniqueKeySafeLoader)
             if not isinstance(obj, dict):
                 continue
             oid = _record_id(obj.get("id"))
             if oid is None:
                 continue
             if oid in seen:
-                return {}
+                return {}, f"duplicate source record id: {oid}"
             seen.add(oid)
             edges = obj.get("edges")
             values = edges.get("references") if isinstance(edges, dict) else None
@@ -142,9 +142,9 @@ def _source_references(release_base):
                 ids = [_record_id(v) for v in values]
                 if all(v and v.startswith("UGR-") for v in ids):
                     refs[oid] = set(ids)
-    except (OSError, UnicodeError, yaml.YAMLError):
-        return {}
-    return refs
+    except (OSError, UnicodeError, yaml.YAMLError) as exc:
+        return {}, f"{type(exc).__name__}: {exc}"
+    return refs, None
 
 
 def _unique_json_object(pairs):
@@ -209,6 +209,8 @@ def _record_fields(lines, profile):
                         if (oid, "references") in fields: return {}
                         fields[oid, "references"] = (i, stop + 1, values)
         return fields
+    # XD-7 lifecycle suppression is inert for registry-doc/registry-ai-context:
+    # neither renders a status field; no lifecycle reconciliation (fail-closed).
     if profile not in ("registry-doc", "registry-ai-context"):
         return {}
     oid = None
@@ -269,7 +271,7 @@ def _reconcile_records(base, new, profile, allowed_kinds, source_refs, reference
     return result
 
 
-def compare_and_classify_diff(profile, baseline_path, new_path, allowed_kinds, release_base=None, reference_targets=None, lifecycle_records=None):
+def compare_and_classify_diff(profile, baseline_path, new_path, allowed_kinds, source_refs=None, reference_targets=None, lifecycle_records=None):
     if not os.path.exists(baseline_path):
         return {"status": "NO_BASELINE", "undeclared_diffs": []}
     if sha256(baseline_path) == sha256(new_path):
@@ -279,7 +281,7 @@ def compare_and_classify_diff(profile, baseline_path, new_path, allowed_kinds, r
     base_n = _normalized_lines(base, allowed_kinds)
     new_n  = _normalized_lines(new, allowed_kinds)
     new_n = _reconcile_records(base_n, new_n, profile, allowed_kinds,
-                               _source_references(release_base), reference_targets, lifecycle_records)
+                               (source_refs or {}), reference_targets, lifecycle_records)
     if base_n == new_n:
         return {"status": "DIFFER_DECLARED_ONLY", "undeclared_diffs": [],
                 "diff_count": 0, "applied_kinds": sorted(allowed_kinds)}
@@ -303,7 +305,7 @@ def count_requirements_in_ckm(ckm_dir):
             continue
         try:
             with open(os.path.join(req_dir, fn), encoding="utf-8") as f:
-                obj = yaml.safe_load(f)
+                obj = yaml.load(f, Loader=UniqueKeySafeLoader)
             if isinstance(obj, dict) and obj.get("type") == "Requirement":
                 count += 1
         except (OSError, UnicodeDecodeError, yaml.YAMLError) as e:
@@ -312,8 +314,10 @@ def count_requirements_in_ckm(ckm_dir):
 
 def persist_summary(summary, path):
     summary["timestamp"] = datetime.datetime.now(datetime.timezone.utc).isoformat()
-    with open(path, "w", encoding="utf-8") as f:
+    tmp_path = os.fspath(path) + ".tmp"
+    with open(tmp_path, "w", encoding="utf-8") as f:
         json.dump(summary, f, indent=2, ensure_ascii=False)
+    os.replace(tmp_path, path)
 
 def escalate_exit(summary, out_summary, message):
     summary["overall_result"] = "FAIL"
@@ -335,22 +339,28 @@ def main():
     args = ap.parse_args()
 
     os.makedirs(os.path.dirname(args.out_summary) or ".", exist_ok=True)
-    minimal = {"overall_result": "FAIL", "stage": "startup"}
-    persist_summary(minimal, args.out_summary)
+    summary = {"overall_result": "FAIL", "stage": "startup", "manifest_id": None,
+               "gates": {}, "profiles": {}, "pending_actions": []}
+    persist_summary(summary, args.out_summary)
     try:
         manifest = load_manifest(args.manifest)
-    except yaml.YAMLError as exc:
-        escalate_exit(minimal, args.out_summary,
-                      f"ESCALATE: invalid manifest YAML: {exc}")
+    except (yaml.YAMLError, OSError, UnicodeDecodeError) as exc:
+        if isinstance(exc, yaml.YAMLError):
+            message = f"ESCALATE: invalid manifest YAML: {exc}"
+        elif isinstance(exc, UnicodeDecodeError):
+            message = f"ESCALATE: manifest decoding failed: {exc}"
+        else:
+            message = f"ESCALATE: manifest I/O failed: {exc}"
+        escalate_exit(summary, args.out_summary, message)
     expected_diffs = manifest.get("expected_differences", [])
     if not isinstance(expected_diffs, list) or any(not isinstance(d, dict) for d in expected_diffs):
-        escalate_exit(minimal, args.out_summary,
+        escalate_exit(summary, args.out_summary,
                       "ESCALATE: expected_differences must be a list of mappings")
     ids = [d.get("id") for d in expected_diffs]
     kinds = [d.get("kind") for d in expected_diffs]
     if (any(not isinstance(v, str) or not v for v in ids + kinds)
             or len(ids) != len(set(ids)) or len(kinds) != len(set(kinds))):
-        escalate_exit(minimal, args.out_summary,
+        escalate_exit(summary, args.out_summary,
                       "ESCALATE: duplicate or invalid expected_difference id/kind")
     allowed_kinds = set(kinds)
     reference_targets = set(); lifecycle_records = set()
@@ -360,7 +370,7 @@ def main():
             if (not isinstance(vals, list) or not vals
                     or any(_record_id(v) is None for v in vals)
                     or len(vals) != len({_record_id(v) for v in vals})):
-                escalate_exit({"overall_result": "FAIL", "stage": "startup"}, args.out_summary,
+                escalate_exit(summary, args.out_summary,
                               "ESCALATE: invalid healed_reference targets")
             reference_targets = {_record_id(v) for v in vals}
         if d.get("kind") == "batch_b_lifecycle_reconciliation":
@@ -368,20 +378,23 @@ def main():
             if (not isinstance(vals, list) or not vals
                     or any(_record_id(v) is None for v in vals)
                     or len(vals) != len({_record_id(v) for v in vals})):
-                escalate_exit({"overall_result": "FAIL", "stage": "startup"}, args.out_summary,
+                escalate_exit(summary, args.out_summary,
                               "ESCALATE: invalid lifecycle records")
             lifecycle_records = {_record_id(v) for v in vals}
-        if d.get("expires") and d.get("kind") in allowed_kinds and datetime.date.today().isoformat() > d["expires"]:
-            escalate_exit({"overall_result": "FAIL", "stage": "startup"}, args.out_summary,
+        # R-I: Expiry applies unconditionally to every entry with expires present.
+        if "expires" in d and (not isinstance(d["expires"], str)
+                               or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", d["expires"])):
+            escalate_exit(summary, args.out_summary,
+                          f"ESCALATE: expected_difference {d.get('id')} invalid expires; expected YYYY-MM-DD")
+        if d.get("expires") and datetime.datetime.now(datetime.timezone.utc).date().isoformat() > d["expires"]:
+            escalate_exit(summary, args.out_summary,
                           f"ESCALATE: expected_difference {d.get('id')} expired; remove or re-ratify")
     sc = manifest.get("success_criteria", {})
 
-    summary = {"manifest_id": manifest.get("manifest", {}).get("id"),
-               "ckm": args.ckm,
-               "release_base": args.release_base,
-               "validation_scope": "merged(release+staging)",
-               "timestamp": None, "gates": {}, "profiles": {},
-               "pending_actions": []}
+    summary.update({"manifest_id": manifest.get("manifest", {}).get("id"),
+                    "ckm": args.ckm,
+                    "release_base": args.release_base,
+                    "validation_scope": "merged(release+staging)"})
 
     # F-214: fail-closed placeholder so crash modes never leave a stale PASS
     summary["overall_result"] = "FAIL"
@@ -565,6 +578,8 @@ def main():
             ingested_gate["report_integrity"] = report_absent_reason
         summary["gates"]["ingested_ugrs"] = ingested_gate
 
+        source_refs, source_reason = _source_references(args.release_base)
+
         # Step 2: determinism (G11) — render twice from merged view
         # R-A: baseline creation requires ingested_ok (failing runs never commit baselines)
         for profile in PROFILES:
@@ -592,7 +607,7 @@ def main():
                     summary["pending_actions"].append(f"commit baseline for {profile} after validation PASS")
             else:
                 comp = compare_and_classify_diff(profile, baseline, p1, allowed_kinds,
-                                                 release_base=args.release_base, reference_targets=reference_targets, lifecycle_records=lifecycle_records)
+                                                 source_refs=source_refs, reference_targets=reference_targets, lifecycle_records=lifecycle_records)
                 entry["baseline_comparison"] = comp
 
             summary["profiles"][profile] = entry
@@ -607,25 +622,27 @@ def main():
 
         # F-205 / R-B: only compared statuses contribute; others -> UNKNOWN
         uncompared = []
-        undeclared_nonempty = 0
+        profiles_with_undeclared = 0
         for profile, v in summary["profiles"].items():
             bc = v.get("baseline_comparison")
             if not isinstance(bc, dict) or bc.get("status") not in COMPARED_STATUSES:
                 uncompared.append(profile)
                 continue
             if bc.get("undeclared_diffs"):
-                undeclared_nonempty += 1
+                profiles_with_undeclared += 1
         if uncompared:
             undeclared_result = "UNKNOWN"
-        elif undeclared_nonempty:
+        elif profiles_with_undeclared:
             undeclared_result = "FAIL"
         else:
             undeclared_result = "PASS"
         undeclared_gate = {
             "result": undeclared_result,
             "declared_criterion": sc.get("undeclared_render_differences"),
-            "actual": None if uncompared else (undeclared_nonempty),
+            "profiles_with_undeclared": None if uncompared else profiles_with_undeclared,
         }
+        if source_reason is not None:
+            undeclared_gate["source_evidence"] = source_reason
         if uncompared:
             undeclared_gate["uncompared"] = uncompared
         summary["gates"]["undeclared_render_differences"] = undeclared_gate

@@ -208,6 +208,9 @@ def main():
     valid_ids = {f"UGR-{int(re.search(r'(\d+)', r['_fields'].get('UGR ID', r['_legacy_id'])).group(1))}"
                  for r in records}
     batch_b_objs = []
+    if a.batch_b and not os.path.isdir(a.batch_b):
+        print(f"WARN: Batch B directory absent: {a.batch_b}; no Batch B objects activated")
+        disp.append({"class": "BATCH-B-ABSENT", "object": "batch-b", "field": "batch_b", "value": a.batch_b})
     if a.batch_b and os.path.isdir(a.batch_b):
         for fn in sorted(os.listdir(a.batch_b)):
             if fn.endswith(".yaml"):
