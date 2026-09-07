@@ -30,7 +30,7 @@ jobs:
       if: ${{ always() }}
       run: |
         if [ -f legacy/UAGF-002_v1.0_source.md ]; then
-          python migrate_ckm.py --legacy legacy/UAGF-002_v1.0_source.md --manifest manifest.yaml --out ckm-staging --report reports/migration_report.json
+          python migrate_ckm.py --legacy legacy/UAGF-002_v1.0_source.md --manifest manifest.yaml --batch-b batch-b --out ckm-staging --report reports/migration_report.json
         else
           echo "No legacy source present; skipping migration step."
         fi
