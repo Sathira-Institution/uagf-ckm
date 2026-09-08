@@ -19,15 +19,79 @@ institutional release (but not the technical pipeline):
 
 ---
 
-## 🚀 Quick Start (5 minutes)
+## Alpha verification without make
 
-UAGF is a knowledge compiler, not a document editor.
+Verified runtime: **Python 3.12** (3.12.14 on the verification host). Other Python
+versions are unverified. Install Python 3.12 with venv support before starting.
+Run this Bash sequence from the repository root. Make is optional convenience
+only; it was unavailable on the verification host, so its targets are UNVERIFIED.
+The existing Make targets use repository output paths and are not substitutes for
+this isolated sequence.
 
-1. **Edit source** — modify `legacy/` (raw input) or `ckm/` (canonical model).
-2. **Migrate** — `python migrate_ckm.py` (conservative, provenance-preserving).
-3. **Validate** — `python validate_ckm.py --require-ledger` (Kernel K-1..K-8; fail-closed).
-4. **Render** — `python render_ckm.py` (deterministic profiles + Loss Manifests).
-5. **Verify** — `python tests/run_e2e.py` (G1–G11, determinism vs baselines).
+The runner writes some reports relative to its working directory even when
+`--out-summary` is supplied. Copy only its required inputs and scripts to a fresh
+temporary workspace first. The source checkout and its committed baselines stay
+untouched. Keep the printed workspace path if you need to preserve the evidence;
+temporary directories may be removed by the host.
+
+```bash
+set -e
+export PYTHONDONTWRITEBYTECODE=1
+export UAGF_VERIFY="$(mktemp -d /tmp/uagf-alpha-verify.XXXXXX)"
+python3.12 -m venv "$UAGF_VERIFY/venv"
+source "$UAGF_VERIFY/venv/bin/activate"
+python --version
+python -m pip install -r requirements.txt
+python - <<'PYSETUP'
+import os
+import shutil
+from pathlib import Path
+work = Path(os.environ["UAGF_VERIFY"]) / "work"
+work.mkdir()
+for name in ("migrate_ckm.py", "validate_ckm.py", "render_ckm.py", "manifest.yaml",
+             "tests", "legacy", "batch-b", "ckm", "ckm-2.0.0-alpha", "governance"):
+    source = Path(name)
+    if source.is_dir():
+        shutil.copytree(source, work / name)
+    else:
+        shutil.copy2(source, work / name)
+shutil.copytree("generated/baseline", work / "generated/baseline")
+(work / "reports").mkdir()
+print(work)
+PYSETUP
+cd "$UAGF_VERIFY/work"
+python validate_ckm.py ckm-2.0.0-alpha -o reports/release_validation.json
+python migrate_ckm.py --legacy legacy/UAGF-002_v1.0_source.md --manifest manifest.yaml --batch-b batch-b --out ckm-staging --report reports/migration_report.json
+python tests/run_e2e.py --ckm ckm-staging --release-base ckm-2.0.0-alpha --ledger governance/UFD_Decisions_Ledger.yaml --migration-report reports/migration_report.json --baseline-dir generated/baseline --out-summary reports/e2e_summary.json
+python render_ckm.py --ckm ckm-2.0.0-alpha --ckm-release 2.0.0-alpha --profile registry-doc --out generated/UAGF-002_registry-doc.md
+python render_ckm.py --ckm ckm-2.0.0-alpha --ckm-release 2.0.0-alpha --profile registry-json --out generated/UAGF-002_registry.json
+python render_ckm.py --ckm ckm-2.0.0-alpha --ckm-release 2.0.0-alpha --profile registry-jsonld --out generated/UAGF-002_registry.jsonld
+python render_ckm.py --ckm ckm-2.0.0-alpha --ckm-release 2.0.0-alpha --profile registry-ai-context --scope object:UGR-15 --out generated/UGR-15_ai-context.txt
+```
+
+All paths after `cd` are under `$UAGF_VERIFY/work`, outside the source checkout:
+
+- `ckm-2.0.0-alpha/`: copied release data, validated first and used for the four
+  standalone renders. These renders describe the release, not the migrated overlay.
+- `ckm-staging/`: newly migrated incremental overlay. E2E validates and renders a
+  temporary merged view of release plus overlay; staging wins on conflicts.
+- `generated/`: new supported-profile renders and adjacent `*.loss-manifest.json`
+  files, plus copied committed baselines in `generated/baseline/`.
+- `reports/`: release validation, migration, merged validation, E2E summary, and
+  `e2e_tmp/` render pairs. The E2E merged dataset is temporary and removed by the runner.
+
+There is no `--profile all`; each supported profile needs its own invocation.
+Migration must precede E2E, which reads the migration report but does not run migration.
+CI additionally installs pytest and pytest-cov, but does not execute pytest or coverage;
+they are not needed for the sequence above.
+
+**Verification ≠ Compliance Certification.** A PASS is bounded by the
+[implemented runner checks](../README.md#4-what-the-runner-checks); it does not
+establish full G1–G11 coverage, release hash verification, red/green fixture
+execution, or rejection of arbitrary generated-file edits. Authority remains with
+the [authority contract](authority-contract.md) and Founder decisions. F-414 remains
+a carried residual; its original disposition text is unavailable, and no closure
+is inferred from these commands.
 
 ---
 
@@ -48,7 +112,8 @@ UAGF is a knowledge compiler, not a document editor.
 
 ## 🔍 How to Read the Evidence (Audit Guide)
 
-Do not trust rendered documents. Trust the JSON evidence in `reports/`.
+Inspect the fresh JSON evidence in `$UAGF_VERIFY/work/reports/` together with the
+inputs and command results; committed reports are historical evidence.
 
 ### 1. `migration_report.json`
 - `"silent_corrections": 0` — must be zero; the system never auto-fixes.
@@ -59,9 +124,10 @@ Do not trust rendered documents. Trust the JSON evidence in `reports/`.
 - `"objects_loaded": 57` — expected dataset (33 Req + 11 Dom + 7 Ref + 6 CV).
 
 ### 3. `e2e_summary.json`
-- `"overall_result": "PASS"` — all gates green.
-- `baseline_comparison.status` — `IDENTICAL` means renders match committed baselines
-  (regression guard active); any undeclared change fails the pipeline.
+- `"overall_result": "PASS"` — all implemented summary gates pass and profile renders are deterministic.
+- `profiles.<profile>.baseline_comparison.status` — `IDENTICAL` means a baseline match;
+  `DIFFER_DECLARED_ONLY` permits differences declared in the manifest. Undeclared
+  differences fail. Baseline creation is not an established comparison.
 
 ### 4. `*.loss-manifest.json`
 - Declares what each profile omits/compresses and why.
@@ -93,4 +159,5 @@ Automation cannot fabricate authority.
 
 **Q: What does "deterministic rendering" guarantee?**
 A: Identical CKM + identical profile = byte-identical output, every time.
-Verified against `generated/baseline/` on every run.
+The E2E runner checks two renders for each of its three profiles and compares
+existing baselines. A standalone renderer invocation does not run these checks.
