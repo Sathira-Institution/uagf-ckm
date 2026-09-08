@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prepare an immutable technical CKM snapshot; does not ratify or publish objects."""
+"""Prepare a technical staging-overlay snapshot; does not ratify or publish objects."""
 import argparse, os, sys, json, shutil, hashlib, datetime
 import yaml
 
@@ -19,7 +19,7 @@ if not args.acknowledge_technical_only:
     parser.error("--acknowledge-technical-only is required; no artifacts prepared")
 
 if os.path.exists(DST):
-    print(f"REFUSED: release dir {DST} already exists (releases are immutable, RB-3)"); sys.exit(1)
+    print(f"REFUSED: snapshot dir {DST} already exists (overwrite protection)"); sys.exit(1)
 shutil.copytree(SRC, DST)
 count = 0
 for dp, _, fs in os.walk(DST):
@@ -35,6 +35,7 @@ for dp, _, fs in os.walk(DST):
 manifest = {"ckm_release": RELEASE, "cut": datetime.datetime.now(datetime.timezone.utc).isoformat(),
             "canonical_name": NAME, "namespace": "https://uagf.sathira.institute",
             "preparation_scope": "technical-only; Founder ratification not verified",
+            "dataset_scope": "ckm-staging overlay only; not a complete merged CKM release",
             "objects": count, "files": {}}
 for dp, _, fs in os.walk(DST):
     for fn in sorted(fs):
@@ -42,4 +43,4 @@ for dp, _, fs in os.walk(DST):
         manifest["files"][os.path.relpath(p, DST)] = hashlib.sha256(open(p, "rb").read()).hexdigest()
 json.dump(manifest, open(os.path.join(DST, "release_manifest.json"), "w", encoding="utf-8"),
           indent=2, ensure_ascii=False)
-print(f"TECHNICAL SNAPSHOT PREPARED: {DST} | {count} objects prepared | Founder ratification not verified")
+print(f"TECHNICAL SNAPSHOT PREPARED: {DST} | {count} staging-overlay objects prepared | not a complete merged CKM release | Founder ratification not verified")

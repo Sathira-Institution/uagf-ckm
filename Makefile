@@ -4,6 +4,7 @@ CKM_DIR ?= ckm-2.0.0-alpha        # single canonical default for validate/render
 RELEASE ?= 2.0.0-alpha
 
 test:            ## full E2E regression (G1-G11): validator -> migrate -> render -> diff -> reproducibility
+	$(PY) tests/run_release_preparation.py
 	$(PY) tests/run_e2e.py
 
 validate:        ## Kernel K-1..K-8 validation of $(CKM_DIR)
@@ -23,5 +24,5 @@ repro:           ## reproducibility: render twice, require byte-identical output
 	$(PY) render_ckm.py --ckm $(CKM_DIR) --ckm-release $(RELEASE) --profile registry-doc --out /tmp/rr2.md
 	cmp /tmp/rr1.md /tmp/rr2.md && echo "REPRODUCIBLE: byte-identical"
 
-release:         ## cut a new immutable release from staging (refuses overwrite)
+release:         ## legacy entry point: fails closed; see docs/GUIDE.md#technical-staging-preparation
 	$(PY) cut_release.py

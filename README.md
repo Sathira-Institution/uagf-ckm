@@ -334,6 +334,11 @@ The Full Institutional Release concept includes additional institutional release
 -   **IC-2:** Institutional ledger and ratification status — handled through the Founder/institutional ratification process and the UFD ledger (Human Accountability).
 -   **IC-3:** Licensing (CC BY 4.0) and security compliance — handled as an institutional licensing and security responsibility outside the automated E2E gate sequence.
 
+`cut_release.py` prepares only a staging-overlay snapshot and generates file hashes;
+it does not verify them or establish a complete release. Its required acknowledgment
+is not authorization. See [technical staging preparation](docs/GUIDE.md#technical-staging-preparation)
+for manifest compatibility and overwrite-protection limits.
+
 An official immutable release therefore requires both scoped automated technical verification and explicit institutional ratification performed outside of the automated E2E gate sequence.
 
 ### 7. The UAGF Mental Model

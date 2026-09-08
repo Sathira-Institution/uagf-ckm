@@ -161,3 +161,39 @@ Automation cannot fabricate authority.
 A: Identical CKM + identical profile = byte-identical output, every time.
 The E2E runner checks two renders for each of its three profiles and compares
 existing baselines. A standalone renderer invocation does not run these checks.
+
+
+## Technical staging preparation
+
+`cut_release.py` copies only the current working directory's `ckm-staging/`
+recursively. It does not merge the release base, run validation, or establish
+completeness. The checked-in overlay has 18 requirements and 7 references, with
+no domains or CVs. Do not substitute its output for the complete release base.
+
+For intentional technical preparation, use a separate workspace containing a
+copy of staging and no existing destination, then invoke the script by absolute
+path with `--acknowledge-technical-only`. This flag acknowledges the warning;
+it grants no authorization. The legacy `make release` caller intentionally
+fails without acknowledgment. No release or publish workflow supplies it.
+
+The retained `ckm-2.0.0-alpha/`, `release_manifest.json`, `ckm_release`, and `cut`
+names are compatibility identifiers, not evidence of approval or completeness.
+The manifest's `preparation_scope` states technical-only authority and
+`dataset_scope` states overlay-only coverage. There is no generated
+`ratified_by`; source object status and authority metadata are preserved without
+verification, and only the version tag is assigned. Consumers must not require
+or infer blanket ratification. The renderer reads only `cut` from this manifest;
+it neither checks hashes nor propagates the scope fields. Rendering this overlay
+cannot establish a complete or authorized registry.
+
+The tool generates SHA-256 hashes for copied files, excluding its own manifest.
+It does not independently verify hashes. Existing-destination refusal provides
+overwrite protection, not immutable storage. The normal checkout already has
+the destination and must not be cleared to run preparation.
+
+Run `python tests/run_release_preparation.py` for isolated preparation regression
+checks; CI runs this separately from the existing migration and E2E checks.
+Institutional publication still needs explicit scoped Founder ledger approval,
+a complete dataset established through the authorized release process, and the
+remaining institutional release controls. Technical preparation supplies none
+of those decisions.

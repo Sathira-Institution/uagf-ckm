@@ -26,6 +26,9 @@ jobs:
         fi
         pip install pytest pytest-cov
 
+    - name: Test technical staging preparation in isolated fixtures
+      run: python tests/run_release_preparation.py
+
     - name: "Optional: Run migration if legacy artifact present"
       if: ${{ always() }}
       run: |
