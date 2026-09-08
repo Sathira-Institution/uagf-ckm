@@ -4,7 +4,7 @@
 
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 [![Version: 2.0.0-alpha](https://img.shields.io/badge/Version-2.0.0--alpha-orange)](#project-status)
-[![E2E: 11/11 PASS](https://img.shields.io/badge/E2E-11/11%20PASS-brightgreen)](reports/e2e_summary.json)
+[![E2E: scoped evidence](https://img.shields.io/badge/E2E-scoped%20evidence-blue)](reports/e2e_summary.json)
 [![CI/CD](https://github.com/Sathira-Institution/uagf-ckm/actions/workflows/ci.yml/badge.svg)](https://github.com/Sathira-Institution/uagf-ckm/actions)
 [![Public Good](https://img.shields.io/badge/Public-Good-green)](#public-benefit)
 [![Machine Native](https://img.shields.io/badge/Machine-Native-blue)](#canonical-knowledge-model)
@@ -48,7 +48,7 @@ UAGF does not seek to replace existing governance sources, standards, regulation
 | **Serialization** | Document formats such as Markdown/PDF | Machine-readable serialization, including YAML |
 | **Synchronization** | Manual synchronization across artifacts | Deterministic transformation and synchronization |
 | **Information Loss** | Often implicit or difficult to detect | Explicitly identified and traceable |
-| **Validation** | Human-centric and fragmented review | Structured multi-gate validation through the Validation Kernel (K-1..K-8) and the automated E2E suite (G1–G11) |
+| **Validation** | Human-centric and fragmented review | Structured multi-gate validation through the Validation Kernel (K-1..K-8) and the scoped automated E2E suite |
 | **Machine Readability** | Often secondary or added later | First-class architectural requirement |
 | **Provenance** | Can degrade across copies and transformations | Machine-traceable provenance |
 | **Lineage** | Difficult to maintain across artifacts | Traceable from authoritative source through CKM to derived representations |
@@ -284,53 +284,49 @@ Start by examining the structured knowledge layer. Typical CKM objects include:
 -   External Governance References (e.g., ISO 42001, EU AI Act)
 -   Canonical metadata and relationship definitions
 
-### 3. Validate the CKM
+### 3. Set Up and Verify Alpha
 
-Before rendering downstream artifacts, validate the CKM against the UAGF Validation Kernel.
+Follow the complete [Python 3.12 setup and verification sequence](docs/GUIDE.md#alpha-verification-without-make)
+from the repository root. It installs requirements in a fresh virtual environment,
+validates release data, migrates into an isolated workspace, runs ledger-aware E2E
+against the migrated overlay, and renders all four supported profiles.
+Other Python versions are unverified. Make is optional and was unavailable on the
+verification host; the guide provides explicit Python commands.
 
-Standard development and transformation workflows exercise the Validation Kernel (K-1..K-8) via the validation CLI:
+`ckm-2.0.0-alpha/` is the release base; `ckm-staging/` is an incremental overlay,
+not a complete standalone dataset. E2E merges release plus overlay (overlay wins)
+into a temporary view. `generated/` holds derived outputs and committed baselines;
+the guide keeps new outputs and reports outside the source checkout.
+Never hand-edit generated artifacts as a substitute for modifying their inputs.
 
-```bash
-# Execute the Validation Kernel against a CKM dataset
-python validate_ckm.py ckm-2.0.0-alpha
-```
+### 4. What the Runner Checks
 
-The Validation Kernel implements the kernel-level checks (K-1..K-8). End-to-end pipeline verification is performed separately by the automated E2E suite (`tests/run_e2e.py`), which implements automated gates G1–G11.
+The current [runner](tests/run_e2e.py) reports five normal summary gates:
+`validation`, `ingested_ugrs`, `invariant_pass`, `undeclared_render_differences`,
+and `manual_authoring_events`. It validates the merged view with the supplied
+ledger, reads migration evidence, renders `registry-doc`, `registry-jsonld`, and
+`registry-ai-context` twice, checks determinism, and compares committed baselines
+using the manifest's allowed differences. Errors can add diagnostics or stop early;
+unknown gate results fail overall verification.
 
-Validation verifies that the CKM conforms to the structural, semantic, provenance, and architectural constraints defined by UAGF. A failed blocking gate prevents downstream processing (Fail-Closed behavior).
+These five gates do not establish full G1–G11 coverage. The runner does not invoke
+migration, verify release-manifest file hashes, run red/green fixtures, or reject
+arbitrary hand-edited generated files. `manual_authoring_events` uses the migration
+report's `silent_corrections` value; it is not an audit of all edits. The fourth
+supported render profile, `registry-json`, is exercised separately in the guide.
 
-### 4. Render Derived Representations
+### 5. Interpret the Result
 
-Once validation succeeds, render the CKM into the required representations:
-
-```bash
-# Render all active profiles (Markdown, JSON-LD, RDF, AI Context)
-python render_ckm.py --profile all --out generated/
-```
-
-**Important:** Generated artifacts in `generated/` should not be manually edited as a substitute for modifying the CKM. If a change is needed, update the CKM, validate, and re-render.
-
-### 5. Run End-to-End Verification
-
-For a complete pipeline verification (Migration → Validation → Rendering → Fidelity Check):
-
-```bash
-python tests/run_e2e.py
-```
-
-The repository's automated end-to-end (E2E) verification suite executes 11 gates (G1–G11):
-
-- G1–G9: Automated pipeline verification covering migration, staged-model validation, rendering, fidelity, and related pipeline checks.
-- G10: Release snapshot integrity and ratification metadata verification (release manifest validation, SHA-256 file hash verification, and published/ratified metadata checks).
-- G11: Deterministic reproducibility verification — two independent renders are byte-identical (deterministic stamp).
-
-The Validation Kernel (K-1..K-8) is distinct from these higher-level E2E gates (G1–G11): `validate_ckm.py` runs the Kernel checks; `tests/run_e2e.py` orchestrates the pipeline-level gates and the release-integrity/reproducibility checks.
-
-This process verifies the defined behavior of the governance knowledge pipeline, including validation, transformation, rendering, reproducibility, and regression properties.
+A technical PASS applies to those implemented checks and the supplied inputs.
+**Verification ≠ Compliance Certification.** Alpha status and unresolved Founder
+dispositions remain; F-414 is a carried residual whose original disposition text
+is unavailable. No closure or ratification is inferred. See the
+[authority contract](docs/authority-contract.md) and
+[Founder ledger](governance/UFD_Decisions_Ledger.yaml).
 
 ### 6. Preparing an Official Release
 
-Development workflows use the Validation Kernel (K-1..K-8) and the automated E2E suite (G1–G11). The current repository implements automated E2E gates G1–G11 only.
+Development workflows use the Validation Kernel (K-1..K-8) and the scoped automated E2E suite described above.
 
 The Full Institutional Release concept includes additional institutional release controls beyond the automated E2E gate sequence. These controls are not implemented as G12/G13 automated gate IDs in `tests/run_e2e.py`. Each control has its own handling mechanism:
 
@@ -338,7 +334,7 @@ The Full Institutional Release concept includes additional institutional release
 -   **IC-2:** Institutional ledger and ratification status — handled through the Founder/institutional ratification process and the UFD ledger (Human Accountability).
 -   **IC-3:** Licensing (CC BY 4.0) and security compliance — handled as an institutional licensing and security responsibility outside the automated E2E gate sequence.
 
-An official immutable release therefore requires both automated technical verification (G1–G11) and explicit institutional ratification performed outside of the automated E2E gate sequence.
+An official immutable release therefore requires both scoped automated technical verification and explicit institutional ratification performed outside of the automated E2E gate sequence.
 
 ### 7. The UAGF Mental Model
 
@@ -1323,7 +1319,7 @@ Successful validation does **not** establish that:
 > **Constitutional Alignment:** These distinctions preserve the absolute boundary between UAGF architectural validity and external governance authority, strictly adhering to Institutional Rule 003 (Human Accountability) and Rule 005 (Public Neutrality).
 
 ## Validation Kernel
-The UAGF Validation Kernel (K-1..K-8) enforces defined architectural invariants, structural constraints, semantic constraints, provenance requirements, and pipeline integrity conditions via `validate_ckm.py`. The automated E2E suite (`tests/run_e2e.py`) implements pipeline-level gates G1–G11. Official publication and immutable institutional releases additionally involve institutional release controls beyond the automated E2E gate sequence: IC-1 (release manifest & SHA-256 hashes) handled through the release-cutting workflow (`cut_release.py`); IC-2 (institutional ratification) handled through the Founder/institutional ratification process and the UFD ledger; and IC-3 (license & security checks) handled as an institutional responsibility outside the automated E2E gate sequence.
+The UAGF Validation Kernel (K-1..K-8) enforces defined architectural invariants, structural constraints, semantic constraints, provenance requirements, and pipeline integrity conditions via `validate_ckm.py`. The automated E2E suite (`tests/run_e2e.py`) performs the scoped checks described in [Quick Start](#4-what-the-runner-checks). Official publication and immutable institutional releases additionally involve institutional release controls beyond the automated E2E gate sequence: IC-1 (release manifest & SHA-256 hashes) handled through the release-cutting workflow (`cut_release.py`); IC-2 (institutional ratification) handled through the Founder/institutional ratification process and the UFD ledger; and IC-3 (license & security checks) handled as an institutional responsibility outside the automated E2E gate sequence.
 Before downstream artifacts may be generated or released, the Canonical Knowledge Model (CKM) is evaluated by this kernel to enforce defined UAGF architectural invariants, structural constraints, semantic constraints, provenance requirements, and pipeline integrity conditions.
 
 > **Important Distinction:** The purpose of the Validation Kernel is not to determine the legal,regulatory,normative,or institutional validity of an underlying governance source. Instead, it verifies whether governance knowledge represented within the CKM conforms to the structures, constraints,relationships, metadata requirements,and transformation conditions defined by the UAGF architecture.
@@ -1354,12 +1350,15 @@ The Validation Kernel therefore acts as an **architectural integrity boundary**.
 The UAGF verification architecture separates three layers:
 
 -   **Validation Kernel (K-1..K-8):** Kernel-level checks executed by `validate_ckm.py`.
--   **Automated E2E Gates (G1–G11):** Executed automatically during continuous integration (CI) by `tests/run_e2e.py`; G1–G9 cover pipeline verification, G10 covers release snapshot integrity & ratification metadata verification, and G11 covers deterministic reproducibility.
+-   **Automated E2E checks:** CI invokes `tests/run_e2e.py` after a separate migration step; its five normal summary gates and three-profile checks are described in Quick Start.
 -   **Institutional Release Controls (IC-1..IC-3):** Cryptographic release-manifest integrity, institutional ratification, and license & security compliance — handled through the release-cutting workflow (`cut_release.py`), the Founder/institutional ratification process, and institutional responsibility respectively. These controls are not implemented as automated gate IDs in `tests/run_e2e.py`.
 
 Each gate evaluates a specific class of architectural conditions. Conditions designated as blocking must pass before the affected transformation or release may proceed.
 
 ### Validation Gate Architecture
+
+The diagram and gate definitions below describe architectural concepts, not a
+coverage inventory of the current runner. See Quick Start for executable scope.
 
 ```mermaid
 graph TD
@@ -1422,7 +1421,7 @@ graph TD
 | Layer | Checks | Use Case | Enforcement |
 | :--- | :--- | :--- | :--- |
 | **Validation Kernel** | K-1..K-8 | Kernel-level structural/semantic/provenance validation | Automated (`validate_ckm.py`) |
-| **Automated E2E Gates** | G1–G11 | CI/CD pipeline verification, incl. release integrity (G10) and reproducibility (G11) | Automated (`tests/run_e2e.py`) |
+| **Automated E2E checks** | Five normal summary gates | Merged validation, migration evidence, three-profile determinism and baseline comparison | Automated (`tests/run_e2e.py`); migration is separate |
 | **Institutional Release Controls** | IC-1..IC-3 | Official publication, immutable release snapshots | Manual Founder/institutional ratification + `cut_release.py` |
 
 ### Gate Definitions
@@ -1443,7 +1442,7 @@ graph TD
 | **IC-2** | Institutional Ledger & Ratification | Founder/Institutional sign-offs and decision records (UFD ledger) |
 | **IC-3** | License & Security Compliance | CC BY 4.0 boundaries, software licenses, security disclosures |
 
-> **Architectural Note:** The institutional release controls IC-1..IC-3 (highlighted in Institutional Gold) represent the **Full Institutional Release** boundary. They embody human accountability, cryptographic integrity, and legal compliance—ensuring that no automated system can bypass institutional ratification. Each control has its own handling mechanism: IC-1 through the release-cutting workflow (`cut_release.py`) and release-manifest generation/verification; IC-2 through the Founder/institutional ratification process and the UFD ledger; and IC-3 as an institutional licensing and security responsibility. None of IC-1..IC-3 is implemented as an automated gate ID in `tests/run_e2e.py` (which implements G1–G11). The executable semantics of the automated E2E gates are those implemented in `tests/run_e2e.py` and summarized in the Quick Start.
+> **Architectural Note:** The institutional release controls IC-1..IC-3 (highlighted in Institutional Gold) represent the **Full Institutional Release** boundary. They embody human accountability, cryptographic integrity, and legal compliance—ensuring that no automated system can bypass institutional ratification. Each control has its own handling mechanism: IC-1 through the release-cutting workflow (`cut_release.py`) and release-manifest generation/verification; IC-2 through the Founder/institutional ratification process and the UFD ledger; and IC-3 as an institutional licensing and security responsibility. None of IC-1..IC-3 is implemented as an automated gate ID in `tests/run_e2e.py` (whose implemented scope is described in Quick Start). The executable semantics of the automated E2E gates are those implemented in `tests/run_e2e.py` and summarized in the Quick Start.
 
 ---
 
@@ -1695,7 +1694,7 @@ A UAGF release represents a specific validated state of the Canonical Knowledge 
 
 A release is eligible for publication only when the applicable technical and institutional release requirements have been satisfied:
 
--   Technical (CI-verified): Validation Kernel checks (K-1..K-8) and automated E2E gates (G1–G11), including release snapshot integrity (G10) and deterministic reproducibility (G11).
+-   Technical: merged-view validation and scoped E2E checks described in Quick Start; release snapshot hash verification is a separate check, not performed by this runner.
 -   Institutional (handled outside CI): cryptographic release manifest recorded (IC-1), institutional ledger and ratification decisions recorded (IC-2), and license boundaries and security contacts designated and reviewed (IC-3).
 -   Migration provenance being complete.
 -   Loss Manifest requirements being satisfied.
@@ -2568,7 +2567,7 @@ A UAGF release is considered eligible for publication only when the applicable t
 Technical release gates should be enforced automatically wherever the relevant checks are implemented in CI/CD.
 
 -   [ ] Validation Kernel (K-1..K-8) passes.
--   [ ] Automated E2E suite (G1–G11) passes all applicable gates.
+-   [ ] Scoped automated E2E suite passes its implemented checks (see Quick Start).
 -   [ ] Regenerate-and-diff verification confirms that committed generated artifacts correspond to the applicable canonical inputs and rendering process.
 -   [ ] Release SHA-256 manifest is generated and verified.
 -   [ ] Release success criteria defined by the applicable validation suite are satisfied.
@@ -2704,7 +2703,7 @@ UAGF therefore aims to evolve its capabilities while preserving the separation b
 Researchers, standards organizations, governments, enterprises, and other users are encouraged to cite UAGF when referencing its architecture, governance model, or Canonical Knowledge Model.
 
 **Plain Text Citation**
-> SATHIRA Institution. Universal AI Governance Framework (UAGF): A Canonical Knowledge Infrastructure for Interoperable AI Governance. Version 2.0.0-alpha. Available at: https://github.com/SATHIRA-Institute/uagf-ckm
+> SATHIRA Institution. Universal AI Governance Framework (UAGF): A Canonical Knowledge Infrastructure for Interoperable AI Governance. Version 2.0.0-alpha. Available at: https://github.com/Sathira-Institution/uagf-ckm
 
 **BibTeX**
 ```bibtex
@@ -2714,7 +2713,7 @@ Researchers, standards organizations, governments, enterprises, and other users 
   author       = {{SATHIRA Institution}},
   version      = {2.0.0-alpha},
   year         = {2026},
-  url          = {https://github.com/SATHIRA-Institute/uagf-ckm},
+  url          = {https://github.com/Sathira-Institution/uagf-ckm},
   note         = {Model-First AI Governance Knowledge Infrastructure}
 }
 ```
@@ -2772,10 +2771,10 @@ These principles collectively shape the architecture of the Universal AI Governa
 | Channel | Link |
 | :--- | :--- |
 | **Official Website** | [https://sathira.institute](https://sathira.institute) |
-| **GitHub Repository** | [github.com/SATHIRA-Institute/uagf-ckm](https://github.com/SATHIRA-Institute/uagf-ckm) |
-| **Issue Tracker** | [github.com/SATHIRA-Institute/uagf-ckm/issues](https://github.com/SATHIRA-Institute/uagf-ckm/issues) |
+| **GitHub Repository** | [github.com/Sathira-Institution/uagf-ckm](https://github.com/Sathira-Institution/uagf-ckm) |
+| **Issue Tracker** | [github.com/Sathira-Institution/uagf-ckm/issues](https://github.com/Sathira-Institution/uagf-ckm/issues) |
 | **Maintainer** | Apichai Chuensuang (Rootz), SATHIRA Institution |
-| **Community Discussions** | [github.com/SATHIRA-Institute/uagf-ckm/discussions](https://github.com/SATHIRA-Institute/uagf-ckm/discussions) |
+| **Community Discussions** | [github.com/Sathira-Institution/uagf-ckm/discussions](https://github.com/Sathira-Institution/uagf-ckm/discussions) |
 
 ---
 
