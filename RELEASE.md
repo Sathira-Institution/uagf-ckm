@@ -32,14 +32,18 @@ Use the Python 3.12 environment established by the
 From the repository root, with that environment active:
 
 ```bash
-export UAGF_SOURCE="$PWD"
-export UAGF_PREP="$(mktemp -d /tmp/uagf-technical-prep.XXXXXX)"
+(
+set -e
+UAGF_SOURCE="$PWD"
+UAGF_PREP="$(mktemp -d /tmp/uagf-technical-prep.XXXXXX)"
 cp -R "$UAGF_SOURCE/ckm-staging" "$UAGF_PREP/ckm-staging"
 cd "$UAGF_PREP"
 python "$UAGF_SOURCE/cut_release.py" --acknowledge-technical-only
+printf 'Output workspace: %s\n' "$UAGF_PREP"
+)
 ```
 
-The output directory is `$UAGF_PREP/ckm-2.0.0-alpha`. Do not remove the existing
+The output directory is `ckm-2.0.0-alpha` within the printed workspace. Do not remove the existing
 release base in the source checkout to make this command run. Preserve output,
 stdout/stderr, exit status, input revision, and environment alongside the evidence.
 Missing acknowledgment or invalid arguments fail before writes (exit 2); an existing
@@ -57,6 +61,7 @@ W2-B `test-results.txt` cited above.
    validate the copied release base, migrate into isolated staging, then run
    `tests/run_e2e.py` with the release base, ledger, migration report, and committed
    baselines. Keep reports outside the source checkout. Migration must precede E2E.
+   The migrated E2E dataset is separate from the copied preparation snapshot, so those E2E results do not automatically validate that specific snapshot.
 3. Run all four explicit render commands in that sequence: `registry-doc`,
    `registry-json`, `registry-jsonld`, and `registry-ai-context` (UGR-15 scope).
    Preserve outputs and loss manifests. These standalone renders use the release
