@@ -3,7 +3,7 @@
 Enhancements: explainable findings (field/value/reason/allowed/reference) + machine fix hints.
 NEVER auto-fixes data (Reality First)."""
 import sys, os, re, json, argparse, datetime
-import yaml
+from strict_yaml import load_yaml_file
 
 ENVELOPE_REQUIRED = ["id","type","label","status","version","owner_module","created","modified","tier"]
 LIFECYCLE = ["proposed","in-review","approved","published","deprecated","superseded","withdrawn"]
@@ -29,8 +29,8 @@ def load(root):
             if not fn.endswith((".yaml",".yml")): continue
             p = os.path.join(dp,fn)
             try:
-                d = yaml.safe_load(open(p,encoding="utf-8"))
-            except yaml.YAMLError as e:
+                d = load_yaml_file(p)
+            except (OSError, UnicodeDecodeError, ValueError) as e:
                 errs.append(F("K-1",fn,f"YAML parse failure: {e}",hint="Fix YAML syntax; no content may enter unparsed.")); continue
             if not isinstance(d,dict):
                 errs.append(F("K-1",fn,"File is not a mapping")); continue
@@ -198,8 +198,7 @@ def load_ledger(ledger_path):
     if not os.path.exists(ledger_path):
         return None, f"Ledger file not found at {ledger_path}"
     try:
-        with open(ledger_path, 'r', encoding='utf-8') as f:
-            data = yaml.safe_load(f)
+        data = load_yaml_file(ledger_path)
         if not isinstance(data, dict):
             return None, "Ledger content is not a mapping"
         return data, None

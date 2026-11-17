@@ -14,7 +14,7 @@
     "scope": "module:M-CORE",
     "ckm_release": "2.0.0-merged",
     "release_cut": "2026-07-29T10:43:18.239894+00:00",
-    "render_token": "bfb5cdacf64ad5b8",
+    "render_token": "9cd3bc9811b74dd8",
     "engine": "uagf-renderer/0.2",
     "source_of_truth": "https://uagf.sathira.institute"
   },
@@ -27,7 +27,7 @@
         "@language": "en"
       },
       "version": "0.1",
-      "status": "proposed"
+      "status": "published"
     },
     {
       "@id": "uagf:controlledvocabulary/CV-ConfLevel",
@@ -37,7 +37,7 @@
         "@language": "en"
       },
       "version": "0.1",
-      "status": "proposed"
+      "status": "published"
     },
     {
       "@id": "uagf:controlledvocabulary/CV-Priority",
@@ -47,7 +47,7 @@
         "@language": "en"
       },
       "version": "0.1",
-      "status": "proposed"
+      "status": "published"
     },
     {
       "@id": "uagf:controlledvocabulary/CV-ReqType",
@@ -57,7 +57,7 @@
         "@language": "en"
       },
       "version": "0.1",
-      "status": "proposed"
+      "status": "published"
     },
     {
       "@id": "uagf:controlledvocabulary/CV-RiskCat",
@@ -67,7 +67,7 @@
         "@language": "en"
       },
       "version": "0.1",
-      "status": "proposed"
+      "status": "published"
     },
     {
       "@id": "uagf:controlledvocabulary/CV-Stage",
@@ -77,7 +77,7 @@
         "@language": "en"
       },
       "version": "0.1",
-      "status": "proposed"
+      "status": "published"
     },
     {
       "@id": "uagf:domain/DOM-ACCOUNTABILITY",
@@ -87,7 +87,7 @@
         "@language": "en"
       },
       "version": "1.0",
-      "status": "proposed"
+      "status": "published"
     },
     {
       "@id": "uagf:domain/DOM-AUDITABILITY",
@@ -97,7 +97,7 @@
         "@language": "en"
       },
       "version": "1.0",
-      "status": "proposed"
+      "status": "published"
     },
     {
       "@id": "uagf:domain/DOM-DATA",
@@ -107,7 +107,7 @@
         "@language": "en"
       },
       "version": "1.0",
-      "status": "proposed"
+      "status": "published"
     },
     {
       "@id": "uagf:domain/DOM-FAIRNESS",
@@ -127,7 +127,7 @@
         "@language": "en"
       },
       "version": "1.0",
-      "status": "proposed"
+      "status": "published"
     },
     {
       "@id": "uagf:domain/DOM-HUMAN",
@@ -137,7 +137,7 @@
         "@language": "en"
       },
       "version": "1.0",
-      "status": "proposed"
+      "status": "published"
     },
     {
       "@id": "uagf:domain/DOM-PRIVACY",
@@ -147,7 +147,7 @@
         "@language": "en"
       },
       "version": "1.0",
-      "status": "proposed"
+      "status": "published"
     },
     {
       "@id": "uagf:domain/DOM-RISK",
@@ -157,7 +157,7 @@
         "@language": "en"
       },
       "version": "1.0",
-      "status": "proposed"
+      "status": "published"
     },
     {
       "@id": "uagf:domain/DOM-SAFETY",
@@ -167,7 +167,7 @@
         "@language": "en"
       },
       "version": "1.0",
-      "status": "proposed"
+      "status": "published"
     },
     {
       "@id": "uagf:domain/DOM-SECURITY",
@@ -177,7 +177,7 @@
         "@language": "en"
       },
       "version": "1.0",
-      "status": "proposed"
+      "status": "published"
     },
     {
       "@id": "uagf:domain/DOM-TRANSPARENCY",
@@ -187,7 +187,7 @@
         "@language": "en"
       },
       "version": "1.0",
-      "status": "proposed"
+      "status": "published"
     },
     {
       "@id": "uagf:externalreference/REF-C2PA",
@@ -318,7 +318,7 @@
       "applicability": "Organizations deploying high-risk AI systems",
       "priority": "critical",
       "version": "1.0",
-      "status": "proposed",
+      "status": "published",
       "requirement_type": [
         "legal",
         "standard"
@@ -414,7 +414,7 @@
       "applicability": "Organizations deploying high-risk AI systems",
       "priority": "critical",
       "version": "1.0",
-      "status": "proposed",
+      "status": "published",
       "requirement_type": [
         "legal",
         "standard"
@@ -459,7 +459,7 @@
       "applicability": "All organizations that develop, deploy, or operate AI systems",
       "priority": "high",
       "version": "1.0",
-      "status": "proposed",
+      "status": "published",
       "requirement_type": [
         "standard"
       ],
@@ -603,7 +603,7 @@
       "applicability": "All organizations that process data through AI systems",
       "priority": "high",
       "version": "1.0",
-      "status": "proposed",
+      "status": "published",
       "requirement_type": [
         "legal",
         "standard"
@@ -634,7 +634,9 @@
         }
       ],
       "references": [
-        "uagf:requirement/UGR-20"
+        "uagf:requirement/UGR-20",
+        "uagf:requirement/UGR-30",
+        "uagf:requirement/UGR-31"
       ]
     },
     {
@@ -649,7 +651,7 @@
       "applicability": "All organizations with user-facing AI systems",
       "priority": "high",
       "version": "1.0",
-      "status": "proposed",
+      "status": "published",
       "requirement_type": [
         "legal",
         "principle"
@@ -696,7 +698,7 @@
       "applicability": "Organizations that generate synthetic content using AI",
       "priority": "high",
       "version": "1.0",
-      "status": "proposed",
+      "status": "published",
       "requirement_type": [
         "legal",
         "standard"
@@ -905,7 +907,7 @@
       "applicability": "All organizations with AI systems",
       "priority": "critical",
       "version": "1.0",
-      "status": "proposed",
+      "status": "published",
       "requirement_type": [
         "legal",
         "standard"
@@ -1048,7 +1050,7 @@
       "applicability": "All organizations that develop, deploy, or operate AI systems",
       "priority": "high",
       "version": "1.0",
-      "status": "proposed",
+      "status": "published",
       "requirement_type": [
         "standard",
         "legal"
@@ -1146,7 +1148,7 @@
       "applicability": "Organizations deploying high-risk AI systems; all organizations with AI systems",
       "priority": "critical",
       "version": "1.0",
-      "status": "proposed",
+      "status": "published",
       "requirement_type": [
         "legal",
         "standard"
@@ -1197,7 +1199,7 @@
       "applicability": "All organizations with AI systems",
       "priority": "high",
       "version": "1.0",
-      "status": "proposed",
+      "status": "published",
       "requirement_type": [
         "legal",
         "standard"
@@ -1227,7 +1229,8 @@
         }
       ],
       "references": [
-        "uagf:requirement/UGR-51"
+        "uagf:requirement/UGR-51",
+        "uagf:requirement/UGR-52"
       ]
     },
     {
@@ -1273,7 +1276,8 @@
         }
       ],
       "references": [
-        "uagf:requirement/UGR-50"
+        "uagf:requirement/UGR-50",
+        "uagf:requirement/UGR-52"
       ]
     },
     {
@@ -1427,7 +1431,7 @@
       "applicability": "Organizations processing personal data through AI systems",
       "priority": "high",
       "version": "1.0",
-      "status": "proposed",
+      "status": "published",
       "requirement_type": [
         "legal"
       ],
@@ -1469,7 +1473,7 @@
       "applicability": "Organizations processing personal data through AI systems",
       "priority": "high",
       "version": "1.0",
-      "status": "proposed",
+      "status": "published",
       "requirement_type": [
         "legal",
         "standard"
@@ -1662,7 +1666,7 @@
       "applicability": "Organizations deploying AI systems",
       "priority": "high",
       "version": "1.0",
-      "status": "proposed",
+      "status": "published",
       "requirement_type": [
         "legal",
         "standard"
@@ -1754,7 +1758,7 @@
       "applicability": "Organizations deploying AI systems",
       "priority": "high",
       "version": "1.0",
-      "status": "proposed",
+      "status": "published",
       "requirement_type": [
         "standard"
       ],

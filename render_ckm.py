@@ -5,7 +5,7 @@ Profiles: registry-doc | registry-json | registry-jsonld | registry-ai-context.
 RE-2: every rendered value traces to a model slot. RE-3: lossy profiles emit a loss manifest.
 """
 import os, re, json, argparse, datetime
-import yaml
+from strict_yaml import load_yaml_file
 
 BASE_IRI = "https://uagf.sathira.institute"   # pending OD-06 name ruling for public minting
 
@@ -14,7 +14,7 @@ def load_model(ckm_dir):
     for dp, _, fs in os.walk(ckm_dir):
         for fn in sorted(fs):
             if fn.endswith((".yaml", ".yml")):
-                d = yaml.safe_load(open(os.path.join(dp, fn), encoding="utf-8"))
+                d = load_yaml_file(os.path.join(dp, fn))
                 if isinstance(d, dict) and "id" in d:
                     objs[d["id"]] = d
     return objs
