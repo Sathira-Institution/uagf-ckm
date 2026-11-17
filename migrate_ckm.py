@@ -5,7 +5,7 @@ verbatim | trim | split | parse_int_id | casefold_token | parse_numbered_list | 
 Violations are FLAGGED (TO_VERIFY / CONFLICT / REJECTED) — never silently corrected.
 """
 import sys, os, re, json, hashlib, argparse, datetime
-import yaml
+from strict_yaml import load_yaml_file
 
 TODAY = "2026-07-28"
 
@@ -198,7 +198,7 @@ def main():
     ap.add_argument("--report", default="reports/migration_report.json")
     ap.add_argument("--batch-b", default="batch-b", help="dir of Founder-activated Batch B objects")
     a = ap.parse_args()
-    manifest = yaml.safe_load(open(a.manifest, encoding="utf-8"))
+    manifest = load_yaml_file(a.manifest)
     report = {"runner": "uagf-migration-runner/0.1", "manifest_id": manifest["manifest"]["id"],
               "pipeline": "WP-005 S1-S7 (S5 identification-only; D-06 verification pending)",
               "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat(),
@@ -214,7 +214,7 @@ def main():
     if a.batch_b and os.path.isdir(a.batch_b):
         for fn in sorted(os.listdir(a.batch_b)):
             if fn.endswith(".yaml"):
-                bo = yaml.safe_load(open(os.path.join(a.batch_b, fn), encoding="utf-8"))
+                bo = load_yaml_file(os.path.join(a.batch_b, fn))
                 batch_b_objs.append(bo)
                 if bo.get("type") == "Requirement":
                     valid_ids.add(bo["id"])

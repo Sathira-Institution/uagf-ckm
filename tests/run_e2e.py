@@ -10,35 +10,21 @@ Semantics (see docs/validation-merge-semantics.md):
 - Baselines are created only when merged validation PASSes.
 - Dangling references (V-1) are recorded as [CONFLICT] for Founder routing (D-03).
 """
-import os, sys, subprocess, yaml, json, hashlib, argparse, tempfile, shutil, difflib, datetime, re
+import os, sys, subprocess, json, hashlib, argparse, tempfile, shutil, difflib, datetime, re
 from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from strict_yaml import load_yaml_file, load_yaml_text
 
 PROFILES = ["registry-doc", "registry-jsonld", "registry-ai-context"]
 COMPARED_STATUSES = ("IDENTICAL", "DIFFER_DECLARED_ONLY", "DIFFER")
 REPORT_READ_ERRORS = (json.JSONDecodeError, OSError, UnicodeDecodeError, TypeError, AttributeError)
 
-class UniqueKeySafeLoader(yaml.SafeLoader):
-    """Reject duplicate mapping keys before YAML can silently overwrite them."""
-    def construct_mapping(self, node, deep=False):
-        seen = set()
-        for key_node, _ in node.value:
-            key = self.construct_object(key_node, deep=deep)
-            try:
-                if key in seen:
-                    raise yaml.constructor.ConstructorError(
-                        "while constructing a mapping", node.start_mark,
-                        f"duplicate YAML key: {key!r}", key_node.start_mark)
-                seen.add(key)
-            except TypeError:
-                raise yaml.constructor.ConstructorError(
-                    "while constructing a mapping", node.start_mark,
-                    "unhashable YAML key", key_node.start_mark)
-        return super().construct_mapping(node, deep=deep)
-
-
 def load_manifest(path="manifest.yaml"):
-    with open(path, encoding="utf-8") as f:
-        return yaml.load(f, Loader=UniqueKeySafeLoader)
+    return load_yaml_file(path)
 
 def copy_tree_into(src, dst):
     src_p, dst_p = Path(src), Path(dst)
@@ -127,7 +113,7 @@ def _source_references(release_base):
         for path in sorted(Path(release_base).rglob("*")):
             if path.suffix not in (".yaml", ".yml"):
                 continue
-            obj = yaml.load(path.read_text(encoding="utf-8"), Loader=UniqueKeySafeLoader)
+            obj = load_yaml_text(path.read_text(encoding="utf-8"), str(path))
             if not isinstance(obj, dict):
                 continue
             oid = _record_id(obj.get("id"))
@@ -142,7 +128,7 @@ def _source_references(release_base):
                 ids = [_record_id(v) for v in values]
                 if all(v and v.startswith("UGR-") for v in ids):
                     refs[oid] = set(ids)
-    except (OSError, UnicodeError, yaml.YAMLError) as exc:
+    except (OSError, UnicodeError, ValueError, yaml.YAMLError) as exc:
         return {}, f"{type(exc).__name__}: {exc}"
     return refs, None
 
@@ -304,11 +290,10 @@ def count_requirements_in_ckm(ckm_dir):
         if not fn.endswith(".yaml"):
             continue
         try:
-            with open(os.path.join(req_dir, fn), encoding="utf-8") as f:
-                obj = yaml.load(f, Loader=UniqueKeySafeLoader)
+            obj = load_yaml_file(os.path.join(req_dir, fn))
             if isinstance(obj, dict) and obj.get("type") == "Requirement":
                 count += 1
-        except (OSError, UnicodeDecodeError, yaml.YAMLError) as e:
+        except (OSError, UnicodeDecodeError, ValueError) as e:
             unreadable.append({"file": fn, "error": type(e).__name__})
     return count, unreadable
 
@@ -344,7 +329,7 @@ def main():
     persist_summary(summary, args.out_summary)
     try:
         manifest = load_manifest(args.manifest)
-    except (yaml.YAMLError, OSError, UnicodeDecodeError) as exc:
+    except (yaml.YAMLError, OSError, UnicodeDecodeError, ValueError) as exc:
         if isinstance(exc, yaml.YAMLError):
             message = f"ESCALATE: invalid manifest YAML: {exc}"
         elif isinstance(exc, UnicodeDecodeError):

@@ -3,6 +3,11 @@
 import hashlib, json, pathlib, runpy, shutil, subprocess, sys, tempfile
 import yaml
 repo = pathlib.Path(__file__).resolve().parents[1]
+
+# Allow runpy-loaded repository modules to import root-level helpers.
+repo_str = str(repo)
+if repo_str not in sys.path:
+    sys.path.insert(0, repo_str)
 warning = ('WARNING: This script performs technical preparation only. It does NOT '
            'verify Founder ratification in the UFD ledger. Institutional release '
            'requires explicit ledger approval.')
