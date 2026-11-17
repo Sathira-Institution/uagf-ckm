@@ -5,6 +5,7 @@ verbatim | trim | split | parse_int_id | casefold_token | parse_numbered_list | 
 Violations are FLAGGED (TO_VERIFY / CONFLICT / REJECTED) — never silently corrected.
 """
 import sys, os, re, json, hashlib, argparse, datetime
+import yaml
 from strict_yaml import load_yaml_file
 
 TODAY = "2026-07-28"
